@@ -12,4 +12,6 @@ enum CardFlag { NONE, RITUAL, PASSIVE }
 @export var card_type : CardType
 @export var card_flag : CardFlag = CardFlag.NONE
 
+@export var artwork : Texture2D
+
 @export var effects : Array[EffectData]

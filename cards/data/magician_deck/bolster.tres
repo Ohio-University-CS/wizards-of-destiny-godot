@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://gnt5ldhqgl87"]
 
+[ext_resource type="Texture2D" uid="uid://c7lnlp3v676d5" path="res://cards/sprites/Bolster.png" id="1_gshb6"]
 [ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="1_rvavo"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_gshb6"]
 
@@ -15,5 +16,6 @@ metadata/_custom_type_script = "uid://oxw2dwib6mke"
 script = ExtResource("2_gshb6")
 card_name = "Bolster"
 card_type = 1
+artwork = ExtResource("1_gshb6")
 effects = Array[ExtResource("1_rvavo")]([SubResource("Resource_pmwjj")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_e2ybi"]
 [ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="2_enxb0"]
+[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_xfvby"]
+[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
 
 [node name="TempCombat" type="Node2D" unique_id=1118192045]
 script = ExtResource("1_e2ybi")
+card_scene = ExtResource("2_xfvby")
+class_data = ExtResource("3_u8mph")
 
 [node name="Player" type="Node" parent="." unique_id=1292176326]
 script = ExtResource("2_enxb0")

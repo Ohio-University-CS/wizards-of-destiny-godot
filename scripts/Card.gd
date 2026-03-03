@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 signal card_clicked
 
@@ -81,8 +81,9 @@ func _on_mouse_exited():
 	z_index = 0
 
 
-func setup(instance: CardInstance):
+func setup(instance : CardInstance):
 	card_instance = instance
+	$TextureRect.texture = instance.data.artwork
 
 
 func _gui_input(event):

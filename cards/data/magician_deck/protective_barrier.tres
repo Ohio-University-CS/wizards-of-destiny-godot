@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://crmy4pr4eh72s"]
 
+[ext_resource type="Texture2D" uid="uid://5ufc7b6fwuj3" path="res://cards/sprites/Protective Barrier.png" id="1_00hw1"]
 [ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="1_qu7nd"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vpg2e"]
 
@@ -13,5 +14,6 @@ metadata/_custom_type_script = "uid://oxw2dwib6mke"
 script = ExtResource("2_vpg2e")
 card_name = "Protective Barrier"
 card_type = 1
+artwork = ExtResource("1_00hw1")
 effects = Array[ExtResource("1_qu7nd")]([SubResource("Resource_qu7nd")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"
