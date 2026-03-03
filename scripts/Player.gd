@@ -40,10 +40,10 @@ var temp_modifiers := {
 	"shield": 0
 }
 
-@export var dodge_chance: float = 0.0   # 0–0.50
-@export var crit_chance: float = 0.0    # 0–0.40
+@export var dodge_chance: float = 0.0   # 0-0.50
+@export var crit_chance: float = 0.0    # 0-0.40
 @export var crit_damage: float = 1.5    # multiplier
-@export var luck: float = 0.0           # 0–0.70
+@export var luck: float = 0.0           # 0-0.70
 
 # Runtime values
 var current_health: int
@@ -107,14 +107,15 @@ func modify_stat_permanent(stat_name: String, amount: int):
 var temp_stat_modifiers := {}
 
 var status_effects := {
-	"burn": 0,
-	"heal": 0,
-	"block": 0,
-	"drained": 0,
-	"freeze": 0,
-	"poison": 0,
-	"shock": 0,
-	"stun": 0
+	"burn": 0,	# take fire damage per completed turn, increases how much damage is dealt to affected
+	"heal": 0,	# regain hp
+	"block": 0,	# decreases damage taken
+	"drained": 0,	# can only do basic attacks
+	"freeze": 0,	# take small amount of damage per completed turn 
+	"poison": 0,	# take small amount of damage per completed turn, lessens damage to opponent
+	"bleed" : 0,	# take small amount of damage proportional to amount of attacks done in a turn
+	"shock": 0,	# deals good amount of damage to affected, but supercharges next attack
+	"stun": 0	# skips turn
 }
 
 # ---------------------------------------------------------

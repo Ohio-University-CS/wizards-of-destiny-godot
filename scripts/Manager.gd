@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player = $Player
 @onready var card = $Card
+@onready var enemy = $Enemy
 
 func _ready():
 	# Connect the card's signal to the player's function

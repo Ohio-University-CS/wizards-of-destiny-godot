@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_xfvby"]
 [ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="6_u8mph"]
 
 [node name="TempCombat" type="Node2D" unique_id=1118192045]
 script = ExtResource("1_e2ybi")
@@ -14,6 +15,14 @@ class_data = ExtResource("3_u8mph")
 [node name="CombatDeck" type="Node" parent="." unique_id=32642842]
 script = ExtResource("3_xfvby")
 
-[node name="Player" type="Node" parent="." unique_id=1044476268]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2016716812]
+
+[node name="Player" type="Node" parent="Sprite2D" unique_id=1044476268]
 script = ExtResource("2_enxb0")
 metadata/_custom_type_script = "uid://b8sgmp127qnl6"
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=728491450]
+
+[node name="Enemy2" type="Node" parent="Enemy" unique_id=181521053]
+script = ExtResource("6_u8mph")
+metadata/_custom_type_script = "uid://cvobj3noqvvab"

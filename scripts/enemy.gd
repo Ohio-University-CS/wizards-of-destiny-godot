@@ -29,6 +29,57 @@ var temp_modifiers := {
 	"shield": 0
 }
 
+# Predefined enemy categories with sensible defaults
+const CATEGORY_STATS = {
+	"Goblin": {
+		"max_health": 20,
+		"damage": 4,
+		"fire_power": 0,
+		"ice_power": 0,
+		"poison_power": 1,
+		"electric_power": 0,
+		"heal_power": 0,
+		"shield": 0,
+		"max_energy": 2,
+		"dodge_chance": 0.05,
+		"crit_chance": 0.05,
+		"crit_damage": 1.5,
+		"luck": 0.02
+	},
+	"Wizard": {
+		"max_health": 16,
+		"damage": 2,
+		"fire_power": 3,
+		"ice_power": 2,
+		"poison_power": 0,
+		"electric_power": 2,
+		"heal_power": 1,
+		"shield": 0,
+		"max_energy": 4,
+		"dodge_chance": 0.04,
+		"crit_chance": 0.08,
+		"crit_damage": 1.6,
+		"luck": 0.05
+	},
+	"Robot": {
+		"max_health": 30,
+		"damage": 6,
+		"fire_power": 0,
+		"ice_power": 0,
+		"poison_power": 0,
+		"electric_power": 3,
+		"heal_power": 0,
+		"shield": 2,
+		"max_energy": 3,
+		"dodge_chance": 0.02,
+		"crit_chance": 0.03,
+		"crit_damage": 1.4,
+		"luck": 0.01
+	}
+}
+
+# Human-friendly category label
+@export var category: String = "Goblin"
 @export var dodge_chance: float = 0.0   # 0–0.50
 @export var crit_chance: float = 0.0    # 0–0.40
 @export var crit_damage: float = 1.5    # multiplier
@@ -54,6 +105,35 @@ func setup_from_class(data: ClassData):
 
 	max_energy = data.max_energy
 	current_health = get_max_health()
+
+
+func configure_from_category(cat: String) -> void:
+	# Apply presets from CATEGORY_STATS. Falls back to Goblin if missing.
+	var stats = CATEGORY_STATS.get(cat, CATEGORY_STATS["Goblin"])
+
+	base_max_health = stats["max_health"]
+	base_damage = stats["damage"]
+	base_fire_power = stats["fire_power"]
+	base_ice_power = stats["ice_power"]
+	base_poison_power = stats["poison_power"]
+	base_electric_power = stats["electric_power"]
+	base_heal_power = stats["heal_power"]
+	base_shield = stats["shield"]
+
+	max_energy = stats["max_energy"]
+	dodge_chance = stats["dodge_chance"]
+	crit_chance = stats["crit_chance"]
+	crit_damage = stats["crit_damage"]
+	luck = stats["luck"]
+
+	current_health = get_max_health()
+	category = cat
+
+
+static func new_enemy(cat: String) -> Enemy:
+	var e = Enemy.new()
+	e.configure_from_category(cat)
+	return e
 
 
 func get_max_health() -> int:
@@ -87,14 +167,15 @@ func get_shield() -> int:
 var temp_stat_modifiers := {}
 
 var status_effects := {
-	"burn": 0,
-	"heal": 0,
-	"block": 0,
-	"drained": 0,
-	"freeze": 0,
-	"poison": 0,
-	"shock": 0,
-	"stun": 0
+	"burn": 0,	# take fire damage per completed turn, increases how much damage is dealt to affected
+	"heal": 0,	# regain hp
+	"block": 0,	# decreases damage taken
+	"drained": 0,	# can only do basic attacks
+	"freeze": 0,	# take small amount of damage per completed turn 
+	"poison": 0,	# take small amount of damage per completed turn, lessens damage to opponent
+	"bleed" : 0,	# take small amount of damage proportional to amount of attacks done in a turn
+	"shock": 0,	# deals good amount of damage to affected, but supercharges next attack
+	"stun": 0	# skips turn
 }
 
 # ---------------------------------------------------------
@@ -112,7 +193,6 @@ signal status_expired(name)
 
 func _ready():
 	current_health = get_max_health()
-
 
 # ---------------------------------------------------------
 # COMBAT INTERFACE

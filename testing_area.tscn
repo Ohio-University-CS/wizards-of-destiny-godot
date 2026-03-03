@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://d4kur0ew5yakn"]
+
+[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="1_y6c48"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="2_j3qui"]
+[ext_resource type="Script" uid="uid://3mexn07lr81e" path="res://scripts/hbox.gd" id="3_y6c48"]
+[ext_resource type="Script" uid="uid://bm8lm7013t3ge" path="res://scripts/card_skeleton.gd" id="4_y6c48"]
+[ext_resource type="Script" uid="uid://wayn6fef8u23" path="res://scripts/Manager.gd" id="5_j3qui"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ksx7e"]
+
+[node name="Arena" type="Node2D" unique_id=258326827]
+
+[node name="Label2" type="Label" parent="." unique_id=931567292]
+offset_left = 899.0
+offset_top = 386.0
+offset_right = 1051.0
+offset_bottom = 422.0
+text = "Wizards of Dihstiny"
+
+[node name="GameManager" type="Node2D" parent="." unique_id=155247822]
+script = ExtResource("5_j3qui")
+metadata/_custom_type_script = "uid://wayn6fef8u23"
+
+[node name="Player" type="Sprite2D" parent="GameManager" unique_id=655943783]
+position = Vector2(338, 675)
+texture = ExtResource("1_y6c48")
+script = ExtResource("2_j3qui")
+
+[node name="Enemy" type="Sprite2D" parent="GameManager" unique_id=297521076]
+modulate = Color(0.971582, 0.17955133, 0.24036002, 1)
+position = Vector2(1628, 686)
+texture = ExtResource("1_y6c48")
+
+[node name="UI" type="Control" parent="GameManager" unique_id=912426115]
+material = SubResource("CanvasItemMaterial_ksx7e")
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 552.0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="available_moves" type="Panel" parent="GameManager/UI" unique_id=559244679]
+modulate = Color(0.54901963, 0.38431373, 0.22352941, 1)
+self_modulate = Color(0.54901963, 0.38431373, 0.22352941, 1)
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 4.7050004
+anchor_right = 1.6660001
+anchor_bottom = 5.5550003
+offset_top = -78.97504
+offset_right = 0.10180664
+offset_bottom = -0.042053223
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameManager/UI/available_moves" unique_id=116959785]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -80.84152
+offset_right = -4.0
+offset_bottom = -21.183014
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_y6c48")
+
+[node name="card" type="Panel" parent="GameManager/UI/available_moves/HBoxContainer" unique_id=1476814915]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("4_y6c48")
+
+[node name="Label" type="Label" parent="GameManager/UI/available_moves/HBoxContainer/card" unique_id=2118422418]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 19.999977
+offset_top = 11.0
+offset_right = 117.99998
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Attack
+"
+horizontal_alignment = 1
+vertical_alignment = 1
