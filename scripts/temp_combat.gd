@@ -9,8 +9,8 @@ func _ready():
 
 	deck.setup_from_class(class_data)
 
-	print("Drawing 3 cards...")
-	for i in range(3):
+	print("Drawing 5 cards...")
+	for i in range(5):
 		var card = deck.draw_card()
 		if card:
 			print(card.data.card_name)
