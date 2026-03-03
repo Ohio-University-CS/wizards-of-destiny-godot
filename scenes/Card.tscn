@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://640ggccrwmqi"]
 
 [ext_resource type="Script" uid="uid://d307hv6y8q8q" path="res://scripts/Card.gd" id="1_yiag5"]
+[ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/bolster.tres" id="2_tgmmg"]
 
 [node name="Card" type="Control" unique_id=614744285]
 custom_minimum_size = Vector2(250, 350)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_yiag5")
+preview_card_data = ExtResource("2_tgmmg")
+selected_y_index = 30
+max_tilt_angle = 100.0
+mouse_tilt_amount = 10.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1029787350]
 layout_mode = 1

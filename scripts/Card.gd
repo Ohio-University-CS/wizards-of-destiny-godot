@@ -1,26 +1,46 @@
+@tool
 extends Control
 
 signal card_clicked
 
-var card_instance : CardInstance
+static var selected_card = null
+
+var card_instance: CardInstance
+@export_group("Editor Preview")
+@export var preview_card_data: CardData:
+	set(value):
+		preview_card_data = value
+		if Engine.is_editor_hint():
+			call_deferred("_refresh_visual")
 
 # Hover & Animation
+@export_group("Interaction")
 @export var hover_scale: Vector2 = Vector2(1.1, 1.1)
 @export var lerp_speed: float = 10.0
+@export var selected_z_index: int = 20
+@export var selected_y_index: int = 10
+@export var drag_threshold: float = 8.0
 
 # Card size
+@export_group("Layout")
 @export var x_size: float = 150
 @export var y_size: float = 220
 
 # Tilt Settings
-@export var max_tilt_angle := 15.0  # Max degrees for movement tilt
+@export_group("Tilt")
+@export var max_tilt_angle := 15.0 # Max degrees for movement tilt
 @export var mouse_tilt_amount := 5.0 # Max degrees for hovering tilt
 @export var tilt_speed := 0.1
 @export var return_speed := 0.05
 
 var is_hovered: bool = false
+var is_selected: bool = false
 var is_dragging: bool = false
 var drag_offset := Vector2.ZERO
+var has_dragged: bool = false
+var ignore_release_toggle: bool = false
+var press_global_mouse_pos := Vector2.ZERO
+var rest_position := Vector2.ZERO
 var target_scale: Vector2 = Vector2.ONE
 var last_pos := Vector2.ZERO
 var current_tilt := 0.0
@@ -31,10 +51,28 @@ func _ready():
 	mouse_exited.connect(_on_mouse_exited)
 	
 	set_card_size(x_size, y_size)
+	rest_position = position
 	last_pos = global_position
+	_refresh_visual()
+
+
+func _exit_tree():
+	if selected_card == self:
+		selected_card = null
 
 
 func _process(delta: float):
+	if is_dragging:
+		var drag_distance = press_global_mouse_pos.distance_to(get_global_mouse_position())
+		if drag_distance >= drag_threshold:
+			has_dragged = true
+
+	if is_dragging and has_dragged:
+		var target_pos = get_global_mouse_position() - drag_offset
+		global_position = global_position.lerp(target_pos, 25 * delta)
+	elif not is_selected:
+		rest_position = position
+
 	# 1. Scale Interpolation
 	scale = scale.lerp(target_scale, lerp_speed * delta)
 	
@@ -46,9 +84,6 @@ func _process(delta: float):
 	
 	# 3. Mouse Hover Tilt Logic (Balatro-style subtle leaning)
 	var mouse_target = 0.0
-	if is_dragging:
-		var target_pos = get_global_mouse_position() - drag_offset
-		global_position = global_position.lerp(target_pos, 25 * delta)
 	if is_hovered:
 		var mouse_pos = get_local_mouse_position()
 		# Calculate -1.0 to 1.0 based on mouse position relative to center
@@ -72,39 +107,105 @@ func set_card_size(new_x: float, new_y: float):
 
 func _on_mouse_entered():
 	is_hovered = true
-	target_scale = hover_scale
-	z_index = 10 
+	_update_visual_state()
 	
 func _on_mouse_exited():
 	is_hovered = false
-	target_scale = Vector2.ONE
-	z_index = 0
+	_update_visual_state()
 
 
-func setup(instance : CardInstance):
+func setup(instance: CardInstance):
 	card_instance = instance
-	$TextureRect.texture = instance.data.artwork
+	_refresh_visual()
+
+
+func _refresh_visual():
+	if not is_inside_tree() or not has_node("TextureRect"):
+		return
+
+	var texture_rect: TextureRect = $TextureRect
+
+	if card_instance and card_instance.data:
+		texture_rect.texture = card_instance.data.artwork
+		return
+
+	if preview_card_data:
+		texture_rect.texture = preview_card_data.artwork
+		return
+
+	texture_rect.texture = null
+
+
+func _update_visual_state():
+	if is_selected or is_hovered:
+		target_scale = hover_scale
+	else:
+		target_scale = Vector2.ONE
+	if is_selected:
+		z_index = selected_z_index
+	elif is_dragging and has_dragged:
+		z_index = selected_z_index + 1
+	elif is_hovered:
+		z_index = 10
+	else:
+		z_index = 0
+	if is_dragging:
+		return
+	if is_selected:
+		position = Vector2(rest_position.x, rest_position.y - selected_y_index)
+	else:
+		position = rest_position
+
+
+func _set_selected(value: bool):
+	is_selected = value
+	_update_visual_state()
+
+
+func _toggle_selected():
+	if is_selected:
+		_set_selected(false)
+		if selected_card == self:
+			selected_card = null
+		return
+
+	if selected_card and is_instance_valid(selected_card) and selected_card != self:
+		selected_card._set_selected(false)
+
+	selected_card = self
+	_set_selected(true)
 
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				# START DRAG
+				if event.double_click:
+					ignore_release_toggle = true
+					card_clicked.emit()
+					return
+
 				is_dragging = true
-				top_level = true 
-				# Calculate where we grabbed the card to avoid snapping
+				has_dragged = false
+				press_global_mouse_pos = get_global_mouse_position()
 				drag_offset = get_global_mouse_position() - global_position
-				
-				# The "Balatro" click punch
-				scale = Vector2(0.9, 0.9)
-				card_clicked.emit()
+				top_level = true
+				_update_visual_state()
 			else:
-				# STOP DRAG
 				is_dragging = false
 				top_level = false
-				# Reset z_index if you changed it
-				z_index = 0
+				if has_dragged:
+					rest_position = position
+
+				if ignore_release_toggle:
+					ignore_release_toggle = false
+					_update_visual_state()
+					return
+
+				if not has_dragged:
+					_toggle_selected()
+
+				_update_visual_state()
 
 	# Optional: Handle hover scaling if mouse moves while not dragging
 	if event is InputEventMouseMotion and is_dragging:
