@@ -1,11 +1,45 @@
 @tool
 extends Node2D
 
+signal turn_changed(turn_name, turn_count)
+
 @onready var player: Player = null
 @onready var deck: CombatDeck = null
+@onready var opponent: Enemy = null
 
 @export var card_scene: PackedScene
 @export var class_data: ClassData
+@export_range(0.25, 4.0, 0.05) var game_speed: float = 1.0
+@export var play_move_duration: float = 0.60
+@export var play_fade_duration: float = 0.45
+@export var enemy_move_cost: int = 1
+@export var enemy_move_base_amount: int = 1
+@export var enemy_move_delay: float = 0.35
+@export var enemy_physical_move_names: Array[String] = ["Claw Swipe", "Brutal Strike", "Heavy Slash"]
+@export var enemy_fire_move_names: Array[String] = ["Flame Burst", "Scorching Bolt", "Inferno Lash"]
+@export var enemy_ice_move_names: Array[String] = ["Frost Bite", "Glacial Spike", "Cold Snap"]
+@export var enemy_poison_move_names: Array[String] = ["Venom Fang", "Toxic Spray", "Corrosive Bite"]
+@export var enemy_electric_move_names: Array[String] = ["Static Arc", "Thunder Jab", "Volt Strike"]
+@export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
+@export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
+@export var move_text_hold_duration: float = 0.60
+@export var move_text_fade_duration: float = 0.40
+@export var turn_transition_delay: float = 0.20
+
+var is_play_animating: bool = false
+var player_move_label: Label = null
+var enemy_move_label: Label = null
+var player_move_tween: Tween = null
+var enemy_move_tween: Tween = null
+
+enum TurnState {
+	PLAYER,
+	ENEMY
+}
+
+var current_turn: TurnState = TurnState.PLAYER
+var turn_count: int = 1
+var is_processing_enemy_turn: bool = false
 
 # Editor preview settings
 @export var preview_in_editor: bool = true
@@ -35,8 +69,36 @@ func _ready():
 
 	if player:
 		player.setup_from_class(class_data)
+		if player.has_signal("health_changed"):
+			player.emit_signal("health_changed", player.current_health)
+		if player.has_signal("energy_changed"):
+			player.emit_signal("energy_changed", player.energy, player.max_energy)
 	else:
 		push_error("TempCombat: no Player node found; cannot call setup_from_class")
+
+	if opponent == null:
+		if has_node("Enemy") and get_node("Enemy") is Enemy:
+			opponent = get_node("Enemy")
+		elif has_node("Sprite2D/Enemy") and get_node("Sprite2D/Enemy") is Enemy:
+			opponent = get_node("Sprite2D/Enemy")
+		else:
+			for child in get_children():
+				if child is Enemy:
+					opponent = child
+					break
+			if opponent == null:
+				var enemies = find_children("*", "Enemy", true, false)
+				if enemies.size() > 0 and enemies[0] is Enemy:
+					opponent = enemies[0]
+
+	if opponent:
+		opponent.setup_from_class(class_data)
+		if opponent.has_signal("health_changed"):
+			opponent.emit_signal("health_changed", opponent.current_health)
+		if opponent.has_signal("energy_changed"):
+			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
+	else:
+		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
 
 	if deck == null:
 		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
@@ -58,7 +120,11 @@ func _ready():
 	else:
 		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
 
-	draw_hand()
+	player_move_label = get_node_or_null(player_move_label_path)
+	enemy_move_label = get_node_or_null(enemy_move_label_path)
+	_apply_game_speed_to_ui()
+
+	_start_player_turn()
 
 	# In the editor, create preview cards so you can see them in the scene tree/viewport
 	if Engine.is_editor_hint() and preview_in_editor:
@@ -77,10 +143,40 @@ func draw_hand():
 	if deck == null:
 		return
 
-	for i in range(5):
+	# First render any cards already placed in hand during deck setup.
+	for existing_card in deck.hand:
+		spawn_card(existing_card)
+
+	var cards_to_draw: int = max(0, deck.max_hand_size - deck.hand.size())
+	for i in range(cards_to_draw):
 		var card_instance = deck.draw_card()
 		if card_instance:
 			spawn_card(card_instance)
+
+
+func play_hand() -> void:
+	if is_play_animating or is_processing_enemy_turn:
+		return
+
+	if current_turn != TurnState.PLAYER:
+		return
+
+	var selected_cards = _get_selected_playable_cards()
+	var played_any: bool = false
+	for card in selected_cards:
+		if is_instance_valid(card):
+			played_any = await play_card(card) or played_any
+
+	if played_any:
+		await _end_player_turn()
+
+
+func _get_selected_playable_cards() -> Array:
+	var cards: Array = []
+	for child in get_children():
+		if child is Control and child.has_signal("card_clicked") and child.get("card_instance") is CardInstance and bool(child.get("is_selected")):
+			cards.append(child)
+	return cards
 
 func spawn_card(instance: CardInstance):
 	var card = card_scene.instantiate()
@@ -93,18 +189,186 @@ func spawn_card(instance: CardInstance):
 	card.card_clicked.connect(func(): play_card(card))
 
 
-func play_card(card_scene):
-	var instance = card_scene.card_instance
+func play_card(card_node) -> bool:
+	if is_play_animating or is_processing_enemy_turn:
+		return false
 
-	var dummy_enemy = player # temporary target for testing
+	if current_turn != TurnState.PLAYER:
+		return false
 
-	if instance.play(dummy_enemy, player):
+	var instance = card_node.card_instance
+
+	if opponent == null:
+		push_error("TempCombat: cannot play card without a valid opponent target")
+		return false
+
+	if instance.play(opponent, player):
+		is_play_animating = true
+		_announce_move(true, instance.data.card_name)
+		if card_node is Control:
+			card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 		if instance.exhausted:
 			deck.exhaust_card(instance)
 		else:
 			deck.discard_card(instance)
 
-		card_scene.queue_free()
+		await _animate_played_card(card_node)
+		card_node.queue_free()
+		is_play_animating = false
+		return true
+
+	return false
+
+
+func _start_player_turn() -> void:
+	current_turn = TurnState.PLAYER
+	emit_signal("turn_changed", "PLAYER", turn_count)
+	if player:
+		player.start_turn()
+	draw_hand()
+
+
+func _end_player_turn() -> void:
+	if player:
+		player.end_turn()
+	if turn_transition_delay > 0.0:
+		await get_tree().create_timer(_scaled_time(turn_transition_delay)).timeout
+	await _start_enemy_turn()
+
+
+func _start_enemy_turn() -> void:
+	current_turn = TurnState.ENEMY
+	turn_count += 1
+	is_processing_enemy_turn = true
+	emit_signal("turn_changed", "ENEMY", turn_count)
+
+	if opponent:
+		opponent.start_turn()
+
+	await _enemy_take_turn()
+
+	if opponent:
+		opponent.end_turn()
+
+	if turn_transition_delay > 0.0:
+		await get_tree().create_timer(_scaled_time(turn_transition_delay)).timeout
+
+	is_processing_enemy_turn = false
+	_start_player_turn()
+
+
+func _enemy_take_turn() -> void:
+	if opponent == null or player == null:
+		return
+
+	while opponent.energy >= enemy_move_cost and player.current_health > 0:
+		if not opponent.spend_energy(enemy_move_cost):
+			break
+
+		var enemy_move_name: String = _build_enemy_move_name()
+		_announce_move(false, enemy_move_name)
+		var damage: int = opponent.deal_damage(enemy_move_base_amount)
+		player.take_damage(damage)
+
+		if enemy_move_delay > 0.0:
+			await get_tree().create_timer(_scaled_time(enemy_move_delay)).timeout
+
+
+func _build_enemy_move_name() -> String:
+	var pool: Array[String] = enemy_physical_move_names
+	var strongest_element: String = _get_enemy_strongest_element()
+
+	match strongest_element:
+		"fire":
+			pool = enemy_fire_move_names
+		"ice":
+			pool = enemy_ice_move_names
+		"poison":
+			pool = enemy_poison_move_names
+		"electric":
+			pool = enemy_electric_move_names
+		_:
+			pool = enemy_physical_move_names
+
+	if pool.is_empty():
+		return "Basic Attack"
+
+	return pool[randi() % pool.size()]
+
+
+func _get_enemy_strongest_element() -> String:
+	if opponent == null:
+		return "physical"
+
+	var fire_power: int = int(opponent.get_fire_power()) if opponent.has_method("get_fire_power") else 0
+	var ice_power: int = int(opponent.get_ice_power()) if opponent.has_method("get_ice_power") else 0
+	var poison_power: int = int(opponent.get_poison_power()) if opponent.has_method("get_poison_power") else 0
+	var electric_power: int = int(opponent.get_electric_power()) if opponent.has_method("get_electric_power") else 0
+
+	var best_power: int = max(max(fire_power, ice_power), max(poison_power, electric_power))
+	if best_power <= 0:
+		return "physical"
+
+	if fire_power == best_power:
+		return "fire"
+	if ice_power == best_power:
+		return "ice"
+	if poison_power == best_power:
+		return "poison"
+	return "electric"
+
+
+func _announce_move(is_player_move: bool, move_name: String) -> void:
+	var label: Label = player_move_label if is_player_move else enemy_move_label
+	if label == null:
+		return
+
+	var prefix := "Player played" if is_player_move else "Enemy played"
+	label.text = "%s: %s" % [prefix, move_name]
+	label.modulate.a = 1.0
+
+	var tween_to_kill: Tween = player_move_tween if is_player_move else enemy_move_tween
+	if tween_to_kill and tween_to_kill.is_valid():
+		tween_to_kill.kill()
+
+	var tween: Tween = create_tween()
+	tween.tween_interval(max(0.0, _scaled_time(move_text_hold_duration)))
+	tween.tween_property(label, "modulate:a", 0.0, _scaled_time(move_text_fade_duration))
+
+	if is_player_move:
+		player_move_tween = tween
+	else:
+		enemy_move_tween = tween
+
+
+func _animate_played_card(card_node) -> void:
+	if not is_instance_valid(card_node):
+		return
+
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var target_position: Vector2 = (viewport_size * 0.5) - (card_node.size * 0.5)
+
+	card_node.z_index = 200
+
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(card_node, "global_position", target_position, _scaled_time(play_move_duration))
+	tween.parallel().tween_property(card_node, "modulate:a", 0.0, _scaled_time(play_fade_duration))
+
+	await tween.finished
+
+
+func _scaled_time(base_duration: float) -> float:
+	return base_duration / max(0.01, game_speed)
+
+
+func _apply_game_speed_to_ui() -> void:
+	var ui_nodes = find_children("*", "ProgressBar", true, false)
+	for ui_node in ui_nodes:
+		if ui_node.get("game_speed") != null:
+			ui_node.set("game_speed", game_speed)
 
 
 func _create_editor_previews():

@@ -1,19 +1,23 @@
 class_name CardInstance
 extends RefCounted
 
-var data : CardData
-var exhausted : bool = false
+var data: CardData
+var exhausted: bool = false
 
 
-func _init(card_data : CardData):
+func _init(card_data: CardData):
 	data = card_data
 
 
 func play(target, caster) -> bool:
 	if caster.energy < data.energy_cost:
 		return false
-	
-	caster.energy -= data.energy_cost
+
+	if caster.has_method("spend_energy"):
+		if not caster.spend_energy(data.energy_cost):
+			return false
+	else:
+		caster.energy -= data.energy_cost
 	
 	for effect in data.effects:
 		resolve_effect(effect, target, caster)

@@ -40,10 +40,10 @@ var temp_modifiers := {
 	"shield": 0
 }
 
-@export var dodge_chance: float = 0.0   # 0-0.50
-@export var crit_chance: float = 0.0    # 0-0.40
-@export var crit_damage: float = 1.5    # multiplier
-@export var luck: float = 0.0           # 0-0.70
+@export var dodge_chance: float = 0.0 # 0-0.50
+@export var crit_chance: float = 0.0 # 0-0.40
+@export var crit_damage: float = 1.5 # multiplier
+@export var luck: float = 0.0 # 0-0.70
 
 # Runtime values
 var current_health: int
@@ -64,7 +64,9 @@ func setup_from_class(data):
 	base_shield = data.shield
 
 	max_energy = data.max_energy
+	energy = max_energy
 	current_health = get_max_health()
+	emit_signal("energy_changed", energy, max_energy)
 
 
 func get_max_health() -> int:
@@ -107,15 +109,15 @@ func modify_stat_permanent(stat_name: String, amount: int):
 var temp_stat_modifiers := {}
 
 var status_effects := {
-	"burn": 0,	# take fire damage per completed turn, increases how much damage is dealt to affected
-	"heal": 0,	# regain hp
-	"block": 0,	# decreases damage taken
-	"drained": 0,	# can only do basic attacks
-	"freeze": 0,	# take small amount of damage per completed turn 
-	"poison": 0,	# take small amount of damage per completed turn, lessens damage to opponent
-	"bleed" : 0,	# take small amount of damage proportional to amount of attacks done in a turn
-	"shock": 0,	# deals good amount of damage to affected, but supercharges next attack
-	"stun": 0	# skips turn
+	"burn": 0, # take fire damage per completed turn, increases how much damage is dealt to affected
+	"heal": 0, # regain hp
+	"block": 0, # decreases damage taken
+	"drained": 0, # can only do basic attacks
+	"freeze": 0, # take small amount of damage per completed turn
+	"poison": 0, # take small amount of damage per completed turn, lessens damage to opponent
+	"bleed": 0, # take small amount of damage proportional to amount of attacks done in a turn
+	"shock": 0, # deals good amount of damage to affected, but supercharges next attack
+	"stun": 0 # skips turn
 }
 
 # ---------------------------------------------------------
@@ -123,6 +125,7 @@ var status_effects := {
 # ---------------------------------------------------------
 
 signal health_changed(new_value)
+signal energy_changed(new_value, max_value)
 signal died
 signal status_applied(name, stacks)
 signal status_expired(name)
@@ -132,7 +135,9 @@ signal status_expired(name)
 # ---------------------------------------------------------
 
 func _ready():
+	energy = max_energy
 	current_health = get_max_health()
+	emit_signal("energy_changed", energy, max_energy)
 
 
 # ---------------------------------------------------------
@@ -149,7 +154,7 @@ func start_turn():
 
 	# Draw cards handled by CombatManager
 	# Energy reset
-	energy = max_energy
+	set_energy(max_energy)
 
 
 func end_turn():
@@ -165,7 +170,7 @@ func _clear_temp_stats():
 # DAMAGE & DEFENSE
 # ---------------------------------------------------------
 
-func take_damage(amount: int, element: String = ""):
+func take_damage(amount: int, _element: String = ""):
 	var dmg = amount
 
 	# Freeze reduces outgoing damage, not incoming
@@ -213,18 +218,18 @@ func deal_damage(amount: int, element: String = "") -> int:
 # STATUS EFFECT MANAGEMENT
 # ---------------------------------------------------------
 
-func apply_status(name: String, stacks: int = 1):
-	if not status_effects.has(name):
+func apply_status(status_name: String, stacks: int = 1):
+	if not status_effects.has(status_name):
 		return
 
-	status_effects[name] += stacks
-	emit_signal("status_applied", name, status_effects[name])
+	status_effects[status_name] += stacks
+	emit_signal("status_applied", status_name, status_effects[status_name])
 
 
-func clear_status(name: String):
-	if status_effects[name] > 0:
-		status_effects[name] = 0
-		emit_signal("status_expired", name)
+func clear_status(status_name: String):
+	if status_effects[status_name] > 0:
+		status_effects[status_name] = 0
+		emit_signal("status_expired", status_name)
 
 
 # ---------------------------------------------------------
@@ -254,7 +259,19 @@ func _apply_heal():
 func _apply_shock():
 	if status_effects["shock"] > 0:
 		# Shock reduces energy
-		energy = max(0, energy - status_effects["shock"])
+		set_energy(max(0, energy - status_effects["shock"]))
+
+
+func set_energy(new_value: int) -> void:
+	energy = clamp(new_value, 0, max_energy)
+	emit_signal("energy_changed", energy, max_energy)
+
+
+func spend_energy(amount: int) -> bool:
+	if amount > energy:
+		return false
+	set_energy(energy - amount)
+	return true
 
 
 # ---------------------------------------------------------

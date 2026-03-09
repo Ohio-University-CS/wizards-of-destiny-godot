@@ -132,7 +132,7 @@ func _start_drag() -> void:
 	original_parent = get_parent() as Control
 	if not original_parent:
 		return
-	original_index = original_parent.get_children().find(self)
+	original_index = original_parent.get_children().find(self )
 	# create placeholder (invisible) to keep HBox layout
 	placeholder = Control.new()
 	placeholder.custom_minimum_size = size
@@ -145,9 +145,9 @@ func _start_drag() -> void:
 	# reparent to the scene root so drag is free across screen
 	var tree = get_tree()
 	if tree and tree.get_root():
-		original_parent.remove_child(self)
+		original_parent.remove_child(self )
 		request_ready()
-		tree.get_root().add_child(self)
+		tree.get_root().add_child(self )
 		global_position = gp
 		_set_top_level_preserve(true)
 		z_index = 100
@@ -176,9 +176,9 @@ func _end_drag() -> void:
 	# remove from current parent and re-add into original_parent at insert_index
 	var curp = get_parent()
 	if curp:
-		curp.remove_child(self)
-	original_parent.add_child(self)
-	original_parent.move_child(self, clamp(insert_index, 0, original_parent.get_child_count()))
+		curp.remove_child(self )
+	original_parent.add_child(self )
+	original_parent.move_child(self , clamp(insert_index, 0, original_parent.get_child_count()))
 
 	# cleanup placeholder
 	if placeholder and placeholder.get_parent():
@@ -196,7 +196,7 @@ func _set_top_level_preserve(value: bool) -> void:
 		return
 	# store both global and local position for robust restoration
 	var gp = global_position
-	var lp = position
+	var _lp = position
 	top_level = value
 	# only adjust position if there was actually a change in coordinates
 	var new_gp = global_position

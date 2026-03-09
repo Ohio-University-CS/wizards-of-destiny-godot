@@ -5,8 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_xfvby"]
 [ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
-[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="5_nanp6"]
 [ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="5_u8mph"]
+[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scripts/play_button.gd" id="6_playbtn"]
+[ext_resource type="Script" uid="uid://bhhc0w5gwn27n" path="res://scripts/health_bar.gd" id="8_glrqy"]
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="9_fodyp"]
+[ext_resource type="Script" path="res://scripts/mana_bar.gd" id="10_mana"]
 
 [node name="TempCombat" type="Node2D" unique_id=1118192045]
 position = Vector2(415.99997, 423.99997)
@@ -16,14 +19,23 @@ card_scene = ExtResource("2_xfvby")
 class_data = ExtResource("3_u8mph")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=634967730]
-offset_left = -519.99994
-offset_top = 656.25
-offset_right = 1889.9998
-offset_bottom = 808.75
+offset_left = -529.99994
+offset_top = 667.5
+offset_right = 1879.9998
+offset_bottom = 820.0
 
 [node name="CombatDeck" type="Node" parent="PanelContainer" unique_id=32642842]
 script = ExtResource("3_xfvby")
-starting_deck = Array[ExtResource("5_nanp6")]([null, null, null, null, null])
+
+[node name="Play" type="Button" parent="PanelContainer" unique_id=1321570188]
+clip_contents = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+text = "Play"
+script = ExtResource("6_playbtn")
 
 [node name="Player" type="Sprite2D" parent="." unique_id=1458958701]
 position = Vector2(21.25, 151.25006)
@@ -34,8 +46,81 @@ texture = ExtResource("5_u8mph")
 script = ExtResource("2_enxb0")
 metadata/_custom_type_script = "uid://b8sgmp127qnl6"
 
+[node name="ProgressBar" type="ProgressBar" parent="Player" unique_id=1124241740]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -179.4275
+offset_top = -317.56464
+offset_right = 62.799667
+offset_bottom = -416.34088
+script = ExtResource("8_glrqy")
+target_path = NodePath("../Player")
+
+[node name="ManaBar" type="ProgressBar" parent="Player" unique_id=1831173201]
+modulate = Color(0.2, 0.6, 1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -179.4275
+offset_top = -292.56464
+offset_right = 62.799667
+offset_bottom = -391.34088
+script = ExtResource("10_mana")
+target_path = NodePath("../Player")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=819217446]
 modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
 position = Vector2(1458.7499, 167.50002)
 scale = Vector2(2.0219703, 1.8022461)
 texture = ExtResource("5_u8mph")
+
+[node name="Enemy" type="Node" parent="Sprite2D" unique_id=1812392051]
+script = ExtResource("9_fodyp")
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite2D" unique_id=1250341661]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.26291
+offset_top = -339.16013
+offset_right = 49.964264
+offset_bottom = -437.93637
+script = ExtResource("8_glrqy")
+target_path = NodePath("../Enemy")
+
+[node name="ManaBar" type="ProgressBar" parent="Sprite2D" unique_id=106273501]
+modulate = Color(0.2, 0.6, 1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.26291
+offset_top = -314.16013
+offset_right = 49.964264
+offset_bottom = -412.93637
+script = ExtResource("10_mana")
+target_path = NodePath("../Enemy")
+
+[node name="PlayerMoveText" type="Label" parent="." unique_id=916274550]
+offset_left = -210.0
+offset_top = 6.0
+offset_right = 593.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(0.95, 1, 0.95, 1)
+theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0, 0.25, 0, 1)
+text = ""
+
+[node name="EnemyMoveText" type="Label" parent="." unique_id=1884305950]
+offset_left = 1114.0
+offset_top = 6.0
+offset_right = 1917.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+text = ""
+horizontal_alignment = 2
