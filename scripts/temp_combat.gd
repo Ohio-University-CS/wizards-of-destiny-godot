@@ -22,24 +22,42 @@ signal turn_changed(turn_name, turn_count)
 @export var enemy_electric_move_names: Array[String] = ["Static Arc", "Thunder Jab", "Volt Strike"]
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
+@export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
+@export var enemy_name_label_path: NodePath = NodePath("Enemy/EnemyName")
+@export var discard_button_path: NodePath = NodePath("PanelContainer/Discard")
+@export var result_overlay_path: NodePath = NodePath("ResultCanvas/ResultOverlay")
+@export var result_label_path: NodePath = NodePath("ResultCanvas/ResultOverlay/ResultText")
 @export var move_text_hold_duration: float = 0.60
 @export var move_text_fade_duration: float = 0.40
 @export var turn_transition_delay: float = 0.20
+@export var hand_origin: Vector2 = Vector2(300, 500)
+@export var hand_spacing: float = 180.0
+@export var hand_return_duration: float = 0.22
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
 var enemy_move_label: Label = null
+var player_name_label: Label = null
+var enemy_name_label: Label = null
+var discard_button: Button = null
+var result_overlay: ColorRect = null
+var result_label: Label = null
 var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
+var hand_cards: Array = []
+var dragged_hand_card: Control = null
 
 enum TurnState {
 	PLAYER,
-	ENEMY
+	ENEMY,
+	PLAYER_WIN,
+	ENEMY_WIN
 }
 
 var current_turn: TurnState = TurnState.PLAYER
 var turn_count: int = 1
 var is_processing_enemy_turn: bool = false
+var is_combat_over: bool = false
 
 # Editor preview settings
 @export var preview_in_editor: bool = true
@@ -122,6 +140,24 @@ func _ready():
 
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
+	player_name_label = get_node_or_null(player_name_label_path)
+	enemy_name_label = get_node_or_null(enemy_name_label_path)
+	discard_button = get_node_or_null(discard_button_path)
+	result_overlay = get_node_or_null(result_overlay_path)
+	result_label = get_node_or_null(result_label_path)
+	if result_overlay:
+		result_overlay.visible = false
+
+	if player and player.has_signal("died"):
+		if not player.died.is_connected(_on_player_died):
+			player.died.connect(_on_player_died)
+	if opponent and opponent.has_signal("died"):
+		if not opponent.died.is_connected(_on_opponent_died):
+			opponent.died.connect(_on_opponent_died)
+
+	_update_combatant_name_labels()
+	_update_discard_button_state()
+
 	_apply_game_speed_to_ui()
 
 	_start_player_turn()
@@ -145,7 +181,8 @@ func draw_hand():
 
 	# First render any cards already placed in hand during deck setup.
 	for existing_card in deck.hand:
-		spawn_card(existing_card)
+		if not _has_visual_for_instance(existing_card):
+			spawn_card(existing_card)
 
 	var cards_to_draw: int = max(0, deck.max_hand_size - deck.hand.size())
 	for i in range(cards_to_draw):
@@ -153,8 +190,12 @@ func draw_hand():
 		if card_instance:
 			spawn_card(card_instance)
 
+	_layout_hand(false)
+
 
 func play_hand() -> void:
+	if is_combat_over:
+		return
 	if is_play_animating or is_processing_enemy_turn:
 		return
 
@@ -163,19 +204,30 @@ func play_hand() -> void:
 
 	var selected_cards = _get_selected_playable_cards()
 	var played_any: bool = false
-	for card in selected_cards:
-		if is_instance_valid(card):
-			played_any = await play_card(card) or played_any
+	if selected_cards.size() > 0 and is_instance_valid(selected_cards[0]):
+		played_any = await play_card(selected_cards[0])
 
-	if played_any:
+	if played_any and not _can_player_continue_turn():
 		await _end_player_turn()
+	elif not played_any and not _can_player_continue_turn():
+		await _end_player_turn()
+
+
+func force_end_player_turn() -> void:
+	if is_combat_over:
+		return
+	if is_play_animating or is_processing_enemy_turn:
+		return
+	if current_turn != TurnState.PLAYER:
+		return
+	await _end_player_turn()
 
 
 func _get_selected_playable_cards() -> Array:
 	var cards: Array = []
-	for child in get_children():
-		if child is Control and child.has_signal("card_clicked") and child.get("card_instance") is CardInstance and bool(child.get("is_selected")):
-			cards.append(child)
+	for card in hand_cards:
+		if is_instance_valid(card) and bool(card.get("is_selected")):
+			cards.append(card)
 	return cards
 
 func spawn_card(instance: CardInstance):
@@ -184,12 +236,32 @@ func spawn_card(instance: CardInstance):
 
 	card.setup(instance)
 
-	card.position = Vector2(200 + deck.hand.size() * 180, 500)
+	hand_cards.append(card)
+	card.position = _slot_position_for_index(hand_cards.size() - 1)
 
-	card.card_clicked.connect(func(): play_card(card))
+	card.card_clicked.connect(func(): _on_card_clicked(card))
+	if card.has_signal("card_drag_started"):
+		card.card_drag_started.connect(_on_card_drag_started)
+	if card.has_signal("card_drag_moved"):
+		card.card_drag_moved.connect(_on_card_drag_moved)
+	if card.has_signal("card_drag_released"):
+		card.card_drag_released.connect(_on_card_drag_released)
+	if card.has_signal("selection_changed"):
+		card.selection_changed.connect(_on_card_selection_changed)
+
+	_layout_hand(true)
+	_update_discard_button_state()
+
+
+func _on_card_clicked(card_node) -> void:
+	var played: bool = await play_card(card_node)
+	if played and not _can_player_continue_turn():
+		await _end_player_turn()
 
 
 func play_card(card_node) -> bool:
+	if is_combat_over:
+		return false
 	if is_play_animating or is_processing_enemy_turn:
 		return false
 
@@ -213,6 +285,11 @@ func play_card(card_node) -> bool:
 		else:
 			deck.discard_card(instance)
 
+		hand_cards.erase(card_node)
+		_sync_deck_hand_to_visual_order()
+		_layout_hand(true)
+		_update_discard_button_state()
+
 		await _animate_played_card(card_node)
 		card_node.queue_free()
 		is_play_animating = false
@@ -222,6 +299,8 @@ func play_card(card_node) -> bool:
 
 
 func _start_player_turn() -> void:
+	if is_combat_over:
+		return
 	current_turn = TurnState.PLAYER
 	emit_signal("turn_changed", "PLAYER", turn_count)
 	if player:
@@ -230,6 +309,8 @@ func _start_player_turn() -> void:
 
 
 func _end_player_turn() -> void:
+	if is_combat_over:
+		return
 	if player:
 		player.end_turn()
 	if turn_transition_delay > 0.0:
@@ -238,6 +319,8 @@ func _end_player_turn() -> void:
 
 
 func _start_enemy_turn() -> void:
+	if is_combat_over:
+		return
 	current_turn = TurnState.ENEMY
 	turn_count += 1
 	is_processing_enemy_turn = true
@@ -259,10 +342,14 @@ func _start_enemy_turn() -> void:
 
 
 func _enemy_take_turn() -> void:
+	if is_combat_over:
+		return
 	if opponent == null or player == null:
 		return
 
 	while opponent.energy >= enemy_move_cost and player.current_health > 0:
+		if is_combat_over:
+			break
 		if not opponent.spend_energy(enemy_move_cost):
 			break
 
@@ -360,6 +447,22 @@ func _animate_played_card(card_node) -> void:
 	await tween.finished
 
 
+func _can_player_continue_turn() -> bool:
+	if current_turn != TurnState.PLAYER:
+		return false
+	if player == null or deck == null:
+		return false
+
+	if player.energy <= 0:
+		return false
+
+	for card_instance in deck.hand:
+		if card_instance and card_instance.data and card_instance.data.energy_cost <= player.energy:
+			return true
+
+	return false
+
+
 func _scaled_time(base_duration: float) -> float:
 	return base_duration / max(0.01, game_speed)
 
@@ -369,6 +472,182 @@ func _apply_game_speed_to_ui() -> void:
 	for ui_node in ui_nodes:
 		if ui_node.get("game_speed") != null:
 			ui_node.set("game_speed", game_speed)
+
+
+func _on_player_died() -> void:
+	_show_result(false)
+
+
+func _on_opponent_died() -> void:
+	_show_result(true)
+
+
+func _show_result(player_won: bool) -> void:
+	if is_combat_over:
+		return
+
+	is_combat_over = true
+	is_processing_enemy_turn = false
+	current_turn = TurnState.PLAYER_WIN if player_won else TurnState.ENEMY_WIN
+
+	if result_overlay:
+		result_overlay.visible = true
+
+	if result_label:
+		if player_won:
+			result_label.text = "You Win!"
+			result_label.modulate = Color(0.2, 1.0, 0.2, 1.0)
+		else:
+			result_label.text = "You Lose!"
+			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
+
+	_update_discard_button_state()
+
+
+func discard_selected_cards() -> void:
+	if is_combat_over or is_play_animating or is_processing_enemy_turn:
+		return
+	if current_turn != TurnState.PLAYER:
+		return
+	if deck == null:
+		return
+
+	var selected_cards: Array = _get_selected_playable_cards()
+	if selected_cards.is_empty():
+		return
+
+	for card in selected_cards:
+		if not is_instance_valid(card):
+			continue
+
+		var instance: CardInstance = card.get("card_instance")
+		if instance:
+			deck.discard_card(instance)
+
+		hand_cards.erase(card)
+		card.queue_free()
+
+	var slots_to_fill: int = max(0, deck.max_hand_size - deck.hand.size())
+	for i in range(slots_to_fill):
+		var drawn: CardInstance = deck.draw_card()
+		if drawn:
+			spawn_card(drawn)
+
+	_sync_deck_hand_to_visual_order()
+	_layout_hand(true)
+	_update_discard_button_state()
+
+
+func _on_card_drag_started(card: Control) -> void:
+	if is_combat_over or current_turn != TurnState.PLAYER:
+		return
+	dragged_hand_card = card
+
+
+func _on_card_drag_moved(card: Control) -> void:
+	if dragged_hand_card != card:
+		return
+	_reorder_hand_by_drag_position(card)
+
+
+func _on_card_drag_released(card: Control) -> void:
+	if dragged_hand_card == card:
+		dragged_hand_card = null
+	_sync_deck_hand_to_visual_order()
+	_layout_hand(true)
+	_update_discard_button_state()
+
+
+func _on_card_selection_changed(_card: Control, _selected: bool) -> void:
+	_update_discard_button_state()
+
+
+func _reorder_hand_by_drag_position(card: Control) -> void:
+	var old_index: int = hand_cards.find(card)
+	if old_index == -1:
+		return
+
+	var new_index: int = _get_drag_insert_index(card)
+	if new_index == old_index:
+		return
+
+	hand_cards.remove_at(old_index)
+	hand_cards.insert(new_index, card)
+	_sync_deck_hand_to_visual_order()
+	_layout_hand(true, card)
+
+
+func _get_drag_insert_index(card: Control) -> int:
+	var drag_center_x: float = card.global_position.x + (card.size.x * 0.5)
+	var new_index: int = 0
+
+	for other in hand_cards:
+		if other == card:
+			continue
+		var other_center_x: float = other.global_position.x + (other.size.x * 0.5)
+		if drag_center_x > other_center_x:
+			new_index += 1
+
+	return clamp(new_index, 0, max(0, hand_cards.size() - 1))
+
+
+func _layout_hand(animated: bool, skip_card: Control = null) -> void:
+	for i in range(hand_cards.size()):
+		var card = hand_cards[i]
+		if not is_instance_valid(card):
+			continue
+
+		var slot_position: Vector2 = _slot_position_for_index(i)
+		if animated and card.has_method("animate_to_slot") and card != skip_card:
+			card.animate_to_slot(slot_position, _scaled_time(hand_return_duration))
+		elif card != skip_card:
+			card.position = slot_position
+			if card.get("rest_position") != null:
+				card.set("rest_position", slot_position)
+
+
+func _slot_position_for_index(index: int) -> Vector2:
+	return Vector2(hand_origin.x + (hand_spacing * index), hand_origin.y)
+
+
+func _has_visual_for_instance(instance: CardInstance) -> bool:
+	for card in hand_cards:
+		if is_instance_valid(card) and card.get("card_instance") == instance:
+			return true
+	return false
+
+
+func _sync_deck_hand_to_visual_order() -> void:
+	if deck == null:
+		return
+
+	var reordered: Array[CardInstance] = []
+	for card in hand_cards:
+		if is_instance_valid(card):
+			var instance: CardInstance = card.get("card_instance")
+			if instance:
+				reordered.append(instance)
+
+	deck.hand = reordered
+
+
+func _update_combatant_name_labels() -> void:
+	if player_name_label:
+		player_name_label.text = "Player"
+
+	if enemy_name_label:
+		var enemy_type_name: String = "Enemy"
+		if opponent and opponent.get("category") != null:
+			enemy_type_name = String(opponent.get("category")).to_lower()
+		enemy_name_label.text = enemy_type_name
+
+
+func _update_discard_button_state() -> void:
+	if discard_button == null:
+		return
+
+	var can_discard: bool = (not is_combat_over) and (current_turn == TurnState.PLAYER) and (_get_selected_playable_cards().size() > 0)
+	discard_button.disabled = not can_discard
 
 
 func _create_editor_previews():

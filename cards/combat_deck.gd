@@ -6,7 +6,7 @@ var discard_pile: Array[CardInstance] = []
 var exhaust_pile: Array[CardInstance] = []
 var hand: Array[CardInstance] = []
 
-var max_hand_size := 5
+@export var max_hand_size := 5
 
 @export var starting_deck: Array[CardData]
 @export var basic_attack: CardData = preload("res://cards/data/basic_attack.tres")

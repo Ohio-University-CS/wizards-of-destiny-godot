@@ -2,8 +2,10 @@
 extends Control
 
 signal card_clicked
-
-static var selected_card = null
+signal card_drag_started(card)
+signal card_drag_moved(card)
+signal card_drag_released(card)
+signal selection_changed(card, selected)
 
 var card_instance: CardInstance
 @export_group("Editor Preview")
@@ -46,6 +48,8 @@ var drag_start_rest_position := Vector2.ZERO
 var target_scale: Vector2 = Vector2.ONE
 var last_pos := Vector2.ZERO
 var current_tilt := 0.0
+var _slot_tween: Tween = null
+var _drag_start_emitted: bool = false
 
 func _ready():
 	# Use connect in Godot 4.x style for safety
@@ -59,21 +63,22 @@ func _ready():
 
 
 func _exit_tree():
-	if selected_card == self:
-		selected_card = null
+	pass
 
 
 func _process(delta: float):
 	if is_dragging:
 		var drag_distance = press_global_mouse_pos.distance_to(get_global_mouse_position())
 		if drag_distance >= drag_threshold:
+			if not _drag_start_emitted:
+				_drag_start_emitted = true
+				card_drag_started.emit(self )
 			has_dragged = true
 
 	if is_dragging and has_dragged:
 		var target_pos = get_global_mouse_position() - drag_offset
 		global_position = global_position.lerp(target_pos, 25 * delta)
-	elif not is_selected:
-		rest_position = position
+		card_drag_moved.emit(self )
 
 	# 1. Scale Interpolation
 	scale = scale.lerp(target_scale, lerp_speed * delta)
@@ -165,19 +170,13 @@ func _update_visual_state():
 func _set_selected(value: bool):
 	is_selected = value
 	_update_visual_state()
+	selection_changed.emit(self , is_selected)
 
 
 func _toggle_selected():
 	if is_selected:
 		_set_selected(false)
-		if selected_card == self:
-			selected_card = null
 		return
-
-	if selected_card and is_instance_valid(selected_card) and selected_card != self:
-		selected_card._set_selected(false)
-
-	selected_card = self
 	_set_selected(true)
 
 
@@ -200,8 +199,10 @@ func _gui_input(event):
 			else:
 				is_dragging = false
 				if has_dragged:
-					rest_position = drag_start_rest_position
-					position = drag_start_position
+					card_drag_released.emit(self )
+					_drag_start_emitted = false
+					_update_visual_state()
+					return
 
 				if ignore_release_toggle:
 					ignore_release_toggle = false
@@ -217,3 +218,18 @@ func _gui_input(event):
 	if event is InputEventMouseMotion and is_dragging:
 		# This ensures movement tilt is updated during the drag
 		pass
+
+
+func animate_to_slot(slot_position: Vector2, duration: float = 0.18) -> void:
+	rest_position = slot_position
+
+	if is_dragging and has_dragged:
+		return
+
+	if _slot_tween and _slot_tween.is_valid():
+		_slot_tween.kill()
+
+	_slot_tween = create_tween()
+	_slot_tween.set_trans(Tween.TRANS_CUBIC)
+	_slot_tween.set_ease(Tween.EASE_OUT)
+	_slot_tween.tween_property(self , "position", slot_position, duration)

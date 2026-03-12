@@ -32,8 +32,8 @@ var temp_modifiers := {
 # Predefined enemy categories with sensible defaults
 const CATEGORY_STATS = {
 	"Goblin": {
-		"max_health": 20,
-		"damage": 4,
+		"max_health": 18,
+		"damage": 3,
 		"fire_power": 0,
 		"ice_power": 0,
 		"poison_power": 1,

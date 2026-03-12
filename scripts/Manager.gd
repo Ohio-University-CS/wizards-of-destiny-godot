@@ -8,6 +8,7 @@ signal turn_changed(turn_name, turn_count)
 @onready var card: Node = null
 
 @export_range(0.25, 4.0, 0.05) var game_speed: float = 1.0
+@export var player_move_cost: int = 1
 @export var enemy_move_cost: int = 1
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
@@ -45,17 +46,30 @@ func play_hand() -> void:
 	_on_player_move_requested()
 
 
+func force_end_player_turn() -> void:
+	if current_turn != TurnState.PLAYER or is_processing_enemy_turn:
+		return
+	await _end_player_turn()
+
+
 func _on_player_move_requested() -> void:
 	if current_turn != TurnState.PLAYER or is_processing_enemy_turn:
 		return
 
-	_player_attack()
-	await _end_player_turn()
+	var played: bool = _player_attack()
+	if played and not _can_player_continue_turn():
+		await _end_player_turn()
+	elif not played:
+		await _end_player_turn()
 
 
-func _player_attack() -> void:
+func _player_attack() -> bool:
 	if player == null or enemy == null:
-		return
+		return false
+
+	if player.has_method("spend_energy"):
+		if not player.spend_energy(player_move_cost):
+			return false
 
 	var damage: int = player_fallback_attack
 	if player.has_method("deal_damage"):
@@ -65,6 +79,8 @@ func _player_attack() -> void:
 		enemy.take_damage(damage)
 	else:
 		enemy_fallback_current_health = max(0, enemy_fallback_current_health - damage)
+
+	return true
 
 
 func _start_player_turn() -> void:
@@ -137,6 +153,17 @@ func _is_player_alive() -> bool:
 	if player.get("current_health") == null:
 		return true
 	return int(player.get("current_health")) > 0
+
+
+func _can_player_continue_turn() -> bool:
+	if current_turn != TurnState.PLAYER or player == null:
+		return false
+
+	if player.has_method("spend_energy"):
+		var current_energy: int = int(player.get("energy"))
+		return current_energy >= player_move_cost
+
+	return true
 
 
 func _scaled_time(base_duration: float) -> float:
