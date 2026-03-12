@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://blmy2l51equds"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_jcl28"]
+
+[resource]
+script = ExtResource("1_jcl28")
+name = "Rusty Knife"
+base_damage = 4
+status_effects = {
+"corroded": 2
+}
+weight = 30
+metadata/_custom_type_script = "uid://t788w26yn03s"

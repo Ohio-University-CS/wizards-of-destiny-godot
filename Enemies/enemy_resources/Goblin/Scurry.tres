@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cgyweuu5uxmfn"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_r07g1"]
+
+[resource]
+script = ExtResource("1_r07g1")
+name = "Scurry"
+base_damage = 3
+status_effects = {
+"Evasive": 1
+}
+weight = 20
+metadata/_custom_type_script = "uid://t788w26yn03s"

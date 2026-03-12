@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dee2qi5j250a0"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_bmbgj"]
+
+[resource]
+script = ExtResource("1_bmbgj")
+name = "Stab"
+base_damage = 7
+weight = 50
+metadata/_custom_type_script = "uid://t788w26yn03s"

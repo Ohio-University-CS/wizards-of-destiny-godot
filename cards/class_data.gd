@@ -6,12 +6,10 @@ class_name ClassData
 # Base Stats
 @export var max_health: int = 50
 @export var damage: int = 5
-@export var fire_power: int = 0
-@export var ice_power: int = 0
-@export var poison_power: int = 0
-@export var electric_power: int = 0
-@export var heal_power: int = 0
-@export var shield: int = 0
+@export var elemental_power: float = 0.5
+@export var crit_chance: float = 0.1
+@export var crit_damage: int = 5
+@export var dodge: float = 0.05
 
 @export var max_energy: int = 3
 

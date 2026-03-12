@@ -1,3 +1,4 @@
+#temp_combat.gd
 @tool
 extends Node2D
 
@@ -110,7 +111,7 @@ func _ready():
 					opponent = enemies[0]
 
 	if opponent:
-		opponent.setup_from_class(class_data)
+		opponent.setup_from_resource(load("res://Enemies/enemy_resources/Goblin/Goblin.tres"))
 		if opponent.has_signal("health_changed"):
 			opponent.emit_signal("health_changed", opponent.current_health)
 		if opponent.has_signal("energy_changed"):
@@ -311,10 +312,17 @@ func _start_player_turn() -> void:
 func _end_player_turn() -> void:
 	if is_combat_over:
 		return
+	
 	if player:
+		player.perform_strike(opponent)
 		player.end_turn()
+	
+	#discard remaining cards
+	_discard_hand()
+	
 	if turn_transition_delay > 0.0:
 		await get_tree().create_timer(_scaled_time(turn_transition_delay)).timeout
+	
 	await _start_enemy_turn()
 
 
@@ -342,24 +350,18 @@ func _start_enemy_turn() -> void:
 
 
 func _enemy_take_turn() -> void:
-	if is_combat_over:
+	if is_combat_over or opponent == null or player == null:
 		return
-	if opponent == null or player == null:
+	
+	var move = opponent.select_move()
+	if move == null:
 		return
-
-	while opponent.energy >= enemy_move_cost and player.current_health > 0:
-		if is_combat_over:
-			break
-		if not opponent.spend_energy(enemy_move_cost):
-			break
-
-		var enemy_move_name: String = _build_enemy_move_name()
-		_announce_move(false, enemy_move_name)
-		var damage: int = opponent.deal_damage(enemy_move_base_amount)
-		player.take_damage(damage)
-
-		if enemy_move_delay > 0.0:
-			await get_tree().create_timer(_scaled_time(enemy_move_delay)).timeout
+	
+	_announce_move(false, move.name)
+	opponent.perform_move(player)
+	
+	if enemy_move_delay > 0.0:
+		await get_tree().create_timer(_scaled_time(enemy_move_delay)).timeout
 
 
 func _build_enemy_move_name() -> String:
@@ -502,6 +504,21 @@ func _show_result(player_won: bool) -> void:
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
 
 	_update_discard_button_state()
+
+
+func _discard_hand():
+	if deck == null:
+		return
+	
+	for card in hand_cards:
+		if is_instance_valid(card):
+			var instance: CardInstance = card.get("card_instance")
+			if instance:
+				deck.discard_card(instance)
+			card.queue_free()
+	
+	hand_cards.clear()
+	deck.hand.clear()
 
 
 func discard_selected_cards() -> void:

@@ -10,34 +10,40 @@ var class_data
 # BASE STATS (from class)
 var base_max_health: int
 var base_damage: int
-var base_fire_power: int
-var base_ice_power: int
-var base_poison_power: int
-var base_electric_power: int
-var base_heal_power: int
-var base_shield: int
+var base_elemental_power: int
+var base_fire: int
+var base_ice: int
+var base_poison: int
+var base_electric: int
+var base_crit_damage: int
+var base_crit_chance: float
+var base_dodge: float
 
 # PERMANENT MODIFIERS (artifacts/upgrades)
 var perm_modifiers := {
 	"max_health": 0,
 	"damage": 0,
+	"elemental_power": 0,
 	"fire": 0,
 	"ice": 0,
 	"poison": 0,
 	"electric": 0,
-	"heal": 0,
-	"shield": 0
+	"crit_damage": 0,
+	"crit_chance": 0,
+	"dodge": 0
 }
 
 var temp_modifiers := {
 	"max_health": 0,
 	"damage": 0,
+	"elemental_power": 0,
 	"fire": 0,
 	"ice": 0,
 	"poison": 0,
 	"electric": 0,
-	"heal": 0,
-	"shield": 0
+	"crit_damage": 0,
+	"crit_chance": 0,
+	"dodge": 0
 }
 
 @export var dodge_chance: float = 0.0 # 0-0.50
@@ -56,12 +62,15 @@ func setup_from_class(data):
 
 	base_max_health = data.max_health
 	base_damage = data.damage
-	base_fire_power = data.fire_power
-	base_ice_power = data.ice_power
-	base_poison_power = data.poison_power
-	base_electric_power = data.electric_power
-	base_heal_power = data.heal_power
-	base_shield = data.shield
+	base_elemental_power = data.elemental_power
+	base_crit_damage = data.crit_damage
+	base_crit_chance = data.crit_chance
+	base_dodge = data.dodge
+	
+	base_fire = 0
+	base_ice = 0
+	base_poison = 0
+	base_electric = 0
 
 	max_energy = data.max_energy
 	energy = max_energy
@@ -75,24 +84,31 @@ func get_max_health() -> int:
 func get_damage() -> int:
 	return base_damage + perm_modifiers["damage"] + temp_modifiers["damage"]
 
+func get_crit_damage() -> int:
+	return base_crit_damage + perm_modifiers["crit_damage"] + temp_modifiers["crit_damage"]
+
+func get_elemental_power() -> float:
+	return base_elemental_power + perm_modifiers["elemental_power"] + temp_modifiers["elemental_power"]
+
 func get_fire_power() -> int:
-	return base_fire_power + perm_modifiers["fire"] + temp_modifiers["fire"]
+	var total_fire : int = base_fire + perm_modifiers["fire"] + temp_modifiers["fire"]
+	@warning_ignore("narrowing_conversion")  #script doesn't like float to int conversion, but we need it
+	return total_fire + (total_fire * get_elemental_power())
 
 func get_ice_power() -> int:
-	return base_ice_power + perm_modifiers["ice"] + temp_modifiers["ice"]
+	var total_ice : int = base_ice + perm_modifiers["ice"] + temp_modifiers["ice"]
+	@warning_ignore("narrowing_conversion")
+	return total_ice + (total_ice * get_elemental_power())
 
 func get_poison_power() -> int:
-	return base_poison_power + perm_modifiers["poison"] + temp_modifiers["poison"]
+	var total_poison : int = base_poison + perm_modifiers["poison"] + temp_modifiers["poison"]
+	@warning_ignore("narrowing_conversion")
+	return total_poison + (total_poison * get_elemental_power())
 
 func get_electric_power() -> int:
-	return base_electric_power + perm_modifiers["electric"] + temp_modifiers["electric"]
-
-func get_heal_power() -> int:
-	return base_heal_power + perm_modifiers["heal"] + temp_modifiers["heal"]
-
-func get_shield() -> int:
-	return base_shield + perm_modifiers["shield"] + temp_modifiers["shield"]
-
+	var total_electric : int = base_electric + perm_modifiers["electric"] + temp_modifiers["electric"]
+	@warning_ignore("narrowing_conversion")
+	return total_electric + (total_electric * get_elemental_power())
 
 func modify_stat_permanent(stat_name: String, amount: int):
 	if perm_modifiers.has(stat_name):
@@ -103,20 +119,80 @@ func modify_stat_permanent(stat_name: String, amount: int):
 			current_health = clamp(current_health + amount, 0, get_max_health())
 
 # ---------------------------------------------------------
+# STRIKE SYSTEM
+# ---------------------------------------------------------
+
+var strike_bonus_damage : int = 0
+var strike_elemental_damage := {
+	"fire": 0,
+	"ice": 0,
+	"poison": 0,
+	"electric": 0
+}
+var strike_statuses : Array = []
+
+#reset all strike at start of turn
+func reset_strike():
+	strike_bonus_damage = 0
+	strike_statuses.clear()
+	for element in strike_elemental_damage.keys():
+		strike_elemental_damage[element] = 0
+
+#add normal damage to strike
+func add_strike_damage(amount : int):
+	strike_bonus_damage += amount
+
+#add elemental damage to strike
+func add_strike_element(element : String, amount : int):
+	if strike_elemental_damage.has(element):
+		strike_elemental_damage[element] += amount
+
+#add status effect to strike
+func add_strike_status(status : String, stacks : int):
+	strike_statuses.append({
+		"name" : status,
+		"stacks" : stacks
+	})
+
+#perform the actual strike
+func perform_strike(target):
+	
+	#normal damage
+	var dmg = get_damage() + strike_bonus_damage
+	#deal normal damage once
+	if dmg > 0:
+		target.take_damage(dmg)
+	
+	#elemental damage
+	for element in strike_elemental_damage.keys():
+		var amt = strike_elemental_damage[element]
+		if amt > 0:
+			var elemental_dmg = amt #doesn't call get_damage again
+			#APPLY FREEZE/CRIT LATER DOWN THE LINE
+			elemental_dmg = deal_damage(elemental_dmg, element)
+			target.take_damage(elemental_dmg, element)
+	
+	#status effects
+	for effect in strike_statuses:
+		target.apply_status(effect["name"], effect["stacks"])
+
+
+
+# ---------------------------------------------------------
 # STATUS EFFECTS
 # ---------------------------------------------------------
 
 var temp_stat_modifiers := {}
 
 var status_effects := {
-	"burn": 0, # take fire damage per completed turn, increases how much damage is dealt to affected
-	"heal": 0, # regain hp
+	"burn": 0, # take fire damage per completed turn
+	"regeneration": 0, # regain hp
 	"block": 0, # decreases damage taken
-	"drained": 0, # can only do basic attacks
-	"freeze": 0, # take small amount of damage per completed turn
-	"poison": 0, # take small amount of damage per completed turn, lessens damage to opponent
-	"bleed": 0, # take small amount of damage proportional to amount of attacks done in a turn
-	"shock": 0, # deals good amount of damage to affected, but supercharges next attack
+	"drained": 0, # draws less cards
+	"freeze": 0, # decrease outgoing damage
+	"corroded": 0, # increase incoming damage
+	"sealed": 0, # can't deal damage outside of strike
+	"shock": 0, # take damage when dealing damage
 	"stun": 0 # skips turn
 }
 
@@ -151,6 +227,13 @@ func start_turn():
 
 	# Reset block each turn
 	status_effects["block"] = 0
+	
+	#Reset Strike
+	strike_bonus_damage = 0
+	strike_statuses.clear()
+	
+	for element in strike_elemental_damage.keys():
+		strike_elemental_damage[element] = 0
 
 	# Draw cards handled by CombatManager
 	# Energy reset
@@ -171,12 +254,15 @@ func _clear_temp_stats():
 # ---------------------------------------------------------
 
 func take_damage(amount: int, _element: String = ""):
+	if try_dodge():
+		return
+	
 	var dmg = amount
 
 	# Freeze reduces outgoing damage, not incoming
-	# Poison increases incoming damage, stacks
-	if status_effects["poison"] > 0:
-		var multiplier = 1.0 + (0.10 * status_effects["poison"])
+	# Corroded increases incoming damage, stacks
+	if status_effects["corroded"] > 0:
+		var multiplier = 1.0 + (0.10 * status_effects["corroded"])
 		dmg = int(dmg * multiplier)
 
 	# Block reduces damage
@@ -193,24 +279,30 @@ func take_damage(amount: int, _element: String = ""):
 		_die()
 
 
-func deal_damage(amount: int, element: String = "") -> int:
-	var dmg = amount + get_damage()
-
-	# Elemental bonuses
+func deal_damage(amount : int, element : String = "", include_base_damage : bool = true) -> int:
+	var dmg = amount
+	
+	if include_base_damage:
+		dmg += get_damage()
+	
+	#Elemental bonuses
 	match element:
-		"fire": dmg += get_fire_power()
+		"fire" : dmg += get_fire_power()
 		"ice": dmg += get_ice_power()
 		"poison": dmg += get_poison_power()
 		"electric": dmg += get_electric_power()
-
-	# Freeze reduces outgoing damage
-	if status_effects["freeze"] > 0:
-		dmg = int(dmg * 0.5)
-
-	# Crit check
+	
+	#Freeze reduces outgoing damage by 10% per stack
+	var freeze_stacks = status_effects["freeze"]
+	if freeze_stacks > 0:
+		var multiplier = 1.0 - (0.1 * freeze_stacks)
+		multiplier = max(multiplier, 0.4) #can't drop below 40%
+		dmg = int(dmg * multiplier)
+	
+	#Crit check
 	if randf() < crit_chance:
-		dmg = int(dmg * crit_damage)
-
+		dmg += get_crit_damage()
+	
 	return dmg
 
 
@@ -251,8 +343,8 @@ func _apply_burn():
 
 
 func _apply_heal():
-	if status_effects["heal"] > 0:
-		current_health = min(get_max_health(), current_health + status_effects["heal"])
+	if status_effects["regeneration"] > 0:
+		current_health = min(get_max_health(), current_health + status_effects["regeneration"])
 		emit_signal("health_changed", current_health)
 
 

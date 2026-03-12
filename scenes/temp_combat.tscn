@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bhhc0w5gwn27n" path="res://scripts/health_bar.gd" id="8_glrqy"]
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="9_fodyp"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="10_mana"]
-[ext_resource type="Script" path="res://scripts/discard_button.gd" id="11_discard"]
+[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scripts/discard_button.gd" id="11_discard"]
 
 [node name="TempCombat" type="Node2D" unique_id=1118192045]
 modulate = Color(0.9998011, 0.99974126, 0.99970776, 1)
