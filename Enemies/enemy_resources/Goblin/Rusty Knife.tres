@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="1_b85b6"]
 [ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_jcl28"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="2_7p211"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="3_mx53d"]
 
 [sub_resource type="Resource" id="Resource_jatjb"]
 script = ExtResource("1_b85b6")
@@ -13,4 +15,5 @@ script = ExtResource("1_jcl28")
 name = "Rusty Knife"
 effects = Array[ExtResource("1_b85b6")]([SubResource("Resource_jatjb")])
 weight = 30
+intent_icons = Array[Texture2D]([ExtResource("2_7p211"), ExtResource("3_mx53d")])
 metadata/_custom_type_script = "uid://t788w26yn03s"

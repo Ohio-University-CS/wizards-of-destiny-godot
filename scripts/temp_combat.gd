@@ -35,6 +35,10 @@ signal turn_changed(turn_name, turn_count)
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
+@onready var enemy_intent_1 : TextureRect = $EnemyIntent1
+@onready var enemy_intent_2 : TextureRect = $EnemyIntent2
+@onready var enemy_intent_3 : TextureRect = $EnemyIntent3
+
 var is_play_animating: bool = false
 var player_move_label: Label = null
 var enemy_move_label: Label = null
@@ -317,6 +321,9 @@ func _start_player_turn() -> void:
 		return
 	current_turn = TurnState.PLAYER
 	emit_signal("turn_changed", "PLAYER", turn_count)
+	
+	update_enemy_intent()
+	
 	if player:
 		player.start_turn()
 	draw_hand()
@@ -347,6 +354,8 @@ func _start_enemy_turn() -> void:
 	is_processing_enemy_turn = true
 	emit_signal("turn_changed", "ENEMY", turn_count)
 
+	clear_enemy_intent()
+
 	if opponent:
 		opponent.start_turn()
 
@@ -362,6 +371,35 @@ func _start_enemy_turn() -> void:
 
 	is_processing_enemy_turn = false
 	_start_player_turn()
+
+
+func clear_enemy_intent() -> void:
+	enemy_intent_1.texture = null
+	enemy_intent_2.texture = null
+	enemy_intent_3.texture = null
+
+
+func update_enemy_intent() -> void:
+	if opponent == null:
+		return
+	
+	if opponent.get_next_move():
+		enemy_intent_1.texture = opponent.get_next_move().intent_icons[0]
+		
+		if opponent.get_next_move().intent_icons.size() > 1:
+			enemy_intent_2.texture = opponent.get_next_move().intent_icons[1]
+		else:
+			enemy_intent_2.texture = null
+		
+		if opponent.get_next_move().intent_icons.size() > 2:
+			enemy_intent_2.texture = opponent.get_next_move().intent_icons[2]
+		else:
+			enemy_intent_3.texture = null
+	
+	else:
+		enemy_intent_1.texture = null
+		enemy_intent_2.texture = null
+		enemy_intent_3.texture = null
 
 
 func _enemy_take_turn() -> void:

@@ -167,6 +167,24 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 horizontal_alignment = 2
 
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=468170854]
+offset_left = 1226.25
+offset_top = 16.25
+offset_right = 1311.25
+offset_bottom = 93.75
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1035456702]
+offset_left = 1218.75
+offset_top = 108.75
+offset_right = 1311.25
+offset_bottom = 192.50006
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=334392349]
+offset_left = 1228.75
+offset_top = 208.75
+offset_right = 1326.25
+offset_bottom = 297.5
+
 [node name="ResultCanvas" type="CanvasLayer" parent="." unique_id=411052007]
 
 [node name="ResultOverlay" type="ColorRect" parent="ResultCanvas" unique_id=1028563632]

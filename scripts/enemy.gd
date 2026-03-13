@@ -134,6 +134,14 @@ func prepare_next_move():
 	
 	current_move = select_move()
 
+
+func get_next_move() -> MoveResource:
+	if current_move == null:
+		return
+	
+	return current_move
+
+
 #pick a random move (weighted)
 func select_move() -> MoveResource:
 	if resource == null or resource.moves.is_empty():
