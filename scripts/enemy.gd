@@ -33,9 +33,14 @@ const CATEGORY_STATS = {
 var current_health: int
 
 
+var current_move : MoveResource = null
+var last_move : MoveResource = null
+var repeat_count : int = 0
+
+
 func setup_from_resource(res : EnemyResource) -> void:
 	resource = res
-	base_max_health = res.base_hp
+	base_max_health = res.hp_variation[0]
 	current_health = base_max_health
 
 
@@ -48,6 +53,10 @@ func configure_from_category(cat: String) -> void:
 	current_health = get_max_health()
 	category = cat
 
+
+# for use later
+func modify_stat(_stat_type, _amount : int, _duration_turns : int = 0):
+	pass
 
 
 static func new_enemy(cat: String) -> Enemy:
@@ -118,46 +127,95 @@ func _clear_temp_stats():
 # AI
 # ---------------------------------------------------------
 
+func prepare_next_move():
+	if resource == null or resource.moves.is_empty():
+		current_move = null
+		return
+	
+	current_move = select_move()
+
 #pick a random move (weighted)
 func select_move() -> MoveResource:
 	if resource == null or resource.moves.is_empty():
 		return null
 	
-	var total_weight = 0
-	for m in resource.moves:
-		total_weight += m.weight
+	# In case enemy has only one move
+	if resource.moves.size() == 1:
+		return resource.moves[0]
 	
-	var roll = randi() % total_weight
-	for m in resource.moves:
-		roll -= m.weight
-		if roll < 0:
-			return m
+	var attempts := 0
+	
+	while attempts < 5:
+		var total_weight = 0
+		for m in resource.moves:
+			total_weight += m.weight
+		
+		var roll = randi() % total_weight
+		var chosen : MoveResource = null
+		
+		for m in resource.moves:
+			roll -= m.weight
+			if roll < 0:
+				chosen = m
+				break
+		
+		# Prevent repeating the same move too many times
+		if chosen == last_move and repeat_count >= 2:
+			attempts += 1
+			continue
+		
+		return chosen
 	
 	return resource.moves[0] #fallback
 
 
 #perform selected move on target
-func perform_move(target : Node) -> void:
-	var move = select_move()
-	if move == null:
-		return
-	print("Enemy playes: ", move.name)
-	
-	var dmg = move.base_damage
-	target.take_damage(dmg)
-	print(" - Enemy dealt ", dmg, " damage")
-	
-	#Apply status effects from the move
-	if move.status_effects:
-		for status_name in move.status_effects.keys():
-			var stacks = move.status_effects[status_name]
-			target.apply_status(status_name, stacks)
-			print(" - Enemy applied ", status_name, " x", stacks)
+#func perform_move(move : MoveResource, target : Node) -> void:
+	#if move == null:
+		#return
+	#
+	#print("Enemy plays: ", move.name)
+	#
+	#for effect in move.effects:
+		#get_tree().current_scene._apply_effects([effect], self, target)
+
+
+#func perform_move(target : Node) -> void:
+	#var move = select_move()
+	#if move == null:
+		#return
+	#print("Enemy playes: ", move.name)
+	#
+	#var dmg = move.base_damage
+	#target.take_damage(dmg)
+	#print(" - Enemy dealt ", dmg, " damage")
+	#
+	##Apply status effects from the move
+	#if move.status_effects:
+		#for status_name in move.status_effects.keys():
+			#var stacks = move.status_effects[status_name]
+			#target.apply_status(status_name, stacks)
+			#print(" - Enemy applied ", status_name, " x", stacks)
 
 
 # ---------------------------------------------------------
 # DAMAGE & DEFENSE
 # ---------------------------------------------------------
+
+func deal_damage(amount: int, _element: String = "", _include_base_damage := false) -> int:
+	var dmg = amount
+	# Optionally add base damage if needed (currently not implemented)
+	# if _include_base_damage:
+	#     dmg += ...
+	# Apply outgoing modifiers here if desired
+	# Freeze reduces outgoing damage by 10% per stack
+	if status_effects.has("freeze"):
+		var freeze_stacks = status_effects["freeze"]
+		if freeze_stacks > 0:
+			var multiplier = 1.0 - (0.1 * freeze_stacks)
+			multiplier = max(multiplier, 0.4)
+			dmg = int(dmg * multiplier)
+	return dmg
 
 func take_damage(amount: int, _element: String = ""):
 	if try_dodge():
@@ -180,9 +238,16 @@ func take_damage(amount: int, _element: String = ""):
 
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
+	
+	print("Player deals ", dmg, " to Enemy")
 
 	if current_health <= 0:
 		_die()
+
+
+func heal(amount : int):
+	current_health = min(get_max_health(), current_health + amount)
+	emit_signal("health_changed", current_health)
 
 
 # ---------------------------------------------------------
@@ -207,7 +272,7 @@ func clear_status(status_name: String):
 # STATUS EFFECT LOGIC
 # ---------------------------------------------------------
 
-func modify_stat_temp(stat_name: String, amount: int):
+func modify_stat_temp(_stat_name: String, _amount: int):
 	pass
 
 
@@ -218,11 +283,12 @@ func add_block(amount: int):
 func _apply_burn():
 	if status_effects["burn"] > 0:
 		take_damage(status_effects["burn"])
+		status_effects["burn"] -= 1
 
 
 func _apply_heal():
 	if status_effects["regeneration"] > 0:
-		current_health = min(get_max_health(), current_health + status_effects["heal"])
+		current_health = min(get_max_health(), current_health + status_effects["regeneration"])
 		emit_signal("health_changed", current_health)
 
 

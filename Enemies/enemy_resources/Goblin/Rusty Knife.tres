@@ -1,13 +1,16 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://blmy2l51equds"]
 
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="1_b85b6"]
 [ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_jcl28"]
+
+[sub_resource type="Resource" id="Resource_jatjb"]
+script = ExtResource("1_b85b6")
+amount = 4
+metadata/_custom_type_script = "uid://oxw2dwib6mke"
 
 [resource]
 script = ExtResource("1_jcl28")
 name = "Rusty Knife"
-base_damage = 4
-status_effects = {
-"corroded": 2
-}
+effects = Array[ExtResource("1_b85b6")]([SubResource("Resource_jatjb")])
 weight = 30
 metadata/_custom_type_script = "uid://t788w26yn03s"

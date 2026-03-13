@@ -1,9 +1,21 @@
 extends Resource
 class_name EnemyResource
+
+enum ElementType {
+	PHYSICAL,
+	FIRE,
+	ICE,
+	LIGHTNING
+}
+
 @export_category("Enemy Data")
 
 @export var enemy_name : String = "Goblin"
-@export var base_hp : int = 20
-@export var moves : Array[Resource] = [] # Array of MoveResource
-@export var resistances : Dictionary = {} # e.g., {"fire": 0.5}
-@export var vulnerabilities : Dictionary = {} # e.g., {"ice": 1.5}
+
+@export var hp_variation : Array[int]
+
+@export var moves : Array[MoveResource] = [] # Array of MoveResource
+
+@export var passive_effects : Array[EffectData] = []
+
+@export var element_modifiers : Dictionary = {}

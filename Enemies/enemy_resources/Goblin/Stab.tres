@@ -1,10 +1,16 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dee2qi5j250a0"]
 
 [ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_bmbgj"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="1_di4nw"]
+
+[sub_resource type="Resource" id="Resource_cdjhv"]
+script = ExtResource("1_di4nw")
+amount = 7
+metadata/_custom_type_script = "uid://oxw2dwib6mke"
 
 [resource]
 script = ExtResource("1_bmbgj")
 name = "Stab"
-base_damage = 7
+effects = Array[ExtResource("1_di4nw")]([SubResource("Resource_cdjhv")])
 weight = 50
 metadata/_custom_type_script = "uid://t788w26yn03s"

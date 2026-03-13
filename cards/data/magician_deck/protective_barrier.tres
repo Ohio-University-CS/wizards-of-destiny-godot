@@ -8,12 +8,13 @@
 script = ExtResource("1_qu7nd")
 effect_type = 1
 amount = 5
+status_type = 2
 metadata/_custom_type_script = "uid://oxw2dwib6mke"
 
 [resource]
 script = ExtResource("2_vpg2e")
 card_name = "Protective Barrier"
-description = "Gain SHIELD Block."
+description = "Gain 5 Block."
 card_type = 1
 artwork = ExtResource("1_00hw1")
 effects = Array[ExtResource("1_qu7nd")]([SubResource("Resource_qu7nd")])

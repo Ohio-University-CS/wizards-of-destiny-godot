@@ -1,5 +1,5 @@
 #temp_combat.gd
-@tool
+#@tool
 extends Node2D
 
 signal turn_changed(turn_name, turn_count)
@@ -8,7 +8,7 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-@export var card_scene: PackedScene
+@export var card_scene: PackedScene = null
 @export var class_data: ClassData
 @export_range(0.25, 4.0, 0.05) var game_speed: float = 1.0
 @export var play_move_duration: float = 0.60
@@ -61,7 +61,7 @@ var is_processing_enemy_turn: bool = false
 var is_combat_over: bool = false
 
 # Editor preview settings
-@export var preview_in_editor: bool = true
+@export var preview_in_editor: bool = false
 @export var preview_count: int = 5
 
 
@@ -85,7 +85,7 @@ func _ready():
 				if child is Player:
 					player = child
 					break
-
+	
 	if player:
 		player.setup_from_class(class_data)
 		if player.has_signal("health_changed"):
@@ -94,7 +94,7 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 	else:
 		push_error("TempCombat: no Player node found; cannot call setup_from_class")
-
+	
 	if opponent == null:
 		if has_node("Enemy") and get_node("Enemy") is Enemy:
 			opponent = get_node("Enemy")
@@ -109,7 +109,7 @@ func _ready():
 				var enemies = find_children("*", "Enemy", true, false)
 				if enemies.size() > 0 and enemies[0] is Enemy:
 					opponent = enemies[0]
-
+	
 	if opponent:
 		opponent.setup_from_resource(load("res://Enemies/enemy_resources/Goblin/Goblin.tres"))
 		if opponent.has_signal("health_changed"):
@@ -118,7 +118,7 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
-
+	
 	if deck == null:
 		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
 			deck = get_node("CombatDeck")
@@ -133,12 +133,12 @@ func _ready():
 				var combat_decks = find_children("*", "CombatDeck", true, false)
 				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
 					deck = combat_decks[0]
-
+	
 	if deck:
 		deck.setup_from_class(class_data)
 	else:
 		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
-
+	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
 	player_name_label = get_node_or_null(player_name_label_path)
@@ -148,14 +148,17 @@ func _ready():
 	result_label = get_node_or_null(result_label_path)
 	if result_overlay:
 		result_overlay.visible = false
-
+	
 	if player and player.has_signal("died"):
 		if not player.died.is_connected(_on_player_died):
 			player.died.connect(_on_player_died)
 	if opponent and opponent.has_signal("died"):
 		if not opponent.died.is_connected(_on_opponent_died):
 			opponent.died.connect(_on_opponent_died)
-
+	
+	if opponent:
+		opponent.prepare_next_move()
+	
 	_update_combatant_name_labels()
 	_update_discard_button_state()
 
@@ -168,9 +171,9 @@ func _ready():
 		_create_editor_previews()
 
 
-func _enter_tree():
-	if Engine.is_editor_hint() and preview_in_editor:
-		_create_editor_previews()
+#func _enter_tree():
+	#if Engine.is_editor_hint() and preview_in_editor:
+		#_create_editor_previews()
 
 func _exit_tree():
 	if Engine.is_editor_hint():
@@ -179,18 +182,20 @@ func _exit_tree():
 func draw_hand():
 	if deck == null:
 		return
-
-	# First render any cards already placed in hand during deck setup.
+	
+	# Spawn visuals for cards already in hand
 	for existing_card in deck.hand:
 		if not _has_visual_for_instance(existing_card):
 			spawn_card(existing_card)
-
-	var cards_to_draw: int = max(0, deck.max_hand_size - deck.hand.size())
-	for i in range(cards_to_draw):
+	
+	# Draw remaining cards
+	while hand_cards.size() < deck.max_hand_size:
 		var card_instance = deck.draw_card()
-		if card_instance:
-			spawn_card(card_instance)
-
+		if card_instance == null:
+			break
+		
+		spawn_card(card_instance)
+	
 	_layout_hand(false)
 
 
@@ -265,38 +270,46 @@ func play_card(card_node) -> bool:
 		return false
 	if is_play_animating or is_processing_enemy_turn:
 		return false
-
+	
 	if current_turn != TurnState.PLAYER:
 		return false
-
+	
 	var instance = card_node.card_instance
-
+	
+	if player.energy < instance.data.energy_cost:
+		return false
+	
 	if opponent == null:
 		push_error("TempCombat: cannot play card without a valid opponent target")
 		return false
-
-	if instance.play(opponent, player):
-		is_play_animating = true
-		_announce_move(true, instance.data.card_name)
-		if card_node is Control:
-			card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-		if instance.exhausted:
-			deck.exhaust_card(instance)
-		else:
-			deck.discard_card(instance)
-
-		hand_cards.erase(card_node)
-		_sync_deck_hand_to_visual_order()
-		_layout_hand(true)
-		_update_discard_button_state()
-
-		await _animate_played_card(card_node)
-		card_node.queue_free()
-		is_play_animating = false
-		return true
-
-	return false
+	
+	# Spend energy + validate play
+	if not instance.play(opponent, player):
+		return false
+	
+	# Apply effects
+	_apply_effects(instance.data.effects, player, opponent)
+	
+	is_play_animating = true
+	_announce_move(true, instance.data.card_name)
+	
+	if card_node is Control:
+		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if instance.exhausted:
+		deck.exhaust_card(instance)
+	else:
+		deck.discard_card(instance)
+	
+	hand_cards.erase(card_node)
+	_sync_deck_hand_to_visual_order()
+	_layout_hand(true)
+	_update_discard_button_state()
+	
+	await _animate_played_card(card_node)
+	card_node.queue_free()
+	is_play_animating = false
+	return true
 
 
 func _start_player_turn() -> void:
@@ -342,6 +355,8 @@ func _start_enemy_turn() -> void:
 	if opponent:
 		opponent.end_turn()
 
+	opponent.prepare_next_move()
+	
 	if turn_transition_delay > 0.0:
 		await get_tree().create_timer(_scaled_time(turn_transition_delay)).timeout
 
@@ -353,15 +368,104 @@ func _enemy_take_turn() -> void:
 	if is_combat_over or opponent == null or player == null:
 		return
 	
-	var move = opponent.select_move()
-	if move == null:
+	if opponent.is_stunned():
+		print("Enemy is stunned")
 		return
 	
+	var move = opponent.current_move
+	if move == null:
+		move = opponent.select_move()
+	
 	_announce_move(false, move.name)
-	opponent.perform_move(player)
+	
+	_apply_effects(move.effects, opponent, player)
+	
+	# handle preventing too many repeat moves
+	if move == opponent.last_move:
+		opponent.repeat_count += 1
+	else:
+		opponent.repeat_count = 1
+		opponent.last_move = move
 	
 	if enemy_move_delay > 0.0:
 		await get_tree().create_timer(_scaled_time(enemy_move_delay)).timeout
+
+
+func _apply_effects(effects : Array, source, target) -> void:
+	if effects == null:
+		return
+	
+	# safety checks for valid targets
+	if _is_valid_target(source) == false:
+		return
+	if _is_valid_target(target) == false:
+		return
+	
+	for effect in effects:
+		if effect == null:
+			continue
+		
+		if randf() > effect.chance:
+			continue
+		
+		#---------------
+		# Tag Handling
+		#---------------
+		
+		if "random_element" in effect.tags:
+			var elements = ["burn", "freeze", "shock"]
+			effect.status_name = elements[randi() % elements.size()]
+		
+		if "undodgeable" in effect.tags:
+			if target.status_effects.has("evasive"):
+				target.status_effects["evasive"] = 0
+		
+		#---------------
+		# Effect Execution
+		#---------------
+		
+		match effect.effect_type:
+			
+			EffectData.EffectType.DAMAGE:
+				for i in range(effect.hits):
+					var dmg = source.deal_damage(
+						effect.amount,
+						effect.element,
+						effect.include_base_damage
+					)
+					target.take_damage(dmg)
+			
+			EffectData.EffectType.BLOCK:
+				source.add_block(effect.amount)
+			
+			EffectData.EffectType.APPLY_STATUS:
+				target.apply_status(effect.get_status_name(), effect.amount)
+			
+			EffectData.EffectType.MODIFY_STAT:
+				source.modify_stat(effect.get_stat_name(), effect.amount, effect.duration_turns)
+			
+			EffectData.EffectType.ADD_STRIKE_DAMAGE:
+				source.add_strike_damage(effect.amount)
+			
+			EffectData.EffectType.MULTIPLIER_DAMAGE:
+				source.apply_damage_multiplier(effect.multiplier)
+			
+			EffectData.EffectType.DRAW_CARDS:
+				for i in range(effect.amount):
+					if hand_cards.size() >= deck.max_hand_size:
+						break
+					var card = deck.draw_card()
+					if card:
+						spawn_card(card)
+			
+			EffectData.EffectType.DISCARD_CARDS:
+				discard_selected_cards()
+			
+			EffectData.EffectType.GAIN_ENERGY:
+				source.set_energy(source.energy + effect.amount)
+			EffectData.EffectType.EXHAUST_SELF:
+				if source.has_method("set_exhaust_flag"):
+					source.set_exhaust_flag()
 
 
 func _build_enemy_move_name() -> String:
@@ -447,6 +551,10 @@ func _animate_played_card(card_node) -> void:
 	tween.parallel().tween_property(card_node, "modulate:a", 0.0, _scaled_time(play_fade_duration))
 
 	await tween.finished
+
+
+func _is_valid_target(target) -> bool:
+	return target != null and is_instance_valid(target)
 
 
 func _can_player_continue_turn() -> bool:
@@ -646,6 +754,14 @@ func _sync_deck_hand_to_visual_order() -> void:
 				reordered.append(instance)
 
 	deck.hand = reordered
+
+
+func _update_enemy_intent():
+	if opponent == null or enemy_move_label == null:
+		return
+	
+	if opponent.current_move:
+		enemy_move_label.text = "Intent: " + opponent.current_move.name
 
 
 func _update_combatant_name_labels() -> void:

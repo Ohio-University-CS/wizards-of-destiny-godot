@@ -6,14 +6,15 @@
 
 [sub_resource type="Resource" id="Resource_nhool"]
 script = ExtResource("1_nhool")
-amount = 1
-stat_name = "damage"
+effect_type = 4
+amount = 2
+stat_type = 1
 metadata/_custom_type_script = "uid://oxw2dwib6mke"
 
 [resource]
 script = ExtResource("2_opk5y")
 card_name = "Hex"
-description = "Attack for DAMAGE +1."
+description = "Add 2 Damage to Strike"
 artwork = ExtResource("1_i23fi")
 effects = Array[ExtResource("1_nhool")]([SubResource("Resource_nhool")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -7,16 +7,22 @@
 [sub_resource type="Resource" id="Resource_pmwjj"]
 script = ExtResource("1_rvavo")
 effect_type = 2
+amount = 3
+status_type = 6
+metadata/_custom_type_script = "uid://oxw2dwib6mke"
+
+[sub_resource type="Resource" id="Resource_gshb6"]
+script = ExtResource("1_rvavo")
+effect_type = 2
 amount = 1
-stat_name = "Heal"
-status_name = "Heal"
+status_type = 10
 metadata/_custom_type_script = "uid://oxw2dwib6mke"
 
 [resource]
 script = ExtResource("2_gshb6")
 card_name = "Bolster"
-description = "Gain HEAL Heal. +1 DAMAGE for rest of turn."
+description = "Gain 3 Regeneration, Gain Empowered"
 card_type = 1
 artwork = ExtResource("1_gshb6")
-effects = Array[ExtResource("1_rvavo")]([SubResource("Resource_pmwjj")])
+effects = Array[ExtResource("1_rvavo")]([SubResource("Resource_pmwjj"), SubResource("Resource_gshb6")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

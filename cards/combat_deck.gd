@@ -9,17 +9,12 @@ var hand: Array[CardInstance] = []
 @export var max_hand_size := 5
 
 @export var starting_deck: Array[CardData]
-@export var basic_attack: CardData = preload("res://cards/data/basic_attack.tres")
 
 func setup_from_class(class_data: ClassData):
 	draw_pile.clear()
 	discard_pile.clear()
 	exhaust_pile.clear()
 	hand.clear()
-
-	# Guarantee opening hand always includes Basic Attack.
-	if basic_attack != null and max_hand_size > 0:
-		hand.append(CardInstance.new(basic_attack))
 
 	for card_data in class_data.starting_deck:
 		draw_pile.append(CardInstance.new(card_data))

@@ -118,6 +118,28 @@ func modify_stat_permanent(stat_name: String, amount: int):
 		if stat_name == "max_health":
 			current_health = clamp(current_health + amount, 0, get_max_health())
 
+
+func modify_stat(stat_type, amount : int, duration_turns : int = 0):
+	var stat_name := ""
+	
+	match stat_type:
+		"ENERGY":
+			set_energy(energy + amount)
+			return
+		"DRAW":
+			stat_name = "draw"
+		"STRIKE_DAMAGE":
+			add_strike_damage(amount)
+			return
+		_:
+			stat_name = str(stat_type).to_lower()
+	
+	if duration_turns > 0:
+		modify_stat_temp(stat_name, amount)
+	else:
+		modify_stat_permanent(stat_name, amount)
+
+
 # ---------------------------------------------------------
 # STRIKE SYSTEM
 # ---------------------------------------------------------
@@ -130,6 +152,7 @@ var strike_elemental_damage := {
 	"electric": 0
 }
 var strike_statuses : Array = []
+var damage_multiplier : float = 1.0
 
 #reset all strike at start of turn
 func reset_strike():
@@ -154,11 +177,16 @@ func add_strike_status(status : String, stacks : int):
 		"stacks" : stacks
 	})
 
+#handle multiplying damage
+func apply_damage_multiplier(mult : float):
+	damage_multiplier *= mult
+
 #perform the actual strike
 func perform_strike(target):
 	
 	#normal damage
 	var dmg = get_damage() + strike_bonus_damage
+	dmg = int(dmg * damage_multiplier)
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
@@ -168,9 +196,8 @@ func perform_strike(target):
 	for element in strike_elemental_damage.keys():
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
-			var elemental_dmg = amt #doesn't call get_damage again
+			var elemental_dmg = deal_damage(amt, element)
 			#APPLY FREEZE/CRIT LATER DOWN THE LINE
-			elemental_dmg = deal_damage(elemental_dmg, element)
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
 	
@@ -178,7 +205,8 @@ func perform_strike(target):
 	for effect in strike_statuses:
 		target.apply_status(effect["name"], effect["stacks"])
 		print(" - Apply ", effect["name"], " x", effect["stacks"])
-
+	
+	damage_multiplier = 1.0
 
 
 # ---------------------------------------------------------
@@ -232,8 +260,7 @@ func start_turn():
 	status_effects["block"] = 0
 	
 	#Reset Strike
-	strike_bonus_damage = 0
-	strike_statuses.clear()
+	reset_strike()
 	
 	for element in strike_elemental_damage.keys():
 		strike_elemental_damage[element] = 0
@@ -309,6 +336,10 @@ func deal_damage(amount : int, element : String = "", include_base_damage : bool
 	return dmg
 
 
+func heal(amount : int):
+	current_health = min(get_max_health(), current_health + amount)
+	emit_signal("health_changed", current_health)
+
 # ---------------------------------------------------------
 # STATUS EFFECT MANAGEMENT
 # ---------------------------------------------------------
@@ -327,6 +358,9 @@ func clear_status(status_name: String):
 		emit_signal("status_expired", status_name)
 
 
+func has_status(status_name: String) -> bool:
+	return status_effects.get(status_name, 0) > 0
+
 # ---------------------------------------------------------
 # STATUS EFFECT LOGIC
 # ---------------------------------------------------------
@@ -343,6 +377,7 @@ func add_block(amount: int):
 func _apply_burn():
 	if status_effects["burn"] > 0:
 		take_damage(status_effects["burn"])
+		status_effects["burn"] -= 1
 
 
 func _apply_heal():

@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Control
 
 signal card_clicked
@@ -140,10 +140,19 @@ func _refresh_visual():
 	if data == null:
 		return
 
-	$Art.texture = data.artwork
-	$Name.text = data.card_name
-	$Description.text = data.description
-	$Cost.text = str(data.energy_cost)
+	var art = get_node_or_null("Art")
+	var cname = get_node_or_null("Name")
+	var desc = get_node_or_null("Description")
+	var cost = get_node_or_null("Cost")
+
+	if art:
+		art.texture = data.artwork
+	if name:
+		cname.text = data.card_name
+	if desc:
+		desc.text = data.description
+	if cost:
+		cost.text = str(data.energy_cost)
 
 
 func _update_visual_state():
