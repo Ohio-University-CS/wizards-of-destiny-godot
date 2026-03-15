@@ -16,11 +16,6 @@ signal turn_changed(turn_name, turn_count)
 @export var enemy_move_cost: int = 1
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
-@export var enemy_physical_move_names: Array[String] = ["Claw Swipe", "Brutal Strike", "Heavy Slash"]
-@export var enemy_fire_move_names: Array[String] = ["Flame Burst", "Scorching Bolt", "Inferno Lash"]
-@export var enemy_ice_move_names: Array[String] = ["Frost Bite", "Glacial Spike", "Cold Snap"]
-@export var enemy_poison_move_names: Array[String] = ["Venom Fang", "Toxic Spray", "Corrosive Bite"]
-@export var enemy_electric_move_names: Array[String] = ["Static Arc", "Thunder Jab", "Volt Strike"]
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
 @export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
@@ -464,49 +459,6 @@ func _apply_effects(effects : Array, source) -> void:
 			
 			effect.apply(source, target, self)
 
-func _build_enemy_move_name() -> String:
-	var pool: Array[String] = enemy_physical_move_names
-	var strongest_element: String = _get_enemy_strongest_element()
-
-	match strongest_element:
-		"fire":
-			pool = enemy_fire_move_names
-		"ice":
-			pool = enemy_ice_move_names
-		"poison":
-			pool = enemy_poison_move_names
-		"electric":
-			pool = enemy_electric_move_names
-		_:
-			pool = enemy_physical_move_names
-
-	if pool.is_empty():
-		return "Basic Attack"
-
-	return pool[randi() % pool.size()]
-
-
-func _get_enemy_strongest_element() -> String:
-	if opponent == null:
-		return "physical"
-
-	var fire_power: int = int(opponent.get_fire_power()) if opponent.has_method("get_fire_power") else 0
-	var ice_power: int = int(opponent.get_ice_power()) if opponent.has_method("get_ice_power") else 0
-	var poison_power: int = int(opponent.get_poison_power()) if opponent.has_method("get_poison_power") else 0
-	var electric_power: int = int(opponent.get_electric_power()) if opponent.has_method("get_electric_power") else 0
-
-	var best_power: int = max(max(fire_power, ice_power), max(poison_power, electric_power))
-	if best_power <= 0:
-		return "physical"
-
-	if fire_power == best_power:
-		return "fire"
-	if ice_power == best_power:
-		return "ice"
-	if poison_power == best_power:
-		return "poison"
-	return "electric"
-
 
 func _announce_move(is_player_move: bool, move_name: String) -> void:
 	var label: Label = player_move_label if is_player_move else enemy_move_label
@@ -557,10 +509,10 @@ func _get_effect_targets(effect: Effect, source) -> Array:
 	var targets: Array = []
 	
 	match effect.target_type:
-		EffectData.TargetType.SELF:
+		Effect.TargetType.SELF:
 			targets.append(source)
 		
-		EffectData.TargetType.ENEMY:
+		Effect.TargetType.ENEMY:
 			targets.append(_get_opponent(source))
 	
 	return targets
@@ -785,8 +737,8 @@ func _update_combatant_name_labels() -> void:
 
 	if enemy_name_label:
 		var enemy_type_name: String = "Enemy"
-		if opponent and opponent.get("category") != null:
-			enemy_type_name = String(opponent.get("category")).to_lower()
+		if opponent and opponent.resource:
+			enemy_type_name = opponent.resource.enemy_name
 		enemy_name_label.text = enemy_type_name
 
 

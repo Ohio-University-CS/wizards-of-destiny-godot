@@ -9,6 +9,6 @@
 
 [resource]
 script = ExtResource("4_xxvr6")
-hp_variation = Array[int]([28, 28, 28])
+hp_variation = Array[int]([28, 31, 35])
 moves = Array[ExtResource("1_iiuf5")]([ExtResource("1_bw31o"), ExtResource("2_xu64k"), ExtResource("3_iiuf5")])
 metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

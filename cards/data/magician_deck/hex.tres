@@ -7,14 +7,14 @@
 
 [sub_resource type="Resource" id="Resource_bat0r"]
 script = ExtResource("3_7ea71")
-amount = 2
+amount = 5
 target_type = 0
 metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
 
 [resource]
 script = ExtResource("2_opk5y")
 card_name = "Hex"
-description = "Add 2 Damage to Strike"
+description = "Add 5 Damage to Strike"
 artwork = ExtResource("1_i23fi")
 effects = Array[ExtResource("2_i23fi")]([SubResource("Resource_bat0r")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

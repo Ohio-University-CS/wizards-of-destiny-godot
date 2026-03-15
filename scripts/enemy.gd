@@ -13,21 +13,6 @@ var base_max_health: int
 
 var temp_health_mod : int = 0
 
-# Predefined enemy categories with sensible defaults
-const CATEGORY_STATS = {
-	"Goblin": {
-		"max_health": 18
-	},
-	"Wizard": {
-		"max_health": 16
-	},
-	"Robot": {
-		"max_health": 30
-	}
-}
-
-# Human-friendly category label
-@export var category: String = "Goblin"
 
 # Runtime values
 var current_health: int
@@ -44,25 +29,9 @@ func setup_from_resource(res : EnemyResource) -> void:
 	current_health = base_max_health
 
 
-func configure_from_category(cat: String) -> void:
-	# Apply presets from CATEGORY_STATS. Falls back to Goblin if missing.
-	var stats = CATEGORY_STATS.get(cat, CATEGORY_STATS["Goblin"])
-
-	base_max_health = stats["max_health"]
-
-	current_health = get_max_health()
-	category = cat
-
-
 # for use later
 func modify_stat(_stat_type, _amount : int, _duration_turns : int = 0):
 	pass
-
-
-static func new_enemy(cat: String) -> Enemy:
-	var e = Enemy.new()
-	e.configure_from_category(cat)
-	return e
 
 
 func get_max_health() -> int:
