@@ -1,0 +1,480 @@
+[gd_scene format=3 uid="uid://doekg4dgn10b6"]
+
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_71l1o"]
+[ext_resource type="Script" uid="uid://dsgh4ek5kd5fg" path="res://scenes/settings_menu/setting_menu.gd" id="1_rar45"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_xgxal"]
+[ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="3_xgxal"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_71l1o"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgxal"]
+font_size = 50
+font_color = Color(0, 0, 0.015686275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rar45"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5h30"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja5ad"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5le3a"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_807kq"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mxoh"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3t8x"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ipew"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o00b5"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7el3e"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edjtb"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bi2s"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emrrn"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qneoh"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbnbe"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kpxt"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aut5i"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs2a7"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 303, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqfm"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4lhh"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3guu"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mc0i"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 202, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6v7s"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xxwn"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0goog"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcmle"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 101, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5175h"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(708, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q41l"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(472, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r50i4"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(236, 0, 236, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d7ay"]
+atlas = ExtResource("3_xgxal")
+region = Rect2(0, 0, 236, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qnn1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rar45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5h30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja5ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5le3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_807kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mxoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3t8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ipew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o00b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7el3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edjtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bi2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emrrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qneoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbnbe")
+}],
+"loop": false,
+"name": &"Close",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kpxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aut5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs2a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4lhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3guu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mc0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6v7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xxwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0goog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcmle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5175h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q41l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r50i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d7ay")
+}],
+"loop": false,
+"name": &"Open",
+"speed": 20.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s5h30"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ja5ad"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5le3a"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[node name="SettingMenu" type="Control" unique_id=1378454964]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rar45")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=59436173]
+texture = ExtResource("1_71l1o")
+centered = false
+
+[node name="Unrolled_Scroll" type="Sprite2D" parent="." unique_id=1738009530]
+position = Vector2(961, 568)
+scale = Vector2(5.169, 7.421)
+texture = ExtResource("2_xgxal")
+
+[node name="Buttons" type="Control" parent="." unique_id=271372125]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Graphics Button" type="Button" parent="Buttons" unique_id=1937190634]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 37.0
+offset_right = 727.0
+offset_bottom = 157.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=749190265]
+position = Vector2(194, 60)
+scale = Vector2(1.747, 1.696)
+texture = ExtResource("2_xgxal")
+
+[node name="Label" type="Label" parent="Buttons/Graphics Button" unique_id=338386855]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 15.0
+offset_right = 358.0
+offset_bottom = 105.0
+text = "Graphics"
+label_settings = SubResource("LabelSettings_71l1o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sound Button" type="Button" parent="Buttons" unique_id=721653677]
+layout_mode = 0
+offset_left = 794.0
+offset_top = 41.0
+offset_right = 1143.0
+offset_bottom = 153.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Sound Button" unique_id=867893015]
+position = Vector2(166, 56)
+scale = Vector2(1.747, 1.696)
+texture = ExtResource("2_xgxal")
+
+[node name="Label" type="Label" parent="Buttons/Sound Button" unique_id=555098908]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 10.0
+offset_right = 331.0
+offset_bottom = 103.0
+text = "Sound"
+label_settings = SubResource("LabelSettings_xgxal")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control Button" type="Button" parent="Buttons" unique_id=1668627018]
+layout_mode = 0
+offset_left = 1257.0
+offset_top = 40.0
+offset_right = 1593.0
+offset_bottom = 157.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Control Button" unique_id=1486842184]
+position = Vector2(128, 57)
+scale = Vector2(1.7469575, 1.696)
+texture = ExtResource("2_xgxal")
+
+[node name="Label" type="Label" parent="Buttons/Control Button" unique_id=1517166874]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 11.0
+offset_right = 291.0
+offset_bottom = 100.0
+text = "Control's"
+label_settings = SubResource("LabelSettings_rar45")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll_Animation" type="Control" parent="." unique_id=1012413467]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Scroll_Animation" unique_id=476162800]
+position = Vector2(961, 568)
+scale = Vector2(5.169, 7.421)
+sprite_frames = SubResource("SpriteFrames_qnn1q")
+animation = &"Open"
+frame = 14
+frame_progress = 1.0
+
+[node name="gsettingsoptions" type="Control" parent="." unique_id=2058529456]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FullScreen button" type="Button" parent="gsettingsoptions" unique_id=1751588147]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 378.0
+offset_right = 921.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="Fullcreen" type="Label" parent="gsettingsoptions/FullScreen button" unique_id=619887131]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -1.0
+offset_right = 369.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 50
+text = "Fullscreen:"
+label_settings = SubResource("LabelSettings_s5h30")
+
+[node name="Fullscreen label" type="Control" parent="gsettingsoptions" unique_id=1102256791]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fullscreen ON" type="Label" parent="gsettingsoptions/Fullscreen label" unique_id=574292199]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 378.0
+offset_right = 873.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 50
+text = "ON"
+label_settings = SubResource("LabelSettings_ja5ad")
+
+[node name="Fullscreen OFF" type="Label" parent="gsettingsoptions/Fullscreen label" unique_id=590655170]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 378.0
+offset_right = 873.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 50
+text = "OFF"
+label_settings = SubResource("LabelSettings_5le3a")
+
+[node name="soundsettingoptions" type="Control" parent="." unique_id=842410391]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="mvs" type="HSlider" parent="soundsettingoptions" unique_id=1490526554]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 444.0
+offset_right = 656.0
+offset_bottom = 524.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.001
+
+[node name="mvl" type="Label" parent="soundsettingoptions" unique_id=900487914]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 452.0
+offset_right = 758.0
+offset_bottom = 507.0
+theme_override_font_sizes/font_size = 50
+text = "MAIN VOLUME:"
+label_settings = SubResource("LabelSettings_ja5ad")
+
+[node name="musicvl" type="Label" parent="soundsettingoptions" unique_id=257127033]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 452.0
+offset_right = 1303.0
+offset_bottom = 521.0
+theme_override_font_sizes/font_size = 50
+text = "MUSIC VOLUME:"
+label_settings = SubResource("LabelSettings_ja5ad")
+
+[node name="musicvs" type="HSlider" parent="soundsettingoptions" unique_id=823738786]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 444.0
+offset_right = 1180.0
+offset_bottom = 524.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.001
+
+[node name="sfvl" type="Label" parent="soundsettingoptions" unique_id=1603664843]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 600.0
+offset_right = 758.0
+offset_bottom = 655.0
+theme_override_font_sizes/font_size = 50
+text = "MAIN VOLUME:"
+label_settings = SubResource("LabelSettings_ja5ad")
+
+[node name="sfvs" type="HSlider" parent="soundsettingoptions" unique_id=1464529166]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 590.0
+offset_right = 656.0
+offset_bottom = 670.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.001
+
+[connection signal="animation_finished" from="Scroll_Animation/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="pressed" from="gsettingsoptions/FullScreen button" to="." method="_on_full_screen_button_pressed"]
+[connection signal="value_changed" from="soundsettingoptions/mvs" to="." method="_on_mvs_value_changed"]
+[connection signal="value_changed" from="soundsettingoptions/musicvs" to="." method="_on_musicvs_value_changed"]
+[connection signal="value_changed" from="soundsettingoptions/sfvs" to="." method="_on_sfvs_value_changed"]
