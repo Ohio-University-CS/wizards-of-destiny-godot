@@ -17,6 +17,10 @@ font_color = Color(0, 0, 0.015686275, 1)
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_807kq"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("3_xgxal")
 region = Rect2(0, 0, 236, 101)
@@ -343,6 +347,26 @@ text = "Control's"
 label_settings = SubResource("LabelSettings_rar45")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=1493047344]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 929.00006
+offset_right = 789.0
+offset_bottom = 1038.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_xgxal")
+flat = true
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=490191138]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 32.75
+offset_right = 255.0
+offset_bottom = 74.75
+text = "Back"
+label_settings = SubResource("LabelSettings_807kq")
 
 [node name="Scroll_Animation" type="Control" parent="." unique_id=1012413467]
 anchors_preset = 0

@@ -39,7 +39,6 @@ func start_shimmer_loop():
 
 
 func _on_play_pressed():
-	print("Play pressed")
 	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
 
 

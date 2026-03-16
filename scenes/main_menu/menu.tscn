@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://y6kmsfru2fv"]
 
+[ext_resource type="Script" uid="uid://elftbjqmvv35" path="res://scenes/main_menu/main_menu.gd" id="1_6ufdq"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_pt1kw"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_0qkqs"]
 
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6ufdq")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
 texture = ExtResource("1_pt1kw")
@@ -36,87 +38,84 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level Select" type="Button" parent="Buttons" unique_id=975534879]
+[node name="LevelSelect" type="Button" parent="Buttons" unique_id=409226595]
 layout_mode = 0
-offset_left = -300.0
-offset_top = -150.0
-offset_right = -292.0
-offset_bottom = -142.0
+offset_left = -430.0
+offset_top = -140.0
+offset_right = -186.0
+offset_bottom = -31.0
 scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
-texture = ExtResource("2_0qkqs")
-
-[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
+[node name="Label" type="Label" parent="Buttons/LevelSelect" unique_id=1290418621]
 layout_mode = 0
-offset_left = -83.5
-offset_top = -21.5
-offset_right = 85.5
-offset_bottom = 20.5
+offset_left = 38.0
+offset_top = 32.75
+offset_right = 207.0
+offset_bottom = 74.75
 text = "Level Select"
 label_settings = SubResource("LabelSettings_0qkqs")
 
-[node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
+[node name="Collection" type="Button" parent="Buttons" unique_id=763851864]
 layout_mode = 0
-offset_left = 300.0
-offset_top = -150.0
-offset_right = 308.0
-offset_bottom = -142.0
+offset_left = 190.0
+offset_top = -140.0
+offset_right = 434.0
+offset_bottom = -31.0
 scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Upgrades" unique_id=1541017295]
-texture = ExtResource("2_0qkqs")
-
-[node name="Label" type="Label" parent="Buttons/Upgrades" unique_id=816502151]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = -61.5
-offset_top = -20.5
-offset_right = 99.5
-offset_bottom = 21.5
-grow_horizontal = 2
-text = "Upgrades"
+[node name="Label" type="Label" parent="Buttons/Collection" unique_id=177031038]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 32.75
+offset_right = 218.0
+offset_bottom = 74.75
+text = "Collection"
 label_settings = SubResource("LabelSettings_0qkqs")
 
-[node name="Settings" type="Button" parent="Buttons" unique_id=1614388412]
+[node name="Settings" type="Button" parent="Buttons" unique_id=1615403388]
 layout_mode = 0
-offset_left = -300.0
-offset_top = 150.0
-offset_right = -292.0
-offset_bottom = 158.0
+offset_left = -430.0
+offset_top = 120.0
+offset_right = -186.0
+offset_bottom = 229.0
 scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=1777698657]
-texture = ExtResource("2_0qkqs")
-
-[node name="Label" type="Label" parent="Buttons/Settings" unique_id=917045816]
+[node name="Label" type="Label" parent="Buttons/Settings" unique_id=1738786059]
 layout_mode = 0
-offset_left = -64.5
-offset_top = -20.5
-offset_right = 104.5
-offset_bottom = 21.5
+offset_left = 56.0
+offset_top = 32.75
+offset_right = 225.0
+offset_bottom = 74.75
 text = "Settings"
 label_settings = SubResource("LabelSettings_0qkqs")
 
-[node name="Exit" type="Button" parent="Buttons" unique_id=1738109675]
+[node name="Exit" type="Button" parent="Buttons" unique_id=1171470084]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 150.0
-offset_right = 308.0
-offset_bottom = 158.0
+offset_left = 190.0
+offset_top = 120.0
+offset_right = 434.0
+offset_bottom = 229.0
 scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=51757949]
-texture = ExtResource("2_0qkqs")
-
-[node name="Label" type="Label" parent="Buttons/Exit" unique_id=999302246]
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=1783043570]
 layout_mode = 0
-offset_left = -27.5
-offset_top = -21.5
-offset_right = 26.5
-offset_bottom = 20.5
-text = "Exit"
+offset_left = 86.0
+offset_top = 32.75
+offset_right = 255.0
+offset_bottom = 74.75
+text = "Back"
 label_settings = SubResource("LabelSettings_0qkqs")
 
 [node name="Label" type="Label" parent="." unique_id=2076492899]

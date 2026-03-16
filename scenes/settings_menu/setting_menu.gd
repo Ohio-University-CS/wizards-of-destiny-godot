@@ -5,6 +5,7 @@ extends Control
 @onready var graphics_button = $"Buttons/Graphics Button"
 @onready var sound_button = $"Buttons/Sound Button"
 @onready var control_button = $"Buttons/Control Button"
+@onready var exit_button : Button = $Buttons/Exit
 @onready var unrolled_scroll = $Unrolled_Scroll
 @onready var gso = $"gsettingsoptions"
 @onready var fullscreen_button = $"gsettingsoptions/FullScreen button"
@@ -16,6 +17,8 @@ extends Control
 @onready var sfx_slider = $"soundsettingoptions/sfvs"
 
 var last_opened: String = "N/A"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#visibility
@@ -30,11 +33,15 @@ func _ready() -> void:
 	graphics_button.pressed.connect(_on_graphics_pressed)
 	sound_button.pressed.connect(_on_sound_pressed)
 	control_button.pressed.connect(_on_control_pressed)
-	fullscreen_button.pressed.connect(_on_full_screen_button_pressed)
+	exit_button.pressed.connect(_on_back_pressed)
+	if not fullscreen_button.pressed.is_connected(_on_full_screen_button_pressed):
+		fullscreen_button.pressed.connect(_on_full_screen_button_pressed)
 	#sound
 	main_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	main_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
-	main_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
+	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+
+
 func _on_graphics_pressed():
 	if last_opened == "graphics":
 		return
@@ -61,6 +68,7 @@ func _on_graphics_pressed():
 		fullscreen_on.hide()
 		fullscreen_off.show()
 
+
 func _on_sound_pressed():
 	if last_opened == "sound":
 		return
@@ -81,6 +89,7 @@ func _on_sound_pressed():
 	last_opened = "sound"
 	soundsettings.show()
 
+
 func _on_control_pressed():
 	if last_opened == "controls":
 		return
@@ -100,9 +109,11 @@ func _on_control_pressed():
 		unrolled_scroll.show()
 	last_opened = "controls"
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
+
 
 func _on_full_screen_button_pressed() -> void:
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -115,17 +126,29 @@ func _on_full_screen_button_pressed() -> void:
 		fullscreen_on.show()
 	# Replace with function body.
 
+
 func _gso_off() -> void:
 	fullscreen_off.hide()
 	fullscreen_on.hide()
 	fullscreen_button.hide()
 	pass
+
+
 func _sso_off() -> void:
 	soundsettings.hide()
 
+
 func _on_mvs_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+
+
 func _on_musicvs_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), value)
+
+
 func _on_sfvs_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value)
+
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
