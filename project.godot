@@ -15,9 +15,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Wizards of Destiny"
-run/main_scene="uid://d4kur0ew5yakn"
+run/main_scene="uid://csgqjabna8v0m"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://sprites/icon.svg"
 
 [display]
 
