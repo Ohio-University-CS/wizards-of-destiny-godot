@@ -1,0 +1,292 @@
+[gd_scene format=3 uid="uid://b85uchlvcjg4s"]
+
+[ext_resource type="Script" uid="uid://bycstnymfk6pn" path="res://scenes/title_screen/title_screen.gd" id="1_qrqkg"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_g7q6h"]
+[ext_resource type="Texture2D" uid="uid://cfd6li58h3ekt" path="res://scenes/title_screen/Title_Screen_Text.png" id="3_i8kf4"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="4_t6qk7"]
+[ext_resource type="Texture2D" uid="uid://dngv2hxttmlq8" path="res://scenes/title_screen/Title_Screen_Play.png" id="5_g7q6h"]
+[ext_resource type="Texture2D" uid="uid://b5s8mj7g2x8an" path="res://scenes/title_screen/Title_Screen_Exit.png" id="5_i8kf4"]
+
+[sub_resource type="Animation" id="Animation_v1xft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title/TitleText:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tgaqq"]
+resource_name = "glimmer"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title/TitleText:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 32]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ap8e1"]
+_data = {
+&"RESET": SubResource("Animation_v1xft"),
+&"glimmer": SubResource("Animation_tgaqq")
+}
+
+[sub_resource type="Animation" id="Animation_qrqkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title/TitleText:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Buttons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title/TitleText:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i8kf4"]
+resource_name = "hover"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, -20), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g7q6h"]
+resource_name = "intro"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title/TitleText:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Buttons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title/TitleText:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8kf4"]
+_data = {
+&"RESET": SubResource("Animation_qrqkg"),
+&"hover": SubResource("Animation_i8kf4"),
+&"intro": SubResource("Animation_g7q6h")
+}
+
+[node name="Node2D" type="Control" unique_id=1234279500]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_qrqkg")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=680865869]
+texture = ExtResource("2_g7q6h")
+centered = false
+
+[node name="Title" type="Control" parent="." unique_id=2084893166]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleText" type="Sprite2D" parent="Title" unique_id=619002953]
+position = Vector2(981, 428)
+texture = ExtResource("3_i8kf4")
+hframes = 9
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title" unique_id=1896686246]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ap8e1")
+
+[node name="Buttons" type="Control" parent="." unique_id=281558537]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=708629904]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 200.0
+offset_right = 394.0
+offset_bottom = 309.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("4_t6qk7")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1411816059]
+position = Vector2(120, 55)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_i8kf4")
+
+[node name="Play" type="Button" parent="Buttons" unique_id=1813044529]
+layout_mode = 1
+offset_left = -400.0
+offset_top = 200.0
+offset_right = -156.0
+offset_bottom = 309.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("4_t6qk7")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Play" unique_id=482112337]
+position = Vector2(120, 55)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_g7q6h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1986724700]
+libraries/ = SubResource("AnimationLibrary_i8kf4")
+
+[node name="Timer" type="Timer" parent="." unique_id=685794867]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

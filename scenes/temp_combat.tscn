@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://csgqjabna8v0m"]
+
+[ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_e2ybi"]
+[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_8m2go"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="2_enxb0"]
+[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
+[ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
+[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="5_u8mph"]
+[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scripts/play_button.gd" id="6_playbtn"]
+[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scripts/end_turn_button.gd" id="7_endturn"]
+[ext_resource type="Script" uid="uid://bhhc0w5gwn27n" path="res://scripts/health_bar.gd" id="8_glrqy"]
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="9_fodyp"]
+[ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="10_mana"]
+[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scripts/discard_button.gd" id="11_discard"]
+
+[node name="TempCombat" type="Node2D" unique_id=1118192045]
+modulate = Color(0.9998011, 0.99974126, 0.99970776, 1)
+position = Vector2(415.99997, 423.99997)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_e2ybi")
+card_scene = ExtResource("2_8m2go")
+class_data = ExtResource("3_u8mph")
+play_move_duration = 2.0
+enemy_move_delay = 1.0
+player_move_label_path = NodePath("Player/PlayerMoveText")
+enemy_move_label_path = NodePath("Enemy/EnemyMoveText")
+discard_button_path = NodePath("Discard")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=634967730]
+offset_left = -521.25
+offset_top = 670.0
+offset_right = 1888.7498
+offset_bottom = 822.5
+
+[node name="CombatDeck" type="Node" parent="PanelContainer" unique_id=32642842]
+script = ExtResource("3_xfvby")
+
+[node name="Play" type="Button" parent="PanelContainer" unique_id=1321570188]
+clip_contents = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+text = "Play"
+script = ExtResource("6_playbtn")
+
+[node name="EndTurn" type="Button" parent="." unique_id=205734611]
+custom_minimum_size = Vector2(150, 150)
+offset_left = 1722.5
+offset_top = 667.50006
+offset_right = 1872.5
+offset_bottom = 817.50006
+text = "End Turn"
+script = ExtResource("7_endturn")
+
+[node name="Discard" type="Button" parent="." unique_id=1748888497]
+custom_minimum_size = Vector2(150, 150)
+offset_left = 1562.5
+offset_top = 667.50006
+offset_right = 1712.5
+offset_bottom = 817.50006
+disabled = true
+text = "Discard"
+script = ExtResource("11_discard")
+
+[node name="Player" type="Sprite2D" parent="." unique_id=1458958701]
+position = Vector2(-28.749958, 155.00006)
+scale = Vector2(1.9785148, 1.9248049)
+texture = ExtResource("5_u8mph")
+
+[node name="PlayerMoveText" type="Label" parent="Player" unique_id=916274550]
+offset_left = 46.752228
+offset_top = -129.8833
+offset_right = 849.7522
+offset_bottom = -70.8833
+theme_override_colors/font_color = Color(0.95, 1, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0.25, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+
+[node name="Player" type="Node" parent="Player" unique_id=1044476268]
+script = ExtResource("2_enxb0")
+dodge_chance = 0.05
+crit_chance = 0.2
+luck = 0.1
+metadata/_custom_type_script = "uid://b8sgmp127qnl6"
+
+[node name="PlayerHealth" type="ProgressBar" parent="Player" unique_id=1124241740]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -179.4275
+offset_top = -317.56464
+offset_right = 62.799667
+offset_bottom = -416.34088
+script = ExtResource("8_glrqy")
+target_path = NodePath("../Player")
+
+[node name="PlayerManaBar" type="ProgressBar" parent="Player" unique_id=1831173201]
+modulate = Color(0.2, 0.6, 1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -179.4275
+offset_top = -292.56464
+offset_right = 62.799667
+offset_bottom = -391.34088
+script = ExtResource("10_mana")
+target_path = NodePath("../Player")
+
+[node name="PlayerName" type="Label" parent="Player" unique_id=571508210]
+offset_left = -112.45811
+offset_top = -359.7767
+offset_right = 129.5419
+offset_bottom = -320.7767
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=819217446]
+modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
+position = Vector2(1458.7499, 167.50002)
+scale = Vector2(2.0219703, 1.8022461)
+texture = ExtResource("5_u8mph")
+
+[node name="Enemy" type="Node" parent="Enemy" unique_id=1812392051]
+script = ExtResource("9_fodyp")
+
+[node name="EnemyHealth" type="ProgressBar" parent="Enemy" unique_id=1250341661]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.26291
+offset_top = -339.16013
+offset_right = 49.964264
+offset_bottom = -437.93637
+script = ExtResource("8_glrqy")
+target_path = NodePath("../Enemy")
+
+[node name="EnemyName" type="Label" parent="Enemy" unique_id=1613021007]
+offset_left = -129.82382
+offset_top = -384.9363
+offset_right = 112.17618
+offset_bottom = -345.9363
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "enemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyMoveText" type="Label" parent="Enemy" unique_id=1884305950]
+offset_left = -723.9225
+offset_top = -144.95801
+offset_right = 79.07745
+offset_bottom = -85.95801
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=468170854]
+offset_left = 1215.0
+offset_top = 2.5
+offset_right = 1311.25
+offset_bottom = 93.75
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1035456702]
+offset_left = 1218.75
+offset_top = 108.75
+offset_right = 1311.25
+offset_bottom = 192.50006
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=334392349]
+offset_left = 1228.75
+offset_top = 208.75
+offset_right = 1326.25
+offset_bottom = 297.5
+
+[node name="ResultCanvas" type="CanvasLayer" parent="." unique_id=411052007]
+
+[node name="ResultOverlay" type="ColorRect" parent="ResultCanvas" unique_id=1028563632]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ResultText" type="Label" parent="ResultCanvas/ResultOverlay" unique_id=948438108]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -60.0
+offset_right = 255.0
+offset_bottom = 60.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 72
+horizontal_alignment = 1
+vertical_alignment = 1
