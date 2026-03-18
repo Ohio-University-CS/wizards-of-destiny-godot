@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bw2r43c88li35"]
 
+[ext_resource type="Script" uid="uid://c40oqkihcbi2e" path="res://scenes/Shop/shop.gd" id="1_1g71r"]
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1g71r")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
