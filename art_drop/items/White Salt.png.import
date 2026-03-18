@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7kcrnjtti1gp"
-path="res://.godot/imported/Holy_Goblet.png-7c7d35adef1ddebdc62eebab9b2b021f.ctex"
+uid="uid://bl15d8o1k4y7g"
+path="res://.godot/imported/White Salt.png-09fba6262e6a265929de9ef3ef44d014.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Holy_Goblet.png"
-dest_files=["res://.godot/imported/Holy_Goblet.png-7c7d35adef1ddebdc62eebab9b2b021f.ctex"]
+source_file="res://art_drop/items/White Salt.png"
+dest_files=["res://.godot/imported/White Salt.png-09fba6262e6a265929de9ef3ef44d014.ctex"]
 
 [params]
 
