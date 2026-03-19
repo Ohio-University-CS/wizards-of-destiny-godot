@@ -8,14 +8,19 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
+const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
+const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
+@export var enemy_pool: Array[PackedScene] = []
 @export_range(0.25, 4.0, 0.05) var game_speed: float = 1.0
 @export var play_move_duration: float = 0.60
 @export var play_fade_duration: float = 0.45
 @export var enemy_move_cost: int = 1
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
+@export var enemy_spawn_position: Vector2 = Vector2(1458.75, 167.5)
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
 @export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
@@ -30,9 +35,9 @@ signal turn_changed(turn_name, turn_count)
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
-@onready var enemy_intent_1 : TextureRect = $EnemyIntent1
-@onready var enemy_intent_2 : TextureRect = $EnemyIntent2
-@onready var enemy_intent_3 : TextureRect = $EnemyIntent3
+@onready var enemy_intent_1: TextureRect = $EnemyIntent1
+@onready var enemy_intent_2: TextureRect = $EnemyIntent2
+@onready var enemy_intent_3: TextureRect = $EnemyIntent3
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -93,10 +98,14 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 	else:
 		push_error("TempCombat: no Player node found; cannot call setup_from_class")
+
+	_spawn_random_enemy_entity()
 	
 	if opponent == null:
 		if has_node("Enemy") and get_node("Enemy") is Enemy:
 			opponent = get_node("Enemy")
+		elif has_node("Enemy/Enemy") and get_node("Enemy/Enemy") is Enemy:
+			opponent = get_node("Enemy/Enemy")
 		elif has_node("Sprite2D/Enemy") and get_node("Sprite2D/Enemy") is Enemy:
 			opponent = get_node("Sprite2D/Enemy")
 		else:
@@ -110,7 +119,7 @@ func _ready():
 					opponent = enemies[0]
 	
 	if opponent:
-		opponent.setup_from_resource(load("res://Enemies/enemy_resources/Goblin/Goblin.tres"))
+		_position_enemy_container(opponent)
 		if opponent.has_signal("health_changed"):
 			opponent.emit_signal("health_changed", opponent.current_health)
 		if opponent.has_signal("energy_changed"):
@@ -168,6 +177,76 @@ func _ready():
 	# In the editor, create preview cards so you can see them in the scene tree/viewport
 	if Engine.is_editor_hint() and preview_in_editor:
 		_create_editor_previews()
+
+
+func _spawn_random_enemy_entity() -> void:
+	var pool: Array[PackedScene] = enemy_pool
+	if pool.is_empty():
+		pool = _get_default_enemy_pool()
+
+	if pool.is_empty():
+		push_error("TempCombat: enemy_pool is empty and no default enemy scenes were found")
+		return
+
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var selected_scene := pool[rng.randi_range(0, pool.size() - 1)]
+	if selected_scene == null:
+		push_error("TempCombat: selected enemy scene is null")
+		return
+
+	var existing_enemy_container := get_node_or_null("Enemy")
+	if existing_enemy_container != null:
+		remove_child(existing_enemy_container)
+		existing_enemy_container.free()
+
+	var spawned_enemy_container := selected_scene.instantiate()
+	if not (spawned_enemy_container is Node2D):
+		push_error("TempCombat: selected enemy scene root must be Node2D")
+		if is_instance_valid(spawned_enemy_container):
+			spawned_enemy_container.queue_free()
+		return
+
+	spawned_enemy_container.name = "Enemy"
+	add_child(spawned_enemy_container)
+	spawned_enemy_container.position = enemy_spawn_position
+
+	opponent = _find_enemy_in_container(spawned_enemy_container)
+	if opponent == null:
+		push_error("TempCombat: spawned enemy scene does not contain an Enemy script instance")
+
+
+func _find_enemy_in_container(container: Node) -> Enemy:
+	if container is Enemy:
+		return container as Enemy
+
+	if container.has_node("Enemy") and container.get_node("Enemy") is Enemy:
+		return container.get_node("Enemy") as Enemy
+
+	var candidates := container.find_children("*", "Enemy", true, false)
+	for c in candidates:
+		if c is Enemy:
+			return c
+
+	return null
+
+
+func _position_enemy_container(enemy: Enemy) -> void:
+	var container: Node = enemy
+	if enemy.get_parent() != self and enemy.get_parent() is Node2D:
+		container = enemy.get_parent()
+	if container is Node2D:
+		container.position = enemy_spawn_position
+
+
+func _get_default_enemy_pool() -> Array[PackedScene]:
+	var defaults: Array[PackedScene] = []
+	for path in [DEFAULT_GOBLIN_SCENE_PATH, DEFAULT_WIZARD_SCENE_PATH]:
+		if ResourceLoader.exists(path):
+			var loaded = load(path)
+			if loaded is PackedScene:
+				defaults.append(loaded)
+	return defaults
 
 
 #func _enter_tree():
@@ -424,7 +503,7 @@ func _enemy_take_turn() -> void:
 		await get_tree().create_timer(_scaled_time(enemy_move_delay)).timeout
 
 
-func _apply_effects(effects : Array, source) -> void:
+func _apply_effects(effects: Array, source) -> void:
 	if effects == null:
 		return
 	
@@ -457,7 +536,7 @@ func _apply_effects(effects : Array, source) -> void:
 				if target.status_effects.has("evasive"):
 					target.status_effects["evasive"] = 0
 			
-			effect.apply(source, target, self)
+			effect.apply(source, target, self )
 
 
 func _announce_move(is_player_move: bool, move_name: String) -> void:

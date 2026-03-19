@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dmnvuaeqp7thf"]
+
+[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="1_icon"]
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="2_enemy"]
+[ext_resource type="Script" uid="uid://bhhc0w5gwn27n" path="res://scripts/health_bar.gd" id="3_health"]
+[ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/Goblin/Goblin.tres" id="4_data"]
+
+[node name="Goblin" type="Sprite2D" unique_id=1886209078]
+modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
+position = Vector2(-1.0000002, 2.0000002)
+scale = Vector2(2.245, 2)
+texture = ExtResource("1_icon")
+
+[node name="Enemy" type="Node" parent="." unique_id=1392093956]
+script = ExtResource("2_enemy")
+enemy_data = ExtResource("4_data")
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=1731289899]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.26291
+offset_top = -339.16013
+offset_right = 49.964264
+offset_bottom = -437.93637
+script = ExtResource("3_health")
+target_path = NodePath("../Enemy")
+
+[node name="EnemyName" type="Label" parent="." unique_id=1516774128]
+offset_left = -129.82382
+offset_top = -384.9363
+offset_right = 112.17618
+offset_bottom = -345.9363
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "enemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyMoveText" type="Label" parent="." unique_id=451412931]
+offset_left = -723.9225
+offset_top = -144.95801
+offset_right = 79.07745
+offset_bottom = -85.95801
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
