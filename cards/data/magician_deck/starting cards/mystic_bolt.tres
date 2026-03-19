@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dc7rqa345pgir"]
+
+[ext_resource type="Texture2D" uid="uid://jyf2gprpxcxr" path="res://cards/sprites/Mystic_Bolt.png" id="1_mv0y2"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_y8u8c"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="3_hi37g"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="4_u6qkf"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="5_ux5rb"]
+
+[sub_resource type="Resource" id="Resource_x3rxm"]
+script = ExtResource("3_hi37g")
+amount = 5
+include_base_damage = true
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_olwbx"]
+script = ExtResource("4_u6qkf")
+status_type = 2
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("5_ux5rb")
+card_name = "Mystic Bolt"
+description = "Attack for DMG +5. Apply one of: Burn, Freeze, or Shock."
+energy_cost = 3
+rarity = "Common"
+artwork = ExtResource("1_mv0y2")
+effects = Array[ExtResource("2_y8u8c")]([SubResource("Resource_x3rxm"), SubResource("Resource_olwbx")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

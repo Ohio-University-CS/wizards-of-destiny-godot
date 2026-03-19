@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c40oqkihcbi2e" path="res://scenes/Shop/shop.gd" id="1_1g71r"]
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
+[ext_resource type="PackedScene" uid="uid://3jgaiifsw41v" path="res://scenes/Shop/ShopItemUI.tscn" id="2_35ukv"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
+[ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/countermeasures.tres" id="3_35ukv"]
+[ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/cure_wounds.tres" id="4_nj4jc"]
+[ext_resource type="Resource" uid="uid://dlba3lrk4k5fn" path="res://cards/data/magician_deck/starting cards/hex.tres" id="5_jpxio"]
+[ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/starting cards/bolster.tres" id="6_wri3e"]
+[ext_resource type="Resource" uid="uid://crmy4pr4eh72s" path="res://cards/data/magician_deck/starting cards/protective_barrier.tres" id="7_j512n"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="10_nj4jc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
 
-[node name="Shop" type="Control" unique_id=1199530725]
+[node name="Shop" type="Control" unique_id=1199530725 node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1g71r")
+shop_item_scene = ExtResource("2_35ukv")
+player = NodePath("Player")
+card_pool = Array[ExtResource("2_vrtdt")]([ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("5_jpxio"), ExtResource("6_wri3e"), ExtResource("7_j512n")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -29,47 +40,102 @@ offset_bottom = 129.0
 text = "Coins: 14"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Cards Here" type="Label" parent="." unique_id=77795916]
+[node name="CardsPanel" type="Panel" parent="." unique_id=274840368]
 layout_mode = 0
-offset_left = 317.0
-offset_top = 450.0
-offset_right = 531.0
-offset_bottom = 505.0
+offset_left = 12.0
+offset_top = 25.0
+offset_right = 846.0
+offset_bottom = 1060.0
+
+[node name="Cards Here" type="Label" parent="CardsPanel" unique_id=77795916]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 75.0
+offset_right = 494.0
+offset_bottom = 130.0
 text = "Cards Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Items Here" type="Label" parent="." unique_id=1262789622]
+[node name="CardContainer" type="GridContainer" parent="CardsPanel" unique_id=1377488406]
 layout_mode = 0
-offset_left = 1038.0
-offset_top = 224.0
-offset_right = 1251.0
-offset_bottom = 279.0
+offset_left = 51.0
+offset_top = 161.0
+offset_right = 699.0
+offset_bottom = 901.0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ItemsPanel" type="Panel" parent="." unique_id=1376833103]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 28.0
+offset_right = 1443.0
+offset_bottom = 544.0
+
+[node name="Items Here" type="Label" parent="ItemsPanel" unique_id=1262789622]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 21.0
+offset_right = 399.0
+offset_bottom = 76.0
 text = "Items Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
+[node name="ItemContainer" type="HBoxContainer" parent="ItemsPanel" unique_id=1222281350]
 layout_mode = 0
-offset_left = 1022.0
-offset_top = 787.0
-offset_right = 1314.0
-offset_bottom = 842.0
+offset_left = 51.0
+offset_top = 152.0
+offset_right = 218.0
+offset_bottom = 397.0
+
+[node name="BuffsPanel" type="Panel" parent="." unique_id=1390107543]
+layout_mode = 0
+offset_left = 875.0
+offset_top = 585.0
+offset_right = 1437.0
+offset_bottom = 1046.0
+
+[node name="Stats Buffs Here" type="Label" parent="BuffsPanel" unique_id=1010229035]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 22.0
+offset_right = 414.0
+offset_bottom = 77.0
 text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Next Stage" type="Button" parent="." unique_id=1443979795]
+[node name="BuffContainer" type="HBoxContainer" parent="BuffsPanel" unique_id=582032841]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 506.0
-offset_right = 1701.0
-offset_bottom = 537.0
+offset_left = 41.0
+offset_top = 97.0
+offset_right = 251.0
+offset_bottom = 328.0
+
+[node name="Buttons" type="Control" parent="." unique_id=1301152946]
+anchors_preset = 0
+offset_left = 1547.0
+offset_top = 456.0
+offset_right = 1870.0
+offset_bottom = 827.0
+
+[node name="Next Stage" type="Button" parent="Buttons" unique_id=1443979795]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 50.0
+offset_right = 154.0
+offset_bottom = 81.0
 scale = Vector2(2, 2)
 text = "Next Stage"
 
-[node name="View Deck" type="Button" parent="." unique_id=1402221572]
+[node name="View Deck" type="Button" parent="Buttons" unique_id=1402221572]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 590.0
-offset_right = 1701.0
-offset_bottom = 621.0
+offset_left = 62.0
+offset_top = 134.0
+offset_right = 154.0
+offset_bottom = 165.0
 scale = Vector2(2, 2)
 text = "View Deck"
+
+[node name="Player" type="Node" parent="." unique_id=1821145247]
+script = ExtResource("10_nj4jc")

@@ -147,7 +147,7 @@ func _refresh_visual():
 
 	if art:
 		art.texture = data.artwork
-	if name:
+	if cname:
 		cname.text = data.card_name
 	if desc:
 		desc.text = data.description

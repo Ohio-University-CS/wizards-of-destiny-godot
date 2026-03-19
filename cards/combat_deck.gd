@@ -10,16 +10,29 @@ var hand: Array[CardInstance] = []
 
 @export var starting_deck: Array[CardData]
 
-func setup_from_class(class_data: ClassData):
+#func setup_from_class(class_data: ClassData):
+	#draw_pile.clear()
+	#discard_pile.clear()
+	#exhaust_pile.clear()
+	#hand.clear()
+#
+	#for card_data in class_data.starting_deck:
+		#draw_pile.append(CardInstance.new(card_data))
+#
+	#shuffle_draw()
+
+
+func setup_from_player(player : Player):
 	draw_pile.clear()
 	discard_pile.clear()
 	exhaust_pile.clear()
 	hand.clear()
-
-	for card_data in class_data.starting_deck:
+	
+	for card_data in player.deck_list:
 		draw_pile.append(CardInstance.new(card_data))
-
+	
 	shuffle_draw()
+
 
 func shuffle_draw():
 	draw_pile.shuffle()
