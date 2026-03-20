@@ -147,12 +147,23 @@ func _refresh_visual():
 
 	if art:
 		art.texture = data.artwork
-	if name:
+	else:
+		push_warning("Card: 'Art' node missing; cannot set artwork")
+
+	if cname:
 		cname.text = data.card_name
+	else:
+		push_warning("Card: 'Name' node missing; cannot set card name")
+
 	if desc:
 		desc.text = data.description
+	else:
+		push_warning("Card: 'Description' node missing; cannot set description")
+
 	if cost:
 		cost.text = str(data.energy_cost)
+	else:
+		push_warning("Card: 'Cost' node missing; cannot set cost")
 
 
 func _update_visual_state():

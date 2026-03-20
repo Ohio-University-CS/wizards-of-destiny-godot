@@ -1,5 +1,6 @@
 #temp_combat.gd
 #@tool
+@tool
 extends Node2D
 
 signal turn_changed(turn_name, turn_count)
@@ -35,9 +36,9 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
-@onready var enemy_intent_1: TextureRect = $EnemyIntent1
-@onready var enemy_intent_2: TextureRect = $EnemyIntent2
-@onready var enemy_intent_3: TextureRect = $EnemyIntent3
+var enemy_intent_1: TextureRect = null
+var enemy_intent_2: TextureRect = null
+var enemy_intent_3: TextureRect = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -126,6 +127,25 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
+
+	# Initialize enemy intent UI nodes — they may live under the Enemy container or at the scene root
+	var _e1 = get_node_or_null("Enemy/EnemyIntent1")
+	if _e1 == null:
+		_e1 = get_node_or_null("EnemyIntent1")
+	if _e1 and _e1 is TextureRect:
+		enemy_intent_1 = _e1
+
+	var _e2 = get_node_or_null("Enemy/EnemyIntent2")
+	if _e2 == null:
+		_e2 = get_node_or_null("EnemyIntent2")
+	if _e2 and _e2 is TextureRect:
+		enemy_intent_2 = _e2
+
+	var _e3 = get_node_or_null("Enemy/EnemyIntent3")
+	if _e3 == null:
+		_e3 = get_node_or_null("EnemyIntent3")
+	if _e3 and _e3 is TextureRect:
+		enemy_intent_3 = _e3
 	
 	if deck == null:
 		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
@@ -171,6 +191,36 @@ func _ready():
 	_update_discard_button_state()
 
 	_apply_game_speed_to_ui()
+
+	# Ensure exported scene overrides that were set to `null` get sensible defaults
+	if enemy_spawn_position == null:
+		enemy_spawn_position = Vector2(1550, 651)
+	if hand_origin == null:
+		hand_origin = Vector2(500, 750)
+	if hand_spacing == null or hand_spacing == 0:
+		hand_spacing = 180.0
+
+	# Ensure UI buttons/signals connect to this TempCombat instance when UI is
+	# a separate packed scene instanced under this node.
+	_connect_ui_signals()
+
+	# -- Editor-time spawn handle: create or sync a Position2D the user can drag --
+	if Engine.is_editor_hint():
+		var handle = get_node_or_null("EnemySpawnHandle")
+		if handle == null:
+			handle = Marker2D.new()
+			handle.name = "EnemySpawnHandle"
+			add_child(handle)
+			# make it part of the edited scene so it's visible and movable
+			if get_owner() != null:
+				handle.owner = get_owner()
+		# initialize position
+		handle.position = enemy_spawn_position
+		# enable processing in editor so _process runs
+		set_process(true)
+	else:
+		set_process(false)
+
 
 	_start_player_turn()
 
@@ -256,6 +306,26 @@ func _get_default_enemy_pool() -> Array[PackedScene]:
 func _exit_tree():
 	if Engine.is_editor_hint():
 		_clear_editor_previews()
+
+
+func _process(delta: float) -> void:
+	if not Engine.is_editor_hint():
+		return
+
+	# sync handle -> enemy_spawn_position when moved in editor
+	var handle = get_node_or_null("EnemySpawnHandle")
+	if handle and handle is Marker2D:
+		if handle.position != enemy_spawn_position:
+			enemy_spawn_position = handle.position
+			# move any existing Enemy container in the scene to reflect change
+			var existing_enemy = get_node_or_null("Enemy")
+			if existing_enemy and existing_enemy is Node2D:
+				existing_enemy.position = enemy_spawn_position
+
+	# ensure the handle follows property changes made in the inspector
+	if handle and handle is Marker2D:
+		if enemy_spawn_position != handle.position:
+			handle.position = enemy_spawn_position
 
 func draw_hand():
 	if deck == null:
@@ -448,31 +518,37 @@ func _start_enemy_turn() -> void:
 
 
 func clear_enemy_intent() -> void:
-	enemy_intent_1.texture = null
-	enemy_intent_2.texture = null
-	enemy_intent_3.texture = null
+	if enemy_intent_1:
+		enemy_intent_1.texture = null
+	if enemy_intent_2:
+		enemy_intent_2.texture = null
+	if enemy_intent_3:
+		enemy_intent_3.texture = null
 
 
 func update_enemy_intent() -> void:
 	if opponent == null:
 		return
-	
-	if opponent.get_next_move():
-		enemy_intent_1.texture = opponent.get_next_move().intent_icons[0]
-		
-		if opponent.get_next_move().intent_icons.size() > 1:
-			enemy_intent_2.texture = opponent.get_next_move().intent_icons[1]
-		else:
-			enemy_intent_2.texture = null
-		
-		if opponent.get_next_move().intent_icons.size() > 2:
-			enemy_intent_3.texture = opponent.get_next_move().intent_icons[2]
-		else:
-			enemy_intent_3.texture = null
-	
-	else:
+
+	var next_move = opponent.get_next_move()
+	if next_move == null:
+		clear_enemy_intent()
+		return
+
+	# set textures only if intent_icons exist and the UI nodes are present
+	if next_move.intent_icons.size() > 0 and enemy_intent_1:
+		enemy_intent_1.texture = next_move.intent_icons[0]
+	elif enemy_intent_1:
 		enemy_intent_1.texture = null
+
+	if next_move.intent_icons.size() > 1 and enemy_intent_2:
+		enemy_intent_2.texture = next_move.intent_icons[1]
+	elif enemy_intent_2:
 		enemy_intent_2.texture = null
+
+	if next_move.intent_icons.size() > 2 and enemy_intent_3:
+		enemy_intent_3.texture = next_move.intent_icons[2]
+	elif enemy_intent_3:
 		enemy_intent_3.texture = null
 
 
@@ -628,6 +704,43 @@ func _apply_game_speed_to_ui() -> void:
 	for ui_node in ui_nodes:
 		if ui_node.get("game_speed") != null:
 			ui_node.set("game_speed", game_speed)
+
+
+func _connect_ui_signals() -> void:
+	var ui = get_node_or_null("UI")
+	if ui == null:
+		ui = find_child("UI", true, false)
+	if ui == null:
+		return
+
+	# Play button
+	var play_btn = ui.get_node_or_null("PanelContainer/Play") if ui.has_node("PanelContainer/Play") else ui.get_node_or_null("Play")
+	if play_btn != null and play_btn.has_signal("play_hand_requested"):
+		if not play_btn.is_connected("play_hand_requested", Callable(self, "play_hand")):
+			play_btn.connect("play_hand_requested", Callable(self, "play_hand"))
+
+	# End turn button
+	var end_btn = ui.get_node_or_null("EndTurn")
+	if end_btn != null and end_btn.has_signal("end_turn_requested"):
+		if not end_btn.is_connected("end_turn_requested", Callable(self, "force_end_player_turn")):
+			end_btn.connect("end_turn_requested", Callable(self, "force_end_player_turn"))
+
+	# Discard button
+	var disc_btn = ui.get_node_or_null("Discard")
+	if disc_btn != null and disc_btn.has_signal("discard_requested"):
+		if not disc_btn.is_connected("discard_requested", Callable(self, "discard_selected_cards")):
+			disc_btn.connect("discard_requested", Callable(self, "discard_selected_cards"))
+
+	# Optional: let UI health/mana ProgressBars find their targets (they use relative paths)
+	# If necessary, set target paths explicitly when UI is instanced under this node.
+	var health_bar = ui.get_node_or_null("PlayerHealth")
+	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
+		# ensure the NodePath points to the sibling Player
+		health_bar.target_path = NodePath("../Player")
+
+	var mana_bar = ui.get_node_or_null("PlayerManaBar")
+	if mana_bar and mana_bar.has_method("set_target") == false and mana_bar.has_variable("target_path"):
+		mana_bar.target_path = NodePath("../Player")
 
 
 func _on_player_died() -> void:
@@ -837,12 +950,14 @@ func _create_editor_previews():
 	for i in range(preview_count):
 		var c = card_scene.instantiate()
 		c.name = "preview_card_%d" % i
+		# Add as child and make it part of the edited scene so editor shows it
 		add_child(c)
-		# mark as editor-only so it doesn't persist or affect runtime
-		if c.has_method("set_editor_only"):
-			c.set_editor_only(true)
+		if get_owner() != null:
+			c.owner = get_owner()
+		# Mark as editor-only so it won't affect runtime scenes
+		c.editor_only = true
 		# Position them for visibility
-		c.position = Vector2(200 + i * 180, 500)
+		c.position = Vector2(200 + i * hand_spacing, 500)
 
 
 func _clear_editor_previews():
