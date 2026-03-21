@@ -11,6 +11,7 @@
 script = ExtResource("1_4ag8t")
 card_scene = ExtResource("2_dpxgc")
 class_data = ExtResource("3_oexds")
+enemy_pool = Array[PackedScene]([ExtResource("4_naajo")])
 enemy_spawn_position = Vector2(1555, 584)
 hand_origin = Vector2(500, 750)
 

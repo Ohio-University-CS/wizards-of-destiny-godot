@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c40oqkihcbi2e" path="res://scenes/Shop/shop.gd" id="1_1g71r"]
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
+[ext_resource type="PackedScene" uid="uid://8vsbg5004ad5" path="res://scenes/Shop/ShopCardUI.tscn" id="2_nj4jc"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
+[ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/common_cards/countermeasures.tres" id="3_35ukv"]
+[ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
+[ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
+[ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/rare_cards/shield.tres" id="7_nj4jc"]
+[ext_resource type="Resource" uid="uid://bdjv3n01gigwa" path="res://cards/data/magician_deck/common_cards/magic_missle.tres" id="8_nj4jc"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="10_nj4jc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
 
-[node name="Shop" type="Control" unique_id=1199530725]
+[node name="Shop" type="Control" unique_id=1199530725 node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1g71r")
+player = NodePath("Player")
+shop_card_scene = ExtResource("2_nj4jc")
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -26,50 +37,75 @@ offset_left = 1587.0
 offset_top = 74.0
 offset_right = 1760.0
 offset_bottom = 129.0
-text = "Coins: 14"
+text = "Coins: "
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Cards Here" type="Label" parent="." unique_id=77795916]
+[node name="CoinAmount" type="Label" parent="." unique_id=1407741725]
 layout_mode = 0
-offset_left = 317.0
-offset_top = 450.0
-offset_right = 531.0
-offset_bottom = 505.0
-text = "Cards Here"
+offset_left = 1717.0
+offset_top = 74.0
+offset_right = 1890.0
+offset_bottom = 129.0
+text = "50"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="Items Here" type="Label" parent="." unique_id=1262789622]
 layout_mode = 0
-offset_left = 1038.0
-offset_top = 224.0
-offset_right = 1251.0
-offset_bottom = 279.0
+offset_left = 1044.0
+offset_top = 49.0
+offset_right = 1257.0
+offset_bottom = 104.0
 text = "Items Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
 layout_mode = 0
-offset_left = 1022.0
-offset_top = 787.0
-offset_right = 1314.0
-offset_bottom = 842.0
+offset_left = 997.0
+offset_top = 607.0
+offset_right = 1289.0
+offset_bottom = 662.0
 text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Next Stage" type="Button" parent="." unique_id=1443979795]
+[node name="CardsContainer" type="GridContainer" parent="." unique_id=1152559202]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076000005
+anchor_top = 0.108
+anchor_right = 0.40100002
+anchor_bottom = 0.92200005
+offset_left = 0.07998657
+offset_top = 0.3600006
+offset_right = 0.079956055
+offset_bottom = 0.2399292
+theme_override_constants/h_separation = 70
+theme_override_constants/v_separation = 50
+columns = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=1301152946]
+anchors_preset = 0
+offset_left = 1547.0
+offset_top = 456.0
+offset_right = 1870.0
+offset_bottom = 827.0
+
+[node name="Next Stage" type="Button" parent="Buttons" unique_id=1443979795]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 506.0
-offset_right = 1701.0
-offset_bottom = 537.0
+offset_left = 62.0
+offset_top = 50.0
+offset_right = 154.0
+offset_bottom = 81.0
 scale = Vector2(2, 2)
 text = "Next Stage"
 
-[node name="View Deck" type="Button" parent="." unique_id=1402221572]
+[node name="View Deck" type="Button" parent="Buttons" unique_id=1402221572]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 590.0
-offset_right = 1701.0
-offset_bottom = 621.0
+offset_left = 62.0
+offset_top = 134.0
+offset_right = 154.0
+offset_bottom = 165.0
 scale = Vector2(2, 2)
 text = "View Deck"
+
+[node name="Player" type="Node" parent="." unique_id=1821145247]
+script = ExtResource("10_nj4jc")

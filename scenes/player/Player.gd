@@ -53,10 +53,16 @@ var current_health: int
 var energy: int = 3
 var max_energy: int = 3
 
+var deck_list : Array[CardData] = []
+
+var initialized : bool = false
+
 
 func setup_from_class(data):
 	class_data = data
-
+	
+	deck_list = data.starting_deck.duplicate()
+	
 	base_max_health = data.max_health
 	base_damage = data.damage
 	base_elemental_power = data.elemental_power

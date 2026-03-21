@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duw1pflwh8rxj"
-path="res://.godot/imported/Card_Frame.png-45896560877e453fcb364cf6098a6967.ctex"
+uid="uid://baf1jrcwsssdg"
+path="res://.godot/imported/scroll_fire.png-cb234728f71cd03a46bdf23f25a22b07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Card_Frame.png"
-dest_files=["res://.godot/imported/Card_Frame.png-45896560877e453fcb364cf6098a6967.ctex"]
+source_file="res://scenes/Shop/sprites/scroll_fire.png"
+dest_files=["res://.godot/imported/scroll_fire.png-cb234728f71cd03a46bdf23f25a22b07.ctex"]
 
 [params]
 

@@ -1,5 +1,6 @@
 #@tool
 extends Control
+class_name Card
 
 signal card_clicked
 signal card_drag_started(card)
@@ -25,8 +26,10 @@ var card_instance: CardInstance
 
 # Card size
 @export_group("Layout")
-@export var x_size: float = 150
-@export var y_size: float = 220
+@export var x_size: float = 200
+@export var y_size: float = 300
+@export var shop_x_size: float = 300
+@export var shop_y_size: float = 450
 
 # Tilt Settings
 @export_group("Tilt")
@@ -50,14 +53,21 @@ var last_pos := Vector2.ZERO
 var current_tilt := 0.0
 var _slot_tween: Tween = null
 var _drag_start_emitted: bool = false
+var is_static_display := false
 
 func _ready():
 	# Use connect in Godot 4.x style for safety
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
-	set_card_size(x_size, y_size)
-	rest_position = position
+	if not is_static_display:
+		set_card_size(x_size, y_size)
+	else:
+		set_card_size(shop_x_size, shop_y_size)
+	
+	if not is_static_display:
+		rest_position = position
+	
 	last_pos = global_position
 	_refresh_visual()
 
@@ -67,6 +77,9 @@ func _exit_tree():
 
 
 func _process(delta: float):
+	if is_static_display:
+		return
+	
 	if is_dragging:
 		var drag_distance = press_global_mouse_pos.distance_to(get_global_mouse_position())
 		if drag_distance >= drag_threshold:
@@ -109,7 +122,7 @@ func _process(delta: float):
 
 func set_card_size(new_x: float, new_y: float):
 	custom_minimum_size = Vector2(new_x, new_y)
-	size = Vector2(new_x, new_y)
+	size = custom_minimum_size
 	pivot_offset = size / 2
 
 func _on_mouse_entered():
@@ -141,6 +154,7 @@ func _refresh_visual():
 		return
 
 	var art = get_node_or_null("Art")
+	var frame = get_node_or_null("Frame")
 	var cname = get_node_or_null("Name")
 	var desc = get_node_or_null("Description")
 	var cost = get_node_or_null("Cost")
@@ -149,6 +163,11 @@ func _refresh_visual():
 		art.texture = data.artwork
 	else:
 		push_warning("Card: 'Art' node missing; cannot set artwork")
+
+	if frame:
+		frame.texture = data.frame_art
+	else:
+		push_warning("Card: 'Frame' node missing; cannot set card frame")
 
 	if cname:
 		cname.text = data.card_name
@@ -167,6 +186,9 @@ func _refresh_visual():
 
 
 func _update_visual_state():
+	if is_static_display:
+		return
+	
 	if is_selected or is_hovered:
 		target_scale = hover_scale
 	else:

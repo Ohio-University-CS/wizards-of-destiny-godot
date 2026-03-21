@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cd3bcpl7esyu5"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_041fv"]
+[ext_resource type="Texture2D" uid="uid://cvny7di7hltms" path="res://cards/sprites/Cure_Wounds.png" id="1_erh63"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_v1ges"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_xg8ow"]
+[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="4_blqa2"]
+
+[sub_resource type="Resource" id="Resource_p8kla"]
+script = ExtResource("2_v1ges")
+status_type = 5
+amount = 6
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_xg8ow")
+card_name = "Cure Wounds"
+description = "Gain 6 Regeneration"
+card_type = 1
+artwork = ExtResource("1_erh63")
+frame_art = ExtResource("4_blqa2")
+effects = Array[ExtResource("1_041fv")]([SubResource("Resource_p8kla")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

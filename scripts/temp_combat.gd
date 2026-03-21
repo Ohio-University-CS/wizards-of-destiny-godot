@@ -70,6 +70,18 @@ var is_combat_over: bool = false
 
 
 func _ready():
+	#------------------------------
+	# use persistent player if possible
+	#------------------------------
+	if RunManager.player:
+		player = RunManager.player
+		if player.get_parent():
+			player.get_parent().remove_child(player)
+			add_child(player)
+	
+	#-------------------
+	# fallback
+	#-------------------
 	# Locate the player node by common names or by type to avoid null path errors
 	if player == null:
 		if has_node("Player"):
@@ -90,15 +102,27 @@ func _ready():
 					player = child
 					break
 	
-	if player:
-		player.setup_from_class(class_data)
+	#------------------
+	# validate
+	#------------------
+	if player == null:
+		push_error("TempCombat: no Player node found")
+	else:
+		if not player.initialized:
+			player.setup_from_class(class_data)
+			player.initialized = true
+			
 		if player.has_signal("health_changed"):
 			player.emit_signal("health_changed", player.current_health)
 		if player.has_signal("energy_changed"):
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
-	else:
-		push_error("TempCombat: no Player node found; cannot call setup_from_class")
-
+	
+	#keep reference updated
+	RunManager.player = player
+	
+	#------------------------
+	# Spawn enemy
+	#------------------------
 	_spawn_random_enemy_entity()
 	
 	if opponent == null:
@@ -126,7 +150,32 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
-
+	
+	#------------------
+	# Deck setup
+	#------------------
+	if deck == null:
+		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
+			deck = get_node("CombatDeck")
+		elif has_node("PanelContainer/CombatDeck") and get_node("PanelContainer/CombatDeck") is CombatDeck:
+			deck = get_node("PanelContainer/CombatDeck")
+		else:
+			for child in get_children():
+				if child is CombatDeck:
+					deck = child
+					break
+			if deck == null:
+				var combat_decks = find_children("*", "CombatDeck", true, false)
+				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
+					deck = combat_decks[0]
+	
+	if deck:
+		deck.setup_from_player(player)
+	else:
+		push_error("TempCombat: no CombatDeck found, cannot draw cards")
+	
+	
+	
 	# Initialize enemy intent UI nodes — they may live under the Enemy container or at the scene root
 	var _e1 = get_node_or_null("Enemy/EnemyIntent1")
 	if _e1 == null:
@@ -162,7 +211,8 @@ func _ready():
 					deck = combat_decks[0]
 	
 	if deck:
-		deck.setup_from_class(class_data)
+		deck.setup_from_player(player)
+		#deck.setup_from_class(class_data)
 	else:
 		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
 	
@@ -796,13 +846,24 @@ func _connect_ui_signals() -> void:
 		
 
 
-
 func _on_player_died() -> void:
 	_show_result(false)
 
 
 func _on_opponent_died() -> void:
 	_show_result(true)
+	
+	#detach player so it doesn't get freed
+	if player:
+		if player.get_parent():
+			player.get_parent().remove_child(player)
+		get_tree().root.add_child(player)
+		RunManager.player = player
+	
+	RunManager.coins += 20
+	
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_file("res://scenes/Shop/shop.tscn")
 
 
 func _show_result(player_won: bool) -> void:

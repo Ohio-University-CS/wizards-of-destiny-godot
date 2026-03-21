@@ -1,1 +1,73 @@
-class_name Shop extends Control
+extends Control
+class_name Shop
+ 
+@onready var next_stage_button : Button = $"Buttons/Next Stage"
+@onready var cards_container = $CardsContainer
+@onready var coins : Label = $CoinAmount
+
+@export var player : Player
+@export var shop_card_scene : PackedScene
+
+#temporary card pool
+@export var available_cards : Array[CardData]
+
+var shop_size := 4
+
+
+func _ready() -> void:
+	player = RunManager.player
+	
+	if player.get_parent():
+		player.get_parent().remove_child(player)
+	add_child(player)
+	player.visible = false
+	
+	next_stage_button.pressed.connect(_on_next_stage_pressed)
+	_update_coin_visual()
+	_generate_shop()
+
+
+func _generate_shop():
+	for child in cards_container.get_children():
+		child.queue_free()
+	
+	var pool = available_cards.duplicate()
+	pool.shuffle()
+	
+	for i in range(shop_size):
+		if i >= pool.size():
+			break
+		
+		var data = pool[i]
+		
+		var ui = shop_card_scene.instantiate()
+		var price = _get_price(data)
+		
+		ui.setup(data, price)
+		ui.purchased.connect(_on_card_purchased)
+		cards_container.add_child(ui)
+
+
+func _get_price(card : CardData) -> int:
+	match card.rarity:
+		card.CardRarity.COMMON:
+			return 5
+		card.CardRarity.UNCOMMON:
+			return 10
+		card.CardRarity.RARE:
+			return 20
+		_:
+			return 8
+
+
+func _on_card_purchased(_card_data):
+	_update_coin_visual()
+
+
+func _update_coin_visual():
+	coins.text = str(RunManager.coins)
+
+
+func _on_next_stage_pressed():
+	#get_tree().change_scene_to_file("res://scenes/arena.tscn")
+	pass
