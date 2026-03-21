@@ -201,8 +201,13 @@ func _spawn_random_enemy_entity() -> void:
 
 	var existing_enemy_container := get_node_or_null("Enemy")
 	if existing_enemy_container != null:
-		remove_child(existing_enemy_container)
-		existing_enemy_container.free()
+		# Preserve an Enemy instance that was placed or modified in the editor
+		# (avoid replacing it with a fresh PackedScene instance). This lets
+		# editor-time changes — like resizing the node — persist into runtime
+		# for this scene instance.
+		existing_enemy_container.position = enemy_spawn_position
+		opponent = _find_enemy_in_container(existing_enemy_container)
+		return
 
 	var spawned_enemy_container := selected_scene.instantiate()
 	if not (spawned_enemy_container is Node2D):

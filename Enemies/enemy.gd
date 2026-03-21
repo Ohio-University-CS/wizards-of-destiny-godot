@@ -63,6 +63,8 @@ signal health_changed(new_value)
 signal died
 signal status_applied(name, stacks)
 signal status_expired(name)
+signal damaged(amount)
+signal healed(amount)
 
 # ---------------------------------------------------------
 # INITIALIZATION
@@ -148,36 +150,6 @@ func select_move() -> MoveResource:
 	
 	return resource.moves[0] # fallback
 
-
-#perform selected move on target
-#func perform_move(move : MoveResource, target : Node) -> void:
-	#if move == null:
-		#return
-	#
-	#print("Enemy plays: ", move.name)
-	#
-	#for effect in move.effects:
-		#get_tree().current_scene._apply_effects([effect], self, target)
-
-
-#func perform_move(target : Node) -> void:
-	#var move = select_move()
-	#if move == null:
-		#return
-	#print("Enemy playes: ", move.name)
-	#
-	#var dmg = move.base_damage
-	#target.take_damage(dmg)
-	#print(" - Enemy dealt ", dmg, " damage")
-	#
-	##Apply status effects from the move
-	#if move.status_effects:
-		#for status_name in move.status_effects.keys():
-			#var stacks = move.status_effects[status_name]
-			#target.apply_status(status_name, stacks)
-			#print(" - Enemy applied ", status_name, " x", stacks)
-
-
 # ---------------------------------------------------------
 # DAMAGE & DEFENSE
 # ---------------------------------------------------------
@@ -220,6 +192,8 @@ func take_damage(amount: int, _element: String = ""):
 	emit_signal("health_changed", current_health)
 	
 	print("Player deals ", dmg, " to Enemy")
+	# Emit damaged for UI indicators
+	emit_signal("damaged", dmg)
 
 	if current_health <= 0:
 		_die()
@@ -228,7 +202,7 @@ func take_damage(amount: int, _element: String = ""):
 func heal(amount: int):
 	current_health = min(get_max_health(), current_health + amount)
 	emit_signal("health_changed", current_health)
-
+	emit_signal("healed", amount)
 
 # ---------------------------------------------------------
 # STATUS EFFECT MANAGEMENT

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_4ag8t"]
 [ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/ui/Card.tscn" id="2_dpxgc"]
 [ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician_deck/magician.tres" id="3_oexds"]
-[ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn" id="4_naajo"]
+[ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/Goblin/Enemy (Goblin).tscn" id="4_naajo"]
 [ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
 [ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
 

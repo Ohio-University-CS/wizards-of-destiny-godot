@@ -7,7 +7,8 @@ var target: Node = null
 
 
 func _ready() -> void:
-	_assign_target_from_path()
+	# Defer target assignment so the parent scene can finish instancing
+	call_deferred("_assign_target_from_path")
 	call_deferred("_refresh")
 
 
@@ -26,12 +27,29 @@ func set_target(new_target: Node) -> void:
 
 
 func _assign_target_from_path() -> void:
-	if target_path == NodePath(""):
-		return
+	# If a target path is explicitly provided, try resolving it first.
+	if target_path != NodePath(""):
+		var found_target: Node = get_node_or_null(target_path)
+		if found_target:
+			set_target(found_target)
+			return
 
-	var found_target: Node = get_node_or_null(target_path)
-	if found_target:
-		set_target(found_target)
+	# Walk up the parent chain to find a Player or Enemy node (useful
+	# when this bar is a child of the combatant node).
+	var p = get_parent()
+	while p != null:
+		if p is Player:
+			set_target(p)
+			return
+		p = p.get_parent()
+
+	# As a last resort, search the current scene for a Player node.
+	var root = get_tree().current_scene
+	if root != null:
+		var found := root.find_child("Player", true, false)
+		if found != null:
+			set_target(found)
+			return
 
 
 func _connect_target_signal() -> void:
@@ -76,6 +94,44 @@ func _refresh() -> void:
 
 	if show_mana_text:
 		tooltip_text = "%d / %d" % [int(value), int(max_value)]
+		_update_bar_text(int(value), int(max_value))
+
+
+func _update_bar_text(current: int, max_mana: int) -> void:
+	# Try to set a fraction-style text on the ProgressBar itself.
+	# Different Godot versions expose different properties, so inspect available properties
+	# and set the most appropriate one. Always keep tooltip as a fallback.
+	var fraction_text: String = "%d / %d" % [current, max_mana]
+	var props: Array = get_property_list()
+	var names: Array = []
+	for p in props:
+		names.append(p.name)
+
+	# Preferred: set a custom text property if present
+	if "custom_text" in names:
+		set("custom_text", fraction_text)
+		if "custom_text_visible" in names:
+			set("custom_text_visible", true)
+		return
+
+	# Older API: hide percent display if possible and set text override
+	if "percent_visible" in names:
+		set("percent_visible", false)
+		# some versions provide a `text` property to override display
+		if "text" in names:
+			set("text", fraction_text)
+		return
+
+	if "show_percent" in names:
+		set("show_percent", false)
+		if "text" in names:
+			set("text", fraction_text)
+		return
+
+	# Last resort: try generic `text` property
+	if "text" in names:
+		set("text", fraction_text)
+		return
 
 
 func _get_energy_value() -> int:

@@ -1,18 +1,46 @@
-extends Label
+extends ProgressBar
 
 @export var target_path: NodePath
-@export var show_health_text: bool = true
-
 var target: Node = null
-var _label: Label = null
 
 func _ready() -> void:
-	_ensure_label()
 	_assign_target_from_path()
 	call_deferred("_refresh")
 
-func _exit_tree() -> void:
-	_disconnect_target_signal()
+func _assign_target_from_path() -> void:
+	# If a target path is provided, use it. Otherwise attempt to find an
+	# Enemy/Player instance by walking up the parent chain (useful when the
+	# progress bar is a child of the combatant node in its scene).
+	if target_path != NodePath(""):
+		var found_target := get_node_or_null(target_path)
+		if found_target:
+			set_target(found_target)
+			return
+
+	var p = get_parent()
+	while p != null:
+		if p is Enemy or p is Player:
+			set_target(p)
+			return
+		p = p.get_parent()
+
+	# If still not found, try a scene-wide search for a Player or Enemy instance
+	var root = get_tree().current_scene
+	if root != null:
+		# prefer Player over Enemy when both are present
+		for child in root.get_children():
+			if child is Player:
+				set_target(child)
+				return
+		# fallback to scanning recursively
+		var found := root.find_child("Player", true, false)
+		if found != null:
+			set_target(found)
+			return
+		found = root.find_child("Enemy", true, false)
+		if found != null:
+			set_target(found)
+			return
 
 func set_target(new_target: Node) -> void:
 	if target == new_target:
@@ -21,13 +49,6 @@ func set_target(new_target: Node) -> void:
 	target = new_target
 	_connect_target_signal()
 	_refresh()
-
-func _assign_target_from_path() -> void:
-	if target_path == NodePath(""):
-		return
-	var found_target := get_node_or_null(target_path)
-	if found_target:
-		set_target(found_target)
 
 func _connect_target_signal() -> void:
 	if target == null:
@@ -50,15 +71,14 @@ func _on_health_changed(_new_value: int) -> void:
 
 func _refresh() -> void:
 	if target == null:
-		if show_health_text and _label:
-			_label.text = "No target"
+		value = 0
+		max_value = 1
 		return
 
 	var current := _get_health_value()
 	var max_hp := _get_max_health_value()
-
-	if show_health_text and _label:
-		_label.text = "%d / %d" % [int(current), int(max_hp)]
+	max_value = max(1, int(max_hp))
+	value = clamp(int(current), 0, int(max_value))
 
 func _get_health_value() -> int:
 	if target == null:
@@ -86,17 +106,3 @@ func _get_max_health_value() -> int:
 	if curr != null:
 		return max(1, int(curr))
 	return 1
-
-func _ensure_label() -> void:
-	_label = $"Label" if has_node("Label") else null
-	if _label == null:
-		_label = Label.new()
-		_label.name = "Label"
-		_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		_label.anchor_left = 0.0
-		_label.anchor_top = 0.0
-		_label.anchor_right = 1.0
-		_label.anchor_bottom = 1.0
-		add_child(_label)

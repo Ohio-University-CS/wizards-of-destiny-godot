@@ -54,6 +54,8 @@ func _connect_to_manager() -> void:
             player_node = scene_root.find_child("Player", true, false)
 
     var health = get_node_or_null("PlayerHealth")
+    if health == null:
+        health = get_node_or_null("Player Health")
     if health != null:
         if health.has_method("set_target") and player_node != null:
             health.set_target(player_node)

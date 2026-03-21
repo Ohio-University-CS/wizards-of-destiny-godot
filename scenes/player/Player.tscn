@@ -2,8 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="1_gfjak"]
 [ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="2_4kuee"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_4kuee"]
 
 [node name="Player" type="Sprite2D" unique_id=46580540]
 scale = Vector2(2, 2)
 texture = ExtResource("1_gfjak")
 script = ExtResource("2_4kuee")
+
+[node name="HealthIndicator" type="Label" parent="." unique_id=1562298725]
+offset_left = -39.0
+offset_top = -114.0
+offset_right = 42.99994
+offset_bottom = -67.0
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+script = ExtResource("3_4kuee")

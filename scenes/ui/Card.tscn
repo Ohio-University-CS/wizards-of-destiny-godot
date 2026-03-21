@@ -13,7 +13,7 @@ font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control" unique_id=614744285]
-custom_minimum_size = Vector2(150, 220)
+custom_minimum_size = Vector2(135, 198)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0

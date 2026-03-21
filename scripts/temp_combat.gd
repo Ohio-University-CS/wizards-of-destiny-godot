@@ -1,5 +1,4 @@
 #temp_combat.gd
-#@tool
 @tool
 extends Node2D
 
@@ -169,6 +168,55 @@ func _ready():
 	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
+
+	# Prefer UI-local labels when move text lives in the shared UI scene
+	var ui_node = get_node_or_null("UI")
+	if ui_node != null:
+		# If the UI provides a shared centered MoveText label prefer it for both
+		var shared = ui_node.get_node_or_null("MoveText")
+		if shared != null:
+			player_move_label = shared
+			enemy_move_label = shared
+		else:
+			if player_move_label == null:
+				var p_from_ui = ui_node.get_node_or_null(player_move_label_path)
+				if p_from_ui != null:
+					player_move_label = p_from_ui
+			if enemy_move_label == null:
+				var e_from_ui = ui_node.get_node_or_null(enemy_move_label_path)
+				if e_from_ui != null:
+					enemy_move_label = e_from_ui
+
+	# Fallbacks: if exported NodePaths and UI lookup didn't resolve, try searching the scene
+	if player_move_label == null:
+		# prefer labels that live under the Player node
+		if player and player.has_node("PlayerMoveText"):
+			player_move_label = player.get_node_or_null("PlayerMoveText")
+		else:
+			var found_p = find_child("PlayerMoveText", true, false)
+			if found_p:
+				player_move_label = found_p
+
+	if enemy_move_label == null:
+		# prefer labels that live under the UI or Enemy node
+		if opponent and opponent.has_node("EnemyMoveText"):
+			enemy_move_label = opponent.get_node_or_null("EnemyMoveText")
+		else:
+			var found_e = find_child("EnemyMoveText", true, false)
+			if found_e:
+				enemy_move_label = found_e
+
+	# Ensure the labels start invisible (alpha 0) so announce/fade works predictably
+	if player_move_label:
+		if player_move_label.has_method("get") or true:
+			var c = player_move_label.modulate
+			c.a = 0.0
+			player_move_label.modulate = c
+
+	if enemy_move_label:
+		var c2 = enemy_move_label.modulate
+		c2.a = 0.0
+		enemy_move_label.modulate = c2
 	player_name_label = get_node_or_null(player_name_label_path)
 	enemy_name_label = get_node_or_null(enemy_name_label_path)
 	discard_button = get_node_or_null(discard_button_path)
@@ -247,8 +295,13 @@ func _spawn_random_enemy_entity() -> void:
 
 	var existing_enemy_container := get_node_or_null("Enemy")
 	if existing_enemy_container != null:
-		remove_child(existing_enemy_container)
-		existing_enemy_container.free()
+		# Preserve an Enemy instance that was placed or modified in the editor
+		# (avoid replacing it with a fresh PackedScene instance). This lets
+		# editor-time changes — like resizing the node — persist into runtime
+		# for this scene instance.
+		existing_enemy_container.position = enemy_spawn_position
+		opponent = _find_enemy_in_container(existing_enemy_container)
+		return
 
 	var spawned_enemy_container := selected_scene.instantiate()
 	if not (spawned_enemy_container is Node2D):
@@ -308,7 +361,7 @@ func _exit_tree():
 		_clear_editor_previews()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
 		return
 
@@ -698,7 +751,6 @@ func _can_player_continue_turn() -> bool:
 func _scaled_time(base_duration: float) -> float:
 	return base_duration / max(0.01, game_speed)
 
-
 func _apply_game_speed_to_ui() -> void:
 	var ui_nodes = find_children("*", "ProgressBar", true, false)
 	for ui_node in ui_nodes:
@@ -730,17 +782,19 @@ func _connect_ui_signals() -> void:
 	if disc_btn != null and disc_btn.has_signal("discard_requested"):
 		if not disc_btn.is_connected("discard_requested", Callable(self, "discard_selected_cards")):
 			disc_btn.connect("discard_requested", Callable(self, "discard_selected_cards"))
-
-	# Optional: let UI health/mana ProgressBars find their targets (they use relative paths)
-	# If necessary, set target paths explicitly when UI is instanced under this node.
+	# Player Health Bar
 	var health_bar = ui.get_node_or_null("PlayerHealth")
 	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
 		# ensure the NodePath points to the sibling Player
 		health_bar.target_path = NodePath("../Player")
-
+	# Mana Indicator
 	var mana_bar = ui.get_node_or_null("PlayerManaBar")
 	if mana_bar and mana_bar.has_method("set_target") == false and mana_bar.has_variable("target_path"):
 		mana_bar.target_path = NodePath("../Player")
+	# Damage/Heal Indicator
+	var player_health_indicator = player.get_node_or_null("HealthIndicator")
+		
+
 
 
 func _on_player_died() -> void:

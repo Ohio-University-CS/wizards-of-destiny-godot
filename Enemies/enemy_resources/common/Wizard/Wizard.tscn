@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cge02g6n6iduc"]
 
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_73te0"]
-[ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/Wizard/Wizard.tres" id="2_pwnpb"]
+[ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tres" id="2_pwnpb"]
 [ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="3_8ywd5"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_healthbar"]
 
 [node name="Wizard" type="Sprite2D" unique_id=1261555004]
 scale = Vector2(2, 2)
@@ -32,6 +33,7 @@ offset_bottom = -273.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+script = ExtResource("4_healthbar")
 
 [node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=977194757]
 layout_mode = 1

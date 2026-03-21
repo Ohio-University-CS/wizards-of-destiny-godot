@@ -238,6 +238,8 @@ signal energy_changed(new_value, max_value)
 signal died
 signal status_applied(name, stacks)
 signal status_expired(name)
+signal damaged(amount)
+signal healed(amount)
 
 # ---------------------------------------------------------
 # INITIALIZATION
@@ -306,6 +308,8 @@ func take_damage(amount: int, _element: String = ""):
 
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
+	# Emit damaged for UI indicators
+	emit_signal("damaged", dmg)
 
 	if current_health <= 0:
 		_die()
@@ -341,6 +345,7 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 func heal(amount: int):
 	current_health = min(get_max_health(), current_health + amount)
 	emit_signal("health_changed", current_health)
+	emit_signal("healed", amount)
 
 # ---------------------------------------------------------
 # STATUS EFFECT MANAGEMENT
