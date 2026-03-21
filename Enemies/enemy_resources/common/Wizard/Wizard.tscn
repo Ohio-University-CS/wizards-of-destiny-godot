@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cge02g6n6iduc"]
+
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_73te0"]
+[ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tres" id="2_pwnpb"]
+[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="3_8ywd5"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_healthbar"]
+
+[node name="Wizard" type="Sprite2D" unique_id=1261555004]
+scale = Vector2(2, 2)
+texture = ExtResource("3_8ywd5")
+script = ExtResource("1_73te0")
+enemy_data = ExtResource("2_pwnpb")
+
+[node name="EnemyMoveText" type="Label" parent="." unique_id=1122216271]
+offset_left = -723.9225
+offset_top = -144.95801
+offset_right = 79.07745
+offset_bottom = -85.95801
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=1403340909]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -300.0
+offset_right = 121.22717
+offset_bottom = -273.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+script = ExtResource("4_healthbar")
+
+[node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=977194757]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.008256712
+anchor_top = -0.037037037
+anchor_right = 0.008256712
+anchor_bottom = -0.037037037
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 239.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "enemy"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

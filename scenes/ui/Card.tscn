@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://640ggccrwmqi"]
 
-[ext_resource type="Script" uid="uid://d307hv6y8q8q" path="res://scripts/Card.gd" id="1_yiag5"]
+[ext_resource type="Script" uid="uid://d307hv6y8q8q" path="res://cards/Card.gd" id="1_yiag5"]
 [ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/bolster.tres" id="2_tgmmg"]
 [ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame.png" id="3_4dx8l"]
 [ext_resource type="Texture2D" uid="uid://b8b5bj6l8ebve" path="res://cards/sprites/Bolster.png" id="4_qf083"]
@@ -13,7 +13,7 @@ font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control" unique_id=614744285]
-custom_minimum_size = Vector2(150, 220)
+custom_minimum_size = Vector2(135, 198)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0

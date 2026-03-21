@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://rswhiwfdb5bb"]
+
+[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scripts/ui_controller.gd" id="1_7vp6q"]
+[ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
+[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
+[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
+[ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
+
+[node name="UI" type="Control" unique_id=1263839368]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7vp6q")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1798303673]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 944.0
+offset_right = 1921.0
+offset_bottom = 1094.0
+
+[node name="CombatDeck" type="Node" parent="PanelContainer" unique_id=525548498]
+script = ExtResource("1_g5kmx")
+max_hand_size = null
+starting_deck = null
+
+[node name="Play" type="Button" parent="PanelContainer" unique_id=1254286619]
+clip_contents = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+text = "Play"
+script = ExtResource("2_0dwhk")
+
+[node name="PlayerUI" type="Node" parent="." unique_id=1551879210]
+
+[node name="PlayerMoveText" type="Label" parent="PlayerUI" unique_id=1468936768]
+offset_left = 46.752228
+offset_top = -129.8833
+offset_right = 849.7522
+offset_bottom = -70.8833
+theme_override_colors/font_color = Color(0.95, 1, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0.25, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+
+[node name="PlayerManaBar" type="ProgressBar" parent="PlayerUI" unique_id=1383878551]
+modulate = Color(0.2, 0.6, 1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 53.0
+offset_top = 809.0
+offset_right = -1751.0
+offset_bottom = -219.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_7vp6q")
+target_path = NodePath("../Player")
+
+[node name="PlayerName" type="Label" parent="PlayerUI" unique_id=994193201]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 241.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=392055822]
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 60.0
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="Panel" unique_id=737147789]
+modulate = Color(7.797182e-06, 0.71552736, 0.17116347, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_top = 1.0
+offset_right = -1552.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_pfayw")
+
+[node name="Discard" type="Button" parent="." unique_id=1741533510]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = 1619.0
+offset_top = 945.0
+offset_right = 1769.0
+offset_bottom = 1095.0
+disabled = true
+text = "Discard"
+script = ExtResource("3_7vp6q")
+
+[node name="EndTurn" type="Button" parent="." unique_id=404048436]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = 1771.0
+offset_top = 945.0
+offset_right = 1921.0
+offset_bottom = 1095.0
+text = "End Turn"
+
+[node name="MoveText" type="Label" parent="." unique_id=125204521]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 382.0
+offset_right = 1192.0
+offset_bottom = 469.0
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+text_direction = 1
+
+[node name="LVL_PLACEHOLDER" type="Label" parent="." unique_id=1978900543]
+layout_mode = 0
+offset_left = 847.0
+offset_top = -12.0
+offset_right = 1130.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "level placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="INVENTORY_PLACEHOLDER" type="Label" parent="." unique_id=424377098]
+layout_mode = 0
+offset_left = 1550.0
+offset_top = -11.0
+offset_right = 1912.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "inventory placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
