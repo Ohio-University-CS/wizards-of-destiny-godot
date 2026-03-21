@@ -134,7 +134,8 @@ func _ready():
 					deck = combat_decks[0]
 	
 	if deck:
-		deck.setup_from_class(class_data)
+		deck.setup_from_player(player)
+		#deck.setup_from_class(class_data)
 	else:
 		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
 	

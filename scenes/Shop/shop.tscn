@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c40oqkihcbi2e" path="res://scenes/Shop/shop.gd" id="1_1g71r"]
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
-[ext_resource type="PackedScene" uid="uid://3jgaiifsw41v" path="res://scenes/Shop/ShopItemUI.tscn" id="2_35ukv"]
+[ext_resource type="PackedScene" uid="uid://8vsbg5004ad5" path="res://scenes/Shop/ShopCardUI.tscn" id="2_nj4jc"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
 [ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/countermeasures.tres" id="3_35ukv"]
 [ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/cure_wounds.tres" id="4_nj4jc"]
@@ -22,9 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1g71r")
-shop_item_scene = ExtResource("2_35ukv")
 player = NodePath("Player")
-card_pool = Array[ExtResource("2_vrtdt")]([ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("5_jpxio"), ExtResource("6_wri3e"), ExtResource("7_j512n")])
+shop_card_scene = ExtResource("2_nj4jc")
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("7_j512n"), ExtResource("6_wri3e"), ExtResource("5_jpxio")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -37,80 +37,50 @@ offset_left = 1587.0
 offset_top = 74.0
 offset_right = 1760.0
 offset_bottom = 129.0
-text = "Coins: 14"
+text = "Coins: "
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="CardsPanel" type="Panel" parent="." unique_id=274840368]
+[node name="CoinAmount" type="Label" parent="." unique_id=1407741725]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 25.0
-offset_right = 846.0
-offset_bottom = 1060.0
-
-[node name="Cards Here" type="Label" parent="CardsPanel" unique_id=77795916]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 75.0
-offset_right = 494.0
-offset_bottom = 130.0
-text = "Cards Here"
+offset_left = 1717.0
+offset_top = 74.0
+offset_right = 1890.0
+offset_bottom = 129.0
+text = "50"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="CardContainer" type="GridContainer" parent="CardsPanel" unique_id=1377488406]
+[node name="Items Here" type="Label" parent="." unique_id=1262789622]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 161.0
-offset_right = 699.0
-offset_bottom = 901.0
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="ItemsPanel" type="Panel" parent="." unique_id=1376833103]
-layout_mode = 0
-offset_left = 858.0
-offset_top = 28.0
-offset_right = 1443.0
-offset_bottom = 544.0
-
-[node name="Items Here" type="Label" parent="ItemsPanel" unique_id=1262789622]
-layout_mode = 0
-offset_left = 186.0
-offset_top = 21.0
-offset_right = 399.0
-offset_bottom = 76.0
+offset_left = 1044.0
+offset_top = 49.0
+offset_right = 1257.0
+offset_bottom = 104.0
 text = "Items Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="ItemContainer" type="HBoxContainer" parent="ItemsPanel" unique_id=1222281350]
+[node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 152.0
-offset_right = 218.0
-offset_bottom = 397.0
-
-[node name="BuffsPanel" type="Panel" parent="." unique_id=1390107543]
-layout_mode = 0
-offset_left = 875.0
-offset_top = 585.0
-offset_right = 1437.0
-offset_bottom = 1046.0
-
-[node name="Stats Buffs Here" type="Label" parent="BuffsPanel" unique_id=1010229035]
-layout_mode = 0
-offset_left = 122.0
-offset_top = 22.0
-offset_right = 414.0
-offset_bottom = 77.0
+offset_left = 997.0
+offset_top = 607.0
+offset_right = 1289.0
+offset_bottom = 662.0
 text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="BuffContainer" type="HBoxContainer" parent="BuffsPanel" unique_id=582032841]
-layout_mode = 0
-offset_left = 41.0
-offset_top = 97.0
-offset_right = 251.0
-offset_bottom = 328.0
+[node name="CardsContainer" type="GridContainer" parent="." unique_id=1152559202]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076000005
+anchor_top = 0.108
+anchor_right = 0.40100002
+anchor_bottom = 0.92200005
+offset_left = 0.07998657
+offset_top = 0.3600006
+offset_right = 0.079956055
+offset_bottom = 0.2399292
+theme_override_constants/h_separation = 70
+theme_override_constants/v_separation = 50
+columns = 2
 
 [node name="Buttons" type="Control" parent="." unique_id=1301152946]
 anchors_preset = 0

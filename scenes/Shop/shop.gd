@@ -2,99 +2,59 @@ extends Control
 class_name Shop
  
 @onready var next_stage_button : Button = $"Buttons/Next Stage"
+@onready var cards_container = $CardsContainer
+@onready var coins : Label = $CoinAmount
 
-@export var shop_item_scene : PackedScene
 @export var player : Player
-@export var card_pool : Array[CardData]
+@export var shop_card_scene : PackedScene
 
-var shop_items : Array = []
+#temporary card pool
+@export var available_cards : Array[CardData]
+
+var shop_size := 4
 
 
 func _ready() -> void:
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
+	_update_coin_visual()
+	_generate_shop()
+
+
+func _generate_shop():
+	for child in cards_container.get_children():
+		child.queue_free()
 	
-	generate_test_shop()
-	populate_shop()
-	update_coins_display()
+	var pool = available_cards.duplicate()
+	pool.shuffle()
+	
+	for i in shop_size:
+		if i >= pool.size():
+			break
+		
+		var data = pool[i]
+		
+		var ui = shop_card_scene.instantiate()
+		var price = _get_price(data)
+		
+		ui.setup(data, price, player)
+		cards_container.add_child(ui)
+
+
+func _get_price(card : CardData) -> int:
+	match card.rarity:
+		card.CardRarity.COMMON:
+			return 5
+		card.CardRarity.UNCOMMON:
+			return 10
+		card.CardRarity.RARE:
+			return 20
+		_:
+			return 8
+
+
+func _update_coin_visual():
+	coins.text = str(player.coins)
 
 
 func _on_next_stage_pressed():
 	pass
-
-
-func generate_test_shop():
-	shop_items.clear()
-	
-	var available_cards = card_pool.duplicate()
-	available_cards.shuffle()
-	
-	#Example: 3 cards
-	for i in range(min(3, available_cards.size())):
-		var item = ShopItem.new()
-		item.type = ShopItem.Type.CARD
-		item.cost = 5 + i
-		
-		item.card_data = available_cards[i]
-		
-		shop_items.append(item)
-
-
-#temporary
-func get_random_card() -> CardData:
-	if card_pool.is_empty():
-		push_error("Card pool is empty")
-		return null
-	
-	return card_pool.pick_random()
-
-
-#func get_random_card_by_rarity()
-
-
-func populate_shop():
-	for item in shop_items:
-		var ui = shop_item_scene.instantiate()
-		
-		$CardsPanel/CardContainer.add_child(ui)
-		
-		ui.call_deferred("setup", item, player.coins)
-		ui.purchased.connect(_on_item_purchased)
-
-
-func _on_item_purchased(item : ShopItem):
-	if player.coins < item.cost:
-		return
-	
-	player.coins -= item.cost
-	update_coins_display()
-	
-	match item.type:
-		ShopItem.Type.CARD:
-			add_card_to_deck(item.card_data)
-		
-		ShopItem.Type.ITEM:
-			print("Item Bought (not implemented)")
-		
-		ShopItem.Type.SERVICE:
-			handle_service(item)
-	
-	refresh_all_ui()
-
-
-func add_card_to_deck(card_data : CardData):
-	player.deck_list.append(card_data)
-	print("Added ", card_data.card_name, " to deck")
-
-
-func refresh_all_ui():
-	for child in $CardsPanel/CardContainer.get_children():
-		child.current_coins = player.coins
-		child.update_affordability()
-
-
-func update_coins_display():
-	$Coins.text = "Coins: " + str(player.coins)
-
-
-func handle_service(item):
-	print("Service not implemented")
