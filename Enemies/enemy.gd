@@ -5,32 +5,32 @@ class_name Enemy
 # ENEMY STATS (Base + Modifiers)
 # ---------------------------------------------------------
 
-var resource : EnemyResource = null
+var resource: EnemyResource = null
+@export var enemy_data: EnemyResource
 
-# BASE STATS (from class)
+# BASE STATS (from resource)
 var base_max_health: int
-
-
-var temp_health_mod : int = 0
-
+var temp_health_mod: int = 0
+var base_damage: int = 0
 
 # Runtime values
 var current_health: int
 
 
-var current_move : MoveResource = null
-var last_move : MoveResource = null
-var repeat_count : int = 0
+var current_move: MoveResource = null
+var last_move: MoveResource = null
+var repeat_count: int = 0
 
 
-func setup_from_resource(res : EnemyResource) -> void:
+func setup_from_resource(res: EnemyResource) -> void:
 	resource = res
 	base_max_health = res.hp_variation[0]
+	base_damage = res.base_damage
 	current_health = base_max_health
 
 
 # for use later
-func modify_stat(_stat_type, _amount : int, _duration_turns : int = 0):
+func modify_stat(_stat_type, _amount: int, _duration_turns: int = 0):
 	pass
 
 
@@ -63,13 +63,18 @@ signal health_changed(new_value)
 signal died
 signal status_applied(name, stacks)
 signal status_expired(name)
+signal damaged(amount)
+signal healed(amount)
 
 # ---------------------------------------------------------
 # INITIALIZATION
 # ---------------------------------------------------------
 
 func _ready():
-	current_health = get_max_health()
+	if enemy_data != null:
+		setup_from_resource(enemy_data)
+	elif current_health <= 0:
+		current_health = get_max_health()
 
 # ---------------------------------------------------------
 # COMBAT INTERFACE
@@ -128,7 +133,7 @@ func select_move() -> MoveResource:
 			total_weight += m.weight
 		
 		var roll = randi() % total_weight
-		var chosen : MoveResource = null
+		var chosen: MoveResource = null
 		
 		for m in resource.moves:
 			roll -= m.weight
@@ -143,47 +148,17 @@ func select_move() -> MoveResource:
 		
 		return chosen
 	
-	return resource.moves[0] #fallback
-
-
-#perform selected move on target
-#func perform_move(move : MoveResource, target : Node) -> void:
-	#if move == null:
-		#return
-	#
-	#print("Enemy plays: ", move.name)
-	#
-	#for effect in move.effects:
-		#get_tree().current_scene._apply_effects([effect], self, target)
-
-
-#func perform_move(target : Node) -> void:
-	#var move = select_move()
-	#if move == null:
-		#return
-	#print("Enemy playes: ", move.name)
-	#
-	#var dmg = move.base_damage
-	#target.take_damage(dmg)
-	#print(" - Enemy dealt ", dmg, " damage")
-	#
-	##Apply status effects from the move
-	#if move.status_effects:
-		#for status_name in move.status_effects.keys():
-			#var stacks = move.status_effects[status_name]
-			#target.apply_status(status_name, stacks)
-			#print(" - Enemy applied ", status_name, " x", stacks)
-
+	return resource.moves[0] # fallback
 
 # ---------------------------------------------------------
 # DAMAGE & DEFENSE
 # ---------------------------------------------------------
 
-func deal_damage(amount: int, _element: String = "", _include_base_damage := false) -> int:
+func deal_damage(amount: int = 0, _element: String = "", include_base_damage: bool = true) -> int:
 	var dmg = amount
-	# Optionally add base damage if needed (currently not implemented)
-	# if _include_base_damage:
-	#     dmg += ...
+	if include_base_damage:
+		dmg += base_damage
+
 	# Apply outgoing modifiers here if desired
 	# Freeze reduces outgoing damage by 10% per stack
 	if status_effects.has("freeze"):
@@ -217,15 +192,17 @@ func take_damage(amount: int, _element: String = ""):
 	emit_signal("health_changed", current_health)
 	
 	print("Player deals ", dmg, " to Enemy")
+	# Emit damaged for UI indicators
+	emit_signal("damaged", dmg)
 
 	if current_health <= 0:
 		_die()
 
 
-func heal(amount : int):
+func heal(amount: int):
 	current_health = min(get_max_health(), current_health + amount)
 	emit_signal("health_changed", current_health)
-
+	emit_signal("healed", amount)
 
 # ---------------------------------------------------------
 # STATUS EFFECT MANAGEMENT

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://csgqjabna8v0m"]
+
+[ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_e2ybi"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="2_enxb0"]
+[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_xfvby"]
+[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
+[ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="5_nanp6"]
+[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="5_u8mph"]
+
+[node name="TempCombat" type="Node2D" unique_id=1118192045]
+position = Vector2(415.99997, 423.99997)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_e2ybi")
+card_scene = ExtResource("2_xfvby")
+class_data = ExtResource("3_u8mph")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=634967730]
+offset_left = -519.99994
+offset_top = 656.25
+offset_right = 1889.9998
+offset_bottom = 808.75
+
+[node name="CombatDeck" type="Node" parent="PanelContainer" unique_id=32642842]
+script = ExtResource("3_xfvby")
+starting_deck = Array[ExtResource("5_nanp6")]([null, null, null, null, null])
+
+[node name="Player" type="Sprite2D" parent="." unique_id=1458958701]
+position = Vector2(21.25, 151.25006)
+scale = Vector2(1.9785148, 1.9248049)
+texture = ExtResource("5_u8mph")
+
+[node name="Player" type="Node" parent="Player" unique_id=1044476268]
+script = ExtResource("2_enxb0")
+metadata/_custom_type_script = "uid://b8sgmp127qnl6"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=819217446]
+modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
+position = Vector2(1458.7499, 167.50002)
+scale = Vector2(2.0219703, 1.8022461)
+texture = ExtResource("5_u8mph")

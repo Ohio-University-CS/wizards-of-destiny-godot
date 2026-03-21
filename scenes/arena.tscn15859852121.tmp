@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://6ociot6d2wny"]
+
+[ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_4ag8t"]
+[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/ui/Card.tscn" id="2_dpxgc"]
+[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician_deck/magician.tres" id="3_oexds"]
+[ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/Goblin/Goblin.tscn" id="4_naajo"]
+[ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
+[ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
+
+[node name="Arena" type="Node2D" unique_id=1267453808]
+script = ExtResource("1_4ag8t")
+card_scene = ExtResource("2_dpxgc")
+class_data = ExtResource("3_oexds")
+enemy_pool = null
+game_speed = null
+play_move_duration = null
+play_fade_duration = null
+enemy_move_cost = null
+enemy_move_base_amount = null
+enemy_move_delay = null
+enemy_spawn_position = Vector2(1555, 651)
+player_move_label_path = null
+enemy_move_label_path = null
+player_name_label_path = null
+enemy_name_label_path = null
+discard_button_path = null
+result_overlay_path = null
+result_label_path = null
+move_text_hold_duration = null
+move_text_fade_duration = null
+turn_transition_delay = null
+hand_origin = Vector2(500, 750)
+hand_spacing = null
+hand_return_duration = null
+preview_in_editor = null
+preview_count = null
+
+[node name="Enemy" parent="." unique_id=1886209078 instance=ExtResource("4_naajo")]
+position = Vector2(1555, 651)
+scale = Vector2(2, 2)
+
+[node name="Player" parent="." unique_id=1096254011 instance=ExtResource("5_41jku")]
+position = Vector2(404, 653)
+
+[node name="UI" parent="." unique_id=1102256735 instance=ExtResource("6_k1k1x")]
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1309317165]
+offset_left = 1330.0
+offset_top = 459.0
+offset_right = 1426.25
+offset_bottom = 550.25
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1636715045]
+offset_left = 1331.0
+offset_top = 553.0
+offset_right = 1423.5
+offset_bottom = 636.75006
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1024364781]
+offset_left = 1329.0
+offset_top = 657.0
+offset_right = 1426.5
+offset_bottom = 745.75
