@@ -1,30 +1,29 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://gnt5ldhqgl87"]
 
-[ext_resource type="Texture2D" uid="uid://b8b5bj6l8ebve" path="res://cards/sprites/Bolster.png" id="1_sylpe"]
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_2p3jd"]
-[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_ynmd7"]
-[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="4_nlog2"]
+[ext_resource type="Texture2D" uid="uid://b8b5bj6l8ebve" path="res://cards/sprites/Bolster.png" id="1_gshb6"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_gshb6"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_pmwjj"]
+[ext_resource type="Script" path="res://cards/effects/apply_status_effect.gd" id="3_uyb0u"]
 
 [sub_resource type="Resource" id="Resource_oyu43"]
-script = ExtResource("3_ynmd7")
+script = ExtResource("3_uyb0u")
 status_type = 5
 amount = 3
 target_type = 0
 metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [sub_resource type="Resource" id="Resource_pmwjj"]
-script = ExtResource("3_ynmd7")
+script = ExtResource("3_uyb0u")
 status_type = 9
 amount = 1
 target_type = 0
 metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [resource]
-script = ExtResource("4_nlog2")
+script = ExtResource("2_gshb6")
 card_name = "Bolster"
 description = "Gain 3 Regeneration, Gain Empowered"
-rarity = "Common"
 card_type = 1
-artwork = ExtResource("1_sylpe")
-effects = Array[ExtResource("2_2p3jd")]([SubResource("Resource_oyu43"), SubResource("Resource_pmwjj")])
+artwork = ExtResource("1_gshb6")
+effects = Array[ExtResource("2_pmwjj")]([SubResource("Resource_oyu43"), SubResource("Resource_pmwjj")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

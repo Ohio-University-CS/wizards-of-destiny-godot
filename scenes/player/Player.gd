@@ -46,9 +46,6 @@ var temp_modifiers := {
 	"dodge": 0
 }
 
-@export var dodge_chance: float = 0.0 # 0-0.50
-@export var crit_chance: float = 0.0 # 0-0.40
-@export var crit_damage: float = 1.5 # multiplier
 @export var luck: float = 0.0 # 0-0.70
 
 # Runtime values
@@ -93,26 +90,32 @@ func get_damage() -> int:
 func get_crit_damage() -> int:
 	return base_crit_damage + perm_modifiers["crit_damage"] + temp_modifiers["crit_damage"]
 
+func get_crit_chance() -> float:
+	return base_crit_chance + perm_modifiers["crit_chance"] + temp_modifiers["crit_chance"]
+
+func get_dodge_chance() -> float:
+	return base_dodge + perm_modifiers["dodge"] + temp_modifiers["dodge"]
+
 func get_elemental_power() -> float:
 	return base_elemental_power + perm_modifiers["elemental_power"] + temp_modifiers["elemental_power"]
 
 func get_fire_power() -> int:
-	var total_fire : int = base_fire + perm_modifiers["fire"] + temp_modifiers["fire"]
-	@warning_ignore("narrowing_conversion")  #script doesn't like float to int conversion, but we need it
+	var total_fire: int = base_fire + perm_modifiers["fire"] + temp_modifiers["fire"]
+	@warning_ignore("narrowing_conversion") # script doesn't like float to int conversion, but we need it
 	return total_fire + (total_fire * get_elemental_power())
 
 func get_ice_power() -> int:
-	var total_ice : int = base_ice + perm_modifiers["ice"] + temp_modifiers["ice"]
+	var total_ice: int = base_ice + perm_modifiers["ice"] + temp_modifiers["ice"]
 	@warning_ignore("narrowing_conversion")
 	return total_ice + (total_ice * get_elemental_power())
 
 func get_poison_power() -> int:
-	var total_poison : int = base_poison + perm_modifiers["poison"] + temp_modifiers["poison"]
+	var total_poison: int = base_poison + perm_modifiers["poison"] + temp_modifiers["poison"]
 	@warning_ignore("narrowing_conversion")
 	return total_poison + (total_poison * get_elemental_power())
 
 func get_electric_power() -> int:
-	var total_electric : int = base_electric + perm_modifiers["electric"] + temp_modifiers["electric"]
+	var total_electric: int = base_electric + perm_modifiers["electric"] + temp_modifiers["electric"]
 	@warning_ignore("narrowing_conversion")
 	return total_electric + (total_electric * get_elemental_power())
 
@@ -125,7 +128,7 @@ func modify_stat_permanent(stat_name: String, amount: int):
 			current_health = clamp(current_health + amount, 0, get_max_health())
 
 
-func modify_stat(stat_type, amount : int, duration_turns : int = 0):
+func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 	var stat_name := ""
 	
 	match stat_type:
@@ -150,15 +153,15 @@ func modify_stat(stat_type, amount : int, duration_turns : int = 0):
 # STRIKE SYSTEM
 # ---------------------------------------------------------
 
-var strike_bonus_damage : int = 0
+var strike_bonus_damage: int = 0
 var strike_elemental_damage := {
 	"fire": 0,
 	"ice": 0,
 	"poison": 0,
 	"electric": 0
 }
-var strike_statuses : Array = []
-var damage_multiplier : float = 1.0
+var strike_statuses: Array = []
+var damage_multiplier: float = 1.0
 
 #reset all strike at start of turn
 func reset_strike():
@@ -168,28 +171,27 @@ func reset_strike():
 		strike_elemental_damage[element] = 0
 
 #add normal damage to strike
-func add_strike_damage(amount : int):
+func add_strike_damage(amount: int):
 	strike_bonus_damage += amount
 
 #add elemental damage to strike
-func add_strike_element(element : String, amount : int):
+func add_strike_element(element: String, amount: int):
 	if strike_elemental_damage.has(element):
 		strike_elemental_damage[element] += amount
 
 #add status effect to strike
-func add_strike_status(status : String, stacks : int):
+func add_strike_status(status: String, stacks: int):
 	strike_statuses.append({
-		"name" : status,
-		"stacks" : stacks
+		"name": status,
+		"stacks": stacks
 	})
 
 #handle multiplying damage
-func apply_damage_multiplier(mult : float):
+func apply_damage_multiplier(mult: float):
 	damage_multiplier *= mult
 
 #perform the actual strike
 func perform_strike(target):
-	
 	#normal damage
 	var dmg = get_damage() + strike_bonus_damage
 	dmg = int(dmg * damage_multiplier)
@@ -242,6 +244,8 @@ signal energy_changed(new_value, max_value)
 signal died
 signal status_applied(name, stacks)
 signal status_expired(name)
+signal damaged(amount)
+signal healed(amount)
 
 # ---------------------------------------------------------
 # INITIALIZATION
@@ -310,12 +314,14 @@ func take_damage(amount: int, _element: String = ""):
 
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
+	# Emit damaged for UI indicators
+	emit_signal("damaged", dmg)
 
 	if current_health <= 0:
 		_die()
 
 
-func deal_damage(amount : int, element : String = "", include_base_damage : bool = true) -> int:
+func deal_damage(amount: int, element: String = "", include_base_damage: bool = true) -> int:
 	var dmg = amount
 	
 	if include_base_damage:
@@ -323,7 +329,7 @@ func deal_damage(amount : int, element : String = "", include_base_damage : bool
 	
 	#Elemental bonuses
 	match element:
-		"fire" : dmg += get_fire_power()
+		"fire": dmg += get_fire_power()
 		"ice": dmg += get_ice_power()
 		"poison": dmg += get_poison_power()
 		"electric": dmg += get_electric_power()
@@ -332,19 +338,20 @@ func deal_damage(amount : int, element : String = "", include_base_damage : bool
 	var freeze_stacks = status_effects["freeze"]
 	if freeze_stacks > 0:
 		var multiplier = 1.0 - (0.1 * freeze_stacks)
-		multiplier = max(multiplier, 0.4) #can't drop below 40%
+		multiplier = max(multiplier, 0.4) # can't drop below 40%
 		dmg = int(dmg * multiplier)
 	
 	#Crit check
-	if randf() < crit_chance:
+	if randf() < get_crit_chance():
 		dmg += get_crit_damage()
 	
 	return dmg
 
 
-func heal(amount : int):
+func heal(amount: int):
 	current_health = min(get_max_health(), current_health + amount)
 	emit_signal("health_changed", current_health)
+	emit_signal("healed", amount)
 
 # ---------------------------------------------------------
 # STATUS EFFECT MANAGEMENT
@@ -419,7 +426,7 @@ func is_stunned() -> bool:
 
 
 func try_dodge() -> bool:
-	return randf() < dodge_chance
+	return randf() < get_dodge_chance()
 
 
 func _die():

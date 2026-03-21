@@ -1,22 +1,21 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://crmy4pr4eh72s"]
 
-[ext_resource type="Texture2D" uid="uid://4a2tg662pbpu" path="res://cards/sprites/Protective_Barrier.png" id="1_4hcax"]
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_he0d5"]
-[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_rksbe"]
-[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="4_mlb7y"]
+[ext_resource type="Texture2D" uid="uid://4a2tg662pbpu" path="res://cards/sprites/Protective_Barrier.png" id="1_00hw1"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vpg2e"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_ytdm3"]
+[ext_resource type="Script" path="res://cards/effects/block_effect.gd" id="3_2q6jb"]
 
 [sub_resource type="Resource" id="Resource_y8aji"]
-script = ExtResource("3_rksbe")
+script = ExtResource("3_2q6jb")
 amount = 5
 target_type = 0
 metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
 
 [resource]
-script = ExtResource("4_mlb7y")
+script = ExtResource("2_vpg2e")
 card_name = "Protective Barrier"
 description = "Gain 5 Block."
-rarity = "Common"
 card_type = 1
-artwork = ExtResource("1_4hcax")
-effects = Array[ExtResource("2_he0d5")]([SubResource("Resource_y8aji")])
+artwork = ExtResource("1_00hw1")
+effects = Array[ExtResource("2_ytdm3")]([SubResource("Resource_y8aji")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

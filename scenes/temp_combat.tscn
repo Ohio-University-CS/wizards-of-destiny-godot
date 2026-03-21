@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://csgqjabna8v0m"]
 
 [ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_e2ybi"]
-[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/Card.tscn" id="2_8m2go"]
-[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="2_enxb0"]
-[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician.tres" id="3_u8mph"]
+[ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/ui/Card.tscn" id="2_8m2go"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="2_enxb0"]
+[ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn" id="2_goblin"]
+[ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician_deck/magician.tres" id="3_u8mph"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="3_xfvby"]
 [ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="5_u8mph"]
-[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scripts/play_button.gd" id="6_playbtn"]
-[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scripts/end_turn_button.gd" id="7_endturn"]
-[ext_resource type="Script" uid="uid://bhhc0w5gwn27n" path="res://scripts/health_bar.gd" id="8_glrqy"]
-[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://scripts/enemy.gd" id="9_fodyp"]
+[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="6_playbtn"]
+[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scenes/ui/end_turn_button.gd" id="7_endturn"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="10_mana"]
-[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scripts/discard_button.gd" id="11_discard"]
+[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="11_discard"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="12_healthbar"]
 
 [node name="TempCombat" type="Node2D" unique_id=1118192045]
 modulate = Color(0.9998011, 0.99974126, 0.99970776, 1)
@@ -65,8 +65,8 @@ text = "Discard"
 script = ExtResource("11_discard")
 
 [node name="Player" type="Sprite2D" parent="." unique_id=1458958701]
-position = Vector2(-28.749958, 155.00006)
-scale = Vector2(1.9785148, 1.9248049)
+position = Vector2(-62.499958, 186.25006)
+scale = Vector2(2, 2)
 texture = ExtResource("5_u8mph")
 
 [node name="PlayerMoveText" type="Label" parent="Player" unique_id=916274550]
@@ -81,9 +81,6 @@ theme_override_font_sizes/font_size = 34
 
 [node name="Player" type="Node" parent="Player" unique_id=1044476268]
 script = ExtResource("2_enxb0")
-dodge_chance = 0.05
-crit_chance = 0.2
-luck = 0.1
 metadata/_custom_type_script = "uid://b8sgmp127qnl6"
 
 [node name="PlayerHealth" type="ProgressBar" parent="Player" unique_id=1124241740]
@@ -95,7 +92,7 @@ offset_left = -179.4275
 offset_top = -317.56464
 offset_right = 62.799667
 offset_bottom = -416.34088
-script = ExtResource("8_glrqy")
+script = ExtResource("12_healthbar")
 target_path = NodePath("../Player")
 
 [node name="PlayerManaBar" type="ProgressBar" parent="Player" unique_id=1831173201]
@@ -123,67 +120,27 @@ text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Enemy" type="Sprite2D" parent="." unique_id=819217446]
-modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
-position = Vector2(1458.7499, 167.50002)
-scale = Vector2(2.0219703, 1.8022461)
-texture = ExtResource("5_u8mph")
+[node name="Enemy" parent="." unique_id=842165 instance=ExtResource("2_goblin")]
+position = Vector2(1353.75, 202.5)
+scale = Vector2(2, 2)
 
-[node name="Enemy" type="Node" parent="Enemy" unique_id=1812392051]
-script = ExtResource("9_fodyp")
+[node name="EnemyIntent4" type="TextureRect" parent="Enemy" unique_id=468170854]
+offset_left = -69.375
+offset_top = -100.0
+offset_right = 26.875
+offset_bottom = -8.75
 
-[node name="EnemyHealth" type="ProgressBar" parent="Enemy" unique_id=1250341661]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -192.26291
-offset_top = -339.16013
-offset_right = 49.964264
-offset_bottom = -437.93637
-script = ExtResource("8_glrqy")
-target_path = NodePath("../Enemy")
+[node name="EnemyIntent5" type="TextureRect" parent="Enemy" unique_id=1035456702]
+offset_left = -67.5
+offset_top = -46.87503
+offset_right = 25.0
+offset_bottom = 36.87503
 
-[node name="EnemyName" type="Label" parent="Enemy" unique_id=1613021007]
-offset_left = -129.82382
-offset_top = -384.9363
-offset_right = 112.17618
-offset_bottom = -345.9363
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 28
-text = "enemy"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EnemyMoveText" type="Label" parent="Enemy" unique_id=1884305950]
-offset_left = -723.9225
-offset_top = -144.95801
-offset_right = 79.07745
-offset_bottom = -85.95801
-theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
-theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 34
-horizontal_alignment = 2
-
-[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=468170854]
-offset_left = 1215.0
-offset_top = 2.5
-offset_right = 1311.25
-offset_bottom = 93.75
-
-[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1035456702]
-offset_left = 1218.75
-offset_top = 108.75
-offset_right = 1311.25
-offset_bottom = 192.50006
-
-[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=334392349]
-offset_left = 1228.75
-offset_top = 208.75
-offset_right = 1326.25
-offset_bottom = 297.5
+[node name="EnemyIntent6" type="TextureRect" parent="Enemy" unique_id=334392349]
+offset_left = -62.5
+offset_top = 3.125
+offset_right = 35.0
+offset_bottom = 91.875
 
 [node name="ResultCanvas" type="CanvasLayer" parent="." unique_id=411052007]
 
