@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://dmnvuaeqp7thf"]
 
-[ext_resource type="Texture2D" uid="uid://cuh3ggngko837" path="res://sprites/icon.svg" id="1_yjr4o"]
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="2_f0hci"]
 [ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tres" id="3_1hkhi"]
+[ext_resource type="Texture2D" uid="uid://bcqkb6f2yjq2m" path="res://sprites/temp_enemy.png" id="3_ywx7t"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_3c0xf"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="5_f0hci"]
 
 [node name="Goblin" type="Sprite2D" unique_id=1886209078]
-modulate = Color(0.96151835, 4.4520943e-06, 9.62615e-07, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("1_yjr4o")
 script = ExtResource("2_f0hci")
 enemy_data = ExtResource("3_1hkhi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=354001421]
+scale = Vector2(6, 6)
+texture = ExtResource("3_ywx7t")
 
 [node name="HealthIndicator" type="Label" parent="." unique_id=2000000001]
 offset_left = -39.0
@@ -26,6 +28,7 @@ horizontal_alignment = 2
 script = ExtResource("5_f0hci")
 
 [node name="EnemyHealth" type="ProgressBar" parent="." unique_id=1894055990]
+modulate = Color(1, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,7 +52,7 @@ offset_left = -3.0
 offset_top = -40.0
 offset_right = 239.0
 offset_bottom = -1.0
-theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 28

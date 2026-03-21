@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvdhx6i0rlj05"
-path="res://.godot/imported/Jinx_text.png-4d94b6a8af7e8884ea17c303583f10fc.ctex"
+uid="uid://baf1jrcwsssdg"
+path="res://.godot/imported/scroll_fire.png-cb234728f71cd03a46bdf23f25a22b07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Jinx_text.png"
-dest_files=["res://.godot/imported/Jinx_text.png-4d94b6a8af7e8884ea17c303583f10fc.ctex"]
+source_file="res://scenes/Shop/sprites/scroll_fire.png"
+dest_files=["res://.godot/imported/scroll_fire.png-cb234728f71cd03a46bdf23f25a22b07.ctex"]
 
 [params]
 

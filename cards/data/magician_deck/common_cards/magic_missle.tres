@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bdjv3n01gigwa"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_npb4k"]
+[ext_resource type="Texture2D" uid="uid://bv36pqgbmnc5f" path="res://cards/sprites/Magic_Missle.png" id="1_qoei8"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_qoei8"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_r6pw6"]
+[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="4_onl1r"]
+
+[sub_resource type="Resource" id="Resource_onl1r"]
+script = ExtResource("2_qoei8")
+amount = 2
+times = 3
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[resource]
+script = ExtResource("2_r6pw6")
+card_name = "Magic Missle"
+description = "Add 2 Damage to Strike 3 Times"
+energy_cost = 3
+card_type = 1
+artwork = ExtResource("1_qoei8")
+frame_art = ExtResource("4_onl1r")
+effects = Array[ExtResource("1_npb4k")]([SubResource("Resource_onl1r")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

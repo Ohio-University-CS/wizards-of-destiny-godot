@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://brvaerogr0xcj"]
 
+[ext_resource type="Texture2D" uid="uid://cbtxp0cantdy2" path="res://cards/sprites/Countermeasures.png" id="1_1noo6"]
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_piwq2"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_i5f7a"]
 [ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_i6c7c"]
 [ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_p84m6"]
+[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="5_x2ftk"]
 
 [sub_resource type="Resource" id="Resource_c8h1k"]
 script = ExtResource("2_i6c7c")
@@ -20,6 +22,7 @@ metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
 script = ExtResource("2_i5f7a")
 card_name = "Countermeasures"
 description = "Gain 5 Block. Attack for 5 Damage"
-rarity = "Common"
+artwork = ExtResource("1_1noo6")
+frame_art = ExtResource("5_x2ftk")
 effects = Array[ExtResource("1_piwq2")]([SubResource("Resource_c8h1k"), SubResource("Resource_45dm0")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -55,7 +55,7 @@ var max_energy: int = 3
 
 var deck_list : Array[CardData] = []
 
-var coins : int = 0
+var initialized : bool = false
 
 
 func setup_from_class(data):

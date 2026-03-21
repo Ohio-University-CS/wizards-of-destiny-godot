@@ -154,6 +154,7 @@ func _refresh_visual():
 		return
 
 	var art = get_node_or_null("Art")
+	var frame = get_node_or_null("Frame")
 	var cname = get_node_or_null("Name")
 	var desc = get_node_or_null("Description")
 	var cost = get_node_or_null("Cost")
@@ -162,6 +163,11 @@ func _refresh_visual():
 		art.texture = data.artwork
 	else:
 		push_warning("Card: 'Art' node missing; cannot set artwork")
+
+	if frame:
+		frame.texture = data.frame_art
+	else:
+		push_warning("Card: 'Frame' node missing; cannot set card frame")
 
 	if cname:
 		cname.text = data.card_name

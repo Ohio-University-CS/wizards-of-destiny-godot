@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbqb1ecslbci7"
-path="res://.godot/imported/Hex_text.png-44cded9a9b2e6d3a684d68ef6d118f37.ctex"
+uid="uid://btlulsf470t2a"
+path="res://.godot/imported/scroll_small_dmg.png-f69a483ff44b9e3fc011b586ac1c55bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Hex_text.png"
-dest_files=["res://.godot/imported/Hex_text.png-44cded9a9b2e6d3a684d68ef6d118f37.ctex"]
+source_file="res://scenes/Shop/sprites/scroll_small_dmg.png"
+dest_files=["res://.godot/imported/scroll_small_dmg.png-f69a483ff44b9e3fc011b586ac1c55bf.ctex"]
 
 [params]
 

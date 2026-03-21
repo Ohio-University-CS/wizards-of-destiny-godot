@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cw5q72qqbvtlg"]
+
+[ext_resource type="Texture2D" uid="uid://boocxeylodng4" path="res://cards/sprites/Fireball.png" id="1_seyby"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_vr6in"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_21dut"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_g47gr"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="3_seyby"]
+[ext_resource type="Texture2D" uid="uid://dblp07jfr0fwu" path="res://cards/sprites/Card_Frame_Uncommon.png.png" id="4_irn5l"]
+
+[sub_resource type="Resource" id="Resource_nbaxt"]
+script = ExtResource("2_g47gr")
+status_type = 1
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_x7i66"]
+script = ExtResource("3_seyby")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[resource]
+script = ExtResource("2_21dut")
+card_name = "Fireball"
+description = "Add DMG Fire Damage to Strike, Apply Burn x2"
+energy_cost = 2
+rarity = 1
+artwork = ExtResource("1_seyby")
+frame_art = ExtResource("4_irn5l")
+effects = Array[ExtResource("1_vr6in")]([SubResource("Resource_nbaxt"), SubResource("Resource_x7i66")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

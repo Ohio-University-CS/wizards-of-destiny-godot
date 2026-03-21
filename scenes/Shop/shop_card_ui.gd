@@ -12,7 +12,6 @@ signal purchased(card_data)
 var card_node : Card
 var card_data : CardData
 var price : int
-var player : Player
 
 
 func _ready() -> void:
@@ -20,10 +19,9 @@ func _ready() -> void:
 	#card_holder.custom_minimum_size = Vector2(300, 450)
 
 
-func setup(data: CardData, cost: int, player_ref: Player):
+func setup(data: CardData, cost: int):
 	card_data = data
 	price = cost
-	player = player_ref
 	
 	await ready
 	
@@ -46,15 +44,16 @@ func setup(data: CardData, cost: int, player_ref: Player):
 	card_node.setup(instance)
 
 	buy_button.text = "Buy (" + str(price) + ")"
+	buy_button.disabled = RunManager.coins < price
 	buy_button.pressed.connect(_on_buy_pressed)
 
 
 func _on_buy_pressed():
-	if player.coins < price:
+	if RunManager.coins < price:
 		return
 
-	player.coins -= price
-	player.deck_list.append(card_data)
+	RunManager.coins -= price
+	RunManager.player.deck_list.append(card_data)
 
 	purchased.emit(card_data)
 	queue_free()

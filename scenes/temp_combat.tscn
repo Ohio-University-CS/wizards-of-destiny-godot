@@ -20,6 +20,7 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("1_e2ybi")
 card_scene = ExtResource("2_8m2go")
 class_data = ExtResource("3_u8mph")
+enemy_pool = Array[PackedScene]([ExtResource("2_goblin")])
 play_move_duration = 2.0
 enemy_move_delay = 1.0
 player_move_label_path = NodePath("Player/PlayerMoveText")
@@ -122,7 +123,6 @@ vertical_alignment = 1
 
 [node name="Enemy" parent="." unique_id=842165 instance=ExtResource("2_goblin")]
 position = Vector2(1353.75, 202.5)
-scale = Vector2(2, 2)
 
 [node name="EnemyIntent4" type="TextureRect" parent="Enemy" unique_id=468170854]
 offset_left = -69.375

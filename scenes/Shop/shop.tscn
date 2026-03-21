@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
 [ext_resource type="PackedScene" uid="uid://8vsbg5004ad5" path="res://scenes/Shop/ShopCardUI.tscn" id="2_nj4jc"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
-[ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/countermeasures.tres" id="3_35ukv"]
-[ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/cure_wounds.tres" id="4_nj4jc"]
-[ext_resource type="Resource" uid="uid://dlba3lrk4k5fn" path="res://cards/data/magician_deck/starting cards/hex.tres" id="5_jpxio"]
-[ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/starting cards/bolster.tres" id="6_wri3e"]
-[ext_resource type="Resource" uid="uid://crmy4pr4eh72s" path="res://cards/data/magician_deck/starting cards/protective_barrier.tres" id="7_j512n"]
-[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scripts/Player.gd" id="10_nj4jc"]
+[ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/common_cards/countermeasures.tres" id="3_35ukv"]
+[ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
+[ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
+[ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/rare_cards/shield.tres" id="7_nj4jc"]
+[ext_resource type="Resource" uid="uid://bdjv3n01gigwa" path="res://cards/data/magician_deck/common_cards/magic_missle.tres" id="8_nj4jc"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="10_nj4jc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -24,7 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("7_j512n"), ExtResource("6_wri3e"), ExtResource("5_jpxio")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)

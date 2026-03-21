@@ -15,6 +15,13 @@ var shop_size := 4
 
 
 func _ready() -> void:
+	player = RunManager.player
+	
+	if player.get_parent():
+		player.get_parent().remove_child(player)
+	add_child(player)
+	player.visible = false
+	
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
 	_update_coin_visual()
 	_generate_shop()
@@ -27,7 +34,7 @@ func _generate_shop():
 	var pool = available_cards.duplicate()
 	pool.shuffle()
 	
-	for i in shop_size:
+	for i in range(shop_size):
 		if i >= pool.size():
 			break
 		
@@ -36,7 +43,8 @@ func _generate_shop():
 		var ui = shop_card_scene.instantiate()
 		var price = _get_price(data)
 		
-		ui.setup(data, price, player)
+		ui.setup(data, price)
+		ui.purchased.connect(_on_card_purchased)
 		cards_container.add_child(ui)
 
 
@@ -52,9 +60,14 @@ func _get_price(card : CardData) -> int:
 			return 8
 
 
+func _on_card_purchased(_card_data):
+	_update_coin_visual()
+
+
 func _update_coin_visual():
-	coins.text = str(player.coins)
+	coins.text = str(RunManager.coins)
 
 
 func _on_next_stage_pressed():
+	#get_tree().change_scene_to_file("res://scenes/arena.tscn")
 	pass
