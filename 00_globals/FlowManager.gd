@@ -7,6 +7,7 @@ extends Node
 
 const COMBAT_SCENE := "res://scenes/arena.tscn"
 const SHOP_SCENE := "res://scenes/Shop/shop.tscn"
+const REWARD_SCENE := "res://scenes/reward_screen/combat_reward.tscn"
 #const REST_SCENE := 
 #const EVENT_SCENE := 
 #const CHOICE_SCENE := 
@@ -37,21 +38,48 @@ func go_to_shop():
 func on_combat_finished(result : Dictionary):
 	# Example result:
 	# { "coins": 20, "perfect": true, "turns": 3 }
+	var total : int = 0
 	
-	if result.has("coins"):
-		RunManager.add_coins(result["coins"])
+	var base : int = result.get("coins", 0)
+	total += base
 	
-	# Advance progression
-	RunManager.next_stage()
+	if result.get("perfect", false):
+		total += 5
 	
-	# After combat, go to shop
-	go_to_shop()
+	var turns = result.get("turns", 999)
+	if turns <= 3:
+		total += 5
+	elif turns <= 6:
+		total += 2
+	
+	result["total_coins"] = total
+	
+	RunManager.add_coins(total)
+	
+	go_to_reward_screen(result)
+
+# ----------------
+# Reward Scene
+# ----------------
+
+func go_to_reward_screen(result : Dictionary):
+	var scene = load(REWARD_SCENE).instantiate()
+	
+	# store result temporarily
+	RunManager.last_combat_result = result
+	
+	get_tree().current_scene.queue_free()
+	get_tree().root.add_child(scene)
+	get_tree().current_scene = scene
 
 # ----------------
 # After Shop Flow
 # ----------------
 
 func after_shop():
+	# Advance progression
+	RunManager.next_stage()
+	
 	var type = RunManager.get_stage_type()
 	
 	match type:

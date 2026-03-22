@@ -17,6 +17,8 @@ enum StageType {
 	BOSS
 }
 
+var last_combat_result : Dictionary = {}
+
 # ----------------
 # Run Setup
 # ----------------
