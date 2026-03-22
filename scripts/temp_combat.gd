@@ -108,7 +108,7 @@ func _ready():
 	if player == null:
 		push_error("TempCombat: no Player node found")
 	else:
-		if not player.initialized:
+		if player.class_data == null:
 			player.setup_from_class(class_data)
 			player.initialized = true
 			
@@ -175,7 +175,6 @@ func _ready():
 		push_error("TempCombat: no CombatDeck found, cannot draw cards")
 	
 	
-	
 	# Initialize enemy intent UI nodes — they may live under the Enemy container or at the scene root
 	var _e1 = get_node_or_null("Enemy/EnemyIntent1")
 	if _e1 == null:
@@ -194,27 +193,6 @@ func _ready():
 		_e3 = get_node_or_null("EnemyIntent3")
 	if _e3 and _e3 is TextureRect:
 		enemy_intent_3 = _e3
-	
-	if deck == null:
-		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
-			deck = get_node("CombatDeck")
-		elif has_node("PanelContainer/CombatDeck") and get_node("PanelContainer/CombatDeck") is CombatDeck:
-			deck = get_node("PanelContainer/CombatDeck")
-		else:
-			for child in get_children():
-				if child is CombatDeck:
-					deck = child
-					break
-			if deck == null:
-				var combat_decks = find_children("*", "CombatDeck", true, false)
-				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
-					deck = combat_decks[0]
-	
-	if deck:
-		deck.setup_from_player(player)
-		#deck.setup_from_class(class_data)
-	else:
-		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
 	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
@@ -258,7 +236,7 @@ func _ready():
 
 	# Ensure the labels start invisible (alpha 0) so announce/fade works predictably
 	if player_move_label:
-		if player_move_label.has_method("get") or true:
+		if player_move_label:
 			var c = player_move_label.modulate
 			c.a = 0.0
 			player_move_label.modulate = c
@@ -837,6 +815,7 @@ func _connect_ui_signals() -> void:
 	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
 		# ensure the NodePath points to the sibling Player
 		health_bar.target_path = NodePath("../Player")
+		#health_bar.set_target(player)
 	# Mana Indicator
 	var mana_bar = ui.get_node_or_null("PlayerManaBar")
 	if mana_bar and mana_bar.has_method("set_target") == false and mana_bar.has_variable("target_path"):
@@ -860,10 +839,16 @@ func _on_opponent_died() -> void:
 		get_tree().root.add_child(player)
 		RunManager.player = player
 	
-	RunManager.coins += 20
+	# Build result data
+	var result = {
+		"coins": 20,
+		"turns": turn_count,
+		"perfect": player.current_health == player.get_max_health()
+	}
 	
 	await get_tree().create_timer(1.5).timeout
-	get_tree().change_scene_to_file("res://scenes/Shop/shop.tscn")
+	
+	FlowManager.on_combat_finished(result)
 
 
 func _show_result(player_won: bool) -> void:

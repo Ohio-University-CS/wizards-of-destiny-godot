@@ -22,6 +22,7 @@ config/icon="res://sprites/icon.svg"
 [autoload]
 
 RunManager="*uid://ba2n4cyxco47s"
+FlowManager="*uid://f0weft1evjx3"
 
 [display]
 

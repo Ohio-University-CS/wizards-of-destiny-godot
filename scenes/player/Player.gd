@@ -7,6 +7,8 @@ class_name Player
 
 var class_data
 
+@export var initialized : bool = false
+
 # BASE STATS (from class)
 var base_max_health: int
 var base_damage: int
@@ -54,8 +56,6 @@ var energy: int = 3
 var max_energy: int = 3
 
 var deck_list : Array[CardData] = []
-
-var initialized : bool = false
 
 
 func setup_from_class(data):
@@ -252,9 +252,10 @@ signal healed(amount)
 # ---------------------------------------------------------
 
 func _ready():
-	energy = max_energy
-	current_health = get_max_health()
-	emit_signal("energy_changed", energy, max_energy)
+	if not initialized:
+		return
+	
+	set_energy(max_energy)
 
 
 # ---------------------------------------------------------

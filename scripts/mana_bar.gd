@@ -1,3 +1,4 @@
+# mana bar
 extends ProgressBar
 
 @export var target_path: NodePath
