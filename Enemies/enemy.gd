@@ -5,6 +5,8 @@ class_name Enemy
 # ENEMY STATS (Base + Modifiers)
 # ---------------------------------------------------------
 
+@onready var health_bar = $EnemyHealth
+
 var resource: EnemyResource = null
 @export var enemy_data: EnemyResource
 
@@ -75,6 +77,8 @@ func _ready():
 		setup_from_resource(enemy_data)
 	elif current_health <= 0:
 		current_health = get_max_health()
+	
+	health_bar.set_target(self)
 
 # ---------------------------------------------------------
 # COMBAT INTERFACE

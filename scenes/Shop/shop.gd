@@ -17,9 +17,6 @@ var shop_size := 4
 func _ready() -> void:
 	player = RunManager.player
 	
-	if player.get_parent():
-		player.get_parent().remove_child(player)
-	add_child(player)
 	player.visible = false
 	
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
@@ -69,5 +66,4 @@ func _update_coin_visual():
 
 
 func _on_next_stage_pressed():
-	#get_tree().change_scene_to_file("res://scenes/arena.tscn")
-	pass
+	FlowManager.go_to_combat()
