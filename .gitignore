@@ -3,3 +3,4 @@
 /android/
 .tmp/
 .pdf/
+addons/godot-sqlite/bin/
