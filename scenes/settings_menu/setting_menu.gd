@@ -27,9 +27,12 @@ func _ready() -> void:
 	_gso_off()
 	_sso_off()
 	#settings
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
 	#buttons
+	setup_button_hover(graphics_button)
+	setup_button_hover(sound_button)
+	setup_button_hover(control_button)
 	graphics_button.pressed.connect(_on_graphics_pressed)
 	sound_button.pressed.connect(_on_sound_pressed)
 	control_button.pressed.connect(_on_control_pressed)
@@ -152,3 +155,48 @@ func _on_sfvs_value_changed(value: float) -> void:
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
+
+#button hover
+func tween_button_scale(button: Control, target_scale: Vector2):
+	var tween = create_tween()
+	tween.tween_property(button, "scale", target_scale, 0.15)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_OUT)
+
+
+func setup_button_hover(button: BaseButton):
+	button.mouse_entered.connect(func():
+		tween_button_hover(button, true)
+		#start_hover_pulse(button)
+	)
+	
+	button.mouse_exited.connect(func():
+		tween_button_hover(button, false)
+	)
+
+
+func tween_button_hover(button: BaseButton, hovering: bool):
+	var tween = create_tween()
+	
+	if hovering:
+		tween.tween_property(button, "scale", Vector2(1.03, 1.03), 0.15)\
+			.set_trans(Tween.TRANS_BACK)\
+			.set_ease(Tween.EASE_OUT)
+		
+		tween.parallel().tween_property(
+			button, 
+			"self_modulate", 
+			Color(1.15, 1.15, 1.15), 
+			0.15
+		)
+	else:
+		tween.tween_property(button, "scale", Vector2(1.0, 1.0), 0.15)\
+			.set_trans(Tween.TRANS_BACK)\
+			.set_ease(Tween.EASE_OUT)
+		
+		tween.parallel().tween_property(
+			button, 
+			"self_modulate", 
+			Color(1, 1, 1), 
+			0.15
+		)

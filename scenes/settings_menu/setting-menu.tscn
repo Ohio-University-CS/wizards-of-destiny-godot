@@ -281,9 +281,9 @@ offset_bottom = 40.0
 
 [node name="Graphics Button" type="Button" parent="Buttons" unique_id=1937190634]
 layout_mode = 0
-offset_left = 342.0
+offset_left = 330.0
 offset_top = 37.0
-offset_right = 727.0
+offset_right = 715.0
 offset_bottom = 157.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=749190265]
@@ -304,9 +304,9 @@ vertical_alignment = 1
 
 [node name="Sound Button" type="Button" parent="Buttons" unique_id=721653677]
 layout_mode = 0
-offset_left = 794.0
+offset_left = 789.0
 offset_top = 41.0
-offset_right = 1143.0
+offset_right = 1138.0
 offset_bottom = 153.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Sound Button" unique_id=867893015]
@@ -343,7 +343,7 @@ offset_left = -36.0
 offset_top = 11.0
 offset_right = 291.0
 offset_bottom = 100.0
-text = "Control's"
+text = "Controls"
 label_settings = SubResource("LabelSettings_rar45")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -393,6 +393,7 @@ offset_top = 378.0
 offset_right = 921.0
 offset_bottom = 453.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+flat = true
 
 [node name="Fullcreen" type="Label" parent="gsettingsoptions/FullScreen button" unique_id=619887131]
 layout_mode = 0
