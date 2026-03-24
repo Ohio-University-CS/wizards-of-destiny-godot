@@ -1,3 +1,28 @@
 [gd_scene format=3 uid="uid://dyg4j7043g6ew"]
 
+[ext_resource type="Texture2D" uid="uid://c5n2tita5ha30" path="res://scenes/level2/level2background.png" id="1_i4egu"]
+[ext_resource type="Texture2D" uid="uid://dsnmtjw8s3t0t" path="res://scenes/level2/Necromancer.png" id="2_reuf7"]
+[ext_resource type="Texture2D" uid="uid://bw0exkb62j0ej" path="res://scenes/level1/wizard_transparent.png" id="3_s0xpa"]
+
 [node name="Level2" type="Node2D" unique_id=1179750380]
+
+[node name="Control" type="Control" parent="." unique_id=929061312]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=989084615]
+position = Vector2(954, 545)
+scale = Vector2(1.8710938, 1.0644531)
+texture = ExtResource("1_i4egu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=965410234]
+position = Vector2(1361, 532)
+scale = Vector2(0.7753906, 0.77734375)
+texture = ExtResource("2_reuf7")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1359562252]
+position = Vector2(484, 572)
+scale = Vector2(0.90625, 0.8828125)
+texture = ExtResource("3_s0xpa")
