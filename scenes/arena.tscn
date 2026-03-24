@@ -1,17 +1,18 @@
-[gd_scene format=3 uid="uid://6ociot6d2wny"]
+[gd_scene format=3 uid="uid://dfr2rm3dgpwst"]
 
 [ext_resource type="Script" uid="uid://cxl105kpeugnu" path="res://scripts/temp_combat.gd" id="1_4ag8t"]
 [ext_resource type="PackedScene" uid="uid://640ggccrwmqi" path="res://scenes/ui/Card.tscn" id="2_dpxgc"]
 [ext_resource type="Resource" uid="uid://cqdccfd21ux3v" path="res://cards/data/magician_deck/magician.tres" id="3_oexds"]
 [ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn" id="4_naajo"]
 [ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
+[ext_resource type="PackedScene" uid="uid://cge02g6n6iduc" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tscn" id="5_dpxgc"]
 [ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
 
 [node name="Arena" type="Node2D" unique_id=1267453808]
 script = ExtResource("1_4ag8t")
 card_scene = ExtResource("2_dpxgc")
 class_data = ExtResource("3_oexds")
-enemy_pool = Array[PackedScene]([ExtResource("4_naajo")])
+enemy_pool = Array[PackedScene]([ExtResource("4_naajo"), ExtResource("5_dpxgc")])
 enemy_spawn_position = Vector2(1555, 584)
 hand_origin = Vector2(500, 750)
 
