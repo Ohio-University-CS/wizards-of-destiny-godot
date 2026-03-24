@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b0xadb0uwdvpc" path="res://scenes/Level Select/level_1.gd" id="1_uhst3"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_11vx2"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_byjjh"]
+[ext_resource type="Texture2D" uid="uid://cda05dl1uqh5x" path="res://scenes/Level Select/plainlevel1.png" id="4_11vx2"]
 [ext_resource type="Texture2D" uid="uid://cdi6q61yf2u8r" path="res://scenes/Level Select/New Piskel-1.png (1).png" id="4_su8kc"]
 
 [node name="Level 1" type="Control" unique_id=1065600331]
@@ -41,6 +42,11 @@ offset_bottom = -328.84045
 scale = Vector2(5, 8)
 icon = ExtResource("3_byjjh")
 flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level 1" unique_id=188781177]
+position = Vector2(122.15, 59.609375)
+scale = Vector2(0.17470703, 0.057647713)
+texture = ExtResource("4_11vx2")
 
 [node name="Forward Arrow" type="Button" parent="Buttons" unique_id=1721505946]
 layout_mode = 1
