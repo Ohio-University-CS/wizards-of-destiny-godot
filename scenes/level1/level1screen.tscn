@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b56t8mujyte6f"]
+
+[ext_resource type="Texture2D" uid="uid://p3xvkh7wkowc" path="res://scenes/level1/plainlevel1.png" id="1_5kq54"]
+[ext_resource type="Texture2D" uid="uid://dvqv3ibbe0ox2" path="res://scenes/level1/betterwizard.png" id="2_rmysr"]
+
+[node name="Control" type="Control" unique_id=1329772604]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1905591842]
+position = Vector2(0, 2)
+scale = Vector2(1.8710938, 1.0585938)
+texture = ExtResource("1_5kq54")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=834143621]
+position = Vector2(418, 680)
+texture = ExtResource("2_rmysr")
