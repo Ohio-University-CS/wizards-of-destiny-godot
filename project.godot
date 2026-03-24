@@ -27,6 +27,10 @@ window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
