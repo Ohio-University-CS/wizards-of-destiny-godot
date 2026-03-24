@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rswhiwfdb5bb"]
 
-[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scripts/ui_controller.gd" id="1_7vp6q"]
+[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scenes/ui/ui_controller.gd" id="1_7vp6q"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]

@@ -54,14 +54,10 @@ func _bind_player_ui(temp_combat):
 	if player_node == null:
 		player_node = RunManager.player
 
-	print("Binding UI to player:", player_node)
-
 	var health = find_child("PlayerHealthBar", true, false)
-	print("Found health:", health)
-
+	
 	var mana = find_child("PlayerManaBar", true, false)
-	print("Found mana:", mana)
-
+	
 	if health and health.has_method("set_target") and player_node:
 		health.set_target(player_node)
 

@@ -9,7 +9,11 @@
 [ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
 [ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/rare_cards/shield.tres" id="7_nj4jc"]
 [ext_resource type="Resource" uid="uid://bdjv3n01gigwa" path="res://cards/data/magician_deck/common_cards/magic_missle.tres" id="8_nj4jc"]
+[ext_resource type="Resource" uid="uid://djo7ivi54ieol" path="res://cards/data/magician_deck/common_cards/stoneskin.tres" id="9_jpxio"]
 [ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="10_nj4jc"]
+[ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
+[ext_resource type="Resource" uid="uid://c4fm0old2um78" path="res://cards/data/magician_deck/common_cards/arcane_insight.tres" id="11_j512n"]
+[ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -24,7 +28,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("11_j512n"), ExtResource("12_5difm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)

@@ -138,7 +138,7 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 		"DRAW":
 			stat_name = "draw"
 		"STRIKE_DAMAGE":
-			add_strike_damage(amount)
+			add_strike_damage(amount, false)
 			return
 		_:
 			stat_name = str(stat_type).to_lower()
@@ -171,13 +171,17 @@ func reset_strike():
 		strike_elemental_damage[element] = 0
 
 #add normal damage to strike
-func add_strike_damage(amount: int):
+func add_strike_damage(amount: int, _include_base_dmg : bool):
 	strike_bonus_damage += amount
+	if _include_base_dmg:
+		strike_bonus_damage += get_damage()
 
 #add elemental damage to strike
-func add_strike_element(element: String, amount: int):
+func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 	if strike_elemental_damage.has(element):
 		strike_elemental_damage[element] += amount
+		if _include_base_dmg:
+			strike_elemental_damage[element] += get_damage()
 
 #add status effect to strike
 func add_strike_status(status: String, stacks: int):
@@ -198,7 +202,6 @@ func perform_strike(target):
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
-	print("Strike deals ", dmg, " damage")
 	
 	#elemental damage
 	for element in strike_elemental_damage.keys():
@@ -407,8 +410,12 @@ func _apply_shock():
 
 
 func set_energy(new_value: int) -> void:
-	energy = clamp(new_value, 0, max_energy)
+	energy = max(0, new_value) # Only clamp to zero, not max_energy
 	emit_signal("energy_changed", energy, max_energy)
+
+
+func add_energy(amount : int) -> void:
+	set_energy(energy + amount)
 
 
 func spend_energy(amount: int) -> bool:

@@ -15,7 +15,8 @@ metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [sub_resource type="Resource" id="Resource_x7i66"]
 script = ExtResource("3_seyby")
-amount = 2
+element = 1
+include_base_dmg = true
 target_type = 0
 metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
 
