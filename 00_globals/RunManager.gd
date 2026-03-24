@@ -17,6 +17,10 @@ enum StageType {
 	BOSS
 }
 
+enum LevelType {
+	FOREST
+}
+
 var last_combat_result : Dictionary = {}
 
 # ----------------
