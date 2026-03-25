@@ -361,7 +361,7 @@ func _set_burn_vfx(stacks: int) -> void:
 func _create_burn_particles() -> GPUParticles2D:
 	var particles := GPUParticles2D.new()
 	particles.name = "BurnParticles"
-	particles.position = Vector2(0, -20)
+	particles.position = Vector2(25, 100)
 	particles.amount = 20
 	particles.lifetime = 0.8
 	particles.preprocess = 0.6
@@ -377,11 +377,6 @@ func _create_burn_particles() -> GPUParticles2D:
 	material.gravity = Vector3(0.0, -10.0, 0.0)
 	material.scale_min = 1
 	material.scale_max = 5
-	
-	# Load custom burn texture if available
-	var burn_texture = _load_status_texture("burn")
-	if burn_texture:
-		material.texture = burn_texture
 
 	var gradient := Gradient.new()
 	gradient.add_point(0.0, Color(1.0, 0.95, 0.35, 0.95))
@@ -393,6 +388,12 @@ func _create_burn_particles() -> GPUParticles2D:
 	material.color_ramp = ramp
 
 	particles.process_material = material
+	
+	# Load custom burn texture if available and set it on the particle node
+	var burn_texture = _load_status_texture("burn")
+	if burn_texture:
+		particles.texture = burn_texture
+	
 	return particles
 
 func _set_regeneration_vfx(stacks: int) -> void:
@@ -531,11 +532,6 @@ func _create_status_particles(
 	material.gravity = Vector3(0.0, -12.0, 0.0)
 	material.scale_min = 0.2
 	material.scale_max = 0.65
-	
-	# Load custom texture if it exists for this status
-	var texture = _load_status_texture(status_name)
-	if texture:
-		material.texture = texture
 
 	var gradient := Gradient.new()
 	gradient.add_point(0.0, base_color)
@@ -546,12 +542,25 @@ func _create_status_particles(
 	material.color_ramp = ramp
 
 	particles.process_material = material
+	
+	# Load custom texture if it exists for this status and set it on the particle node
+	var texture = _load_status_texture(status_name)
+	if texture:
+		particles.texture = texture
+	
 	return particles
 
 
 func _load_status_texture(status_name: String) -> Texture2D:
-	# For example: res://art_drop/status_effects/burn.png for "burn" status
-	var texture_path = "res://art_drop/status_effects/%s.png" % status_name
+	# For example: res://art_drop/status effects/burn.png for "burn" status
+	var texture_path = "res://art_drop/status effects/%s.png" % status_name
 	if ResourceLoader.exists(texture_path):
-		return load(texture_path) as Texture2D
+		var texture = load(texture_path) as Texture2D
+		if texture:
+			print("[StatusVFX] Loaded texture for %s from %s" % [status_name, texture_path])
+			return texture
+		else:
+			print("[StatusVFX] Failed to load texture at %s" % texture_path)
+	else:
+		print("[StatusVFX] Texture path does not exist: %s" % texture_path)
 	return null # No custom texture found, use default coloring
