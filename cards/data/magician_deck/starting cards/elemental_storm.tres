@@ -22,8 +22,8 @@ metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 [resource]
 script = ExtResource("2_lnjx4")
 card_name = "Elemental Storm"
-description = "Add 3 Damage to Strike. Apply one of: Burn, Freeze, or Shock"
-energy_cost = 3
+description = "Add 5 Damage to Strike. Choose to Add 2 Burn or 2 Shock to Strike"
+energy_cost = 2
 artwork = ExtResource("1_lnjx4")
 frame_art = ExtResource("5_lnlap")
 effects = Array[ExtResource("2_b5tvs")]([SubResource("Resource_lueaj"), SubResource("Resource_wpaim")])

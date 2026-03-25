@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_18rt4"]
 [ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="2_yhhq6"]
 [ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="3_iwjyr"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="4_l5huo"]
 
 [sub_resource type="Resource" id="Resource_l5huo"]
 script = ExtResource("2_yhhq6")
@@ -13,13 +14,19 @@ times = 2
 target_type = 0
 metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
 
+[sub_resource type="Resource" id="Resource_lyxfo"]
+script = ExtResource("4_l5huo")
+amount = 4
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
 [resource]
 script = ExtResource("2_18rt4")
 card_name = "Stoneskin"
-description = "Gain 7 Block 2 Times"
+description = "Gain 7 Block 2 Times. Add 4 Damage to Strike"
 energy_cost = 2
 card_type = 1
 artwork = ExtResource("1_iwjyr")
 frame_art = ExtResource("3_iwjyr")
-effects = Array[ExtResource("1_pauty")]([SubResource("Resource_l5huo")])
+effects = Array[ExtResource("1_pauty")]([SubResource("Resource_l5huo"), SubResource("Resource_lyxfo")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"
