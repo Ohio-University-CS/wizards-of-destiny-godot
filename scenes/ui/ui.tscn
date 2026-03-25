@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
-[ext_resource type="Script" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
+[ext_resource type="Script" uid="uid://dgssro5ui3kge" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
 
 [node name="UI" type="Control" unique_id=1263839368]
 layout_mode = 3
@@ -149,3 +149,14 @@ offset_right = 1912.0
 offset_bottom = 66.0
 theme_override_constants/separation = 8
 script = ExtResource("6_h7bar")
+
+[node name="INV" type="Label" parent="InventoryHotbar" unique_id=1537458866]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "inventory exists"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
