@@ -25,7 +25,7 @@ func _on_back_pressed():
 # Go forward to the next deck select screen
 func _on_forward_pressed():
 	print(\"Forward pressed\")
-	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect_next.tscn\")
+	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect_emperor.tscn\")
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
@@ -146,21 +146,6 @@ offset_bottom = 20.5
 text = "Exit"
 label_settings = SubResource("LabelSettings_0qkqs")
 
-[node name="Forward" type="Button" parent="Buttons" unique_id=485008250]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 17.598001
-anchor_top = 0.5
-anchor_right = 17.598001
-anchor_bottom = 0.5
-offset_left = -79.920044
-offset_top = -76.999985
-offset_right = -54.920044
-offset_bottom = -52.999985
-scale = Vector2(7, 7)
-icon = ExtResource("4_ogfrv")
-flat = true
-
 [node name="Back" type="Button" parent="Buttons" unique_id=1412095940]
 layout_mode = 0
 offset_left = -752.0
@@ -171,6 +156,16 @@ scale = Vector2(7, 7)
 icon = ExtResource("5_imyfv")
 flat = true
 
+[node name="Forward" type="Button" parent="Buttons" unique_id=1427195039]
+layout_mode = 0
+offset_left = 634.99994
+offset_top = -67.99999
+offset_right = 659.99994
+offset_bottom = -43.999992
+scale = Vector2(7, 7)
+icon = ExtResource("4_ogfrv")
+flat = true
+
 [node name="Label" type="Label" parent="." unique_id=2076492899]
 layout_mode = 0
 offset_left = 724.0
@@ -179,3 +174,5 @@ offset_right = 1364.0
 offset_bottom = 97.0
 text = "Deck Select -Temp"
 label_settings = SubResource("LabelSettings_6ufdq")
+
+[connection signal="pressed" from="Buttons/Forward" to="." method="_on_forward_pressed"]
