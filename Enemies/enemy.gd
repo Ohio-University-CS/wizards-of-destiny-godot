@@ -361,22 +361,26 @@ func _set_burn_vfx(stacks: int) -> void:
 func _create_burn_particles() -> GPUParticles2D:
 	var particles := GPUParticles2D.new()
 	particles.name = "BurnParticles"
-	particles.position = Vector2(25, 100)
-	particles.amount = 20
+	particles.position = Vector2(25, 90)
+	particles.amount = 5
 	particles.lifetime = 0.8
 	particles.preprocess = 0.6
 	particles.explosiveness = 0.0
-	particles.randomness = 0.75
+	particles.randomness = 1
 	particles.emitting = true
 
 	var material := ParticleProcessMaterial.new()
 	material.direction = Vector3(0.0, -1.0, 0.0)
-	material.spread = 28.0
-	material.initial_velocity_min = 26.0
-	material.initial_velocity_max = 44.0
+	material.spread = 100.0
+	material.initial_velocity_min = 10
+	material.initial_velocity_max = 20
 	material.gravity = Vector3(0.0, -10.0, 0.0)
 	material.scale_min = 1
 	material.scale_max = 5
+	
+	# Emit from a horizontal line along x-axis for wider fire spread
+	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	material.emission_box_extents = Vector3(40.0, 1.0, 0.1) # Wide on x-axis for random horizontal emission
 
 	var gradient := Gradient.new()
 	gradient.add_point(0.0, Color(1.0, 0.95, 0.35, 0.95))
