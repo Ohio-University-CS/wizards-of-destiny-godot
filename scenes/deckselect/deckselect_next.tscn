@@ -1,32 +1,9 @@
-[gd_scene format=3 uid="uid://dh80c15he03y6"]
+[gd_scene format=3 uid="uid://pw8esywcfsr2"]
 
-[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_oukx7"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_e23ap"]
-[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/New Piskel-1.png (1).png" id="4_ogfrv"]
-[ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png.png" id="5_imyfv"]
-
-[sub_resource type="GDScript" id="GDScript_rcvug"]
-script/source = "extends Control
-
-# Button nodes
-@onready var back_button : Button = $Buttons/Back
-@onready var forward_button : Button = $Buttons/Forward
-
-func _ready():
-	# Connect button presses
-	back_button.pressed.connect(_on_back_pressed)
-	forward_button.pressed.connect(_on_forward_pressed)
-
-# Go back to the first deck select screen
-func _on_back_pressed():
-	print(\"Back pressed\")
-	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect.tscn\")
-
-# Go forward to the next deck select screen
-func _on_forward_pressed():
-	print(\"Forward pressed\")
-	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect_next.tscn\")
-"
+[ext_resource type="Script" uid="uid://bp6tp7higtw6j" path="res://scenes/deckselect/deckselect.gd" id="1_8vo4q"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_2jecw"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_pedml"]
+[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/New Piskel-1.png (1).png" id="5_j1ang"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -42,10 +19,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_rcvug")
+script = ExtResource("1_8vo4q")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
-texture = ExtResource("1_oukx7")
+texture = ExtResource("2_2jecw")
 centered = false
 
 [node name="Buttons" type="Control" parent="." unique_id=255705122]
@@ -75,7 +52,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
 position = Vector2(32.5, 16.5)
-texture = ExtResource("2_e23ap")
+texture = ExtResource("3_pedml")
 
 [node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
 layout_mode = 0
@@ -83,9 +60,13 @@ offset_left = -48.0
 offset_top = -6.5
 offset_right = 121.0
 offset_bottom = 35.5
-text = "Judgement"
+text = "hold"
 label_settings = SubResource("LabelSettings_0qkqs")
 horizontal_alignment = 1
+
+[node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
+position = Vector2(35.5, -215)
+scale = Vector2(0.665625, 0.671875)
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false
@@ -98,7 +79,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Upgrades" unique_id=1541017295]
 visible = false
-texture = ExtResource("2_e23ap")
+texture = ExtResource("3_pedml")
 
 [node name="Settings" type="Button" parent="Buttons" unique_id=1614388412]
 visible = false
@@ -111,7 +92,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=1777698657]
 visible = false
-texture = ExtResource("2_e23ap")
+texture = ExtResource("3_pedml")
 
 [node name="Label" type="Label" parent="Buttons/Settings" unique_id=917045816]
 visible = false
@@ -134,7 +115,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=51757949]
 visible = false
-texture = ExtResource("2_e23ap")
+texture = ExtResource("3_pedml")
 
 [node name="Label" type="Label" parent="Buttons/Exit" unique_id=999302246]
 visible = false
@@ -146,29 +127,17 @@ offset_bottom = 20.5
 text = "Exit"
 label_settings = SubResource("LabelSettings_0qkqs")
 
-[node name="Forward" type="Button" parent="Buttons" unique_id=485008250]
+[node name="Judgement" type="Button" parent="Buttons" unique_id=1329746898]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 17.598001
-anchor_top = 0.5
-anchor_right = 17.598001
-anchor_bottom = 0.5
-offset_left = -79.920044
-offset_top = -76.999985
-offset_right = -54.920044
-offset_bottom = -52.999985
+anchor_left = 18.205
+anchor_right = 18.205
+offset_left = -95.20001
+offset_top = -103.99999
+offset_right = -70.20001
+offset_bottom = -73.99999
 scale = Vector2(7, 7)
-icon = ExtResource("4_ogfrv")
-flat = true
-
-[node name="Back" type="Button" parent="Buttons" unique_id=1412095940]
-layout_mode = 0
-offset_left = -752.0
-offset_top = -74.0
-offset_right = -727.0
-offset_bottom = -50.0
-scale = Vector2(7, 7)
-icon = ExtResource("5_imyfv")
+icon = ExtResource("5_j1ang")
 flat = true
 
 [node name="Label" type="Label" parent="." unique_id=2076492899]
