@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://dqisx8e0rbe2i"]
+[gd_scene format=3 uid="uid://dh80c15he03y6"]
 
-[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_gaypc"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_6xl06"]
-[ext_resource type="Texture2D" uid="uid://c8i7sbqvtt28r" path="res://scenes/deckselect/Magician_Card.png" id="3_okpc4"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_jd182"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_ku3me"]
+[ext_resource type="Texture2D" uid="uid://c8i7sbqvtt28r" path="res://scenes/deckselect/Magician_Card.png" id="3_kmm7f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
-texture = ExtResource("1_gaypc")
+texture = ExtResource("1_jd182")
 centered = false
 
 [node name="Buttons" type="Control" parent="." unique_id=255705122]
@@ -50,7 +50,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
 position = Vector2(32.5, 16.5)
-texture = ExtResource("2_6xl06")
+texture = ExtResource("2_ku3me")
 
 [node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
 layout_mode = 0
@@ -65,7 +65,7 @@ horizontal_alignment = 1
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
 position = Vector2(35.5, -215)
 scale = Vector2(0.665625, 0.671875)
-texture = ExtResource("3_okpc4")
+texture = ExtResource("3_kmm7f")
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false
@@ -78,7 +78,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Upgrades" unique_id=1541017295]
 visible = false
-texture = ExtResource("2_6xl06")
+texture = ExtResource("2_ku3me")
 
 [node name="Settings" type="Button" parent="Buttons" unique_id=1614388412]
 visible = false
@@ -91,7 +91,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=1777698657]
 visible = false
-texture = ExtResource("2_6xl06")
+texture = ExtResource("2_ku3me")
 
 [node name="Label" type="Label" parent="Buttons/Settings" unique_id=917045816]
 visible = false
@@ -114,7 +114,7 @@ scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=51757949]
 visible = false
-texture = ExtResource("2_6xl06")
+texture = ExtResource("2_ku3me")
 
 [node name="Label" type="Label" parent="Buttons/Exit" unique_id=999302246]
 visible = false
