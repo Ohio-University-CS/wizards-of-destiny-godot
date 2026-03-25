@@ -1,0 +1,20 @@
+extends Control
+
+# Button nodes
+@onready var back_button : Button = $Buttons/Back
+@onready var forward_button : Button = $Buttons/Forward
+
+func _ready():
+	# Connect button presses
+	back_button.pressed.connect(_on_back_pressed)
+	forward_button.pressed.connect(_on_forward_pressed)
+
+# Go back to the first deck select screen
+func _on_back_pressed():
+	print("Back pressed")
+	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_judgement.tscn")
+
+# Go forward to the next deck select screen
+func _on_forward_pressed():
+	print("Forward pressed")
+	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect.tscn")
