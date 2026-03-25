@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dqisx8e0rbe2i"]
 
+[ext_resource type="Script" uid="uid://bp6tp7higtw6j" path="res://scenes/deckselect/deckselect.gd" id="1_bsler"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_gaypc"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_6xl06"]
 [ext_resource type="Texture2D" uid="uid://c8i7sbqvtt28r" path="res://scenes/deckselect/Magician_Card.png" id="3_okpc4"]
+[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/New Piskel-1.png (1).png" id="5_nx1vj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -18,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bsler")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
 texture = ExtResource("1_gaypc")
@@ -125,6 +128,19 @@ offset_right = 26.5
 offset_bottom = 20.5
 text = "Exit"
 label_settings = SubResource("LabelSettings_0qkqs")
+
+[node name="Judgement" type="Button" parent="Buttons" unique_id=1329746898]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.205
+anchor_right = 18.205
+offset_left = -95.20001
+offset_top = -103.99999
+offset_right = -70.20001
+offset_bottom = -73.99999
+scale = Vector2(7, 7)
+icon = ExtResource("5_nx1vj")
+flat = true
 
 [node name="Label" type="Label" parent="." unique_id=2076492899]
 layout_mode = 0
