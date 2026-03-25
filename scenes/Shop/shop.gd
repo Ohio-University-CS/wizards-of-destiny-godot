@@ -48,11 +48,11 @@ func _generate_shop():
 func _get_price(card : CardData) -> int:
 	match card.rarity:
 		card.CardRarity.COMMON:
-			return 5
+			return 12
 		card.CardRarity.UNCOMMON:
-			return 10
+			return 25
 		card.CardRarity.RARE:
-			return 20
+			return 50
 		_:
 			return 8
 

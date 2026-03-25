@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c4w1vwldssmmg"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_435xh"]
+[ext_resource type="Texture2D" uid="uid://c1bryajqbjptf" path="res://cards/sprites/mana_weave.png" id="1_mwe7w"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="2_igen2"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_m7wjv"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="3_mwe7w"]
+[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="4_x5o68"]
+
+[sub_resource type="Resource" id="Resource_m4eks"]
+script = ExtResource("2_igen2")
+amount = 3
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_5qf6n"]
+script = ExtResource("3_mwe7w")
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[resource]
+script = ExtResource("2_m7wjv")
+card_name = "Mana Weave"
+description = "Gain 3 Block. Draw 1 Card"
+card_type = 1
+artwork = ExtResource("1_mwe7w")
+frame_art = ExtResource("4_x5o68")
+effects = Array[ExtResource("1_435xh")]([SubResource("Resource_m4eks"), SubResource("Resource_5qf6n")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

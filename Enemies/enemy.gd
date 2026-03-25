@@ -195,7 +195,6 @@ func take_damage(amount: int, _element: String = ""):
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
 	
-	print("Player deals ", dmg, " to Enemy")
 	# Emit damaged for UI indicators
 	emit_signal("damaged", dmg)
 
