@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjsunko60cxnt"
-path="res://.godot/imported/Regeneration_Status.png-22c89dee75e815f6fd66bceffa8fc040.ctex"
+uid="uid://ycijsulkvm1c"
+path="res://.godot/imported/evasive.png-1e7af9f4e715f9fa8656f178eb1d9ada.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Regeneration_Status.png"
-dest_files=["res://.godot/imported/Regeneration_Status.png-22c89dee75e815f6fd66bceffa8fc040.ctex"]
+source_file="res://art_drop/status effects/evasive.png"
+dest_files=["res://.godot/imported/evasive.png-1e7af9f4e715f9fa8656f178eb1d9ada.ctex"]
 
 [params]
 

@@ -63,6 +63,10 @@ var deck_list : Array[CardData] = []
 
 
 func setup_from_class(data):
+	if data == null:
+		push_error("Player.setup_from_class called with null class data")
+		return
+
 	class_data = data
 	
 	deck_list = data.starting_deck.duplicate()
@@ -82,6 +86,8 @@ func setup_from_class(data):
 	max_energy = data.max_energy
 	energy = max_energy
 	current_health = get_max_health()
+	initialized = true
+	emit_signal("health_changed", current_health)
 	emit_signal("energy_changed", energy, max_energy)
 
 

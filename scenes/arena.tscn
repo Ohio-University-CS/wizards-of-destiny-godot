@@ -19,6 +19,7 @@ hand_origin = Vector2(500, 750)
 [node name="Enemy" parent="." unique_id=1886209078 instance=ExtResource("4_naajo")]
 position = Vector2(1542, 584)
 scale = Vector2(1.75, 1.75)
+debug_status_vfx_test = true
 
 [node name="Player" parent="." unique_id=1096254011 instance=ExtResource("5_41jku")]
 position = Vector2(387.99997, 584)

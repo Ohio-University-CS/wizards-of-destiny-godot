@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwmrmtrnwlhoa"
-path="res://.godot/imported/Sealed_Status.png-746acf3da3f743945cf9a0b7f60a0e3c.ctex"
+uid="uid://dsptqa1wloejp"
+path="res://.godot/imported/shock.png-a9cf4cba1b553d1e5b41928375eb113a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Sealed_Status.png"
-dest_files=["res://.godot/imported/Sealed_Status.png-746acf3da3f743945cf9a0b7f60a0e3c.ctex"]
+source_file="res://art_drop/status effects/shock.png"
+dest_files=["res://.godot/imported/shock.png-a9cf4cba1b553d1e5b41928375eb113a.ctex"]
 
 [params]
 

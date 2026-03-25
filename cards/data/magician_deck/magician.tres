@@ -12,5 +12,5 @@
 [resource]
 script = ExtResource("1_d3ap0")
 deck_name = "Magician"
-starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_nudi4"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj")])
+starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_nudi4"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj"), null])
 metadata/_custom_type_script = "uid://cniggcjjpnmqi"

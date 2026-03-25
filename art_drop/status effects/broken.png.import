@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c05iq7ncy4kku"
-path="res://.godot/imported/Freeze_Status.png-e380b4109b8390dd30d51bc9022e7e7a.ctex"
+uid="uid://dh76t6tghipy6"
+path="res://.godot/imported/broken.png-6b770b4fd518dbce78205f858ae7ed4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Freeze_Status.png"
-dest_files=["res://.godot/imported/Freeze_Status.png-e380b4109b8390dd30d51bc9022e7e7a.ctex"]
+source_file="res://art_drop/status effects/broken.png"
+dest_files=["res://.godot/imported/broken.png-6b770b4fd518dbce78205f858ae7ed4f.ctex"]
 
 [params]
 

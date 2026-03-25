@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cokvy5nk7twdf"
-path="res://.godot/imported/Stun_Status.png-873afcb4dcd0e9af0f01069299a1028a.ctex"
+uid="uid://dwmrmtrnwlhoa"
+path="res://.godot/imported/sealed.png-a74e3a0a69912afaeba2128825af8281.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Stun_Status.png"
-dest_files=["res://.godot/imported/Stun_Status.png-873afcb4dcd0e9af0f01069299a1028a.ctex"]
+source_file="res://art_drop/status effects/sealed.png"
+dest_files=["res://.godot/imported/sealed.png-a74e3a0a69912afaeba2128825af8281.ctex"]
 
 [params]
 
