@@ -1,0 +1,16 @@
+{
+    "graphics" : 
+    {
+        "fullscreen" : "False",
+    }
+    "audio" : 
+    {
+        "main volume" : 100,
+        "music volume" : 100,
+        "sfx volume" : 100
+    }
+    "controls" : 
+    {
+        "settings" = "True"
+    }
+}
