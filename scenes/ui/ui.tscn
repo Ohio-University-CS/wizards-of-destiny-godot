@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://rswhiwfdb5bb"]
 
-[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scripts/ui_controller.gd" id="1_7vp6q"]
+[ext_resource type="Script" path="res://scripts/ui_controller.gd" id="1_7vp6q"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
-[ext_resource type="Script" uid="uid://dgssro5ui3kge" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
+[ext_resource type="Script" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
+[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scenes/ui/end_turn_button.gd" id="7_jcn1r"]
 
 [node name="UI" type="Control" unique_id=1263839368]
 layout_mode = 3
@@ -112,6 +113,7 @@ offset_top = 945.0
 offset_right = 1921.0
 offset_bottom = 1095.0
 text = "End Turn"
+script = ExtResource("7_jcn1r")
 
 [node name="MoveText" type="Label" parent="." unique_id=125204521]
 layout_mode = 0
