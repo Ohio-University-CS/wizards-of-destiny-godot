@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_1y8me"]
 [ext_resource type="Texture2D" uid="uid://clx1uog4bsd0u" path="res://scenes/Level Select/BackButton.png.png" id="3_n7ypv"]
 [ext_resource type="Texture2D" uid="uid://cdi6q61yf2u8r" path="res://scenes/Level Select/New Piskel-1.png (1).png" id="4_2indx"]
+[ext_resource type="Texture2D" uid="uid://pmuyd4ndos1i" path="res://scenes/Level Select/level2background.png" id="4_ly812"]
 
 [node name="Level 2" type="Control" unique_id=1065600331]
 layout_mode = 3
@@ -42,6 +43,11 @@ offset_bottom = -328.84
 scale = Vector2(5, 8)
 icon = ExtResource("2_1y8me")
 flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level 1" unique_id=581847482]
+position = Vector2(122.15, 59.609)
+scale = Vector2(0.175, 0.058)
+texture = ExtResource("4_ly812")
 
 [node name="Forward Arrow" type="Button" parent="Buttons" unique_id=210604529]
 layout_mode = 1
