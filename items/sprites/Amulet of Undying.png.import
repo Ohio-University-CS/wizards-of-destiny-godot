@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbwt1vwcuad3s"
-path="res://.godot/imported/Holy Goblet.png-74f6121ee1a339f7217f39b77039adfd.ctex"
+uid="uid://clwg8pkjep2fc"
+path="res://.godot/imported/Amulet of Undying.png-b1d99445e42f4a4130e34523a8101418.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Holy Goblet.png"
-dest_files=["res://.godot/imported/Holy Goblet.png-74f6121ee1a339f7217f39b77039adfd.ctex"]
+source_file="res://items/sprites/Amulet of Undying.png"
+dest_files=["res://.godot/imported/Amulet of Undying.png-b1d99445e42f4a4130e34523a8101418.ctex"]
 
 [params]
 

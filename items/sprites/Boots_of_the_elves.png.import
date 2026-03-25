@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diwl8r1yieuji"
-path="res://.godot/imported/Silver Heart.png-3a6cb2dbe2a3baeb2315f898ff9b572a.ctex"
+uid="uid://b6kujp2dacs0x"
+path="res://.godot/imported/Boots_of_the_elves.png-b0a7b88b51530974cf3ba76bd395da9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Silver Heart.png"
-dest_files=["res://.godot/imported/Silver Heart.png-3a6cb2dbe2a3baeb2315f898ff9b572a.ctex"]
+source_file="res://items/sprites/Boots_of_the_elves.png"
+dest_files=["res://.godot/imported/Boots_of_the_elves.png-b0a7b88b51530974cf3ba76bd395da9b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqt6k4q576bbj"
-path="res://.godot/imported/Comedy Mask.png-70ddf2b4b18488e8dca9f03035ece0c2.ctex"
+uid="uid://djhxk17k8a2bd"
+path="res://.godot/imported/ruby_hilted_dagger.png-bc1002ebdc41c9ecf286bb004160015c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Comedy Mask.png"
-dest_files=["res://.godot/imported/Comedy Mask.png-70ddf2b4b18488e8dca9f03035ece0c2.ctex"]
+source_file="res://items/sprites/ruby_hilted_dagger.png"
+dest_files=["res://.godot/imported/ruby_hilted_dagger.png-bc1002ebdc41c9ecf286bb004160015c.ctex"]
 
 [params]
 

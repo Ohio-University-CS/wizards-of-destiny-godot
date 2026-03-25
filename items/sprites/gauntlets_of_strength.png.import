@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pndjhuj1er4r"
-path="res://.godot/imported/Rune of Death.png-64fabe9b89e1331851b1a1e8fc82e925.ctex"
+uid="uid://858fmkgsnuce"
+path="res://.godot/imported/gauntlets_of_strength.png-272ad1e0363043f4e2e9b263c7bf0f9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Rune of Death.png"
-dest_files=["res://.godot/imported/Rune of Death.png-64fabe9b89e1331851b1a1e8fc82e925.ctex"]
+source_file="res://items/sprites/gauntlets_of_strength.png"
+dest_files=["res://.godot/imported/gauntlets_of_strength.png-272ad1e0363043f4e2e9b263c7bf0f9a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clwg8pkjep2fc"
-path="res://.godot/imported/Amulet of Undying.png-bdc1f73f1e344a2a03236eae0b25a2cc.ctex"
+uid="uid://bqt6k4q576bbj"
+path="res://.godot/imported/Comedy Mask.png-5aaed0ff1f4b0828cf13d1546bbfd4d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Amulet of Undying.png"
-dest_files=["res://.godot/imported/Amulet of Undying.png-bdc1f73f1e344a2a03236eae0b25a2cc.ctex"]
+source_file="res://items/sprites/Comedy Mask.png"
+dest_files=["res://.godot/imported/Comedy Mask.png-5aaed0ff1f4b0828cf13d1546bbfd4d3.ctex"]
 
 [params]
 

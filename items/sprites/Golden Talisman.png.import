@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://do2tgostp1ovf"
-path="res://.godot/imported/Golden Talisman.png-af2e644b30e5450b33ca2ec591c23962.ctex"
+path="res://.godot/imported/Golden Talisman.png-19cc0ca184277dbbaea89c90a486e2d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/items/Golden Talisman.png"
-dest_files=["res://.godot/imported/Golden Talisman.png-af2e644b30e5450b33ca2ec591c23962.ctex"]
+source_file="res://items/sprites/Golden Talisman.png"
+dest_files=["res://.godot/imported/Golden Talisman.png-19cc0ca184277dbbaea89c90a486e2d0.ctex"]
 
 [params]
 
