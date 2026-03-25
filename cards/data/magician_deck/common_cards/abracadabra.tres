@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dvi2kjhfepq7w"]
+
+[ext_resource type="Texture2D" uid="uid://b72tcv472gl73" path="res://cards/sprites/abracadabra.png" id="1_0g30y"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_toq4w"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_omkr8"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_rglbv"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="3_0g30y"]
+[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="5_0g30y"]
+
+[sub_resource type="Resource" id="Resource_ccjgr"]
+script = ExtResource("2_omkr8")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_834un"]
+script = ExtResource("3_0g30y")
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[resource]
+script = ExtResource("2_rglbv")
+card_name = "Abracadabra"
+description = "Add 2 Damage to Strike. Draw 1 Card"
+card_type = 1
+artwork = ExtResource("1_0g30y")
+frame_art = ExtResource("5_0g30y")
+effects = Array[ExtResource("1_toq4w")]([SubResource("Resource_ccjgr"), SubResource("Resource_834un")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

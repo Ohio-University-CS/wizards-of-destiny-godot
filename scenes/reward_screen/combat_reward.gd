@@ -40,14 +40,14 @@ func _display_rewards():
 	
 	# Perfect
 	if result.get("perfect", false):
-		add_line("+5 Perfect Bonus")
+		add_line("+4 Perfect Bonus")
 	
 	# Speed
 	var turns = result.get("turns", 999)
 	if turns <= 3:
-		add_line("+5 Fast Clear")
+		add_line("+3 Fast Clear")
 	elif turns <= 6:
-		add_line("+2 Quick Clear")
+		add_line("+1 Quick Clear")
 	
 	var total : int = result.get("total_coins", base)
 	total_label.text = "Total: " + str(total)

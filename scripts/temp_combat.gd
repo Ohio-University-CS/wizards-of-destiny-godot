@@ -82,6 +82,10 @@ func _ready():
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
+		
+		var ui = find_child("UI", true, false)
+		if ui and ui.has_method("_bind_player_ui"):
+			ui._bind_player_ui(self)
 	
 	#-------------------
 	# fallback
@@ -426,7 +430,7 @@ func draw_hand():
 			spawn_card(existing_card)
 	
 	# Draw remaining cards
-	while hand_cards.size() < deck.max_hand_size:
+	while hand_cards.size() < deck.draw_hand_size:
 		var card_instance = deck.draw_card()
 		if card_instance == null:
 			break
@@ -829,7 +833,7 @@ func _connect_ui_signals() -> void:
 	if mana_bar and mana_bar.has_method("set_target") == false and mana_bar.has_variable("target_path"):
 		mana_bar.target_path = NodePath("../Player")
 	# Damage/Heal Indicator
-	var player_health_indicator = player.get_node_or_null("HealthIndicator")
+	var _player_health_indicator = player.get_node_or_null("HealthIndicator")
 		
 
 func _on_player_died() -> void:
@@ -848,7 +852,7 @@ func _on_opponent_died() -> void:
 	
 	# Build result data
 	var result = {
-		"coins": 20,
+		"coins": 12,
 		"turns": turn_count,
 		"perfect": player.current_health == player.get_max_health()
 	}

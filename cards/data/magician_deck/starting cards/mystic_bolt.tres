@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_x3rxm"]
 script = ExtResource("3_77n27")
-amount = 5
+amount = 6
 include_base_damage = true
 metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
@@ -22,8 +22,8 @@ metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 [resource]
 script = ExtResource("2_2gqhm")
 card_name = "Mystic Bolt"
-description = "Attack for DMG +5. Apply one of: Burn, Freeze, or Shock."
-energy_cost = 3
+description = "Attack for DMG +6. Choose to apply 2 Burn or 2 Shock"
+energy_cost = 2
 artwork = ExtResource("1_2gqhm")
 frame_art = ExtResource("5_y8u8c")
 effects = Array[ExtResource("2_1pjvk")]([SubResource("Resource_x3rxm"), SubResource("Resource_olwbx")])

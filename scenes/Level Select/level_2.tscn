@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b68rq2qodg5b3"]
+
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_xdadj"]
+[ext_resource type="Script" uid="uid://p82v34s6jxmd" path="res://scenes/Level Select/level_2.gd" id="1_xwgpu"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_1y8me"]
+[ext_resource type="Texture2D" uid="uid://clx1uog4bsd0u" path="res://scenes/Level Select/BackButton.png.png" id="3_n7ypv"]
+[ext_resource type="Texture2D" uid="uid://cdi6q61yf2u8r" path="res://scenes/Level Select/New Piskel-1.png (1).png" id="4_2indx"]
+[ext_resource type="Texture2D" uid="uid://pmuyd4ndos1i" path="res://scenes/Level Select/level2background.png" id="4_ly812"]
+
+[node name="Level 2" type="Control" unique_id=1065600331]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xwgpu")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=78211613]
+texture = ExtResource("1_xdadj")
+centered = false
+
+[node name="Buttons" type="Control" parent="." unique_id=255705122]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level 1" type="Button" parent="Buttons" unique_id=975534879]
+layout_mode = 0
+offset_left = -595.0
+offset_top = -448.0
+offset_right = -351.0
+offset_bottom = -328.84
+scale = Vector2(5, 8)
+icon = ExtResource("2_1y8me")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level 1" unique_id=581847482]
+position = Vector2(122.15, 59.609)
+scale = Vector2(0.175, 0.058)
+texture = ExtResource("4_ly812")
+
+[node name="Forward Arrow" type="Button" parent="Buttons" unique_id=210604529]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.2
+offset_left = 691.0
+offset_top = 7.0
+offset_right = 711.0
+offset_bottom = 38.0
+scale = Vector2(7.732, 7.732)
+pivot_offset = Vector2(11, 20)
+icon = ExtResource("4_2indx")
+flat = true
+
+[node name="Back Arrow" type="Button" parent="Buttons" unique_id=462923134]
+layout_mode = 0
+offset_left = -773.0
+offset_top = 7.0
+offset_right = -745.0
+offset_bottom = 46.0
+scale = Vector2(7.732, 7.732)
+pivot_offset = Vector2(0, 20)
+icon = ExtResource("3_n7ypv")
+flat = true
+
+[node name="Label" type="Label" parent="." unique_id=1734775747]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 165.0
+offset_right = 1104.0
+offset_bottom = 315.0
+text = "lllllllllabel 222222222"

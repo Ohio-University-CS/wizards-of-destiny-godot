@@ -6,7 +6,8 @@ var discard_pile: Array[CardInstance] = []
 var exhaust_pile: Array[CardInstance] = []
 var hand: Array[CardInstance] = []
 
-@export var max_hand_size := 5
+@export var max_hand_size := 10
+@export var draw_hand_size := 5
 
 @export var starting_deck: Array[CardData]
 

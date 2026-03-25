@@ -5,7 +5,11 @@ class_name Player
 # PLAYER STATS (Base + Modifiers)
 # ---------------------------------------------------------
 
+
 var class_data
+
+# List of active passive cards/effects
+var active_passives: Array = []
 
 @export var initialized : bool = false
 
@@ -138,7 +142,7 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 		"DRAW":
 			stat_name = "draw"
 		"STRIKE_DAMAGE":
-			add_strike_damage(amount)
+			add_strike_damage(amount, false)
 			return
 		_:
 			stat_name = str(stat_type).to_lower()
@@ -152,6 +156,8 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 # ---------------------------------------------------------
 # STRIKE SYSTEM
 # ---------------------------------------------------------
+
+signal strike_changed(total_damage)
 
 var strike_bonus_damage: int = 0
 var strike_elemental_damage := {
@@ -169,15 +175,36 @@ func reset_strike():
 	strike_statuses.clear()
 	for element in strike_elemental_damage.keys():
 		strike_elemental_damage[element] = 0
+	
+	_emit_strike_changed()
 
 #add normal damage to strike
-func add_strike_damage(amount: int):
+func add_strike_damage(amount: int, _include_base_dmg : bool):
 	strike_bonus_damage += amount
+	if _include_base_dmg:
+		strike_bonus_damage += get_damage()
+	_emit_strike_changed()
+
+func multiply_strike_damage(amount : float):
+	@warning_ignore("narrowing_conversion")
+	strike_bonus_damage *= amount
+	@warning_ignore("narrowing_conversion")
+	strike_bonus_damage += ((get_damage() * amount) - get_damage()) #adds multiplied base strike damage
+	for element in strike_elemental_damage:
+		if strike_elemental_damage[element] != 0:
+			strike_elemental_damage[element] *= amount
+	
+	_emit_strike_changed()
+
 
 #add elemental damage to strike
-func add_strike_element(element: String, amount: int):
+func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 	if strike_elemental_damage.has(element):
 		strike_elemental_damage[element] += amount
+		if _include_base_dmg:
+			strike_elemental_damage[element] += get_damage()
+	
+	_emit_strike_changed()
 
 #add status effect to strike
 func add_strike_status(status: String, stacks: int):
@@ -190,6 +217,12 @@ func add_strike_status(status: String, stacks: int):
 func apply_damage_multiplier(mult: float):
 	damage_multiplier *= mult
 
+
+func _emit_strike_changed():
+	var total = get_damage() + strike_bonus_damage
+	emit_signal("strike_changed", total)
+
+
 #perform the actual strike
 func perform_strike(target):
 	#normal damage
@@ -198,7 +231,6 @@ func perform_strike(target):
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
-	print("Strike deals ", dmg, " damage")
 	
 	#elemental damage
 	for element in strike_elemental_damage.keys():
@@ -407,8 +439,12 @@ func _apply_shock():
 
 
 func set_energy(new_value: int) -> void:
-	energy = clamp(new_value, 0, max_energy)
+	energy = max(0, new_value) # Only clamp to zero, not max_energy
 	emit_signal("energy_changed", energy, max_energy)
+
+
+func add_energy(amount : int) -> void:
+	set_energy(energy + amount)
 
 
 func spend_energy(amount: int) -> bool:
@@ -416,6 +452,15 @@ func spend_energy(amount: int) -> bool:
 		return false
 	set_energy(energy - amount)
 	return true
+
+
+# Registers a passive card/effect if not already present
+func register_passive(card: CardData) -> void:
+	# this is in case we don't want duplicates
+	#if card in active_passives:
+		#return # Prevent duplicates
+	active_passives.append(card)
+	# Optionally, trigger any setup logic for the passive here
 
 
 # ---------------------------------------------------------
