@@ -78,6 +78,10 @@ func _ready():
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
+		
+		var ui = find_child("UI", true, false)
+		if ui and ui.has_method("_bind_player_ui"):
+			ui._bind_player_ui(self)
 	
 	#-------------------
 	# fallback

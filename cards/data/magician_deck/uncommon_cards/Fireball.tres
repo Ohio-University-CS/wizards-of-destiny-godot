@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
 [resource]
 script = ExtResource("2_21dut")
 card_name = "Fireball"
-description = "Add DMG Fire Damage to Strike, Apply Burn x2"
+description = "Add DMG Fire Damage to Strike, Apply 2 Burn"
 energy_cost = 2
 rarity = 1
 artwork = ExtResource("1_seyby")
