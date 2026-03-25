@@ -17,6 +17,8 @@
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
 [ext_resource type="Resource" uid="uid://hykg0af24hdd" path="res://cards/data/magician_deck/common_cards/lightning_bolt.tres" id="15_5j3h6"]
+[ext_resource type="Resource" uid="uid://c4w1vwldssmmg" path="res://cards/data/magician_deck/common_cards/mana_weave.tres" id="16_ronn0"]
+[ext_resource type="Resource" uid="uid://b06moxsoigmtk" path="res://cards/data/magician_deck/rare_cards/smite.tres" id="17_cbkss"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -31,7 +33,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("11_j512n"), ExtResource("12_5difm"), ExtResource("13_xaxl1"), ExtResource("14_16jyn"), ExtResource("15_5j3h6")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("11_j512n"), ExtResource("12_5difm"), ExtResource("13_xaxl1"), ExtResource("14_16jyn"), ExtResource("15_5j3h6"), ExtResource("16_ronn0"), ExtResource("17_cbkss")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
