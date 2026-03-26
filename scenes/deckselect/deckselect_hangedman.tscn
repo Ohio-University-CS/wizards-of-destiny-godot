@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://cbg21604xxgeg"]
 
-[ext_resource type="Script" uid="uid://c76722jy00seb" path="res://scenes/deckselect/deckselect_sun.gd" id="1_qkjbj"]
+[ext_resource type="Script" uid="uid://d1cqaeqm8qf20" path="res://scenes/deckselect/deckselect_hangedman.gd" id="1_6osn5"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_f8yn5"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_a8pdl"]
-[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_5he0g"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_04r8a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
@@ -20,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qkjbj")
+script = ExtResource("1_6osn5")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
 texture = ExtResource("2_f8yn5")
@@ -127,19 +126,6 @@ offset_right = 26.5
 offset_bottom = 20.5
 text = "Exit"
 label_settings = SubResource("LabelSettings_0qkqs")
-
-[node name="Forward" type="Button" parent="Buttons" unique_id=1329746898]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 18.205
-anchor_right = 18.205
-offset_left = -95.20001
-offset_top = -103.99999
-offset_right = -70.20001
-offset_bottom = -73.99999
-scale = Vector2(7, 7)
-icon = ExtResource("4_5he0g")
-flat = true
 
 [node name="Back" type="Button" parent="Buttons" unique_id=310655290]
 layout_mode = 0
