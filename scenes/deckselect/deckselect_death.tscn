@@ -61,7 +61,7 @@ offset_left = -48.0
 offset_top = -6.5
 offset_right = 121.0
 offset_bottom = 35.5
-text = "Sun"
+text = "Death"
 label_settings = SubResource("LabelSettings_0qkqs")
 horizontal_alignment = 1
 
