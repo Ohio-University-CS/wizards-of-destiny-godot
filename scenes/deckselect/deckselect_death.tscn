@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dld14fxvky1g0"]
 
-[ext_resource type="Script" uid="uid://c76722jy00seb" path="res://scenes/deckselect/deckselect_sun.gd" id="1_dxt7g"]
+[ext_resource type="Script" uid="uid://beb7o1h2nln5k" path="res://scenes/deckselect/deckselect_death.gd" id="1_dxt7g"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_ta53j"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_cql0h"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_2mlcd"]
