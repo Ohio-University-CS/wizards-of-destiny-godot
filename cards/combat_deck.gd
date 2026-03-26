@@ -1,3 +1,5 @@
+# Player's deck for the run
+
 extends Node
 class_name CombatDeck
 

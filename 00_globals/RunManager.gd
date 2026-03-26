@@ -1,4 +1,5 @@
 # RunManager.gd
+# Handles run information
 extends Node
 
 # ----------------

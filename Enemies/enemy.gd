@@ -1,3 +1,5 @@
+# Handles enemy
+
 extends Node
 class_name Enemy
 
@@ -159,6 +161,7 @@ func _clear_temp_stats():
 # AI
 # ---------------------------------------------------------
 
+# Used for intent
 func prepare_next_move():
 	if resource == null or resource.moves.is_empty():
 		current_move = null
@@ -354,6 +357,10 @@ func try_dodge() -> bool:
 func _die():
 	emit_signal("died")
 
+
+# ---------------------------------------------------------
+# VFX
+# ---------------------------------------------------------
 
 func _on_status_applied(status_name: String, stacks: int) -> void:
 	match status_name:

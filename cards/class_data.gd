@@ -1,3 +1,6 @@
+# Used for deck info
+# Sets stats, determines card pool
+
 extends Resource
 class_name ClassData
 

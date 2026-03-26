@@ -1,3 +1,5 @@
+# Gives block status
+
 class_name BlockEffect extends Effect
 
 @export var amount : int = 0

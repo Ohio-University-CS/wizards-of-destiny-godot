@@ -1,3 +1,7 @@
+# HEADS UP!
+# THIS IS CURRENTLY OLD CODE
+# SHOULDN'T BE IN USE
+
 extends Resource
 class_name EffectData
 

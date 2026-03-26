@@ -1,3 +1,5 @@
+# Handles Player (so kind of a big deal)
+
 extends Node
 class_name Player
 
@@ -62,6 +64,7 @@ var max_energy: int = 3
 var deck_list : Array[CardData] = []
 
 
+# Uses class_data resource
 func setup_from_class(data):
 	if data == null:
 		push_error("Player.setup_from_class called with null class data")
@@ -174,6 +177,7 @@ var strike_elemental_damage := {
 }
 var strike_statuses: Array = []
 var damage_multiplier: float = 1.0
+var _strike_in_progress := false
 
 #reset all strike at start of turn
 func reset_strike():
@@ -229,10 +233,7 @@ func _emit_strike_changed():
 	emit_signal("strike_changed", total)
 
 
-var _strike_in_progress := false
-
 #perform the actual strike
-
 func perform_strike(target):
 	# Prevent strike if Broken is active
 	if status_effects["broken"] > 0:
@@ -247,18 +248,22 @@ func perform_strike(target):
 		_do_strike_on_target(target)
 	_strike_in_progress = false
 
+
 # Helper for strike logic (all effects)
 func _do_strike_on_target(target):
 	var dmg = get_damage() + strike_bonus_damage
+	
 	# Empower: +3 damage per stack
 	if status_effects["empower"] > 0:
 		dmg += 3 * status_effects["empower"]
+	
 	# Apply Freeze: -2 per stack, cannot go below 0
 	var freeze_stacks = status_effects["freeze"]
 	if freeze_stacks > 0:
 		dmg = max(0, dmg - 2 * freeze_stacks)
 		status_effects["freeze"] = 0
 		emit_signal("status_expired", "freeze")
+	
 	# Apply Shock: take stack amount of Lightning damage, remove one stack
 	var shock_stacks = status_effects["shock"]
 	if shock_stacks > 0:
@@ -267,9 +272,11 @@ func _do_strike_on_target(target):
 		if status_effects["shock"] == 0:
 			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
+	
 	#elemental damage
 	for element in strike_elemental_damage.keys():
 		var amt = strike_elemental_damage[element]
@@ -277,6 +284,7 @@ func _do_strike_on_target(target):
 			var elemental_dmg = deal_damage(amt, element)
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
+	
 	#status effects
 	for effect in strike_statuses:
 		target.apply_status(effect["name"], effect["stacks"])

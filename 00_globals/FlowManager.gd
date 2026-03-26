@@ -1,4 +1,5 @@
 # FlowManager.gd
+# Handles transition from scene to scene during a run
 extends Node
 
 # ----------------
@@ -99,7 +100,7 @@ func after_shop():
 # ----------------
 
 func go_to_choice():
-	go_to_combat() #nothing exists
+	go_to_combat() # nothing exists yet
 	
 	#temp
 	#if randf() < 0.5:
@@ -117,4 +118,3 @@ func after_rest():
 
 func after_event():
 	go_to_combat()
-

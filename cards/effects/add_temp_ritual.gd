@@ -1,3 +1,5 @@
+# Currently used to apply temporary effects from Ritual cards
+
 class_name AddTempRitual extends Effect
 
 @export var rname : String

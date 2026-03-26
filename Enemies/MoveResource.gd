@@ -1,3 +1,5 @@
+# Used to create enemy moves
+
 extends Resource
 class_name MoveResource
 

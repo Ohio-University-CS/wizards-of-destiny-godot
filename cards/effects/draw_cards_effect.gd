@@ -1,3 +1,5 @@
+# Used to draw another card
+
 class_name DrawCardsEffect extends Effect
 
 @export var amount : int = 1

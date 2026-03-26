@@ -1,3 +1,6 @@
+# Visual implementation of cards.
+# Does not handle data, purely what player sees
+
 #@tool
 extends Control
 class_name Card
@@ -153,6 +156,7 @@ func _refresh_visual():
 	if data == null:
 		return
 
+	# Gets children to make card info visible
 	var art = get_node_or_null("Art")
 	var frame = get_node_or_null("Frame")
 	var cname = get_node_or_null("Name")
@@ -160,6 +164,7 @@ func _refresh_visual():
 	var cost = get_node_or_null("Cost")
 	var tag = get_node_or_null("Tag")
 
+	# following statements set info visuals
 	if art:
 		art.texture = data.artwork
 	else:
