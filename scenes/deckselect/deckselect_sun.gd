@@ -15,9 +15,9 @@ func _ready():
 # Go back to the first deck select screen
 func _on_back_pressed():
 	print("Back pressed")
-	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_judgement.tscn")
+	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_emperor.tscn")
 
 # Go forward to the next deck select screen
 func _on_forward_pressed():
 	print("Forward pressed")
-	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_sun.tscn")
+	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
