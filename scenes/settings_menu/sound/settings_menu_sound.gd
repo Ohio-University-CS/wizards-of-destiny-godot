@@ -1,3 +1,4 @@
+# Settings Menu - Sound
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -17,6 +18,7 @@ var last_opened: String = "N/A"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#visibility
+	AnimatedSprite.speed_scale = 2.0  # 2x faster
 	_sso_off()
 	_sso_on()
 	#settings

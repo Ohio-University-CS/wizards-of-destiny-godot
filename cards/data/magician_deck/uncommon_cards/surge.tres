@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://da7mw5k6xppkc"]
+
+[ext_resource type="Texture2D" uid="uid://dmiy0wv3u1j35" path="res://cards/sprites/surge.png" id="1_6p1ms"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_c42om"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_4ev2b"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="2_alys4"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_vv5kp"]
+[ext_resource type="Script" uid="uid://p867dxer3vpn" path="res://cards/effects/add_temp_ritual.gd" id="3_vv5kp"]
+
+[sub_resource type="Resource" id="Resource_6p1ms"]
+script = ExtResource("2_vv5kp")
+status_type = 9
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_kl6eq"]
+script = ExtResource("3_vv5kp")
+rname = "Surge"
+target_type = 0
+metadata/_custom_type_script = "uid://p867dxer3vpn"
+
+[resource]
+script = ExtResource("2_4ev2b")
+card_name = "Surge"
+description = "Gain 1 Empowered. Your Strike hits twice this turn"
+energy_cost = 2
+rarity = 1
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_6p1ms")
+frame_art = ExtResource("2_alys4")
+effects = Array[ExtResource("1_c42om")]([SubResource("Resource_6p1ms"), SubResource("Resource_kl6eq")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

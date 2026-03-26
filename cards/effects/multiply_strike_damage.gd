@@ -1,3 +1,5 @@
+# Used to multiply all damage done by Strike
+
 class_name MultiplyStrikeDamage extends Effect
 
 @export var amount : float = 1

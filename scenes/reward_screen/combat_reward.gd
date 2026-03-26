@@ -1,3 +1,5 @@
+# Visuals for after-combat reward screen
+
 extends Control
 
 @onready var title : Label = $Title
@@ -11,6 +13,7 @@ var result : Dictionary
 func _ready():
 	result = RunManager.last_combat_result
 	
+	# This isn't working, for some reason, just all 0's
 	title.text = "Floor " + str(RunManager.level_floor) + " Stage " + str(RunManager.stage) + " Cleared!"
 	
 	_display_rewards()

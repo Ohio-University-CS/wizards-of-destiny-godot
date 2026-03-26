@@ -1,3 +1,4 @@
+# Settings Menu - Graphics
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -17,7 +18,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#startup
-	
+	AnimatedSprite.speed_scale = 2.0  # 2x faster
 	_gso_off()
 	_gso_on()
 	#settings

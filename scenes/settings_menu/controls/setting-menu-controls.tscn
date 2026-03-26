@@ -15,7 +15,7 @@ font_color = Color(0, 0, 0.015686275, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3h3aa"]
 font_size = 50
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0, 0, 0.7254902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yls1s"]
 font_size = 30
@@ -365,7 +365,7 @@ offset_bottom = 40.0
 position = Vector2(961, 568)
 scale = Vector2(5.169, 7.421)
 sprite_frames = SubResource("SpriteFrames_w43bv")
-animation = &"Open"
+animation = &"Close"
 
 [node name="control_settings" type="Control" parent="." unique_id=1874290779]
 anchors_preset = 0

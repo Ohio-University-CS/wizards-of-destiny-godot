@@ -1,4 +1,5 @@
 # FlowManager.gd
+# Handles transition from scene to scene during a run
 extends Node
 
 # ----------------
@@ -11,6 +12,8 @@ const REWARD_SCENE := "res://scenes/reward_screen/combat_reward.tscn"
 #const REST_SCENE := 
 #const EVENT_SCENE := 
 #const CHOICE_SCENE := 
+
+
 
 # ----------------
 # Basic Transitions
@@ -97,7 +100,7 @@ func after_shop():
 # ----------------
 
 func go_to_choice():
-	go_to_combat() #nothing exists
+	go_to_combat() # nothing exists yet
 	
 	#temp
 	#if randf() < 0.5:

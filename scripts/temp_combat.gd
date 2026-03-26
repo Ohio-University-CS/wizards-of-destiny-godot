@@ -1,4 +1,6 @@
-#temp_combat.gd
+# temp_combat.gd
+# Handles combat
+
 @tool
 extends Node2D
 
@@ -21,6 +23,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
 @export var enemy_spawn_position: Vector2 = Vector2(1458.75, 167.5)
+@export var enemy_spawn_scale: Vector2 = Vector2(1.75, 1.75)
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
 @export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
@@ -51,6 +54,7 @@ var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
+var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 enum TurnState {
 	PLAYER,
@@ -70,6 +74,8 @@ var is_combat_over: bool = false
 
 
 func _ready():
+	enemy_rng.randomize()
+
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -318,22 +324,24 @@ func _spawn_random_enemy_entity() -> void:
 		push_error("TempCombat: enemy_pool is empty and no default enemy scenes were found")
 		return
 
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var selected_scene := pool[rng.randi_range(0, pool.size() - 1)]
+	var selected_scene := pool[enemy_rng.randi_range(0, pool.size() - 1)]
 	if selected_scene == null:
 		push_error("TempCombat: selected enemy scene is null")
 		return
 
 	var existing_enemy_container := get_node_or_null("Enemy")
 	if existing_enemy_container != null:
-		# Preserve an Enemy instance that was placed or modified in the editor
-		# (avoid replacing it with a fresh PackedScene instance). This lets
-		# editor-time changes — like resizing the node — persist into runtime
-		# for this scene instance.
-		existing_enemy_container.position = enemy_spawn_position
-		opponent = _find_enemy_in_container(existing_enemy_container)
-		return
+		if Engine.is_editor_hint():
+			# Keep editor-placed preview enemy while editing the scene.
+			existing_enemy_container.position = enemy_spawn_position
+			if existing_enemy_container is Node2D:
+				existing_enemy_container.scale = enemy_spawn_scale
+			opponent = _find_enemy_in_container(existing_enemy_container)
+			return
+
+		# In gameplay, replace any editor-placed enemy with a random pick.
+		remove_child(existing_enemy_container)
+		existing_enemy_container.free()
 
 	var spawned_enemy_container := selected_scene.instantiate()
 	if not (spawned_enemy_container is Node2D):
@@ -345,6 +353,7 @@ func _spawn_random_enemy_entity() -> void:
 	spawned_enemy_container.name = "Enemy"
 	add_child(spawned_enemy_container)
 	spawned_enemy_container.position = enemy_spawn_position
+	spawned_enemy_container.scale = enemy_spawn_scale
 
 	opponent = _find_enemy_in_container(spawned_enemy_container)
 	if opponent == null:
@@ -372,6 +381,7 @@ func _position_enemy_container(enemy: Enemy) -> void:
 		container = enemy.get_parent()
 	if container is Node2D:
 		container.position = enemy_spawn_position
+		container.scale = enemy_spawn_scale
 
 
 func _get_default_enemy_pool() -> Array[PackedScene]:
@@ -415,20 +425,24 @@ func _process(_delta: float) -> void:
 func draw_hand():
 	if deck == null:
 		return
-	
+
 	# Spawn visuals for cards already in hand
 	for existing_card in deck.hand:
 		if not _has_visual_for_instance(existing_card):
 			spawn_card(existing_card)
-	
+
+	# Drained: draw one less card per stack (max 3)
+	var draw_size = deck.draw_hand_size
+	if player and player.status_effects.has("drained"):
+		var drained = clamp(player.status_effects["drained"], 0, 3)
+		draw_size = max(0, draw_size - drained)
 	# Draw remaining cards
-	while hand_cards.size() < deck.draw_hand_size:
+	while hand_cards.size() < draw_size:
 		var card_instance = deck.draw_card()
 		if card_instance == null:
 			break
-		
 		spawn_card(card_instance)
-	
+
 	_layout_hand(false)
 
 
@@ -508,7 +522,10 @@ func play_card(card_node) -> bool:
 		return false
 	
 	var instance = card_node.card_instance
-	
+	if not instance or not instance.data:
+		push_error("TempCombat: card_instance or its data is null!")
+		return false
+
 	if player.energy < instance.data.energy_cost:
 		return false
 	
@@ -523,22 +540,35 @@ func play_card(card_node) -> bool:
 	# Apply effects
 	_apply_effects(instance.data.effects, player)
 	
-	is_play_animating = true
-	_announce_move(true, instance.data.card_name)
-	
-	if card_node is Control:
-		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	if instance.exhausted:
+	# Register passive if card is passive, and exhaust it so it can't be played again
+	if instance.data.card_flag == CardData.CardFlag.PASSIVE:
+		player.register_passive(instance.data.card_name)
 		deck.exhaust_card(instance)
 	else:
-		deck.discard_card(instance)
-	
+		if instance.exhausted:
+			deck.exhaust_card(instance)
+		else:
+			deck.discard_card(instance)
+
+	# POOL OF ESSENCE: Draw a card when a ritual card is played and Pool of Essence is active
+	if instance.data.card_flag == CardData.CardFlag.RITUAL:
+		for passive in player.active_passives:
+			if passive == "Pool of Essence":
+				var drawn = deck.draw_card()
+				if drawn:
+					spawn_card(drawn)
+
+	is_play_animating = true
+	_announce_move(true, instance.data.card_name)
+
+	if card_node is Control:
+		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	hand_cards.erase(card_node)
 	_sync_deck_hand_to_visual_order()
 	_layout_hand(true)
 	_update_discard_button_state()
-	
+
 	await _animate_played_card(card_node)
 	card_node.queue_free()
 	is_play_animating = false
@@ -800,20 +830,20 @@ func _connect_ui_signals() -> void:
 	# Play button
 	var play_btn = ui.get_node_or_null("PanelContainer/Play") if ui.has_node("PanelContainer/Play") else ui.get_node_or_null("Play")
 	if play_btn != null and play_btn.has_signal("play_hand_requested"):
-		if not play_btn.is_connected("play_hand_requested", Callable(self, "play_hand")):
-			play_btn.connect("play_hand_requested", Callable(self, "play_hand"))
+		if not play_btn.is_connected("play_hand_requested", Callable(self , "play_hand")):
+			play_btn.connect("play_hand_requested", Callable(self , "play_hand"))
 
 	# End turn button
 	var end_btn = ui.get_node_or_null("EndTurn")
 	if end_btn != null and end_btn.has_signal("end_turn_requested"):
-		if not end_btn.is_connected("end_turn_requested", Callable(self, "force_end_player_turn")):
-			end_btn.connect("end_turn_requested", Callable(self, "force_end_player_turn"))
+		if not end_btn.is_connected("end_turn_requested", Callable(self , "force_end_player_turn")):
+			end_btn.connect("end_turn_requested", Callable(self , "force_end_player_turn"))
 
 	# Discard button
 	var disc_btn = ui.get_node_or_null("Discard")
 	if disc_btn != null and disc_btn.has_signal("discard_requested"):
-		if not disc_btn.is_connected("discard_requested", Callable(self, "discard_selected_cards")):
-			disc_btn.connect("discard_requested", Callable(self, "discard_selected_cards"))
+		if not disc_btn.is_connected("discard_requested", Callable(self , "discard_selected_cards")):
+			disc_btn.connect("discard_requested", Callable(self , "discard_selected_cards"))
 	# Player Health Bar
 	var health_bar = ui.get_node_or_null("PlayerHealth")
 	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
@@ -827,7 +857,6 @@ func _connect_ui_signals() -> void:
 	# Damage/Heal Indicator
 	var _player_health_indicator = player.get_node_or_null("HealthIndicator")
 		
-
 
 func _on_player_died() -> void:
 	_show_result(false)

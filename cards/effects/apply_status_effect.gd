@@ -1,3 +1,5 @@
+# Used to apply status effects to player or enemy
+
 class_name ApplyStatusEffect extends Effect
 
 enum StatusType {

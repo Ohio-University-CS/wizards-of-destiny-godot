@@ -5,10 +5,12 @@ extends ProgressBar
 @export var show_mana_text: bool = true
 
 var target: Node = null
+var fraction_label: Label = null
 
 
 func _ready() -> void:
 	# Defer target assignment so the parent scene can finish instancing
+	_ensure_fraction_label()
 	call_deferred("_assign_target_from_path")
 	call_deferred("_refresh")
 
@@ -85,10 +87,11 @@ func _refresh() -> void:
 		value = 3
 		if show_mana_text:
 			tooltip_text = "3 / 3"
+			_update_bar_text(3, 3)
 		return
 
 	var current: int = _get_energy_value()
-	var max_mana: int = clamp(_get_max_energy_value(), 1, 3)
+	var max_mana: int = max(1, _get_max_energy_value())
 
 	max_value = max_mana
 	value = clamp(current, 0, max_mana)
@@ -99,40 +102,50 @@ func _refresh() -> void:
 
 
 func _update_bar_text(current: int, max_mana: int) -> void:
-	# Try to set a fraction-style text on the ProgressBar itself.
-	# Different Godot versions expose different properties, so inspect available properties
-	# and set the most appropriate one. Always keep tooltip as a fallback.
 	var fraction_text: String = "%d / %d" % [current, max_mana]
 	var props: Array = get_property_list()
 	var names: Array = []
 	for p in props:
 		names.append(p.name)
 
-	# Preferred: set a custom text property if present
-	if "custom_text" in names:
-		set("custom_text", fraction_text)
-		if "custom_text_visible" in names:
-			set("custom_text_visible", true)
-		return
-
-	# Older API: hide percent display if possible and set text override
+	if "show_percentage" in names:
+		set("show_percentage", false)
 	if "percent_visible" in names:
 		set("percent_visible", false)
-		# some versions provide a `text` property to override display
-		if "text" in names:
-			set("text", fraction_text)
+
+	_ensure_fraction_label()
+	if fraction_label != null:
+		fraction_label.visible = show_mana_text
+		fraction_label.text = fraction_text
+
+
+func _ensure_fraction_label() -> void:
+	if fraction_label != null and is_instance_valid(fraction_label):
 		return
 
-	if "show_percent" in names:
-		set("show_percent", false)
-		if "text" in names:
-			set("text", fraction_text)
+	var existing: Node = get_node_or_null("ManaFractionLabel")
+	if existing is Label:
+		fraction_label = existing as Label
 		return
 
-	# Last resort: try generic `text` property
-	if "text" in names:
-		set("text", fraction_text)
-		return
+	var label := Label.new()
+	label.name = "ManaFractionLabel"
+	label.anchor_left = 0.0
+	label.anchor_top = 0.0
+	label.anchor_right = 1.0
+	label.anchor_bottom = 1.0
+	label.offset_left = 0.0
+	label.offset_top = 0.0
+	label.offset_right = 0.0
+	label.offset_bottom = 0.0
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.set("theme_override_colors/font_color", Color(1, 1, 1, 1))
+	label.set("theme_override_colors/font_outline_color", Color(0, 0, 0, 1))
+	label.set("theme_override_constants/outline_size", 2)
+	add_child(label)
+	fraction_label = label
 
 
 func _get_energy_value() -> int:

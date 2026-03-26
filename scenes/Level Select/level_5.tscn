@@ -32,7 +32,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level 1" type="Button" parent="Buttons" unique_id=975534879]
+[node name="Level 5" type="Button" parent="Buttons" unique_id=975534879]
 layout_mode = 0
 offset_left = -595.0
 offset_top = -448.0

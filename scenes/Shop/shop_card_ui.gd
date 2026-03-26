@@ -1,3 +1,6 @@
+# Visuals for cards in the shop
+# note: scaling is slightly weird
+
 extends Control
 class_name ShopCardUI
 
