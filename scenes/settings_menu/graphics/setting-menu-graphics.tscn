@@ -7,7 +7,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_71l1o"]
 font_size = 50
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0, 0, 0.7254902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xgxal"]
 font_size = 50
@@ -377,9 +377,7 @@ offset_bottom = 40.0
 position = Vector2(961, 568)
 scale = Vector2(5.169, 7.421)
 sprite_frames = SubResource("SpriteFrames_qnn1q")
-animation = &"Open"
-frame = 14
-frame_progress = 1.0
+animation = &"Close"
 
 [node name="gsettingsoptions" type="Control" parent="." unique_id=2058529456]
 anchors_preset = 0
