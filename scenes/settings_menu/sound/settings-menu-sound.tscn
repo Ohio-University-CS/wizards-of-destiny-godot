@@ -11,7 +11,7 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y3tlp"]
 font_size = 50
-font_color = Color(0, 0, 0.015686275, 1)
+font_color = Color(0, 0, 0.7254902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_64vy1"]
 font_size = 50

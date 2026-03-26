@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cda05dl1uqh5x" path="res://scenes/Level Select/plainlevel1.png" id="4_11vx2"]
 [ext_resource type="Texture2D" uid="uid://cdi6q61yf2u8r" path="res://scenes/Level Select/New Piskel-1.png (1).png" id="4_su8kc"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_11vx2"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
 [node name="Level 1" type="Control" unique_id=1065600331]
 layout_mode = 3
 anchors_preset = 15
@@ -32,6 +36,26 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=2040380823]
+layout_mode = 0
+offset_left = 612.0
+offset_top = -488.0
+offset_right = 856.0
+offset_bottom = -379.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("3_byjjh")
+flat = true
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=275407024]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 37.75
+offset_right = 246.0
+offset_bottom = 79.75
+text = "Back"
+label_settings = SubResource("LabelSettings_11vx2")
 
 [node name="Level 1" type="Button" parent="Buttons" unique_id=975534879]
 layout_mode = 0

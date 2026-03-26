@@ -8,14 +8,11 @@ extends Control
 @onready var unrolled_scroll = $Unrolled_Scroll
 
 
-var last_opened: String = "N/A"
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#visibility
+	AnimatedSprite.speed_scale = 2.0  # 2x faster
 	_cs_on()
-	
 	#settings
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
@@ -64,24 +61,6 @@ func _on_sound_pressed():
 	control_button.disabled = false
 	sound_button.disabled = false
 	
-
-func _on_control_pressed():
-	if last_opened == "controls":
-		return
-	
-	if not unrolled_scroll.visible:
-		AnimatedSprite.show()
-		AnimatedSprite.play("Open")
-		await AnimatedSprite.animation_finished
-		unrolled_scroll.show()
-	else:
-		unrolled_scroll.hide()
-		AnimatedSprite.play("Close")
-		await AnimatedSprite.animation_finished
-		AnimatedSprite.play("Open")
-		await AnimatedSprite.animation_finished
-		unrolled_scroll.show()
-	last_opened = "controls"
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
