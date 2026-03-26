@@ -1,32 +1,10 @@
 [gd_scene format=3 uid="uid://dh80c15he03y6"]
 
+[ext_resource type="Script" uid="uid://bj5f4glvyos30" path="res://scenes/deckselect/deckselect_judgement.gd" id="1_e23ap"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_oukx7"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_e23ap"]
-[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/New Piskel-1.png (1).png" id="4_ogfrv"]
-[ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png.png" id="5_imyfv"]
-
-[sub_resource type="GDScript" id="GDScript_rcvug"]
-script/source = "extends Control
-
-# Button nodes
-@onready var back_button : Button = $Buttons/Back
-@onready var forward_button : Button = $Buttons/Forward
-
-func _ready():
-	# Connect button presses
-	back_button.pressed.connect(_on_back_pressed)
-	forward_button.pressed.connect(_on_forward_pressed)
-
-# Go back to the first deck select screen
-func _on_back_pressed():
-	print(\"Back pressed\")
-	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect.tscn\")
-
-# Go forward to the next deck select screen
-func _on_forward_pressed():
-	print(\"Forward pressed\")
-	get_tree().change_scene_to_file(\"res://scenes/deckselect/deckselect_emperor.tscn\")
-"
+[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_ogfrv"]
+[ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_imyfv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -42,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_rcvug")
+script = ExtResource("1_e23ap")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=78211613]
 texture = ExtResource("1_oukx7")

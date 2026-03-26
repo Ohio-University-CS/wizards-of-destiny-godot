@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddfahprft4yga"
-path="res://.godot/imported/New Piskel-1.png (1).png-738b36c35922f86b2205c84eccf55675.ctex"
+path="res://.godot/imported/ForwardButton.png-668f18d5308c75eef30158649d39a67a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/deckselect/New Piskel-1.png (1).png"
-dest_files=["res://.godot/imported/New Piskel-1.png (1).png-738b36c35922f86b2205c84eccf55675.ctex"]
+source_file="res://scenes/deckselect/ForwardButton.png"
+dest_files=["res://.godot/imported/ForwardButton.png-668f18d5308c75eef30158649d39a67a.ctex"]
 
 [params]
 

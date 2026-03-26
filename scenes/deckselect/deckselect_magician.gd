@@ -1,3 +1,4 @@
+# Magician
 extends Control
 
 # Button node
@@ -5,7 +6,8 @@ extends Control
 
 func _ready():
 	# Connect the button press
-	judgement_button.pressed.connect(_on_judgement_pressed)
+	if not judgement_button.pressed.is_connected(_on_judgement_pressed):
+		judgement_button.pressed.connect(_on_judgement_pressed)
 
 # Function called when the button is pressed
 func _on_judgement_pressed():
