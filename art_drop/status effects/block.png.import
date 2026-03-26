@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsptqa1wloejp"
-path="res://.godot/imported/Shock_Status.png-6cfc76c2da0a2748be986c5e7b2e1a3f.ctex"
+uid="uid://d2i14pdbrg0qk"
+path="res://.godot/imported/block.png-5d93f21a0952e73151cfd8e8f4f81428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Shock_Status.png"
-dest_files=["res://.godot/imported/Shock_Status.png-6cfc76c2da0a2748be986c5e7b2e1a3f.ctex"]
+source_file="res://art_drop/status effects/block.png"
+dest_files=["res://.godot/imported/block.png-5d93f21a0952e73151cfd8e8f4f81428.ctex"]
 
 [params]
 

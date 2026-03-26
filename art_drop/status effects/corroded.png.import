@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh76t6tghipy6"
-path="res://.godot/imported/Broken_Status.png-915cc24e6c74efc6db5a49f0cc866a97.ctex"
+uid="uid://crrgocd38p5hi"
+path="res://.godot/imported/corroded.png-4e4895c03f9e8e22aca514ce1f0ce87c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Broken_Status.png"
-dest_files=["res://.godot/imported/Broken_Status.png-915cc24e6c74efc6db5a49f0cc866a97.ctex"]
+source_file="res://art_drop/status effects/corroded.png"
+dest_files=["res://.godot/imported/corroded.png-4e4895c03f9e8e22aca514ce1f0ce87c.ctex"]
 
 [params]
 

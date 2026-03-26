@@ -12,6 +12,8 @@ const REWARD_SCENE := "res://scenes/reward_screen/combat_reward.tscn"
 #const EVENT_SCENE := 
 #const CHOICE_SCENE := 
 
+
+
 # ----------------
 # Basic Transitions
 # ----------------
@@ -115,3 +117,4 @@ func after_rest():
 
 func after_event():
 	go_to_combat()
+

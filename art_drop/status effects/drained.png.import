@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2i14pdbrg0qk"
-path="res://.godot/imported/Block_Status.png-94d953ae9faf15926b3a0759e7419e27.ctex"
+uid="uid://d1cd1viahxh0o"
+path="res://.godot/imported/drained.png-121bbb2d9263f3bd215e48bfa1e86b0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Block_Status.png"
-dest_files=["res://.godot/imported/Block_Status.png-94d953ae9faf15926b3a0759e7419e27.ctex"]
+source_file="res://art_drop/status effects/drained.png"
+dest_files=["res://.godot/imported/drained.png-121bbb2d9263f3bd215e48bfa1e86b0a.ctex"]
 
 [params]
 

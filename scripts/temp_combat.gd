@@ -21,6 +21,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
 @export var enemy_spawn_position: Vector2 = Vector2(1458.75, 167.5)
+@export var enemy_spawn_scale: Vector2 = Vector2(1.75, 1.75)
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
 @export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
@@ -51,6 +52,7 @@ var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
+var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 enum TurnState {
 	PLAYER,
@@ -70,6 +72,8 @@ var is_combat_over: bool = false
 
 
 func _ready():
+	enemy_rng.randomize()
+
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -318,22 +322,24 @@ func _spawn_random_enemy_entity() -> void:
 		push_error("TempCombat: enemy_pool is empty and no default enemy scenes were found")
 		return
 
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var selected_scene := pool[rng.randi_range(0, pool.size() - 1)]
+	var selected_scene := pool[enemy_rng.randi_range(0, pool.size() - 1)]
 	if selected_scene == null:
 		push_error("TempCombat: selected enemy scene is null")
 		return
 
 	var existing_enemy_container := get_node_or_null("Enemy")
 	if existing_enemy_container != null:
-		# Preserve an Enemy instance that was placed or modified in the editor
-		# (avoid replacing it with a fresh PackedScene instance). This lets
-		# editor-time changes — like resizing the node — persist into runtime
-		# for this scene instance.
-		existing_enemy_container.position = enemy_spawn_position
-		opponent = _find_enemy_in_container(existing_enemy_container)
-		return
+		if Engine.is_editor_hint():
+			# Keep editor-placed preview enemy while editing the scene.
+			existing_enemy_container.position = enemy_spawn_position
+			if existing_enemy_container is Node2D:
+				existing_enemy_container.scale = enemy_spawn_scale
+			opponent = _find_enemy_in_container(existing_enemy_container)
+			return
+
+		# In gameplay, replace any editor-placed enemy with a random pick.
+		remove_child(existing_enemy_container)
+		existing_enemy_container.free()
 
 	var spawned_enemy_container := selected_scene.instantiate()
 	if not (spawned_enemy_container is Node2D):
@@ -345,6 +351,7 @@ func _spawn_random_enemy_entity() -> void:
 	spawned_enemy_container.name = "Enemy"
 	add_child(spawned_enemy_container)
 	spawned_enemy_container.position = enemy_spawn_position
+	spawned_enemy_container.scale = enemy_spawn_scale
 
 	opponent = _find_enemy_in_container(spawned_enemy_container)
 	if opponent == null:
@@ -372,6 +379,7 @@ func _position_enemy_container(enemy: Enemy) -> void:
 		container = enemy.get_parent()
 	if container is Node2D:
 		container.position = enemy_spawn_position
+		container.scale = enemy_spawn_scale
 
 
 func _get_default_enemy_pool() -> Array[PackedScene]:
@@ -817,20 +825,20 @@ func _connect_ui_signals() -> void:
 	# Play button
 	var play_btn = ui.get_node_or_null("PanelContainer/Play") if ui.has_node("PanelContainer/Play") else ui.get_node_or_null("Play")
 	if play_btn != null and play_btn.has_signal("play_hand_requested"):
-		if not play_btn.is_connected("play_hand_requested", Callable(self, "play_hand")):
-			play_btn.connect("play_hand_requested", Callable(self, "play_hand"))
+		if not play_btn.is_connected("play_hand_requested", Callable(self , "play_hand")):
+			play_btn.connect("play_hand_requested", Callable(self , "play_hand"))
 
 	# End turn button
 	var end_btn = ui.get_node_or_null("EndTurn")
 	if end_btn != null and end_btn.has_signal("end_turn_requested"):
-		if not end_btn.is_connected("end_turn_requested", Callable(self, "force_end_player_turn")):
-			end_btn.connect("end_turn_requested", Callable(self, "force_end_player_turn"))
+		if not end_btn.is_connected("end_turn_requested", Callable(self , "force_end_player_turn")):
+			end_btn.connect("end_turn_requested", Callable(self , "force_end_player_turn"))
 
 	# Discard button
 	var disc_btn = ui.get_node_or_null("Discard")
 	if disc_btn != null and disc_btn.has_signal("discard_requested"):
-		if not disc_btn.is_connected("discard_requested", Callable(self, "discard_selected_cards")):
-			disc_btn.connect("discard_requested", Callable(self, "discard_selected_cards"))
+		if not disc_btn.is_connected("discard_requested", Callable(self , "discard_selected_cards")):
+			disc_btn.connect("discard_requested", Callable(self , "discard_selected_cards"))
 	# Player Health Bar
 	var health_bar = ui.get_node_or_null("PlayerHealth")
 	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
@@ -844,7 +852,6 @@ func _connect_ui_signals() -> void:
 	# Damage/Heal Indicator
 	var _player_health_indicator = player.get_node_or_null("HealthIndicator")
 		
-
 
 func _on_player_died() -> void:
 	_show_result(false)

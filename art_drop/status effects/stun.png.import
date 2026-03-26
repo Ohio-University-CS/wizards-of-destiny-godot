@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ycijsulkvm1c"
-path="res://.godot/imported/Evasive_Status.png-d54166f0c0243ecb8443270a6dc914c9.ctex"
+uid="uid://cokvy5nk7twdf"
+path="res://.godot/imported/stun.png-57d802b94b120246067cbf79f883e87d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Evasive_Status.png"
-dest_files=["res://.godot/imported/Evasive_Status.png-d54166f0c0243ecb8443270a6dc914c9.ctex"]
+source_file="res://art_drop/status effects/stun.png"
+dest_files=["res://.godot/imported/stun.png-57d802b94b120246067cbf79f883e87d.ctex"]
 
 [params]
 

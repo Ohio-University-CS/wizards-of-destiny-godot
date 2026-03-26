@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0gwjrlylbi8g"
-path="res://.godot/imported/Burn_Status.png-fa007758772f311a8b330a50c928e1bb.ctex"
+uid="uid://cjsunko60cxnt"
+path="res://.godot/imported/regeneration.png-c7ad5c6fd788019819b1f4bae2e9567d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_drop/status effects/Burn_Status.png"
-dest_files=["res://.godot/imported/Burn_Status.png-fa007758772f311a8b330a50c928e1bb.ctex"]
+source_file="res://art_drop/status effects/regeneration.png"
+dest_files=["res://.godot/imported/regeneration.png-c7ad5c6fd788019819b1f4bae2e9567d.ctex"]
 
 [params]
 
