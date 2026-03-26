@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://beb52we0m8127"]
+
+[ext_resource type="Script" uid="uid://c76722jy00seb" path="res://scenes/deckselect/deckselect_sun.gd" id="1_8nu7m"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_vode2"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_qq6la"]
+[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_ayq5f"]
+[ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_3ahd7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
+font_size = 50
+
+[node name="Menu" type="Control" unique_id=1065600331]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8nu7m")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=78211613]
+texture = ExtResource("2_vode2")
+centered = false
+
+[node name="Buttons" type="Control" parent="." unique_id=255705122]
+layout_mode = 1
+anchor_left = 0.37500003
+anchor_top = 0.42900002
+anchor_right = 0.37500003
+anchor_bottom = 0.42900002
+offset_left = 219.99994
+offset_top = 56.679993
+offset_right = 259.99994
+offset_bottom = 96.67999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level Select" type="Button" parent="Buttons" unique_id=975534879]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425
+anchor_top = 10.862
+anchor_right = 0.425
+anchor_bottom = 10.862
+offset_left = -56.0
+offset_top = -35.48001
+offset_bottom = 0.019989014
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
+position = Vector2(32.5, 16.5)
+texture = ExtResource("3_qq6la")
+
+[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
+layout_mode = 0
+offset_left = -48.0
+offset_top = -6.5
+offset_right = 121.0
+offset_bottom = 35.5
+text = "Sun"
+label_settings = SubResource("LabelSettings_0qkqs")
+horizontal_alignment = 1
+
+[node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
+position = Vector2(35.5, -215)
+scale = Vector2(0.665625, 0.671875)
+
+[node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = -150.0
+offset_right = 308.0
+offset_bottom = -142.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Upgrades" unique_id=1541017295]
+visible = false
+texture = ExtResource("3_qq6la")
+
+[node name="Settings" type="Button" parent="Buttons" unique_id=1614388412]
+visible = false
+layout_mode = 0
+offset_left = -300.0
+offset_top = 150.0
+offset_right = -292.0
+offset_bottom = 158.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=1777698657]
+visible = false
+texture = ExtResource("3_qq6la")
+
+[node name="Label" type="Label" parent="Buttons/Settings" unique_id=917045816]
+visible = false
+layout_mode = 0
+offset_left = -64.5
+offset_top = -20.5
+offset_right = 104.5
+offset_bottom = 21.5
+text = "Settings"
+label_settings = SubResource("LabelSettings_0qkqs")
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=1738109675]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 150.0
+offset_right = 308.0
+offset_bottom = 158.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=51757949]
+visible = false
+texture = ExtResource("3_qq6la")
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=999302246]
+visible = false
+layout_mode = 0
+offset_left = -27.5
+offset_top = -21.5
+offset_right = 26.5
+offset_bottom = 20.5
+text = "Exit"
+label_settings = SubResource("LabelSettings_0qkqs")
+
+[node name="Forward" type="Button" parent="Buttons" unique_id=1329746898]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.205
+anchor_right = 18.205
+offset_left = -95.20001
+offset_top = -103.99999
+offset_right = -70.20001
+offset_bottom = -73.99999
+scale = Vector2(7, 7)
+icon = ExtResource("4_ayq5f")
+flat = true
+
+[node name="Back" type="Button" parent="Buttons" unique_id=310655290]
+layout_mode = 0
+offset_left = -772.0
+offset_top = -63.000008
+offset_right = -747.0
+offset_bottom = -39.000008
+scale = Vector2(7, 7)
+icon = ExtResource("5_3ahd7")
+flat = true
+
+[node name="Label" type="Label" parent="." unique_id=2076492899]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 28.0
+offset_right = 1364.0
+offset_bottom = 97.0
+text = "Deck Select -Temp"
+label_settings = SubResource("LabelSettings_6ufdq")
