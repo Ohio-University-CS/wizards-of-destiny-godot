@@ -1,3 +1,5 @@
+# Parent class, handles card information
+
 extends Resource
 class_name CardData
 
@@ -17,4 +19,3 @@ enum CardRarity { COMMON, UNCOMMON, RARE }
 @export var frame_art : Texture2D
 
 @export var effects : Array[Effect]
-#@export var effects : Array[EffectData]

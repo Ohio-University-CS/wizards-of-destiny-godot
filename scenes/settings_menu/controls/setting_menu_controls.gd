@@ -1,3 +1,4 @@
+# Settings Menu - Controls
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D

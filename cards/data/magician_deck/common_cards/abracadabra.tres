@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_omkr8"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_rglbv"]
 [ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="3_0g30y"]
-[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="5_0g30y"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="5_0g30y"]
 
 [sub_resource type="Resource" id="Resource_ccjgr"]
 script = ExtResource("2_omkr8")

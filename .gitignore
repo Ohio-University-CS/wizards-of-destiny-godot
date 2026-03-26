@@ -3,4 +3,5 @@
 /android/
 .tmp/
 .pdf/
+.DS_Store
 addons/godot-sqlite/bin/

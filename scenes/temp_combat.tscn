@@ -94,7 +94,6 @@ offset_top = -317.56464
 offset_right = 62.799667
 offset_bottom = -416.34088
 script = ExtResource("12_healthbar")
-target_path = NodePath("../Player")
 
 [node name="PlayerManaBar" type="ProgressBar" parent="Player" unique_id=1831173201]
 modulate = Color(0.2, 0.6, 1, 1)
