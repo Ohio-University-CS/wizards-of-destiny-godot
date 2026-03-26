@@ -22,6 +22,7 @@ metadata/_custom_type_script = "uid://b0upwpofv1ojb"
 script = ExtResource("2_m7wjv")
 card_name = "Mana Weave"
 description = "Gain 3 Block. Draw 1 Card"
+energy_cost = 0
 card_type = 1
 artwork = ExtResource("1_mwe7w")
 frame_art = ExtResource("4_x5o68")

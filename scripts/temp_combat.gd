@@ -520,7 +520,10 @@ func play_card(card_node) -> bool:
 		return false
 	
 	var instance = card_node.card_instance
-	
+	if not instance or not instance.data:
+		push_error("TempCombat: card_instance or its data is null!")
+		return false
+
 	if player.energy < instance.data.energy_cost:
 		return false
 	

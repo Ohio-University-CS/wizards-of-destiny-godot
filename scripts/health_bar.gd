@@ -9,7 +9,6 @@ func _ready() -> void:
 
 
 func set_target(new_target: Node) -> void:
-	print("HealthBar received target:", new_target)
 	if target == new_target:
 		return
 	
@@ -54,4 +53,3 @@ func _refresh() -> void:
 
 	max_value = max(1, int(max_hp))
 	value = clamp(int(current), 0, int(max_value))
-

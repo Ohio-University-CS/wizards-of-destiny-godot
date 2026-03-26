@@ -34,7 +34,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level 1" type="Button" parent="Buttons" unique_id=975534879]
+[node name="Level 2" type="Button" parent="Buttons" unique_id=975534879]
 layout_mode = 0
 offset_left = -595.0
 offset_top = -448.0
@@ -44,7 +44,7 @@ scale = Vector2(5, 8)
 icon = ExtResource("2_1y8me")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level 1" unique_id=581847482]
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level 2" unique_id=581847482]
 position = Vector2(122.15, 59.609)
 scale = Vector2(0.175, 0.058)
 texture = ExtResource("4_ly812")
