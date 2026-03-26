@@ -1,3 +1,4 @@
+# Inventory Hotbar
 extends HBoxContainer
 
 signal item_used(slot_index: int, item: Variant)

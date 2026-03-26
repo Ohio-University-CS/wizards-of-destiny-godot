@@ -434,7 +434,7 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 		"electric": dmg += get_electric_power()
 	
 	# Freeze does not affect elemental damage (handled in perform_strike)
-	#Crit check
+	# Crit check
 	if randf() < get_crit_chance():
 		dmg += get_crit_damage()
 	

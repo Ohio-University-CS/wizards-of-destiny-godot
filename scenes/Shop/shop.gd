@@ -1,3 +1,5 @@
+# Handles the after-combat shop
+
 extends Control
 class_name Shop
  
@@ -8,10 +10,11 @@ class_name Shop
 @export var player : Player
 @export var shop_card_scene : PackedScene
 
-#temporary card pool
+# temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
-var shop_size := 4
+# numbber of cards that appear in shop
+var shop_size := 4 
 
 
 func _ready() -> void:
@@ -25,6 +28,7 @@ func _ready() -> void:
 
 
 func _generate_shop():
+	# Setup cards
 	for child in cards_container.get_children():
 		child.queue_free()
 	
