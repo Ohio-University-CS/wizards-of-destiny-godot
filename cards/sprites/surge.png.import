@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blixivugxpp47"
-path="res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"
+uid="uid://dmiy0wv3u1j35"
+path="res://.godot/imported/surge.png-3e3ddc2c3a00b389cb07afe70cd6f812.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Card_Frame_Common.png"
-dest_files=["res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"]
+source_file="res://cards/sprites/surge.png"
+dest_files=["res://.godot/imported/surge.png-3e3ddc2c3a00b389cb07afe70cd6f812.ctex"]
 
 [params]
 

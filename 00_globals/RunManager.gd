@@ -6,7 +6,7 @@ extends Node
 # ----------------
 
 var player : Player = null
-var coins : int = 0
+var coins : int = 10
 
 var level_floor : int
 var stage : int
@@ -25,7 +25,7 @@ var last_combat_result : Dictionary = {}
 
 func start_new_run(starting_player : Player):
 	player = starting_player
-	coins = 0
+	coins = 10
 	level_floor = 1
 	stage = 1
 

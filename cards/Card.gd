@@ -158,6 +158,7 @@ func _refresh_visual():
 	var cname = get_node_or_null("Name")
 	var desc = get_node_or_null("Description")
 	var cost = get_node_or_null("Cost")
+	var tag = get_node_or_null("Tag")
 
 	if art:
 		art.texture = data.artwork
@@ -171,6 +172,7 @@ func _refresh_visual():
 
 	if cname:
 		cname.text = data.card_name
+		# can add stuff here to make upgraded card names be green with "+" at the end
 	else:
 		push_warning("Card: 'Name' node missing; cannot set card name")
 
@@ -183,6 +185,12 @@ func _refresh_visual():
 		cost.text = str(data.energy_cost)
 	else:
 		push_warning("Card: 'Cost' node missing; cannot set cost")
+	
+	if tag:
+		if data.card_flag == data.CardFlag.NONE:
+			tag.text = ""
+		else:
+			tag.text = str(data.CardFlag.keys()[int(data.card_flag)])
 
 
 func _update_visual_state():

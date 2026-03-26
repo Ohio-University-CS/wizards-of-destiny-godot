@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blixivugxpp47"
-path="res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"
+uid="uid://ctvdsfkmbeyyw"
+path="res://.godot/imported/unholy_bargain.png-f509f64398d8daddf2bc062e3540b37d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Card_Frame_Common.png"
-dest_files=["res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"]
+source_file="res://cards/sprites/unholy_bargain.png"
+dest_files=["res://.godot/imported/unholy_bargain.png-f509f64398d8daddf2bc062e3540b37d.ctex"]
 
 [params]
 

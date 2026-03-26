@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3lc5xlk5yixg"
-path="res://.godot/imported/Card_Frame_Rare.png.png-c56d36129162c9eff09e56cadcc6c027.ctex"
+uid="uid://d28jjtld0w860"
+path="res://.godot/imported/conduit.png-76930fbf20f3c4d0c6243256edaaf642.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Card_Frame_Rare.png.png"
-dest_files=["res://.godot/imported/Card_Frame_Rare.png.png-c56d36129162c9eff09e56cadcc6c027.ctex"]
+source_file="res://cards/sprites/conduit.png"
+dest_files=["res://.godot/imported/conduit.png-76930fbf20f3c4d0c6243256edaaf642.ctex"]
 
 [params]
 

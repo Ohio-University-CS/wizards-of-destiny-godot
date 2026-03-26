@@ -415,20 +415,24 @@ func _process(_delta: float) -> void:
 func draw_hand():
 	if deck == null:
 		return
-	
+
 	# Spawn visuals for cards already in hand
 	for existing_card in deck.hand:
 		if not _has_visual_for_instance(existing_card):
 			spawn_card(existing_card)
-	
+
+	# Drained: draw one less card per stack (max 3)
+	var draw_size = deck.draw_hand_size
+	if player and player.status_effects.has("drained"):
+		var drained = clamp(player.status_effects["drained"], 0, 3)
+		draw_size = max(0, draw_size - drained)
 	# Draw remaining cards
-	while hand_cards.size() < deck.draw_hand_size:
+	while hand_cards.size() < draw_size:
 		var card_instance = deck.draw_card()
 		if card_instance == null:
 			break
-		
 		spawn_card(card_instance)
-	
+
 	_layout_hand(false)
 
 
@@ -523,22 +527,35 @@ func play_card(card_node) -> bool:
 	# Apply effects
 	_apply_effects(instance.data.effects, player)
 	
-	is_play_animating = true
-	_announce_move(true, instance.data.card_name)
-	
-	if card_node is Control:
-		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	if instance.exhausted:
+	# Register passive if card is passive, and exhaust it so it can't be played again
+	if instance.data.card_flag == CardData.CardFlag.PASSIVE:
+		player.register_passive(instance.data.card_name)
 		deck.exhaust_card(instance)
 	else:
-		deck.discard_card(instance)
-	
+		if instance.exhausted:
+			deck.exhaust_card(instance)
+		else:
+			deck.discard_card(instance)
+
+	# POOL OF ESSENCE: Draw a card when a ritual card is played and Pool of Essence is active
+	if instance.data.card_flag == CardData.CardFlag.RITUAL:
+		for passive in player.active_passives:
+			if passive == "Pool of Essence":
+				var drawn = deck.draw_card()
+				if drawn:
+					spawn_card(drawn)
+
+	is_play_animating = true
+	_announce_move(true, instance.data.card_name)
+
+	if card_node is Control:
+		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	hand_cards.erase(card_node)
 	_sync_deck_hand_to_visual_order()
 	_layout_hand(true)
 	_update_discard_button_state()
-	
+
 	await _animate_played_card(card_node)
 	card_node.queue_free()
 	is_play_animating = false

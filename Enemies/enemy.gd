@@ -50,11 +50,12 @@ var status_effects := {
 	"burn": 0, # take fire damage per completed turn
 	"regeneration": 0, # regain hp
 	"block": 0, # decreases damage taken
-	"evasive": 0, # 25% chance to dodge per stack (base max 2)
 	"freeze": 0, # reduce outgoing damage
 	"corroded": 0, # increases incoming damage
 	"shock": 0, # deals damage when attacking
-	"stun": 0 # skips turn
+	"stun": 0, # skips turn
+	"empower": 0, # deal +3 damage per stack, remove 1 at end of turn
+	"evasive": 0 # dodge next attack, remove a stack (max 2), remove at start of turn
 }
 
 # ---------------------------------------------------------
@@ -85,6 +86,19 @@ func _ready():
 # ---------------------------------------------------------
 
 func start_turn():
+	# Stun: skip turn if stunned, remove one stack
+	if status_effects["stun"] > 0:
+		status_effects["stun"] -= 1
+		if status_effects["stun"] == 0:
+			emit_signal("status_expired", "stun")
+		return
+
+	# Evasive: remove one stack at start of turn
+	if status_effects["evasive"] > 0:
+		status_effects["evasive"] -= 1
+		if status_effects["evasive"] == 0:
+			emit_signal("status_expired", "evasive")
+
 	# Apply start-of-turn effects
 	_apply_heal()
 	_apply_shock()
@@ -94,6 +108,11 @@ func start_turn():
 
 func end_turn():
 	_apply_burn()
+	# Empower: remove one stack at end of turn
+	if status_effects["empower"] > 0:
+		status_effects["empower"] -= 1
+		if status_effects["empower"] == 0:
+			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
 
 
@@ -162,28 +181,49 @@ func deal_damage(amount: int = 0, _element: String = "", include_base_damage: bo
 	var dmg = amount
 	if include_base_damage:
 		dmg += base_damage
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
 
-	# Apply outgoing modifiers here if desired
-	# Freeze reduces outgoing damage by 10% per stack
-	if status_effects.has("freeze"):
-		var freeze_stacks = status_effects["freeze"]
-		if freeze_stacks > 0:
-			var multiplier = 1.0 - (0.1 * freeze_stacks)
-			multiplier = max(multiplier, 0.4)
-			dmg = int(dmg * multiplier)
+	# Apply Freeze: -2 per stack, cannot go below 0
+	var freeze_stacks = status_effects["freeze"]
+	if freeze_stacks > 0:
+		dmg = max(0, dmg - 2 * freeze_stacks)
+		status_effects["freeze"] = 0
+		emit_signal("status_expired", "freeze")
+
+	# Apply Shock: take stack amount of Lightning damage, remove one stack
+	var shock_stacks = status_effects["shock"]
+	if shock_stacks > 0:
+		take_damage(shock_stacks, "electric")
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
+
 	return dmg
 
 func take_damage(amount: int, _element: String = ""):
+	# Evasive: dodge next attack, remove a stack
+	if status_effects["evasive"] > 0:
+		status_effects["evasive"] -= 1
+		emit_signal("status_applied", "evasive", status_effects["evasive"])
+		if status_effects["evasive"] == 0:
+			emit_signal("status_expired", "evasive")
+		print("Enemy dodged the attack with Evasive!")
+		return
+
 	if try_dodge():
 		return
 	
 	var dmg = amount
 	
 	# Freeze reduces outgoing damage, not incoming
-	# Poison increases incoming damage, stacks
+	# Corroded: +2 damage taken per stack, remove one stack after being hit
 	if status_effects["corroded"] > 0:
-		var multiplier = 1.0 + (0.10 * status_effects["corroded"])
-		dmg = int(dmg * multiplier)
+		dmg += 2 * status_effects["corroded"]
+		status_effects["corroded"] -= 1
+		if status_effects["corroded"] == 0:
+			emit_signal("status_expired", "corroded")
 
 	# Block reduces damage
 	if status_effects["block"] > 0:
@@ -216,6 +256,12 @@ func apply_status(status_name: String, stacks: int = 1):
 		return
 
 	status_effects[status_name] += stacks
+	# Clamp Burn to max 99 stacks
+	if status_name == "burn":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 99)
+	# Clamp Evasive to max 2
+	if status_name == "evasive":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 2)
 	emit_signal("status_applied", status_name, status_effects[status_name])
 
 
@@ -241,6 +287,8 @@ func _apply_burn():
 	if status_effects["burn"] > 0:
 		take_damage(status_effects["burn"])
 		status_effects["burn"] -= 1
+		if status_effects["burn"] == 0:
+			emit_signal("status_expired", "burn")
 
 
 func _apply_heal():
@@ -264,9 +312,7 @@ func is_stunned() -> bool:
 
 
 func try_dodge() -> bool:
-	if status_effects["evasive"] > 0:
-		var chance = 0.25 * status_effects["evasive"]
-		return randf() < chance
+	# Evasive is now deterministic and handled in take_damage
 	return false
 
 

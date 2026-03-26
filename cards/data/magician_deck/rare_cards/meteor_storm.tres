@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_253f0"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_8ydoa"]
 [ext_resource type="Script" uid="uid://gpg24vtoe1tr" path="res://cards/effects/multiply_strike_damage.gd" id="2_ofj0p"]
-[ext_resource type="Texture2D" uid="uid://c3lc5xlk5yixg" path="res://cards/sprites/Card_Frame_Rare.png.png" id="3_0mmyg"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="4_0mmyg"]
 
 [sub_resource type="Resource" id="Resource_pcstb"]
 script = ExtResource("2_ofj0p")
@@ -20,6 +20,6 @@ energy_cost = 2
 rarity = 2
 card_type = 1
 artwork = ExtResource("1_0mmyg")
-frame_art = ExtResource("3_0mmyg")
+frame_art = ExtResource("4_0mmyg")
 effects = Array[ExtResource("1_253f0")]([SubResource("Resource_pcstb")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

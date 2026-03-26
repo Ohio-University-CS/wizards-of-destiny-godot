@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blixivugxpp47"
-path="res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"
+uid="uid://dbwqnix5jsvbk"
+path="res://.godot/imported/Redhead.jpg-c1cbd4f22f4705d9b12a539c05a7068e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/sprites/Card_Frame_Common.png"
-dest_files=["res://.godot/imported/Card_Frame_Common.png-3e5a107aa2eaacb1e41816c21da246e5.ctex"]
+source_file="res://essentials/Redhead.jpg"
+dest_files=["res://.godot/imported/Redhead.jpg-c1cbd4f22f4705d9b12a539c05a7068e.ctex"]
 
 [params]
 

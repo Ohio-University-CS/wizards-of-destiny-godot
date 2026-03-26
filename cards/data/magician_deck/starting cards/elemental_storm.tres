@@ -5,11 +5,11 @@
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_lnjx4"]
 [ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="3_bi8h3"]
 [ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="4_j52w7"]
-[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="5_lnlap"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="5_lnlap"]
 
 [sub_resource type="Resource" id="Resource_lueaj"]
 script = ExtResource("3_bi8h3")
-amount = 3
+amount = 5
 target_type = 0
 metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
 
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 [resource]
 script = ExtResource("2_lnjx4")
 card_name = "Elemental Storm"
-description = "Add 5 Damage to Strike. Choose to Add 2 Burn or 2 Shock to Strike"
+description = "(WIP) Add 5 Damage to Strike. Choose to Add 2 Burn or 2 Shock to Strike"
 energy_cost = 2
 artwork = ExtResource("1_lnjx4")
 frame_art = ExtResource("5_lnlap")

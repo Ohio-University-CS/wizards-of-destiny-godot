@@ -223,29 +223,58 @@ func _emit_strike_changed():
 	emit_signal("strike_changed", total)
 
 
+var _strike_in_progress := false
+
 #perform the actual strike
+
 func perform_strike(target):
-	#normal damage
+	# Prevent strike if Broken is active
+	if status_effects["broken"] > 0:
+		print("Strike prevented: Player is Broken.")
+		return
+	_strike_in_progress = true
+	_do_strike_on_target(target)
+	# If Surge is active, hit again
+	if active_passives.has("Surge"):
+		print("Surge active: Strike hits twice!")
+		active_passives.erase("Surge")
+		_do_strike_on_target(target)
+	_strike_in_progress = false
+
+# Helper for strike logic (all effects)
+func _do_strike_on_target(target):
 	var dmg = get_damage() + strike_bonus_damage
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
+	# Apply Freeze: -2 per stack, cannot go below 0
+	var freeze_stacks = status_effects["freeze"]
+	if freeze_stacks > 0:
+		dmg = max(0, dmg - 2 * freeze_stacks)
+		status_effects["freeze"] = 0
+		emit_signal("status_expired", "freeze")
+	# Apply Shock: take stack amount of Lightning damage, remove one stack
+	var shock_stacks = status_effects["shock"]
+	if shock_stacks > 0:
+		take_damage(shock_stacks, "electric")
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
-	
 	#elemental damage
 	for element in strike_elemental_damage.keys():
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
 			var elemental_dmg = deal_damage(amt, element)
-			#APPLY FREEZE/CRIT LATER DOWN THE LINE
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
-	
 	#status effects
 	for effect in strike_statuses:
 		target.apply_status(effect["name"], effect["stacks"])
 		print(" - Apply ", effect["name"], " x", effect["stacks"])
-	
 	damage_multiplier = 1.0
 
 
@@ -264,7 +293,9 @@ var status_effects := {
 	"corroded": 0, # increase incoming damage
 	"sealed": 0, # can't deal damage outside of strike
 	"shock": 0, # take damage when dealing damage
-	"stun": 0 # skips turn
+	"stun": 0, # skips turn
+	"broken": 0, # strike doesn't trigger (max 1)
+	"empower": 0 # deal +3 damage per stack, remove 1 at end of turn
 }
 
 # ---------------------------------------------------------
@@ -295,6 +326,13 @@ func _ready():
 # ---------------------------------------------------------
 
 func start_turn():
+	# Stun: skip turn if stunned, remove one stack
+	if status_effects["stun"] > 0:
+		status_effects["stun"] -= 1
+		if status_effects["stun"] == 0:
+			emit_signal("status_expired", "stun")
+		return
+
 	# Apply start-of-turn effects
 	_apply_heal()
 	_apply_shock()
@@ -315,6 +353,11 @@ func start_turn():
 
 func end_turn():
 	_apply_burn()
+	# Empower: remove one stack at end of turn
+	if status_effects["empower"] > 0:
+		status_effects["empower"] -= 1
+		if status_effects["empower"] == 0:
+			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
 
 
@@ -333,10 +376,12 @@ func take_damage(amount: int, _element: String = ""):
 	var dmg = amount
 
 	# Freeze reduces outgoing damage, not incoming
-	# Corroded increases incoming damage, stacks
+	# Corroded: +2 damage taken per stack, remove one stack after being hit
 	if status_effects["corroded"] > 0:
-		var multiplier = 1.0 + (0.10 * status_effects["corroded"])
-		dmg = int(dmg * multiplier)
+		dmg += 2 * status_effects["corroded"]
+		status_effects["corroded"] -= 1
+		if status_effects["corroded"] == 0:
+			emit_signal("status_expired", "corroded")
 
 	# Block reduces damage
 	if status_effects["block"] > 0:
@@ -355,10 +400,17 @@ func take_damage(amount: int, _element: String = ""):
 
 
 func deal_damage(amount: int, element: String = "", include_base_damage: bool = true) -> int:
+	# Sealed: Only Strike deals damage
+	if status_effects["sealed"] > 0 and not _strike_in_progress:
+		return 0
 	var dmg = amount
 	
 	if include_base_damage:
 		dmg += get_damage()
+	
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
 	
 	#Elemental bonuses
 	match element:
@@ -367,13 +419,7 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 		"poison": dmg += get_poison_power()
 		"electric": dmg += get_electric_power()
 	
-	#Freeze reduces outgoing damage by 10% per stack
-	var freeze_stacks = status_effects["freeze"]
-	if freeze_stacks > 0:
-		var multiplier = 1.0 - (0.1 * freeze_stacks)
-		multiplier = max(multiplier, 0.4) # can't drop below 40%
-		dmg = int(dmg * multiplier)
-	
+	# Freeze does not affect elemental damage (handled in perform_strike)
 	#Crit check
 	if randf() < get_crit_chance():
 		dmg += get_crit_damage()
@@ -395,7 +441,12 @@ func apply_status(status_name: String, stacks: int = 1):
 		return
 
 	status_effects[status_name] += stacks
+	# Clamp Broken to max 1 stack
+	if status_name == "broken":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 1)
 	emit_signal("status_applied", status_name, status_effects[status_name])
+	if status_effects["broken"] > 0:
+		return
 
 
 func clear_status(status_name: String):
@@ -424,6 +475,8 @@ func _apply_burn():
 	if status_effects["burn"] > 0:
 		take_damage(status_effects["burn"])
 		status_effects["burn"] -= 1
+		if status_effects["burn"] == 0:
+			emit_signal("status_expired", "burn")
 
 
 func _apply_heal():
@@ -454,12 +507,17 @@ func spend_energy(amount: int) -> bool:
 	return true
 
 
+# temporary passive (rituals, etc)
+func _add_temp_effect(ename : String):
+	active_passives.append(ename)
+
+
 # Registers a passive card/effect if not already present
-func register_passive(card: CardData) -> void:
+func register_passive(pname : String) -> void:
 	# this is in case we don't want duplicates
 	#if card in active_passives:
 		#return # Prevent duplicates
-	active_passives.append(card)
+	active_passives.append(pname)
 	# Optionally, trigger any setup logic for the passive here
 
 
