@@ -66,6 +66,10 @@ var status_effects := {
 	"evasive": 0 # dodge next attack, remove a stack (max 2), remove at start of turn
 }
 
+
+func get_burn() -> int:
+	return status_effects["burn"]
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------

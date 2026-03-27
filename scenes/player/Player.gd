@@ -327,6 +327,9 @@ var status_effects := {
 var electrostasis : bool = false
 
 
+func get_block() -> int:
+	return status_effects["block"]
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------
