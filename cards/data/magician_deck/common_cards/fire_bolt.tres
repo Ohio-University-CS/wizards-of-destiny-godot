@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
 [resource]
 script = ExtResource("2_3bgfv")
 card_name = "Fire Bolt"
-description = "Add 2 Fire Damage to Strike. Apply 1 Burn. If Enemy has Burn, apply 1 extra Burn"
+description = "Add 2 Fire Damage to Strike. Add 1 Burn. If Enemy has Burn, add 1 extra Burn"
 card_type = 1
 artwork = ExtResource("1_2bh4q")
 frame_art = ExtResource("3_p6v0w")

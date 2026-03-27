@@ -70,6 +70,10 @@ var status_effects := {
 func get_burn() -> int:
 	return status_effects["burn"]
 
+
+func get_shock() -> int:
+	return status_effects["shock"]
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------
