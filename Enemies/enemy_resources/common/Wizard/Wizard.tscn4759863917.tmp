@@ -12,6 +12,8 @@ scale = Vector2(2, 2)
 script = ExtResource("1_73te0")
 enemy_data = ExtResource("2_pwnpb")
 debug_status_vfx_test = true
+debug_test_status = null
+debug_test_stacks = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=584249853]
 scale = Vector2(6, 6)

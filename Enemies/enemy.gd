@@ -338,6 +338,42 @@ func _on_status_expired(status_name: String) -> void:
 			node.queue_free()
 		_status_vfx_nodes.erase(status_name)
 
+	# Also free auxiliary VFX nodes (e.g., background sprite, embers)
+	var back_key = "%s_back" % status_name
+	if _status_vfx_nodes.has(back_key):
+		var back_node = _status_vfx_nodes[back_key]
+		if is_instance_valid(back_node):
+			back_node.queue_free()
+		_status_vfx_nodes.erase(back_key)
+
+	var ember_key = "%s_embers" % status_name
+	if _status_vfx_nodes.has(ember_key):
+		var ember_node = _status_vfx_nodes[ember_key]
+		if is_instance_valid(ember_node):
+			ember_node.queue_free()
+		_status_vfx_nodes.erase(ember_key)
+
+	var ember_inv_key = "%s_embers_inverted" % status_name
+	if _status_vfx_nodes.has(ember_inv_key):
+		var ember_inv_node = _status_vfx_nodes[ember_inv_key]
+		if is_instance_valid(ember_inv_node):
+			ember_inv_node.queue_free()
+		_status_vfx_nodes.erase(ember_inv_key)
+
+	var small_key = "%s_small" % status_name
+	if _status_vfx_nodes.has(small_key):
+		var small_node = _status_vfx_nodes[small_key]
+		if is_instance_valid(small_node):
+			small_node.queue_free()
+		_status_vfx_nodes.erase(small_key)
+
+	var pixel_key = "%s_pixel_embers" % status_name
+	if _status_vfx_nodes.has(pixel_key):
+		var pixel_node = _status_vfx_nodes[pixel_key]
+		if is_instance_valid(pixel_node):
+			pixel_node.queue_free()
+		_status_vfx_nodes.erase(pixel_key)
+
 
 func _set_burn_vfx(stacks: int) -> void:
 	if stacks <= 0:
@@ -353,20 +389,26 @@ func _set_burn_vfx(stacks: int) -> void:
 		_status_vfx_nodes["burn"] = burn_particles
 
 	# Scale intensity based on burn stacks.
-	burn_particles.amount = clampi(14 + stacks * 6, 14, 64)
-	burn_particles.scale = Vector2.ONE * min(1.0 + 0.08 * float(stacks), 1.8)
+	burn_particles.amount = clampi(10, 5, 10)
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var variance := rng.randf_range(-0.04, 0.12)
+	var target_scale := 1.0 + 0.08 * float(stacks) + variance
+	target_scale = clamp(target_scale, 0.9, 1.2)
+	burn_particles.scale = Vector2.ONE * target_scale
 	burn_particles.emitting = true
 
 
 func _create_burn_particles() -> GPUParticles2D:
 	var particles := GPUParticles2D.new()
 	particles.name = "BurnParticles"
-	particles.position = Vector2(25, 90)
-	particles.amount = 5
-	particles.lifetime = 0.8
+	particles.position = Vector2(25, 70)
+	# Increase base amount so particles can fill the box when spread wide
+	particles.amount = 10
+	particles.lifetime = 1.5
 	particles.preprocess = 0.6
 	particles.explosiveness = 0.0
-	particles.randomness = 1
+	particles.randomness = .5
 	particles.emitting = true
 
 	var material := ParticleProcessMaterial.new()
@@ -377,15 +419,27 @@ func _create_burn_particles() -> GPUParticles2D:
 	material.gravity = Vector3(0.0, -10.0, 0.0)
 	material.scale_min = 1
 	material.scale_max = 5
-	
-	# Emit from a horizontal line along x-axis for wider fire spread
+
+	# Shrink main burn particles over their lifetime (scale curve: 1 -> 0)
+	var burn_scale_curve := Curve.new()
+	burn_scale_curve.add_point(Vector2(0.0, 1.0))
+	burn_scale_curve.add_point(Vector2(1.0, 0.0))
+	var burn_scale_tex := CurveTexture.new()
+	burn_scale_tex.curve = burn_scale_curve
+	material.scale_curve = burn_scale_tex
+
+	# Emit from a horizontal box: narrow vertical band (shorter spawn height)
+	# and wide horizontal extent for stronger X-axis randomness.
 	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
-	material.emission_box_extents = Vector3(40.0, 1.0, 0.1) # Wide on x-axis for random horizontal emission
+	material.emission_box_extents = Vector3(30.0, 1.0, 0.1) # wide X, short Y
 
 	var gradient := Gradient.new()
-	gradient.add_point(0.0, Color(1.0, 0.95, 0.35, 0.95))
-	gradient.add_point(0.35, Color(1.0, 0.4, 0.1, 0.8))
-	gradient.add_point(1.0, Color(0.4, 0.05, 0.0, 0.0))
+	# Fire color ramp: bright core -> orange -> fade to transparent
+	gradient.add_point(0.0, Color(1.0, 0.98, 0.6, 1.0))
+	gradient.add_point(0.18, Color(1.0, 0.7, 0.18, 0.95))
+	gradient.add_point(0.4, Color(1.0, 0.42, 0.12, 0.85))
+	# gradient.add_point(0.7, Color(0.7, 0.12, 0.04, 0.6))
+	
 
 	var ramp := GradientTexture1D.new()
 	ramp.gradient = gradient
@@ -397,6 +451,200 @@ func _create_burn_particles() -> GPUParticles2D:
 	var burn_texture = _load_status_texture("burn")
 	if burn_texture:
 		particles.texture = burn_texture
+
+	# --- Small burn layer: smaller sprites that spawn toward the ends (wide X extents)
+	var small_burn := GPUParticles2D.new()
+	small_burn.name = "BurnSmall"
+	small_burn.position = Vector2(25, 70)
+	small_burn.amount = 5
+	small_burn.lifetime = 1.1
+	small_burn.preprocess = 0.2
+	small_burn.explosiveness = 0.0
+	small_burn.randomness = 1.0
+	small_burn.emitting = true
+
+	var small_mat := ParticleProcessMaterial.new()
+	small_mat.direction = Vector3(0.0, -1.0, 0.0)
+	small_mat.spread = 120.0
+	small_mat.initial_velocity_min = 6
+	small_mat.initial_velocity_max = 14
+	small_mat.gravity = Vector3(0.0, -8.0, 0.0)
+	small_mat.scale_min = 0.5
+	small_mat.scale_max = 1
+
+	# Shrink small burn sprites over their lifetime
+	var small_scale_curve := Curve.new()
+	small_scale_curve.add_point(Vector2(0.0, 1.0))
+	small_scale_curve.add_point(Vector2(1.0, 0.0))
+	var small_scale_tex := CurveTexture.new()
+	small_scale_tex.curve = small_scale_curve
+	small_mat.scale_curve = small_scale_tex
+	# Wide box so small burns spawn more toward the ends of the emission area
+	small_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	small_mat.emission_box_extents = Vector3(72.0, 1.0, 0.1)
+
+	# Use a slightly subdued ramp so small burns read as smaller embers
+	var small_grad := Gradient.new()
+	small_grad.add_point(0.0, Color(1.0, 0.85, 0.4, 1.0))
+	small_grad.add_point(0.5, Color(1.0, 0.45, 0.12, 0.85))
+	# small burn fades color to grey but keeps alpha; shrink removes them
+	small_grad.add_point(1.0, Color(0.25, 0.25, 0.25, 1.0))
+	var small_ramp := GradientTexture1D.new()
+	small_ramp.gradient = small_grad
+	small_mat.color_ramp = small_ramp
+
+	small_burn.process_material = small_mat
+	if burn_texture:
+		small_burn.texture = burn_texture
+
+	# Add small burn layer as a sibling under the VFX root and track it
+	if is_instance_valid(_status_vfx_root):
+		_status_vfx_root.add_child(small_burn)
+		_status_vfx_nodes["burn_small"] = small_burn
+
+	# --- Pixel embers: small 1x1 white texture tinted by ramp -> orange/yellow to grey ---
+	var pixel_embers := GPUParticles2D.new()
+	pixel_embers.name = "PixelEmbers"
+	pixel_embers.position = Vector2(0, 0)
+	pixel_embers.amount = 28
+	pixel_embers.lifetime = 0.9
+	pixel_embers.preprocess = 0.0
+	pixel_embers.randomness = 1.0
+	pixel_embers.emitting = true
+
+	var pmat := ParticleProcessMaterial.new()
+	pmat.direction = Vector3(0.0, -1.0, 0.0)
+	pmat.spread = 50.0
+	pmat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	pmat.emission_box_extents = Vector3(72.0, 2.0, 0.1)
+	pmat.initial_velocity_min = 6
+	pmat.initial_velocity_max = 14
+	pmat.gravity = Vector3(0.0, -6.0, 0.0)
+	pmat.scale_min = 0.06
+	pmat.scale_max = 0.18
+
+	# Pixel embers shrink to 0 scale over lifetime
+	var pscale := Curve.new()
+	pscale.add_point(Vector2(0.0, 1.0))
+	pscale.add_point(Vector2(1.0, 0.0))
+	var p_scale_tex := CurveTexture.new()
+	p_scale_tex.curve = pscale
+	pmat.scale_curve = p_scale_tex
+
+	var pgrad := Gradient.new()
+	pgrad.add_point(0.0, Color(1.0, 0.9, 0.3, 1.0)) # yellowish start
+	pgrad.add_point(0.35, Color(1.0, 0.55, 0.12, 1.0)) # orange mid
+	pgrad.add_point(0.8, Color(0.35, 0.35, 0.35, 0.9)) # grey near end
+	# keep alpha, let scale curve shrink pixels away
+	pgrad.add_point(1.0, Color(0.2, 0.2, 0.2, 1.0)) # grey at end (alpha kept)
+
+	var pramp := GradientTexture1D.new()
+	pramp.gradient = pgrad
+	pmat.color_ramp = pramp
+
+	pixel_embers.process_material = pmat
+
+	# create a 1x1 white pixel texture so ramp controls color
+	var px_img := Image.create(1, 1, false, Image.FORMAT_RGBA8)
+	px_img.set_pixel(0, 0, Color(1, 1, 1, 1))
+	var px_tex := ImageTexture.create_from_image(px_img)
+	pixel_embers.texture = px_tex
+
+	if is_instance_valid(_status_vfx_root):
+		_status_vfx_root.add_child(pixel_embers)
+		_status_vfx_nodes["burn_pixel_embers"] = pixel_embers
+
+	# --- Ember layer (small glowing embers that drift up) ---
+	var ember_particles := GPUParticles2D.new()
+	ember_particles.name = "Embers"
+	ember_particles.position = Vector2(0, 0)
+	ember_particles.amount = 12
+	ember_particles.lifetime = 3.5
+	ember_particles.preprocess = 0.4
+	ember_particles.randomness = 0.9
+	ember_particles.emitting = true
+
+	var ember_material := ParticleProcessMaterial.new()
+	ember_material.direction = Vector3(0.0, -1.0, 0.0)
+	ember_material.spread = 60.0
+	ember_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	ember_material.emission_box_extents = Vector3(48.0, 4.0, 0.1)
+	ember_material.initial_velocity_min = 10
+	ember_material.initial_velocity_max = 20
+	ember_material.gravity = Vector3(0.0, -6.0, 0.0)
+	ember_material.scale_min = .5
+	ember_material.scale_max = 1
+
+	# Make embers shrink over their lifetime
+	var ember_scale_curve := Curve.new()
+	ember_scale_curve.add_point(Vector2(0.0, 1.0))
+	ember_scale_curve.add_point(Vector2(1.0, 0.0))
+	var ember_scale_tex := CurveTexture.new()
+	ember_scale_tex.curve = ember_scale_curve
+	ember_material.scale_curve = ember_scale_tex
+
+	var ember_grad := Gradient.new()
+	ember_grad.add_point(0.0, Color(1.0, 0.95, 0.7, 1.0))
+	ember_grad.add_point(0.15, Color(1.0, 0.7, 0.2, 0.95))
+	ember_grad.add_point(0.4, Color(1.0, 0.45, 0.12, 0.7))
+	ember_grad.add_point(0.75, Color(0.6, 0.18, 0.06, 0.45))
+	# End ember ramp in grey and keep alpha; shrinking will make them disappear
+	ember_grad.add_point(1.0, Color(0.25, 0.25, 0.25, 1.0))
+
+	var ember_ramp := GradientTexture1D.new()
+	ember_ramp.gradient = ember_grad
+	ember_material.color_ramp = ember_ramp
+	ember_particles.process_material = ember_material
+
+	# prefer a small ember texture if it exists, otherwise create a tiny
+	# 2x2 pixel texture where each pixel is a specific ember/smoke color
+	var ember_texture = _load_status_texture("ember")
+	if not ember_texture:
+		var img := Image.create(2, 2, false, Image.FORMAT_RGBA8)
+		# Set pixels directly (Godot 4: Image.lock()/unlock() removed)
+		img.set_pixel(0, 0, Color(1.0, 0.12, 0.12, 1.0)) # top-left: red
+		img.set_pixel(1, 0, Color(1.0, 0.55, 0.12, 1.0)) # top-right: orange
+		img.set_pixel(0, 1, Color(1.0, 0.85, 0.18, 1.0)) # bottom-left: yellow
+		img.set_pixel(1, 1, Color(0.15, 0.15, 0.15, 1.0)) # bottom-right: dark grey (smoke)
+		var gen_tex := ImageTexture.create_from_image(img)
+		ember_texture = gen_tex
+
+	if ember_texture:
+		ember_particles.texture = ember_texture
+		# Remove color ramp tint so texture pixel colors show accurately
+		ember_material.color_ramp = null
+
+	# Add ember layer as a sibling under the VFX root so it renders correctly
+	# and can be managed independently.
+	_status_vfx_root.add_child(ember_particles)
+	_status_vfx_nodes["burn_embers"] = ember_particles
+
+	# --- Inverted ember layer: some embers drift downward for variety ---
+	var ember_inv := GPUParticles2D.new()
+	ember_inv.name = "EmbersInverted"
+	ember_inv.position = ember_particles.position
+	ember_inv.amount = max(6, int(ember_particles.amount / 2.0))
+	ember_inv.lifetime = ember_particles.lifetime
+	ember_inv.preprocess = ember_particles.preprocess
+	ember_inv.randomness = ember_particles.randomness
+	ember_inv.emitting = true
+
+	# Duplicate the ember material and invert its Y direction so particles fall
+	var inv_mat := ember_material.duplicate() as ParticleProcessMaterial
+	if inv_mat:
+		inv_mat.direction = Vector3(0.0, 1.0, 0.0) # downward
+		# Slightly increase spread/velocity variance for visual distinction
+		inv_mat.spread = ember_material.spread * 1.1
+		inv_mat.initial_velocity_min = ember_material.initial_velocity_min * 0.6
+		inv_mat.initial_velocity_max = ember_material.initial_velocity_max * 0.9
+
+	ember_inv.process_material = inv_mat
+
+	if ember_texture:
+		ember_inv.texture = ember_texture
+
+	_status_vfx_root.add_child(ember_inv)
+	_status_vfx_nodes["burn_embers_inverted"] = ember_inv
 	
 	return particles
 
@@ -537,9 +785,18 @@ func _create_status_particles(
 	material.scale_min = 0.2
 	material.scale_max = 0.65
 
+	# Shrink status particles over lifetime instead of fading them out
+	var status_scale := Curve.new()
+	status_scale.add_point(Vector2(0.0, 1.0))
+	status_scale.add_point(Vector2(1.0, 0.0))
+	var status_scale_tex := CurveTexture.new()
+	status_scale_tex.curve = status_scale
+	material.scale_curve = status_scale_tex
+
 	var gradient := Gradient.new()
 	gradient.add_point(0.0, base_color)
-	gradient.add_point(1.0, Color(base_color.r, base_color.g, base_color.b, 0.0))
+	# keep alpha so particles remain visible while shrinking to zero scale
+	gradient.add_point(1.0, Color(base_color.r, base_color.g, base_color.b, 1.0))
 
 	var ramp := GradientTexture1D.new()
 	ramp.gradient = gradient
