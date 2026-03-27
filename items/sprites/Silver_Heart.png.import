@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diwl8r1yieuji"
-path="res://.godot/imported/Silver Heart.png-3c7909c69bdcd1cbeaa11a54eb7a9fd3.ctex"
+uid="uid://l3eytnrggphi"
+path="res://.godot/imported/Silver_Heart.png-9d6cab6cf213b493299814b62fa1a6fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/sprites/Silver Heart.png"
-dest_files=["res://.godot/imported/Silver Heart.png-3c7909c69bdcd1cbeaa11a54eb7a9fd3.ctex"]
+source_file="res://items/sprites/Silver_Heart.png"
+dest_files=["res://.godot/imported/Silver_Heart.png-9d6cab6cf213b493299814b62fa1a6fa.ctex"]
 
 [params]
 

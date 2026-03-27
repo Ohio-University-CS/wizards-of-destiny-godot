@@ -109,8 +109,12 @@ func go_to_choice():
 		#go_to_combat()
 
 # ----------------
-# After Rest / Event
+# After Rest / Event / Item Select
 # ----------------
+
+func after_item_select():
+	go_to_combat()
+
 
 func after_rest():
 	go_to_combat()

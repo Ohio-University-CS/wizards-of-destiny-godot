@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ca28xndumf42a"]
+
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="1_2df6n"]
+[ext_resource type="Texture2D" uid="uid://rj2eqlm1ejmp" path="res://items/sprites/Ring of Life.png" id="1_d0fwt"]
+
+[resource]
+script = ExtResource("1_2df6n")
+item_name = "Ring of Life"
+decription = "Gain 5 Max Health"
+art = ExtResource("1_d0fwt")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

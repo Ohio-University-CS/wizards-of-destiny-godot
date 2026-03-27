@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bab1qy5wbwvkj"]
+
+[ext_resource type="Texture2D" uid="uid://tcjcb5xcn3jk" path="res://items/sprites/tattered_shawl.png" id="1_00bg6"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="1_qtqik"]
+
+[resource]
+script = ExtResource("1_qtqik")
+item_name = "Tattered Shawl"
+decription = "Add 5 Damage to your first Strike each Combat"
+art = ExtResource("1_00bg6")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

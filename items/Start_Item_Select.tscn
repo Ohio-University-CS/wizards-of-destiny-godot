@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://ds6mqsy0q250u"]
+
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="1_52xl4"]
+[ext_resource type="Script" uid="uid://bljfkbskudhhi" path="res://items/start_item_select.gd" id="1_wkau7"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_5se7s"]
+[ext_resource type="Texture2D" uid="uid://rj2eqlm1ejmp" path="res://items/sprites/Ring of Life.png" id="2_ud5uk"]
+[ext_resource type="Resource" uid="uid://bc1ywcyadf05g" path="res://items/data/common/amulet_of_undying.tres" id="3_jt7p4"]
+[ext_resource type="Texture2D" uid="uid://d3l7h1q5nuxyf" path="res://items/sprites/staff_of_power.png" id="3_ud5uk"]
+[ext_resource type="Texture2D" uid="uid://cqwa35k44mqi3" path="res://items/sprites/Amulet of Undying.png" id="4_llqjk"]
+[ext_resource type="Resource" uid="uid://55nl2xyq0aep" path="res://items/data/common/boots_of_the_elves.tres" id="4_twu4s"]
+[ext_resource type="Resource" uid="uid://dge6lo4auctby" path="res://items/data/common/gauntlets_of_strength.tres" id="5_3nn4w"]
+[ext_resource type="Resource" uid="uid://ca28xndumf42a" path="res://items/data/common/ring_of_life.tres" id="6_0jafp"]
+[ext_resource type="Resource" uid="uid://bhskb58dgnmn4" path="res://items/data/common/ruby_hilted_dagger.tres" id="7_iy8n1"]
+[ext_resource type="Resource" uid="uid://cryogkau5nqi1" path="res://items/data/common/rune_of_death.tres" id="8_r3vw4"]
+[ext_resource type="Resource" uid="uid://chpufs6j1lfud" path="res://items/data/common/staff_of_power.tres" id="9_tq7yl"]
+[ext_resource type="Resource" uid="uid://bab1qy5wbwvkj" path="res://items/data/common/tattered_shawl.tres" id="10_18gop"]
+
+[node name="StartItemSelect" type="Control" unique_id=957808992]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wkau7")
+item_options = Array[ExtResource("2_5se7s")]([ExtResource("3_jt7p4"), ExtResource("4_twu4s"), ExtResource("5_3nn4w"), ExtResource("6_0jafp"), ExtResource("7_iy8n1"), ExtResource("8_r3vw4"), ExtResource("9_tq7yl"), ExtResource("10_18gop")])
+
+[node name="Label" type="Label" parent="." unique_id=1868213526]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 111.0
+offset_right = 1676.0
+offset_bottom = 231.83334
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_52xl4")
+theme_override_font_sizes/font_size = 100
+text = "CHOOSE  A  STARTING  ITEM"
+
+[node name="Buttons" type="Control" parent="." unique_id=990668956]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Item1" type="Button" parent="Buttons" unique_id=1734021470]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 497.00006
+offset_right = 341.0
+offset_bottom = 553.00006
+scale = Vector2(5, 5)
+icon = ExtResource("2_ud5uk")
+flat = true
+
+[node name="Item2" type="Button" parent="Buttons" unique_id=575694689]
+layout_mode = 0
+offset_left = 767.00006
+offset_top = 493.00006
+offset_right = 823.00006
+offset_bottom = 549.00006
+scale = Vector2(5, 5)
+icon = ExtResource("3_ud5uk")
+flat = true
+
+[node name="Item3" type="Button" parent="Buttons" unique_id=798547971]
+layout_mode = 0
+offset_left = 1268.0
+offset_top = 486.00006
+offset_right = 1324.0
+offset_bottom = 542.00006
+scale = Vector2(5, 5)
+icon = ExtResource("4_llqjk")
+flat = true

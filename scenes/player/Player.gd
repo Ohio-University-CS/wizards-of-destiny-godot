@@ -74,6 +74,8 @@ func setup_from_class(data):
 	
 	deck_list = data.starting_deck.duplicate()
 	
+	active_passives.clear()
+	
 	base_max_health = data.max_health
 	base_damage = data.damage
 	base_elemental_power = data.elemental_power
@@ -520,6 +522,10 @@ func spend_energy(amount: int) -> bool:
 	set_energy(energy - amount)
 	return true
 
+
+# ---------------------------------------------------------
+# Passive Effects
+# ---------------------------------------------------------
 
 # temporary passive (rituals, etc)
 func _add_temp_effect(ename : String):

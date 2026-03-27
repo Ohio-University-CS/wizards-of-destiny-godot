@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqwa35k44mqi3"
-path="res://.godot/imported/Amulet of Undying.png-b1d99445e42f4a4130e34523a8101418.ctex"
+uid="uid://bnlb4grw56yn2"
+path="res://.godot/imported/White_Salt.png-f5f01318a5b6e8a6869c607764f1eb22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/sprites/Amulet of Undying.png"
-dest_files=["res://.godot/imported/Amulet of Undying.png-b1d99445e42f4a4130e34523a8101418.ctex"]
+source_file="res://items/sprites/White_Salt.png"
+dest_files=["res://.godot/imported/White_Salt.png-f5f01318a5b6e8a6869c607764f1eb22.ctex"]
 
 [params]
 

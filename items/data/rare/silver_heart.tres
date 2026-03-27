@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://lb6o7075ftoc"]
+
+[ext_resource type="Texture2D" uid="uid://l3eytnrggphi" path="res://items/sprites/Silver_Heart.png" id="1_twrnr"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_oujwp"]
+
+[resource]
+script = ExtResource("2_oujwp")
+item_name = "Silver Heart"
+decription = "Deal 2 extra Damage for every time you've lost health this combat"
+rarity = 2
+art = ExtResource("1_twrnr")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

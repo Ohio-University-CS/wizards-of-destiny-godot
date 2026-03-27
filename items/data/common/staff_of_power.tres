@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://chpufs6j1lfud"]
+
+[ext_resource type="Texture2D" uid="uid://d3l7h1q5nuxyf" path="res://items/sprites/staff_of_power.png" id="1_2cqyd"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_0n20v"]
+
+[resource]
+script = ExtResource("2_0n20v")
+item_name = "Staff of Power"
+decription = "Gain +25% Elemental Power"
+art = ExtResource("1_2cqyd")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

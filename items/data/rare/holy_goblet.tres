@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cdgjj0a8e1icw"]
+
+[ext_resource type="Texture2D" uid="uid://bndeb6i7aab6o" path="res://items/sprites/Holy_Goblet.png.png" id="1_q1xg1"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_mfu4g"]
+
+[resource]
+script = ExtResource("2_mfu4g")
+item_name = "Holy Goblet"
+decription = "Gain +1 Max Energy"
+rarity = 2
+art = ExtResource("1_q1xg1")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

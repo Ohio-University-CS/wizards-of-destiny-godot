@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dge6lo4auctby"]
+
+[ext_resource type="Texture2D" uid="uid://wmpnpbvcbawn" path="res://items/sprites/gauntlets_of_strength.png" id="1_q0obe"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_hr4mc"]
+
+[resource]
+script = ExtResource("2_hr4mc")
+item_name = "Gauntlets of Strength"
+decription = "Gain +1 Damage"
+art = ExtResource("1_q0obe")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

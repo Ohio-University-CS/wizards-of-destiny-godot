@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bhskb58dgnmn4"]
+
+[ext_resource type="Texture2D" uid="uid://ccl6vo850wtgb" path="res://items/sprites/ruby_hilted_dagger.png" id="1_rwsyy"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_o8peu"]
+
+[resource]
+script = ExtResource("2_o8peu")
+item_name = "Ruby-Hilted Dagger"
+decription = "Gain +7 Crit Damage"
+art = ExtResource("1_rwsyy")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

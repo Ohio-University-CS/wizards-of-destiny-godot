@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbwt1vwcuad3s"
-path="res://.godot/imported/Holy Goblet.png-b9c63bae3352bfbedc18eb993cddd0a6.ctex"
+uid="uid://tcjcb5xcn3jk"
+path="res://.godot/imported/tattered_shawl.png-7f07eee871a96aff2cf434f02c73e00c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/sprites/Holy Goblet.png"
-dest_files=["res://.godot/imported/Holy Goblet.png-b9c63bae3352bfbedc18eb993cddd0a6.ctex"]
+source_file="res://items/sprites/tattered_shawl.png"
+dest_files=["res://.godot/imported/tattered_shawl.png-7f07eee871a96aff2cf434f02c73e00c.ctex"]
 
 [params]
 
