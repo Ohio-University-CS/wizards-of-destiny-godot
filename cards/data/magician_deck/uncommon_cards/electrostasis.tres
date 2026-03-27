@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://llkwkxuxqkhe"]
+
+[ext_resource type="Texture2D" uid="uid://cnnnesvcqbrx8" path="res://cards/sprites/electrostasis.png" id="1_20nl0"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_lovld"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_3rcat"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="2_20nl0"]
+
+[resource]
+script = ExtResource("2_3rcat")
+card_name = "Electrostasis"
+description = "When you apply Shock, gain 1 Energy (once per turn)"
+rarity = 1
+card_type = 2
+card_flag = 2
+artwork = ExtResource("1_20nl0")
+frame_art = ExtResource("2_20nl0")
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

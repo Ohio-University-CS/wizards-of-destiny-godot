@@ -195,6 +195,11 @@ func add_strike_damage(amount: int, _include_base_dmg : bool):
 	strike_bonus_damage += amount
 	if _include_base_dmg:
 		strike_bonus_damage += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
+	
 	_emit_strike_changed()
 
 func multiply_strike_damage(amount : float):
@@ -215,6 +220,10 @@ func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 		strike_elemental_damage[element] += amount
 		if _include_base_dmg:
 			strike_elemental_damage[element] += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
 	
 	_emit_strike_changed()
 
@@ -314,6 +323,10 @@ var status_effects := {
 	"empower": 0 # deal +3 damage per stack, remove 1 at end of turn
 }
 
+# Electrostasis Passive variable
+var electrostasis : bool = false
+
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------
@@ -352,6 +365,9 @@ func start_turn():
 	# Apply start-of-turn effects
 	_apply_heal()
 	_apply_shock()
+	
+	# Passives
+	electrostasis = false
 
 	# Reset block each turn
 	status_effects["block"] = 0
@@ -485,6 +501,10 @@ func modify_stat_temp(stat_name: String, amount: int):
 
 func add_block(amount: int):
 	status_effects["block"] += amount
+	
+	# Guardian Passive
+	if active_passives.has("Guardian"):
+		add_strike_damage(1, false)
 
 
 func _apply_burn():
@@ -505,6 +525,11 @@ func _apply_shock():
 	if status_effects["shock"] > 0:
 		# Shock reduces energy
 		set_energy(max(0, energy - status_effects["shock"]))
+		
+		# Electrostasis Passive
+		if active_passives.has("Electrostasis") and electrostasis == false:
+			add_energy(1)
+			electrostasis = true
 
 
 func set_energy(new_value: int) -> void:
