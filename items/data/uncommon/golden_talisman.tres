@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_capyt")
 item_name = "Golden Talisman"
-decription = "Gain +15% Crit Chance"
+description = "Gaiin +15% Crit Chance"
 rarity = 1
 art = ExtResource("1_11vlv")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_qtqik")
 item_name = "Tattered Shawl"
-decription = "Add 5 Damage to your first Strike each Combat"
+description = "Add 5 Damage to your first Strike each Combat"
 art = ExtResource("1_00bg6")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

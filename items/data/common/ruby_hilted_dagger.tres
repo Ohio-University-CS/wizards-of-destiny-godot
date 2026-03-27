@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_o8peu")
 item_name = "Ruby-Hilted Dagger"
-decription = "Gain +7 Crit Damage"
+description = "Gain +7 Crit Damage"
 art = ExtResource("1_rwsyy")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

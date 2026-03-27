@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_0n20v")
 item_name = "Staff of Power"
-decription = "Gain +25% Elemental Power"
+description = "Gain +25% Elemental Power"
 art = ExtResource("1_2cqyd")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

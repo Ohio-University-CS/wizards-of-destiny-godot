@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_oujwp")
 item_name = "Silver Heart"
-decription = "Deal 2 extra Damage for every time you've lost health this combat"
+description = "Deal 2 extra Damage for every time you've lost health this combat"
 rarity = 2
 art = ExtResource("1_twrnr")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

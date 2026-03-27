@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_juynm")
 item_name = "Used Breastplate"
-decription = "If you have Block remaining at end of turn, gain 1 Empowered"
+description = "If you have have Block remaining at start of turn, gain 1 Empowered"
 rarity = 1
 metadata/_custom_type_script = "uid://dii8d12ououjr"

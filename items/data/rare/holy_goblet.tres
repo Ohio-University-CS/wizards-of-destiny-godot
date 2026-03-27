@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_mfu4g")
 item_name = "Holy Goblet"
-decription = "Gain +1 Max Energy"
+description = "Gain +1 Max Energy"
 rarity = 2
 art = ExtResource("1_q1xg1")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

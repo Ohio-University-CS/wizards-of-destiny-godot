@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_rf7bf")
 item_name = "Rune of Death"
-decription = "Enemies spawn with 3 less Health"
+description = "Enemies Spawn with 3 less Health"
 art = ExtResource("1_hp2my")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

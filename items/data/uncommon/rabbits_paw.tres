@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_a3tie")
 item_name = "Rabbit's Paw"
-decription = "If you would die, destroy this item and set your Health to 25%"
+description = "If you would die, destroy this item and set your Health to 25%"
 rarity = 1
 metadata/_custom_type_script = "uid://dii8d12ououjr"

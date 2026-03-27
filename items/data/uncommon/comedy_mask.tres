@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_5qafx")
 item_name = "Comedy Mask"
-decription = "All prices in the shop are reduced by 25%"
+description = "All prices in shop are reduced by 25%"
 rarity = 1
 art = ExtResource("1_ecnpg")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

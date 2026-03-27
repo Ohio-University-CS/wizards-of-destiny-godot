@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_hr4mc")
 item_name = "Gauntlets of Strength"
-decription = "Gain +1 Damage"
+description = "Gain +1 Damage"
 art = ExtResource("1_q0obe")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

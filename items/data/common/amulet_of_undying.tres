@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_1rd32")
 item_name = "Amulet of Undying"
-decription = "Heal 3 Life after each Combat"
+description = "Heal 3 Life after each Combat"
 art = ExtResource("1_y040h")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

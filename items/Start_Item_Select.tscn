@@ -44,29 +44,66 @@ offset_bottom = 40.0
 [node name="Item1" type="Button" parent="Buttons" unique_id=1734021470]
 layout_mode = 0
 offset_left = 285.0
-offset_top = 497.00006
+offset_top = 604.0
 offset_right = 341.0
-offset_bottom = 553.00006
+offset_bottom = 660.0
 scale = Vector2(5, 5)
 icon = ExtResource("2_ud5uk")
 flat = true
 
 [node name="Item2" type="Button" parent="Buttons" unique_id=575694689]
 layout_mode = 0
-offset_left = 767.00006
-offset_top = 493.00006
-offset_right = 823.00006
-offset_bottom = 549.00006
+offset_left = 771.00006
+offset_top = 582.0
+offset_right = 827.00006
+offset_bottom = 638.0
 scale = Vector2(5, 5)
 icon = ExtResource("3_ud5uk")
 flat = true
 
 [node name="Item3" type="Button" parent="Buttons" unique_id=798547971]
 layout_mode = 0
-offset_left = 1268.0
-offset_top = 486.00006
-offset_right = 1324.0
-offset_bottom = 542.00006
+offset_left = 1275.0001
+offset_top = 586.0
+offset_right = 1331.0001
+offset_bottom = 642.0
 scale = Vector2(5, 5)
 icon = ExtResource("4_llqjk")
 flat = true
+
+[node name="Tooltip" type="Panel" parent="." unique_id=1055760658]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 282.0
+offset_right = 1412.0
+offset_bottom = 529.0
+
+[node name="NameLabel" type="Label" parent="Tooltip" unique_id=119655518]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.27100003
+offset_right = 2.0
+offset_bottom = 0.06299591
+theme_override_fonts/font = ExtResource("1_52xl4")
+theme_override_font_sizes/font_size = 40
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="Tooltip" unique_id=383312843]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.377
+anchor_right = 0.92700005
+anchor_bottom = 1.0200001
+offset_left = 0.2009964
+offset_top = -0.119003296
+offset_right = -0.21905518
+offset_bottom = 0.0599823
+theme_override_fonts/font = ExtResource("1_52xl4")
+theme_override_font_sizes/font_size = 25
+text = "Item Description"
+horizontal_alignment = 1

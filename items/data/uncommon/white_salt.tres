@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_uvmlb")
 item_name = "White Salt"
-decription = "Draw 1 extra card"
+description = "Draw 1 extra Card"
 rarity = 1
 art = ExtResource("1_msuld")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

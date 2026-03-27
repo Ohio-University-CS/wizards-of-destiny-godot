@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_1hk24")
 item_name = "Boots of the Elves"
-decription = "Gain +5% Dodge"
+description = "Gain +5% Dodge"
 art = ExtResource("1_36kay")
 metadata/_custom_type_script = "uid://dii8d12ououjr"
