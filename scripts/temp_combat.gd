@@ -865,7 +865,20 @@ func _on_player_died() -> void:
 func _on_opponent_died() -> void:
 	_show_result(true)
 	
-	#detach player so it doesn't get freed
+	# Remove temporary cards from all piles
+	if deck:
+		deck.draw_pile = deck.draw_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.hand = deck.hand.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.discard_pile = deck.discard_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		print("[Combat] Temporary cards removed from all piles.")
+	
+	
+	# detach player so it doesn't get freed
 	if player:
 		if player.get_parent():
 			player.get_parent().remove_child(player)

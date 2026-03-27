@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
 [ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/uncommon_cards/shield.tres" id="7_nj4jc"]
 [ext_resource type="Resource" uid="uid://bdjv3n01gigwa" path="res://cards/data/magician_deck/common_cards/magic_missle.tres" id="8_nj4jc"]
+[ext_resource type="Resource" uid="uid://c5rgb5q5rn4m2" path="res://cards/data/magician_deck/common_cards/duplicate.tres" id="9_jafg1"]
 [ext_resource type="Resource" uid="uid://djo7ivi54ieol" path="res://cards/data/magician_deck/common_cards/stoneskin.tres" id="9_jpxio"]
 [ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="10_nj4jc"]
 [ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
@@ -17,6 +18,9 @@
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
 [ext_resource type="Resource" uid="uid://hykg0af24hdd" path="res://cards/data/magician_deck/common_cards/lightning_bolt.tres" id="15_5j3h6"]
+[ext_resource type="Resource" uid="uid://bdau76shjs4sa" path="res://cards/data/magician_deck/common_cards/shocking_grasp.tres" id="15_n5wbs"]
+[ext_resource type="Resource" uid="uid://bj818eibkxbjg" path="res://cards/data/magician_deck/common_cards/static_field.tres" id="16_2lsrc"]
+[ext_resource type="Resource" uid="uid://d27n5bfah5q6p" path="res://cards/data/magician_deck/common_cards/spark_of_magic.tres" id="16_jafg1"]
 [ext_resource type="Resource" uid="uid://c4w1vwldssmmg" path="res://cards/data/magician_deck/common_cards/mana_weave.tres" id="16_ronn0"]
 [ext_resource type="Resource" uid="uid://b06moxsoigmtk" path="res://cards/data/magician_deck/rare_cards/smite.tres" id="17_cbkss"]
 [ext_resource type="Resource" uid="uid://cuixxyk63vg8b" path="res://cards/data/magician_deck/uncommon_cards/pool_of_essence.tres" id="18_t785l"]
@@ -44,7 +48,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("4_nj4jc"), ExtResource("3_35ukv"), ExtResource("6_nj4jc"), ExtResource("7_nj4jc"), ExtResource("8_nj4jc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("11_j512n"), ExtResource("12_5difm"), ExtResource("13_xaxl1"), ExtResource("14_16jyn"), ExtResource("15_5j3h6"), ExtResource("16_ronn0"), ExtResource("17_cbkss"), ExtResource("18_t785l"), ExtResource("19_r34ar"), ExtResource("20_mmk1d"), ExtResource("21_s6mfd"), ExtResource("22_s6mfd"), ExtResource("23_kfoi1"), ExtResource("24_e5h2d"), ExtResource("25_vln2m"), ExtResource("26_i6tmi"), ExtResource("27_5wu3g"), ExtResource("28_kt3wt")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("14_16jyn"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_i6tmi"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("18_t785l"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("12_5difm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c5rgb5q5rn4m2"]
+
+[ext_resource type="Texture2D" uid="uid://cr31wddu6gs11" path="res://cards/sprites/duplicate.png" id="1_1qwc4"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_176bg"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="2_66ecp"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_wtauk"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_1qwc4"]
+
+[sub_resource type="Resource" id="Resource_awhfu"]
+script = ExtResource("2_66ecp")
+card_name = 4
+target_type = 0
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_wtauk")
+card_name = "Duplicate"
+description = "Create a copy of a Card in your hand for rest of Battle"
+energy_cost = 0
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_1qwc4")
+frame_art = ExtResource("3_1qwc4")
+effects = Array[ExtResource("1_176bg")]([SubResource("Resource_awhfu")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

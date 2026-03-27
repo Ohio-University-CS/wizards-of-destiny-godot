@@ -19,3 +19,5 @@ enum CardRarity { COMMON, UNCOMMON, RARE }
 @export var frame_art : Texture2D
 
 @export var effects : Array[Effect]
+
+var temporary : bool = false

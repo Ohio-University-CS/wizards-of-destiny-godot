@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bj818eibkxbjg"]
+
+[ext_resource type="Texture2D" uid="uid://bkv22hgc8rp3e" path="res://cards/sprites/static_field.png" id="1_pi0r8"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_xcuwb"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="2_32y8x"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_gmssq"]
+[ext_resource type="Script" uid="uid://bqpow07i80x21" path="res://cards/effects/temp_stat_change.gd" id="2_v7dke"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_v7dke"]
+
+[sub_resource type="Resource" id="Resource_pi0r8"]
+script = ExtResource("2_v7dke")
+stat = 6
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://bqpow07i80x21"
+
+[sub_resource type="Resource" id="Resource_jrwaf"]
+script = ExtResource("3_v7dke")
+card_name = 3
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_gmssq")
+card_name = "Static Field"
+description = "Gain +1 Electric Damage this Battle. If Enemy has Shock, gain 1 Energy"
+artwork = ExtResource("1_pi0r8")
+frame_art = ExtResource("2_32y8x")
+effects = Array[ExtResource("1_xcuwb")]([SubResource("Resource_pi0r8"), SubResource("Resource_jrwaf")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
