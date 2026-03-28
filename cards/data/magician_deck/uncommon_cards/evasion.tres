@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cg51qpankcalo"]
+
+[ext_resource type="Texture2D" uid="uid://csgj7g5rmj2qm" path="res://cards/sprites/evasion.png" id="1_omo8v"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_xn5ae"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_lgi37"]
+[ext_resource type="Script" uid="uid://p867dxer3vpn" path="res://cards/effects/add_temp_ritual.gd" id="3_s07xi"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="4_grlpq"]
+
+[sub_resource type="Resource" id="Resource_8cx5c"]
+script = ExtResource("3_s07xi")
+rname = "Evasion"
+target_type = 0
+metadata/_custom_type_script = "uid://p867dxer3vpn"
+
+[resource]
+script = ExtResource("2_lgi37")
+card_name = "Evasion"
+description = "Set Dodge to 100% until next turn. Strike deals 50% Damage this turn."
+energy_cost = 2
+rarity = 1
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_omo8v")
+frame_art = ExtResource("4_grlpq")
+effects = Array[ExtResource("1_xn5ae")]([SubResource("Resource_8cx5c")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -284,6 +284,10 @@ func _do_strike_on_target(target):
 			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
 	
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		dmg /= 2
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
@@ -293,6 +297,11 @@ func _do_strike_on_target(target):
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
 			var elemental_dmg = deal_damage(amt, element)
+			
+			# Evasion Ritual
+			if active_passives.has("Evasion"):
+				elemental_dmg /= 2
+			
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
 	
@@ -370,6 +379,10 @@ func start_turn():
 	
 	# Passives
 	electrostasis = false
+	
+	# Rituals
+	if active_passives.has("Evasion"):
+		active_passives.erase("Evasion")
 
 	# Reset block each turn
 	status_effects["block"] = 0
@@ -577,6 +590,10 @@ func is_stunned() -> bool:
 
 
 func try_dodge() -> bool:
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		return true
+	
 	return randf() < get_dodge_chance()
 
 

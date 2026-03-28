@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://n2pf7h4xkg51"]
+
+[ext_resource type="Texture2D" uid="uid://cislvc1i350em" path="res://cards/sprites/burning_hands.png" id="1_7fk0o"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_aegfu"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_rh666"]
+[ext_resource type="Script" uid="uid://bqpow07i80x21" path="res://cards/effects/temp_stat_change.gd" id="3_ui6ke"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="4_rdxvc"]
+
+[sub_resource type="Resource" id="Resource_uimno"]
+script = ExtResource("3_ui6ke")
+stat = 3
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://bqpow07i80x21"
+
+[resource]
+script = ExtResource("2_rh666")
+card_name = "Burning Hands"
+description = "(WIP) Gain +1 Fire Damage. Every time you apply Burn this turn gain 1 more"
+card_type = 1
+artwork = ExtResource("1_7fk0o")
+frame_art = ExtResource("4_rdxvc")
+effects = Array[ExtResource("1_aegfu")]([SubResource("Resource_uimno")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
