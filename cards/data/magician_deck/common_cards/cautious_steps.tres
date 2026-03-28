@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bo05i667eshff"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_cn74t"]
+[ext_resource type="Texture2D" uid="uid://bdrhcit84kxdy" path="res://cards/sprites/cautious_steps.png" id="1_nrch0"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="2_cyl8o"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_p211a"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_nrch0"]
+
+[sub_resource type="Resource" id="Resource_abg0c"]
+script = ExtResource("2_cyl8o")
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[resource]
+script = ExtResource("2_p211a")
+card_name = "Cautious Steps"
+description = "(WIP) Gain +10% Dodge until next turn. Draw 1 Card"
+energy_cost = 0
+card_type = 1
+artwork = ExtResource("1_nrch0")
+frame_art = ExtResource("3_nrch0")
+effects = Array[ExtResource("1_cn74t")]([SubResource("Resource_abg0c")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

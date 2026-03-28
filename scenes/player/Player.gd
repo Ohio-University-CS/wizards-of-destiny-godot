@@ -367,7 +367,6 @@ func start_turn():
 
 	# Apply start-of-turn effects
 	_apply_heal()
-	_apply_shock()
 	
 	# Passives
 	electrostasis = false
@@ -526,13 +525,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		set_energy(max(0, energy - status_effects["shock"]))
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
 		
-		# Electrostasis Passive
-		if active_passives.has("Electrostasis") and electrostasis == false:
-			add_energy(1)
-			electrostasis = true
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 func set_energy(new_value: int) -> void:

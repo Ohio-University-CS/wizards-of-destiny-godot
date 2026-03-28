@@ -875,7 +875,6 @@ func _on_opponent_died() -> void:
 			return not card_instance.data.temporary)
 		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
 			return not card_instance.data.temporary)
-		print("[Combat] Temporary cards removed from all piles.")
 	
 	
 	# detach player so it doesn't get freed
