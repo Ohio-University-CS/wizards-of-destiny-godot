@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bgcwahceecrw1"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_h7rnq"]
+[ext_resource type="Texture2D" uid="uid://d1e55oh2d8vt6" path="res://cards/sprites/overheat.png" id="1_nu4u1"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_yrchd"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="3_2ddoi"]
+
+[resource]
+script = ExtResource("2_yrchd")
+card_name = "Overheat"
+description = "Burn deals 50% more Damage. If Enemy has 6+ Burn, Burn deals 100% more Damage"
+rarity = 1
+card_type = 2
+card_flag = 2
+artwork = ExtResource("1_nu4u1")
+frame_art = ExtResource("3_2ddoi")
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

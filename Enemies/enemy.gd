@@ -66,6 +66,14 @@ var status_effects := {
 	"evasive": 0 # dodge next attack, remove a stack (max 2), remove at start of turn
 }
 
+
+func get_burn() -> int:
+	return status_effects["burn"]
+
+
+func get_shock() -> int:
+	return status_effects["shock"]
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------
@@ -137,14 +145,13 @@ func start_turn():
 			emit_signal("status_expired", "evasive")
 
 	# Apply start-of-turn effects
+	_apply_burn()
 	_apply_heal()
-	_apply_shock()
 
 	# Reset block each turn
 	status_effects["block"] = 0
 
 func end_turn():
-	_apply_burn()
 	# Empower: remove one stack at end of turn
 	if status_effects["empower"] > 0:
 		status_effects["empower"] -= 1
@@ -323,7 +330,16 @@ func add_block(amount: int):
 
 func _apply_burn():
 	if status_effects["burn"] > 0:
-		take_damage(status_effects["burn"])
+		# If Overheat Passive is in play
+		if RunManager.player.active_passives.has("Overheat"):
+			if status_effects["burn"] > 6:
+				take_damage(status_effects["burn"] * 2)
+			else:
+				take_damage(status_effects["burn"] * 1.5)
+		else:
+			take_damage(status_effects["burn"])
+		
+		# Decrease by 1
 		status_effects["burn"] -= 1
 		if status_effects["burn"] == 0:
 			emit_signal("status_expired", "burn")
@@ -337,8 +353,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		pass
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 # ---------------------------------------------------------

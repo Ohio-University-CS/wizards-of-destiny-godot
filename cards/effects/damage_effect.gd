@@ -27,3 +27,6 @@ func apply(source, target, _combat):
 		)
 		
 		target.take_damage(dmg)
+	
+	if source.has_method("_apply_shock"):
+		source._apply_shock()

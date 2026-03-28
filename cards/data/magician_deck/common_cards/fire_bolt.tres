@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://2ybti81h0mfp"]
+
+[ext_resource type="Texture2D" uid="uid://cohphihl7i888" path="res://cards/sprites/firebolt.png" id="1_2bh4q"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_tjf4h"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_3bgfv"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_bh4ok"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_2bh4q"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_p6v0w"]
+
+[sub_resource type="Resource" id="Resource_2bh4q"]
+script = ExtResource("2_bh4ok")
+amount = 2
+element = 1
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_lnw7k"]
+script = ExtResource("3_2bh4q")
+card_name = 1
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_3bgfv")
+card_name = "Fire Bolt"
+description = "Add 2 Fire Damage to Strike. Add 1 Burn. If Enemy has Burn, add 1 extra Burn"
+card_type = 1
+artwork = ExtResource("1_2bh4q")
+frame_art = ExtResource("3_p6v0w")
+effects = Array[ExtResource("1_tjf4h")]([SubResource("Resource_2bh4q"), SubResource("Resource_lnw7k")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

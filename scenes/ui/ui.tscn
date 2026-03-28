@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://bpwkk8nabxiqh" path="res://sprites/strike_visual.png" id="5_jcn1r"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
-[ext_resource type="Script" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
-[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scenes/ui/end_turn_button.gd" id="7_jcn1r"]
+[ext_resource type="Script" uid="uid://dgssro5ui3kge" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_uegxj"]
+[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scenes/ui/end_turn_button.gd" id="7_jcn1r"]
 
 [node name="UI" type="Control" unique_id=1263839368]
 layout_mode = 3

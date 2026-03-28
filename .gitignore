@@ -5,3 +5,4 @@
 .pdf/
 .DS_Store
 addons/godot-sqlite/bin/
+addons/godot_wry/bin/

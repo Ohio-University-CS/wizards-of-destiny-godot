@@ -74,6 +74,8 @@ func setup_from_class(data):
 	
 	deck_list = data.starting_deck.duplicate()
 	
+	active_passives.clear()
+	
 	base_max_health = data.max_health
 	base_damage = data.damage
 	base_elemental_power = data.elemental_power
@@ -193,6 +195,11 @@ func add_strike_damage(amount: int, _include_base_dmg : bool):
 	strike_bonus_damage += amount
 	if _include_base_dmg:
 		strike_bonus_damage += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
+	
 	_emit_strike_changed()
 
 func multiply_strike_damage(amount : float):
@@ -213,6 +220,10 @@ func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 		strike_elemental_damage[element] += amount
 		if _include_base_dmg:
 			strike_elemental_damage[element] += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
 	
 	_emit_strike_changed()
 
@@ -273,6 +284,10 @@ func _do_strike_on_target(target):
 			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
 	
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		dmg /= 2
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
@@ -282,6 +297,11 @@ func _do_strike_on_target(target):
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
 			var elemental_dmg = deal_damage(amt, element)
+			
+			# Evasion Ritual
+			if active_passives.has("Evasion"):
+				elemental_dmg /= 2
+			
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
 	
@@ -311,6 +331,13 @@ var status_effects := {
 	"broken": 0, # strike doesn't trigger (max 1)
 	"empower": 0 # deal +3 damage per stack, remove 1 at end of turn
 }
+
+# Electrostasis Passive variable
+var electrostasis : bool = false
+
+
+func get_block() -> int:
+	return status_effects["block"]
 
 # ---------------------------------------------------------
 # SIGNALS
@@ -349,7 +376,13 @@ func start_turn():
 
 	# Apply start-of-turn effects
 	_apply_heal()
-	_apply_shock()
+	
+	# Passives
+	electrostasis = false
+	
+	# Rituals
+	if active_passives.has("Evasion"):
+		active_passives.erase("Evasion")
 
 	# Reset block each turn
 	status_effects["block"] = 0
@@ -483,6 +516,10 @@ func modify_stat_temp(stat_name: String, amount: int):
 
 func add_block(amount: int):
 	status_effects["block"] += amount
+	
+	# Guardian Passive
+	if active_passives.has("Guardian"):
+		add_strike_damage(1, false)
 
 
 func _apply_burn():
@@ -501,8 +538,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		set_energy(max(0, energy - status_effects["shock"]))
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 func set_energy(new_value: int) -> void:
@@ -520,6 +562,10 @@ func spend_energy(amount: int) -> bool:
 	set_energy(energy - amount)
 	return true
 
+
+# ---------------------------------------------------------
+# Passive Effects
+# ---------------------------------------------------------
 
 # temporary passive (rituals, etc)
 func _add_temp_effect(ename : String):
@@ -544,6 +590,10 @@ func is_stunned() -> bool:
 
 
 func try_dodge() -> bool:
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		return true
+	
 	return randf() < get_dodge_chance()
 
 

@@ -9,6 +9,8 @@ extends Node
 var player : Player = null
 var coins : int = 10
 
+var item_inventory : Array[ItemData]
+
 var level_floor : int
 var stage : int
 
@@ -29,6 +31,7 @@ var last_combat_result : Dictionary = {}
 # ----------------
 
 func start_new_run(starting_player : Player):
+	item_inventory.clear()
 	player = starting_player
 	coins = 10
 	level_floor = 1
@@ -65,3 +68,17 @@ func get_stage_type() -> StageType:
 	if stage == 12:
 		return StageType.BOSS
 	return StageType.NORMAL
+
+
+# ---------------------------------------------------------
+# Items
+# ---------------------------------------------------------
+
+func add_item(item : ItemData):
+	if item not in item_inventory:
+		item_inventory.append(item)
+
+
+func remove_item(item : ItemData):
+	if item in item_inventory:
+		item_inventory.erase(item)
