@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://s6osdcqxapgy"]
+
+[ext_resource type="Texture2D" uid="uid://cfjsknywt4jtd" path="res://cards/sprites/thunderwave.png" id="1_8dcbb"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_xkqex"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_0s1yl"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_60st0"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_8dcbb"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="3_57q25"]
+
+[sub_resource type="Resource" id="Resource_8dcbb"]
+script = ExtResource("2_0s1yl")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_mb4er"]
+script = ExtResource("3_8dcbb")
+card_name = 6
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_60st0")
+card_name = "Thunderwave"
+description = "Add 5 Damage to Strike. If Enemy has Shock, apply Stun"
+energy_cost = 3
+rarity = 2
+card_type = 1
+artwork = ExtResource("1_8dcbb")
+frame_art = ExtResource("3_57q25")
+effects = Array[ExtResource("1_xkqex")]([SubResource("Resource_8dcbb"), SubResource("Resource_mb4er")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

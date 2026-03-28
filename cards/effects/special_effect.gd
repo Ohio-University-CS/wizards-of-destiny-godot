@@ -5,7 +5,9 @@ enum CardName {
 	FIRE_BOLT,
 	SHOCKING_GRASP,
 	STATIC_FIELD,
-	DUPLICATE
+	DUPLICATE,
+	DIVINE_INCANTATION,
+	THUNDERWAVE
 }
 
 @export var card_name : CardName
@@ -73,3 +75,13 @@ func apply(source, target, combat):
 		combat.deck.hand.append(temp_card_instance)
 		combat.spawn_card(temp_card_instance)
 		print("[DuplicateEffect] Duplicated card added as temporary to draw_pile and hand.")
+	
+	if card_name == CardName.DIVINE_INCANTATION:
+		if source:
+			source.status_effects["empower"] *= 2
+	
+	if card_name == CardName.THUNDERWAVE:
+		if target and target.has_method("get_shock") and target.has_method("apply_status"):
+			if target.get_shock() > 0:
+				target.apply_status("stun", 1)
+	

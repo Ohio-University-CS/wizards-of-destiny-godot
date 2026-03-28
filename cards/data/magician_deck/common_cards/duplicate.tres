@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
 [resource]
 script = ExtResource("2_wtauk")
 card_name = "Duplicate"
-description = "Create a copy of a Card in your hand for rest of Battle"
+description = "(WIP) Create a copy of a Card in your hand for rest of Battle"
 energy_cost = 0
 card_type = 1
 card_flag = 1
