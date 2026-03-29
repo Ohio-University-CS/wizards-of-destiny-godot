@@ -46,21 +46,20 @@ anchor_left = 0.425
 anchor_top = 10.862
 anchor_right = 0.425
 anchor_bottom = 10.862
-offset_left = -56.0
-offset_top = -35.48001
-offset_bottom = 0.019989014
+offset_left = -242.0
+offset_top = -115.48001
+offset_right = 2.0
+offset_bottom = -6.480011
 scale = Vector2(2, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
-position = Vector2(32.5, 16.5)
-texture = ExtResource("3_3671t")
+icon = ExtResource("3_3671t")
+flat = true
 
 [node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
 layout_mode = 0
-offset_left = -48.0
-offset_top = -6.5
-offset_right = 121.0
-offset_bottom = 35.5
+offset_left = 40.0
+offset_top = 31.5
+offset_right = 209.0
+offset_bottom = 73.5
 text = "Sun"
 label_settings = SubResource("LabelSettings_0qkqs")
 horizontal_alignment = 1
