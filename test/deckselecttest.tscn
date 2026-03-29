@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://djdvf1ihste63"]
 
+[ext_resource type="Script" uid="uid://b4b3xmxktckft" path="res://test/deckselecttest.gd" id="1_fdi50"]
+
 [node name="Deckselecttest" type="Node2D" unique_id=406970149]
+script = ExtResource("1_fdi50")
