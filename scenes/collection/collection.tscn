@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cslclgjjlhqpy" path="res://scenes/collection/collection_page.gd" id="1_wbqwq"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_bqqb3"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_v7qe6"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="3_rp0lf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_v7qe6"]
 font_size = 30
@@ -15,6 +17,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wbqwq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1785798548]
+texture = ExtResource("2_v7qe6")
+centered = false
+
+[node name="Label" type="Label" parent="." unique_id=793781147]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 49.0
+offset_right = 1116.0
+offset_bottom = 121.5
+theme_override_fonts/font = ExtResource("3_rp0lf")
+theme_override_font_sizes/font_size = 60
+text = "COLLECTION"
 
 [node name="Buttons" type="Control" parent="." unique_id=106585024]
 layout_mode = 1
@@ -41,5 +57,6 @@ offset_left = 86.0
 offset_top = 32.75
 offset_right = 255.0
 offset_bottom = 74.75
+theme_override_fonts/font = ExtResource("3_rp0lf")
 text = "Back"
 label_settings = SubResource("LabelSettings_v7qe6")

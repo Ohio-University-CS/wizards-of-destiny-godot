@@ -68,7 +68,7 @@ func apply(source, target, combat):
 						source.add_strike_damage(3)
 	
 	if card_name == CardName.LAY_ON_HANDS:
-		if source and source.has_var("status_effects"):
+		if source and "status_effects" in source:
 			var count : int = 0
 			for effect in source.status_effects:
 				count += source.status_effects[effect]
