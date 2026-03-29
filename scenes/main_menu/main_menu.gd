@@ -14,13 +14,17 @@ func _ready() -> void:
 	settings_button.pressed.connect(_on_settings_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
 	levels_button.pressed.connect(_on_level_select_pressed)
+	collection_button.pressed.connect(_on_collections_pressed)
 
 func _on_settings_pressed():
 	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setting-menu-graphics.tscn")
 
 func _on_level_select_pressed():
 	get_tree().change_scene_to_file("res://scenes/Level Select/level_1.tscn")
-	
+
+func _on_collections_pressed():
+	get_tree().change_scene_to_file("res://scenes/collection/collection.tscn")
+
 func _on_exit_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen/title_page.tscn")
 
