@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://0uq1lyntjwe7"]
 
+[ext_resource type="Texture2D" uid="uid://bxpyuqvmfabtl" path="res://cards/sprites/potential_destruction.png" id="1_fnqb3"]
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_i52f8"]
 [ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_0y3he"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_gdmtp"]
@@ -24,6 +25,7 @@ script = ExtResource("2_gdmtp")
 card_name = "Potential Destruction"
 description = "Attack for DMG +1. Increase this Card's Damage by DMG this Battle."
 rarity = 1
+artwork = ExtResource("1_fnqb3")
 frame_art = ExtResource("3_3o7fd")
 effects = Array[ExtResource("1_i52f8")]([SubResource("Resource_fnqb3"), SubResource("Resource_pk5b3")])
 metadata/_custom_type_script = "uid://c3657u1f1ygos"

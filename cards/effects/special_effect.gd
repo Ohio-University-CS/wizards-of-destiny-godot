@@ -6,6 +6,8 @@ enum CardName {
 	DUPLICATE,
 	FIRE_BOLT,
 	GRAND_FINALE,
+	LAY_ON_HANDS,
+	LIGHTNING_STRIKE,
 	POTENTIAL_DESTRUCTION,
 	SHOCKING_GRASP,
 	STATIC_FIELD,
@@ -64,6 +66,27 @@ func apply(source, target, combat):
 				if target.get_shock() > 0:
 					for i in range(target.get_shock()):
 						source.add_strike_damage(3)
+	
+	if card_name == CardName.LAY_ON_HANDS:
+		if source and source.has_var("status_effects"):
+			var count : int = 0
+			for effect in source.status_effects:
+				count += source.status_effects[effect]
+				source.status_effects[effect] = 0
+			
+			source.status_effects["empower"] = count
+			
+		if source and source.has_method("add_block"):
+			source.add_block(6)
+	
+	if card_name == CardName.LIGHTNING_STRIKE:
+		if target and target.has_method("get_shock"):
+			if source and source.has_method("add_energy"):
+				if target.get_shock() > 0:
+					source.add_energy(1)
+			
+			if source and source.has_method("add_strike_status"):
+				source.add_strike_status("shock", 2)
 	
 	if card_name == CardName.POTENTIAL_DESTRUCTION:
 		if source and source.has_method("add_strike_damage") and source.has_method("get_damage"):
