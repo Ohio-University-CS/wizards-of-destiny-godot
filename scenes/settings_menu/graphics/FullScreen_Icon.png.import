@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6kg5pg7fsqkr"
-path="res://.godot/imported/Settings_Icon.png-10f4f78536ac9a5941c61760eddcd788.ctex"
+uid="uid://cgrsfwvngllyt"
+path="res://.godot/imported/FullScreen_Icon.png-ee05fc617398ff6a1bab3180bf32ab93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/main_menu/Settings_Icon.png"
-dest_files=["res://.godot/imported/Settings_Icon.png-10f4f78536ac9a5941c61760eddcd788.ctex"]
+source_file="res://scenes/settings_menu/graphics/FullScreen_Icon.png"
+dest_files=["res://.godot/imported/FullScreen_Icon.png-ee05fc617398ff6a1bab3180bf32ab93.ctex"]
 
 [params]
 
