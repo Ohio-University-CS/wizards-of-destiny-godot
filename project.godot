@@ -24,6 +24,7 @@ config/icon="res://sprites/icon.svg"
 RunManager="*uid://ba2n4cyxco47s"
 FlowManager="*uid://f0weft1evjx3"
 GameStateManager="*uid://bkr278l2d88f7"
+GameEventSignaler="*uid://s4k8xblr3us7"
 
 [display]
 
