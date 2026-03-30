@@ -70,4 +70,5 @@ func _update_coin_visual():
 
 
 func _on_next_stage_pressed():
+	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	FlowManager.go_to_combat()
