@@ -1,6 +1,13 @@
 # Game State Manager
 extends Node
 
+var gamestate_player : Player
+var gamestate_coins : int
+var gamestate_stage : int
+var gamestate_level_floor : int
+var gamestate_inventory : Array
+
+
 func _ready() -> void:
 	print("GAMESTATEMANAGER READY")
 	get_tree().scene_changed.connect(_on_scene_change)
@@ -10,10 +17,13 @@ func _ready() -> void:
 
 
 func get_run_player_state() -> Dictionary:
+	#var player = RunManager.player
 	var _player_script = load("res://scenes/player/Player.gd")
 	var _player_state = {}
 	#player_state.
-	
+	return _player_state
+
+
 func _update_current_gamestate():
 	print("UPDATING GAMESTATE")
 	gamestate_player = RunManager.player
@@ -22,6 +32,7 @@ func _update_current_gamestate():
 	gamestate_level_floor = RunManager.level_floor	
 	for item in RunManager.item_inventory:
 		gamestate_inventory.append(item)
+
 
 func _on_combat_end(player : Player):
 	if(player != null):

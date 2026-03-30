@@ -433,6 +433,11 @@ func draw_hand():
 
 	# Drained: draw one less card per stack (max 3)
 	var draw_size = deck.draw_hand_size
+	
+	# White Salt
+	if RunManager.has_item("White Salt"):
+		draw_size += 1
+	
 	if player and player.status_effects.has("drained"):
 		var drained = clamp(player.status_effects["drained"], 0, 3)
 		draw_size = max(0, draw_size - drained)
@@ -876,6 +881,9 @@ func _on_opponent_died() -> void:
 		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
 			return not card_instance.data.temporary)
 	
+	# Amulet of Undying
+	if RunManager.has_item("Amulet of Undying"):
+		player.heal(3)
 	
 	# detach player so it doesn't get freed
 	if player:

@@ -44,6 +44,10 @@ func _generate_shop():
 		var ui = shop_card_scene.instantiate()
 		var price = _get_price(data)
 		
+		# Comedy Mask
+		if RunManager.has_item("Comedy Mask"):
+			price *= 0.75
+		
 		ui.setup(data, price)
 		ui.purchased.connect(_on_card_purchased)
 		cards_container.add_child(ui)

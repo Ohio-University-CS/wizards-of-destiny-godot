@@ -33,6 +33,11 @@ var repeat_count: int = 0
 func setup_from_resource(res: EnemyResource) -> void:
 	resource = res
 	base_max_health = res.hp_variation[0]
+	
+	# Rune of Death
+	if RunManager.has_item("Rune of Death"):
+		base_max_health -= 3
+	
 	base_damage = res.base_damage
 	current_health = base_max_health
 

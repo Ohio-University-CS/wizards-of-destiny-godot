@@ -74,6 +74,15 @@ func get_stage_type() -> StageType:
 # Items
 # ---------------------------------------------------------
 
+func has_item(iname : String) -> bool:
+	if item_inventory.size() == 0:
+		return false
+	for i in item_inventory:
+		if iname == i.item_name:
+			return true
+	return false
+
+
 func add_item(item : ItemData):
 	if item not in item_inventory:
 		item_inventory.append(item)
