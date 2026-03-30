@@ -1,4 +1,4 @@
-# Settings Menu - Sound
+# Pause Settings Menu - Controls
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -7,105 +7,64 @@ extends Control
 @onready var control_button = $"Buttons/Control Button"
 @onready var exit_button : Button = $Buttons/Exit
 @onready var unrolled_scroll = $Unrolled_Scroll
-@onready var soundsettings = $"soundsettingoptions"
-@onready var main_slider = $"soundsettingoptions/mvs"
-@onready var music_slider = $"soundsettingoptions/musicvs"
-@onready var sfx_slider = $"soundsettingoptions/sfvs"
-
-var last_opened: String = "N/A"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#visibility
 	AnimatedSprite.speed_scale = 2.0  # 2x faster
-	_sso_off()
-	_sso_on()
+	_cs_on()
 	#settings
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	
 	
 	#buttons
 	setup_button_hover(graphics_button)
 	setup_button_hover(sound_button)
 	setup_button_hover(control_button)
 	graphics_button.pressed.connect(_on_graphics_pressed)
-	control_button.pressed.connect(_on_control_pressed)
+	sound_button.pressed.connect(_on_sound_pressed)
+	
 	exit_button.pressed.connect(_on_back_pressed)
+	
 
-	#sound
-	main_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
-	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
 
+
+func _cs_on() -> void:
+	unrolled_scroll.hide()
+	AnimatedSprite.play("Open")
+	await AnimatedSprite.animation_finished
+	unrolled_scroll.show()
+
+
+func _cs_off() -> void:
+	unrolled_scroll.hide()
 
 func _on_graphics_pressed():
 	graphics_button.disabled = true
 	control_button.disabled = true
 	unrolled_scroll.hide()
-	_sso_off()
+	_cs_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_graphics/pause_settings_graphics.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 	pass
-	
-func _on_sound_pressed():
-	if last_opened == "sound":
-		return
-	
-	if not unrolled_scroll.visible:
-		AnimatedSprite.show()
-		AnimatedSprite.play("Open")
-		await AnimatedSprite.animation_finished
-		unrolled_scroll.show()
-	else:
-		unrolled_scroll.hide()
-		AnimatedSprite.play("Close")
-		await AnimatedSprite.animation_finished
-		AnimatedSprite.play("Open")
-		await AnimatedSprite.animation_finished
-		unrolled_scroll.show()
-	last_opened = "sound"
-	soundsettings.show()
 
-func _on_control_pressed():
+func _on_sound_pressed():
 	control_button.disabled = true
-	graphics_button.disabled = true
+	sound_button.disabled = true
 	unrolled_scroll.hide()
-	_sso_off()
+	_cs_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/settings-menu-controls.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_sound/pause_settings_sound.tscn")
 	control_button.disabled = false
-	graphics_button.disabled = false
-
-func _sso_on() -> void:
-	unrolled_scroll.hide()
-	AnimatedSprite.play("Open")
-	await AnimatedSprite.animation_finished
-	unrolled_scroll.show()
-	soundsettings.show()
-
-func _sso_off() -> void:
-	soundsettings.hide()
-
-
-func _on_mvs_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
-
-
-func _on_musicvs_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), value)
-
-
-func _on_sfvs_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value)
-
+	sound_button.disabled = false
+	
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause-menu.tscn")
 
 #button hover
 func tween_button_scale(button: Control, target_scale: Vector2):

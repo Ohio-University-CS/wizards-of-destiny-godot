@@ -20,7 +20,7 @@ func _ready() -> void:
 	info_button.pressed.connect(_on_info_pressed)
 
 func _on_settings_pressed():
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setting-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
 
 func _on_level_select_pressed():
 	get_tree().change_scene_to_file("res://scenes/Level Select/level_1.tscn")
