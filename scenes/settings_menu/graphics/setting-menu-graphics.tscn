@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="4_64xe4"]
 [ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="5_7tigw"]
 [ext_resource type="Texture2D" uid="uid://b3126nvmfyvs6" path="res://scenes/settings_menu/controls/Controls_Icon.png" id="6_w80fl"]
+[ext_resource type="Texture2D" uid="uid://cgrsfwvngllyt" path="res://scenes/settings_menu/graphics/FullScreen_Icon.png" id="9_2xek2"]
+[ext_resource type="Texture2D" uid="uid://cd1f8n5hwqrf7" path="res://scenes/settings_menu/graphics/ON_Icon.png" id="10_upxim"]
+[ext_resource type="Texture2D" uid="uid://cale3dtexbitf" path="res://scenes/settings_menu/graphics/OFF_Icon.png" id="11_44eqb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("4_7tigw")
@@ -232,18 +235,6 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_s5h30"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ja5ad"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_5le3a"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
 [node name="SettingMenu" type="Control" unique_id=1378454964]
 layout_mode = 3
 anchors_preset = 15
@@ -274,12 +265,12 @@ offset_top = 37.0
 offset_right = 715.0
 offset_bottom = 157.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=749190265]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=749190265]
 position = Vector2(194, 60)
 scale = Vector2(1.747, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=37943825]
+[node name="Graphics" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=37943825]
 position = Vector2(211, 77)
 scale = Vector2(0.418, 0.40551353)
 texture = ExtResource("4_7dimq")
@@ -291,12 +282,12 @@ offset_top = 41.0
 offset_right = 1138.0
 offset_bottom = 153.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Sound Button" unique_id=867893015]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Sound Button" unique_id=867893015]
 position = Vector2(166, 56)
 scale = Vector2(1.747, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Sound Button" unique_id=840018892]
+[node name="Sound" type="Sprite2D" parent="Buttons/Sound Button" unique_id=840018892]
 position = Vector2(168, 55)
 scale = Vector2(0.46699998, 0.45490578)
 texture = ExtResource("5_7tigw")
@@ -308,12 +299,12 @@ offset_top = 40.0
 offset_right = 1593.0
 offset_bottom = 157.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Control Button" unique_id=1486842184]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Control Button" unique_id=1486842184]
 position = Vector2(128, 57)
 scale = Vector2(1.7469575, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Control Button" unique_id=1570205548]
+[node name="Controls" type="Sprite2D" parent="Buttons/Control Button" unique_id=1570205548]
 position = Vector2(129.99997, 56)
 scale = Vector2(0.36300004, 0.39756447)
 texture = ExtResource("6_w80fl")
@@ -326,8 +317,12 @@ offset_right = 1054.0
 offset_bottom = 1038.0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(122, 54.5)
-icon = ExtResource("3_7dimq")
 flat = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Exit" unique_id=1485350827]
+position = Vector2(122.00003, 54.083313)
+scale = Vector2(1.0000002, 1.0049505)
+texture = ExtResource("3_7dimq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1949047644]
 position = Vector2(118.66669, 53.499996)
@@ -347,8 +342,10 @@ animation = &"Close"
 
 [node name="gsettingsoptions" type="Control" parent="." unique_id=2058529456]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 52.0
+offset_top = -9.0
+offset_right = 229.0
+offset_bottom = 31.0
 
 [node name="FullScreen button" type="Button" parent="gsettingsoptions" unique_id=1751588147]
 layout_mode = 0
@@ -359,33 +356,20 @@ offset_bottom = 453.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 flat = true
 
-[node name="Fullcreen" type="Label" parent="gsettingsoptions/FullScreen button" unique_id=619887131]
-layout_mode = 0
-offset_left = 4.0
-offset_top = -1.0
-offset_right = 369.0
-offset_bottom = 68.0
-theme_override_font_sizes/font_size = 50
-text = "Fullscreen:"
-label_settings = SubResource("LabelSettings_s5h30")
+[node name="Fullscreen" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=975073075]
+position = Vector2(101.000015, 37.000008)
+scale = Vector2(0.3308824, 0.27328083)
+texture = ExtResource("9_2xek2")
 
-[node name="Fullscreen ON" type="Label" parent="gsettingsoptions/FullScreen button" unique_id=574292199]
-layout_mode = 0
-offset_left = 277.0
-offset_right = 370.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 50
-text = "ON"
-label_settings = SubResource("LabelSettings_ja5ad")
+[node name="Fullscreen ON" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=2015063585]
+position = Vector2(315, 36.999996)
+scale = Vector2(0.331, 0.273)
+texture = ExtResource("10_upxim")
 
-[node name="Fullscreen OFF" type="Label" parent="gsettingsoptions/FullScreen button" unique_id=590655170]
-layout_mode = 0
-offset_left = 277.0
-offset_right = 370.0
-offset_bottom = 69.0
-theme_override_font_sizes/font_size = 50
-text = "OFF"
-label_settings = SubResource("LabelSettings_5le3a")
+[node name="Fullscreen OFF" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=570426129]
+position = Vector2(327, 37)
+scale = Vector2(0.331, 0.273)
+texture = ExtResource("11_44eqb")
 
 [connection signal="animation_finished" from="Scroll_Animation/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="pressed" from="gsettingsoptions/FullScreen button" to="." method="_on_full_screen_button_pressed"]

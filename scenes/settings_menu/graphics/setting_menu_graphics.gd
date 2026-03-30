@@ -28,6 +28,7 @@ func _ready() -> void:
 	setup_button_hover(sound_button)
 	setup_button_hover(control_button)
 	setup_button_hover(fullscreen_button)
+	setup_button_hover(exit_button)
 	
 	
 	sound_button.pressed.connect(_on_sound_pressed)
