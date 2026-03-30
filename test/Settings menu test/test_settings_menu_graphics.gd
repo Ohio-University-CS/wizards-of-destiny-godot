@@ -79,6 +79,3 @@ func test_fullscreen_button():
 	test_settings.fullscreen_on = null
 	test_settings.fullscreen_off = null
 	assert_eq(test_settings.fullscreen_on, null)
-
-	
-	pass

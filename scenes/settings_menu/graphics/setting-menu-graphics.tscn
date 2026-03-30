@@ -3,23 +3,11 @@
 [ext_resource type="Script" uid="uid://dsgh4ek5kd5fg" path="res://scenes/settings_menu/graphics/setting_menu_graphics.gd" id="1_xgpil"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_64xe4"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_7dimq"]
+[ext_resource type="Texture2D" uid="uid://dc125ju51cduy" path="res://scenes/settings_menu/graphics/Blue_Graphics_Icon.png" id="4_7dimq"]
 [ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="4_7tigw"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_71l1o"]
-font_size = 50
-font_color = Color(0, 0, 0.7254902, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_xgxal"]
-font_size = 50
-font_color = Color(0, 0, 0.015686275, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_rar45"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_807kq"]
-font_size = 30
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="4_64xe4"]
+[ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="5_7tigw"]
+[ext_resource type="Texture2D" uid="uid://b3126nvmfyvs6" path="res://scenes/settings_menu/controls/Controls_Icon.png" id="6_w80fl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("4_7tigw")
@@ -291,16 +279,10 @@ position = Vector2(194, 60)
 scale = Vector2(1.747, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Label" type="Label" parent="Buttons/Graphics Button" unique_id=338386855]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 15.0
-offset_right = 358.0
-offset_bottom = 105.0
-text = "Graphics"
-label_settings = SubResource("LabelSettings_71l1o")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=37943825]
+position = Vector2(211, 77)
+scale = Vector2(0.418, 0.40551353)
+texture = ExtResource("4_7dimq")
 
 [node name="Sound Button" type="Button" parent="Buttons" unique_id=721653677]
 layout_mode = 0
@@ -314,16 +296,10 @@ position = Vector2(166, 56)
 scale = Vector2(1.747, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Label" type="Label" parent="Buttons/Sound Button" unique_id=555098908]
-layout_mode = 0
-offset_left = -4.0
-offset_top = 10.0
-offset_right = 331.0
-offset_bottom = 103.0
-text = "Sound"
-label_settings = SubResource("LabelSettings_xgxal")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Sound Button" unique_id=840018892]
+position = Vector2(168, 55)
+scale = Vector2(0.46699998, 0.45490578)
+texture = ExtResource("5_7tigw")
 
 [node name="Control Button" type="Button" parent="Buttons" unique_id=1668627018]
 layout_mode = 0
@@ -337,16 +313,10 @@ position = Vector2(128, 57)
 scale = Vector2(1.7469575, 1.696)
 texture = ExtResource("3_7dimq")
 
-[node name="Label" type="Label" parent="Buttons/Control Button" unique_id=1517166874]
-layout_mode = 0
-offset_left = -36.0
-offset_top = 11.0
-offset_right = 291.0
-offset_bottom = 100.0
-text = "Controls"
-label_settings = SubResource("LabelSettings_rar45")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Control Button" unique_id=1570205548]
+position = Vector2(129.99997, 56)
+scale = Vector2(0.36300004, 0.39756447)
+texture = ExtResource("6_w80fl")
 
 [node name="Exit" type="Button" parent="Buttons" unique_id=1493047344]
 layout_mode = 0
@@ -359,14 +329,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("3_7dimq")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Exit" unique_id=490191138]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 32.75
-offset_right = 255.0
-offset_bottom = 74.75
-text = "Back"
-label_settings = SubResource("LabelSettings_807kq")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1949047644]
+position = Vector2(118.66669, 53.499996)
+scale = Vector2(0.175, 0.15215278)
+texture = ExtResource("4_64xe4")
 
 [node name="Scroll_Animation" type="Control" parent="." unique_id=1012413467]
 anchors_preset = 0
