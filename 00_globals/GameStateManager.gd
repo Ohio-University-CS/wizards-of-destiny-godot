@@ -1,5 +1,5 @@
-
-
+# Game State Manager
+extends Node
 
 func _ready() -> void:
 	var player_dict = get_run_player_state()
@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 func get_run_player_state() -> Dictionary:
-	var player_script = load("res://scenes/player/Player.gd")
-	var player_state = {}
-	player_state.
+	var _player_script = load("res://scenes/player/Player.gd")
+	var _player_state = {}
+	#player_state.
 	
 	return {}

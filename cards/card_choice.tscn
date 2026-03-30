@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://blii22sp2asse"]
+
+[ext_resource type="Script" uid="uid://cjd2ntbbq70di" path="res://cards/card_choice.gd" id="1_uw00r"]
+
+[node name="CardChoice" type="Control" unique_id=187975372]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uw00r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1119421785]
+layout_mode = 0
+offset_left = 898.0
+offset_top = 400.0
+offset_right = 938.0
+offset_bottom = 447.0
+
+[node name="PromptText" type="Label" parent="VBoxContainer" unique_id=457222897]
+layout_mode = 2
+
+[node name="Choice1" type="Button" parent="VBoxContainer" unique_id=2052150653]
+layout_mode = 2
+
+[node name="Choice2" type="Button" parent="VBoxContainer" unique_id=1263278627]
+layout_mode = 2
