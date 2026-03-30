@@ -914,7 +914,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-
+	GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
