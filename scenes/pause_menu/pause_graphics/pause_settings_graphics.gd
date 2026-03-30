@@ -1,4 +1,4 @@
-# Settings Menu - Graphics
+# Pause Settings Menu - Graphics
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -28,7 +28,6 @@ func _ready() -> void:
 	setup_button_hover(sound_button)
 	setup_button_hover(control_button)
 	setup_button_hover(fullscreen_button)
-	setup_button_hover(exit_button)
 	
 	
 	sound_button.pressed.connect(_on_sound_pressed)
@@ -44,7 +43,7 @@ func _on_sound_pressed():
 	_gso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/sound/settings-menu-sound.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_sound/pause_settings_sound.tscn")
 	control_button.disabled = false
 	sound_button.disabled = false
 	pass
@@ -57,7 +56,7 @@ func _on_control_pressed():
 	_gso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/setting-menu-controls.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_controls/pause_settings_controls.tscn")
 	control_button.disabled = false
 	sound_button.disabled = false
 	pass
@@ -95,7 +94,7 @@ func _gso_off() -> void:
 	
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause-menu.tscn")
 
 #button hover
 func tween_button_scale(button: Control, target_scale: Vector2):

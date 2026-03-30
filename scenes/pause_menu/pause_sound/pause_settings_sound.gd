@@ -1,4 +1,4 @@
-# Settings Menu - Sound
+# Pause Settings Menu - Sound
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -46,7 +46,7 @@ func _on_graphics_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_graphics/pause_settings_graphics.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 	pass
@@ -77,7 +77,7 @@ func _on_control_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/settings-menu-controls.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause_controls/pause_settings_controls.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 
@@ -105,7 +105,7 @@ func _on_sfvs_value_changed(value: float) -> void:
 
 
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/pause_menu/pause-menu.tscn")
 
 #button hover
 func tween_button_scale(button: Control, target_scale: Vector2):
