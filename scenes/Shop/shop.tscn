@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
+[ext_resource type="Resource" uid="uid://c08cupugqrh0n" path="res://cards/data/magician_deck/common_cards/lay_on_hands.tres" id="14_tjyfs"]
 [ext_resource type="Resource" uid="uid://hykg0af24hdd" path="res://cards/data/magician_deck/common_cards/lightning_bolt.tres" id="15_5j3h6"]
 [ext_resource type="Resource" uid="uid://bdau76shjs4sa" path="res://cards/data/magician_deck/common_cards/shocking_grasp.tres" id="15_n5wbs"]
 [ext_resource type="Resource" uid="uid://bj818eibkxbjg" path="res://cards/data/magician_deck/common_cards/static_field.tres" id="16_2lsrc"]
@@ -38,7 +39,10 @@
 [ext_resource type="Resource" uid="uid://dfgdrjkj6g8j" path="res://cards/data/magician_deck/common_cards/abjuration.tres" id="27_5wu3g"]
 [ext_resource type="Resource" uid="uid://bgcwahceecrw1" path="res://cards/data/magician_deck/uncommon_cards/overheat.tres" id="27_f1ko4"]
 [ext_resource type="Resource" uid="uid://2ybti81h0mfp" path="res://cards/data/magician_deck/common_cards/fire_bolt.tres" id="28_kt3wt"]
+[ext_resource type="Resource" uid="uid://xmp8sotus83" path="res://cards/data/magician_deck/uncommon_cards/lightning_strike.tres" id="30_qgs5q"]
+[ext_resource type="Resource" uid="uid://0uq1lyntjwe7" path="res://cards/data/magician_deck/uncommon_cards/potential_destruction.tres" id="31_4r704"]
 [ext_resource type="Resource" uid="uid://r4pos228sfyl" path="res://cards/data/magician_deck/rare_cards/divine_incantation.tres" id="34_rymir"]
+[ext_resource type="Resource" uid="uid://cjiqxdd8rxubd" path="res://cards/data/magician_deck/rare_cards/grand_finale.tres" id="35_kkcac"]
 [ext_resource type="Resource" uid="uid://s6osdcqxapgy" path="res://cards/data/magician_deck/rare_cards/thunderwave.tres" id="37_8e5es"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
@@ -54,7 +58,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("14_16jyn"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)

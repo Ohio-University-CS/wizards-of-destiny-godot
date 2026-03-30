@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqisx8e0rbe2i"]
 
-[ext_resource type="Script" uid="uid://bp6tp7higtw6j" path="res://scenes/deckselect/deckselect_magician.gd" id="1_ru5l6"]
+[ext_resource type="Script" path="res://scenes/deckselect/deckselect_magician.gd" id="1_ru5l6"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_j0yuy"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_4nt8v"]
 [ext_resource type="Texture2D" uid="uid://c8i7sbqvtt28r" path="res://scenes/deckselect/Magician_Card.png" id="4_2qfyw"]
@@ -42,31 +42,30 @@ grow_vertical = 2
 [node name="Level Select" type="Button" parent="Buttons" unique_id=975534879]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.425
-anchor_top = 10.862
-anchor_right = 0.425
-anchor_bottom = 10.862
-offset_left = -56.0
-offset_top = -35.48001
-offset_bottom = 0.019989014
+anchor_left = -9.275001
+anchor_top = 21.512001
+anchor_right = -9.275001
+anchor_bottom = 21.512001
+offset_left = 176.00003
+offset_top = -533.48004
+offset_right = 420.00003
+offset_bottom = -424.48004
 scale = Vector2(2, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1995009790]
-position = Vector2(32.5, 16.5)
-texture = ExtResource("3_4nt8v")
+icon = ExtResource("3_4nt8v")
+flat = true
 
 [node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
 layout_mode = 0
-offset_left = -48.0
-offset_top = -6.5
-offset_right = 121.0
-offset_bottom = 35.5
+offset_left = 38.0
+offset_top = 30.5
+offset_right = 207.0
+offset_bottom = 72.5
 text = "Magician"
 label_settings = SubResource("LabelSettings_0qkqs")
 horizontal_alignment = 1
 
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
-position = Vector2(35.5, -215)
+position = Vector2(123.5, -180)
 scale = Vector2(0.665625, 0.671875)
 texture = ExtResource("4_2qfyw")
 

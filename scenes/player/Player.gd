@@ -13,6 +13,9 @@ var class_data
 # List of active passive cards/effects
 var active_passives: Array = []
 
+# Other variables for random cards/effects
+var potential_destruction : int = 0
+
 @export var initialized : bool = false
 
 # BASE STATS (from class)
@@ -75,6 +78,7 @@ func setup_from_class(data):
 	deck_list = data.starting_deck.duplicate()
 	
 	active_passives.clear()
+	
 	
 	base_max_health = data.max_health
 	base_damage = data.damage
@@ -360,6 +364,10 @@ func _ready():
 		return
 	
 	set_energy(max_energy)
+	
+	active_passives.clear()
+	
+	potential_destruction = 0
 
 
 # ---------------------------------------------------------
