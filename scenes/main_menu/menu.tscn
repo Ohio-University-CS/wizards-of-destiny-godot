@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://y6kmsfru2fv"]
 
-[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_6ufdq"]
+[ext_resource type="Script" uid="uid://elftbjqmvv35" path="res://scenes/main_menu/main_menu.gd" id="1_6ufdq"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_pt1kw"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_0qkqs"]
 [ext_resource type="Texture2D" uid="uid://b8am2fvma8rst" path="res://scenes/main_menu/Level Select .png" id="4_pm07s"]
+[ext_resource type="Texture2D" uid="uid://cwehg4uku4ojt" path="res://scenes/Settings_Icon.png" id="5_tbubb"]
+[ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="6_q0knb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -86,14 +88,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_0qkqs")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Settings" unique_id=1738786059]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 32.75
-offset_right = 225.0
-offset_bottom = 74.75
-text = "Settings"
-label_settings = SubResource("LabelSettings_0qkqs")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=650061656]
+position = Vector2(120, 62.75)
+scale = Vector2(0.43603677, 0.52997607)
+texture = ExtResource("5_tbubb")
 
 [node name="Exit" type="Button" parent="Buttons" unique_id=1171470084]
 layout_mode = 0
@@ -106,14 +104,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_0qkqs")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Exit" unique_id=1783043570]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 32.75
-offset_right = 255.0
-offset_bottom = 74.75
-text = "Back"
-label_settings = SubResource("LabelSettings_0qkqs")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1248051304]
+position = Vector2(122.500015, 54.75)
+scale = Vector2(0.19777778, 0.19875)
+texture = ExtResource("6_q0knb")
 
 [node name="Label" type="Label" parent="." unique_id=2076492899]
 layout_mode = 0
