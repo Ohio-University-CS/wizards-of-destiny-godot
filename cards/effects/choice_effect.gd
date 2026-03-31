@@ -1,57 +1,51 @@
 class_name ChoiceEffect extends Effect
 
-@export var choices : Array[Effect]
-@export var choice_texts : Array[String]
+enum CardName {
+	CURSE,
+	ELEMENTAL_STORM,
+	ENCHANT,
+	FIRE_STORM,
+	MYSTIC_BOLT,
+	SPARK_OF_MAGIC
+}
 
-var callback_source
-var callback_target
-var callback_combat
+@export var card_name : CardName
+
+var choice_amount : int = 2
+var max_choices : int = 1
+
+var choice_texts : Array[String]
+
 
 func apply(_source, _target, _combat):
-	callback_source = _source
-	callback_target = _target
-	callback_combat = _combat
+	if card_name == CardName.ELEMENTAL_STORM:
+		choice_texts.append("Add 2 Burn to Strike")
+		choice_texts.append("Add 2 Shock to Strike")
 	
-	UIManager.show_card_choice(self)
-
-
-func resolve_choice(index: int):
-	if index < 0 or index >= choices.size():
-		return
-
-	var chosen = choices[index]
+	if card_name == CardName.MYSTIC_BOLT or card_name == CardName.SPARK_OF_MAGIC:
+		choice_texts.append("Apply 2 Burn")
+		choice_texts.append("Apply 2 Shock")
 	
-	print("Chosen type: ", chosen.get_class())
+	UIManager.show_card_choice(choice_texts, _on_choice_made.bind(_source, _target, _combat))
 
-	if "target_type" in chosen:
-		print("Target type: ", chosen.target_type)
 
-	# If the choice has an 'effects' property, treat as CardData
-	if "effects" in chosen:
-		if chosen.effects.size() > 0:
-			var effect = chosen.effects[0]
-			
-			var targets = callback_combat._get_effect_targets(effect, callback_source)
-			for target in targets:
-				if callback_combat._is_valid_target(target):
-					print("Computed targets:", targets)
-					print("Source:", callback_source)
-					print("Player ref:", callback_combat.player)
-					print("Opponent ref:", callback_combat.opponent)
-					effect.apply(callback_source, callback_target, callback_combat)
-		else:
-			print("Chosen card has no effects!")
-	# If the choice has an 'apply' method, treat as Effect
-	elif chosen is Effect:
-		var targets = callback_combat._get_effect_targets(chosen, callback_source)
-		for target in targets:
-			if callback_combat._is_valid_target(target):
-				print("Computed targets: ", targets)
-				print("Source: ", callback_source)
-				print("Player ref: ", callback_combat.player)
-				print("Opponent ref: ", callback_combat.opponent)
-				print("Passing target: ", target)
-				var effect_instance = chosen.duplicate(true)
-				effect_instance.apply(callback_source, callback_target, callback_combat)
-	else:
-		print("Chosen object is neither CardData nor Effect!")
+func _on_choice_made(index, _source, _target, _combat):
+	if card_name == CardName.ELEMENTAL_STORM:
+		if index == 0:
+			# Add 2 Burn to Strike
+			if _source.has_method("add_strike_status"):
+				_source.add_strike_status("burn", 2)
+		elif index == 1:
+			# Add 2 Shock to Strike
+			if _source.has_method("apply_status"):
+				_source.add_strike_status("shock", 2)
+	
+	if card_name == CardName.MYSTIC_BOLT or card_name == CardName.SPARK_OF_MAGIC:
+		if index == 0:
+			# Apply 2 Burn to target
+			if _target.has_method("apply_status"):
+				_target.apply_status("burn", 2)
+		elif index == 1:
+			# Apply 2 Shock to target
+			if _target.has_method("apply_status"):
+				_target.apply_status("shock", 2)
