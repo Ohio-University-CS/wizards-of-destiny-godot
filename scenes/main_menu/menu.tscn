@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8am2fvma8rst" path="res://scenes/main_menu/Level Select .png" id="4_pm07s"]
 [ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="5_q0knb"]
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="6_q0knb"]
+[ext_resource type="Texture2D" uid="uid://b1xr3qw02ree6" path="res://scenes/main_menu/Menu_info_button.png" id="7_mg445"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
@@ -108,6 +109,20 @@ flat = true
 position = Vector2(121.000015, 55.250004)
 scale = Vector2(0.21777777, 0.21770833)
 texture = ExtResource("6_q0knb")
+
+[node name="Info" type="Button" parent="Buttons" unique_id=411843384]
+layout_mode = 0
+offset_left = -81.0
+offset_top = 336.0
+offset_right = -4.0
+offset_bottom = 406.5
+scale = Vector2(2, 2)
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Info" unique_id=990430280]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("7_mg445")
+centered = false
 
 [node name="Label" type="Label" parent="." unique_id=2076492899]
 layout_mode = 0

@@ -1,3 +1,4 @@
+# Game State Manager
 extends Node
 var selected_save : String = "save_1"
 var gamestate_player : Player = null
@@ -13,7 +14,16 @@ func _ready() -> void:
 	GameEventSignaler.combat_end.connect(_on_combat_end)
 	GameEventSignaler.next_combat_begin.connect(_on_exit_shop)
 	
-	
+
+
+func get_run_player_state() -> Dictionary:
+	#var player = RunManager.player
+	var _player_script = load("res://scenes/player/Player.gd")
+	var _player_state = {}
+	#player_state.
+	return _player_state
+
+
 func _update_current_gamestate():
 	print("UPDATING GAMESTATE")
 	gamestate_player = RunManager.player
@@ -22,6 +32,7 @@ func _update_current_gamestate():
 	gamestate_level_floor = RunManager.level_floor	
 	for item in RunManager.item_inventory:
 		gamestate_inventory.append(item)
+
 
 func _on_combat_end(player : Player):
 	if(player != null):

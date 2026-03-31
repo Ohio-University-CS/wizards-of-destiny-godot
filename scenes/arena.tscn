@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
 [ext_resource type="PackedScene" uid="uid://cge02g6n6iduc" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tscn" id="5_dpxgc"]
 [ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
+[ext_resource type="Texture2D" uid="uid://p3xvkh7wkowc" path="res://scenes/level1/plainlevel1.png" id="6_oexds"]
 
 [node name="Arena" type="Node2D" unique_id=1267453808]
 script = ExtResource("1_4ag8t")
@@ -15,6 +16,12 @@ class_data = ExtResource("3_oexds")
 enemy_pool = Array[PackedScene]([ExtResource("4_naajo"), ExtResource("5_dpxgc")])
 enemy_spawn_position = Vector2(1555, 584)
 hand_origin = Vector2(500, 750)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1056833688]
+visible = false
+scale = Vector2(1.8769531, 1.0537109)
+texture = ExtResource("6_oexds")
+centered = false
 
 [node name="Enemy" parent="." unique_id=1886209078 instance=ExtResource("4_naajo")]
 position = Vector2(1542, 584)

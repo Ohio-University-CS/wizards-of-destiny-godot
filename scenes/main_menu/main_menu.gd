@@ -4,6 +4,7 @@ extends Control
 @onready var collection_button : Button = $Buttons/Collection
 @onready var settings_button : Button = $Buttons/Settings
 @onready var exit_button : Button = $Buttons/Exit
+@onready var info_button : Button = $Buttons/Info
 
 
 func _ready() -> void:
@@ -11,13 +12,15 @@ func _ready() -> void:
 	setup_button_hover(collection_button)
 	setup_button_hover(settings_button)
 	setup_button_hover(exit_button)
+	setup_button_hover(info_button)
 	settings_button.pressed.connect(_on_settings_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
 	levels_button.pressed.connect(_on_level_select_pressed)
 	collection_button.pressed.connect(_on_collections_pressed)
+	info_button.pressed.connect(_on_info_pressed)
 
 func _on_settings_pressed():
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setting-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
 
 func _on_level_select_pressed():
 	get_tree().change_scene_to_file("res://scenes/Level Select/level_1.tscn")
@@ -28,6 +31,8 @@ func _on_collections_pressed():
 func _on_exit_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen/title_page.tscn")
 
+func _on_info_pressed():
+	get_tree().change_scene_to_file("res://scenes/info_page/Info_Page.tscn")
 
 
 

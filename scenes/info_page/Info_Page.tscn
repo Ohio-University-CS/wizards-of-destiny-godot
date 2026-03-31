@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://cya57lg1lfsb6"]
+
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_nwlqx"]
+[ext_resource type="Script" uid="uid://b3ta3xje7i5xt" path="res://scenes/info_page/info_page.gd" id="1_pnuhd"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_pnuhd"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="3_msiiv"]
+[ext_resource type="Texture2D" uid="uid://d2i14pdbrg0qk" path="res://art_drop/status effects/block.png" id="5_xn2yo"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="6_hcy2l"]
+[ext_resource type="Texture2D" uid="uid://c0gwjrlylbi8g" path="res://art_drop/status effects/burn.png" id="7_sddm3"]
+[ext_resource type="Texture2D" uid="uid://crrgocd38p5hi" path="res://art_drop/status effects/corroded.png" id="8_wr0h2"]
+[ext_resource type="Texture2D" uid="uid://4pl63padnqly" path="res://art_drop/status effects/empower.png" id="9_ctx8d"]
+[ext_resource type="Texture2D" uid="uid://dsptqa1wloejp" path="res://art_drop/status effects/shock.png" id="10_a7s83"]
+[ext_resource type="Texture2D" uid="uid://ycijsulkvm1c" path="res://art_drop/status effects/evasive.png" id="11_sjfpx"]
+[ext_resource type="Texture2D" uid="uid://cokvy5nk7twdf" path="res://art_drop/status effects/stun.png" id="12_dvuqo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xn2yo"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="InfoPage" type="Control" unique_id=967636714]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnuhd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1493111867]
+texture = ExtResource("1_nwlqx")
+centered = false
+
+[node name="Buttons" type="Control" parent="." unique_id=1689227831]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=668896231]
+layout_mode = 0
+offset_left = 810.0
+offset_top = 929.0
+offset_right = 1054.0
+offset_bottom = 1038.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_pnuhd")
+flat = true
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=1333020114]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 32.75
+offset_right = 255.0
+offset_bottom = 74.75
+theme_override_fonts/font = ExtResource("3_msiiv")
+text = "Back"
+label_settings = SubResource("LabelSettings_xn2yo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=958880367]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 195.0
+offset_right = 1029.0
+offset_bottom = 487.0
+scale = Vector2(2, 2)
+theme_override_constants/separation = 20
+
+[node name="Block" type="HBoxContainer" parent="VBoxContainer" unique_id=1755366388]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Block" unique_id=1694238477]
+texture = ExtResource("5_xn2yo")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Block" unique_id=1458787020]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Block: Prevents damage done, removed at start of turn"
+
+[node name="Burn" type="HBoxContainer" parent="VBoxContainer" unique_id=953704960]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Burn" unique_id=987037993]
+texture = ExtResource("7_sddm3")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Burn" unique_id=127992815]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Burn: Deals Damage equal to stack at end of turn, loses 1 stack"
+
+[node name="Corroded" type="HBoxContainer" parent="VBoxContainer" unique_id=1601537748]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Corroded" unique_id=1598268814]
+texture = ExtResource("8_wr0h2")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Corroded" unique_id=1833503035]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Corroded: +2 Damage taken per stack, remove 1 stack"
+
+[node name="Empowered" type="HBoxContainer" parent="VBoxContainer" unique_id=524980620]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Empowered" unique_id=1115493795]
+texture = ExtResource("9_ctx8d")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Empowered" unique_id=480596704]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Empowered: Deal +3 Damage per stack. Remove 1 Stack at end of turn"
+
+[node name="Evasive" type="HBoxContainer" parent="VBoxContainer" unique_id=651889705]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Evasive" unique_id=400527434]
+texture = ExtResource("11_sjfpx")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Evasive" unique_id=59914514]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Evasive (Enemy Only): Dodge next attack, remove 1 stack"
+
+[node name="Regeneration" type="HBoxContainer" parent="VBoxContainer" unique_id=2013725675]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Regeneration" unique_id=2087844007]
+texture = ExtResource("6_hcy2l")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Regeneration" unique_id=752476168]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Regeneration: Heals Health, Removed at start of Turn"
+
+[node name="Shock" type="HBoxContainer" parent="VBoxContainer" unique_id=1453232464]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Shock" unique_id=1458426349]
+texture = ExtResource("10_a7s83")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Shock" unique_id=307536042]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Shock: Take X Damage when attacking, lose 1 stack"
+
+[node name="Stun" type="HBoxContainer" parent="VBoxContainer" unique_id=1064671662]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Stun" unique_id=234742467]
+texture = ExtResource("12_dvuqo")
+offset = Vector2(-25, 10)
+
+[node name="Label" type="Label" parent="VBoxContainer/Stun" unique_id=1464172466]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 16
+text = "Stun: Skip your turn, remove this status"

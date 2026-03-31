@@ -46,7 +46,7 @@ func _on_graphics_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setting-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 	pass
@@ -77,7 +77,7 @@ func _on_control_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/setting-menu-controls.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/settings-menu-controls.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 

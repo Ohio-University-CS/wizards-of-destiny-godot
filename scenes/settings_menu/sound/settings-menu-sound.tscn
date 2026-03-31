@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hmouqecianop"]
 
-[ext_resource type="Script" uid="uid://dro7rxrgl6rtm" path="res://scenes/settings_menu/sound/settings_menu_sound.gd" id="1_uhuc8"]
+[ext_resource type="Script" uid="uid://dro7rxrgl6rtm" path="res://scenes/settings_menu/sound/settings_menu_sound.gd" id="1_jhu8x"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_xtwag"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_q0o37"]
 [ext_resource type="Texture2D" uid="uid://dnjf2053kkm8i" path="res://scenes/settings_menu/controls/Graphics_Icon.png" id="4_q0o37"]
@@ -243,7 +243,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_uhuc8")
+script = ExtResource("1_jhu8x")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1998106679]
 texture = ExtResource("2_xtwag")

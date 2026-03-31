@@ -15,6 +15,7 @@ var active_passives: Array = []
 
 # Other variables for random cards/effects
 var potential_destruction : int = 0
+var tattered_shawl : bool = true
 
 @export var initialized : bool = false
 
@@ -77,7 +78,11 @@ func setup_from_class(data):
 	
 	deck_list = data.starting_deck.duplicate()
 	
+	set_perm_stats()
+	
 	active_passives.clear()
+	
+	tattered_shawl = true
 	
 	
 	base_max_health = data.max_health
@@ -167,6 +172,22 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 	else:
 		modify_stat_permanent(stat_name, amount)
 
+
+func set_perm_stats():
+	#fresh reset
+	for m in perm_modifiers:
+		m = 0
+		
+	if RunManager.has_item("Gauntlets of Strength"):
+		modify_stat_permanent("damage", 1)
+	if RunManager.has_item("Ring of Life"):
+		modify_stat_permanent("max_health", 5)
+	if RunManager.has_item("Ruby-Hilted Dagger"):
+		modify_stat_permanent("crit_damage", 7)
+	if RunManager.has_item("Staff of Power"):
+		modify_stat_permanent("elemental_power", 25)
+	if RunManager.has_item("Boots of the Elves"):
+		modify_stat_permanent("dodge", 5)
 
 # ---------------------------------------------------------
 # STRIKE SYSTEM
@@ -268,6 +289,10 @@ func perform_strike(target):
 func _do_strike_on_target(target):
 	var dmg = get_damage() + strike_bonus_damage
 	
+	# Tattered Shawl
+	if RunManager.has_item("Tattered Shawl") and tattered_shawl:
+		dmg += 5
+	
 	# Empower: +3 damage per stack
 	if status_effects["empower"] > 0:
 		dmg += 3 * status_effects["empower"]
@@ -291,6 +316,10 @@ func _do_strike_on_target(target):
 	# Evasion Ritual
 	if active_passives.has("Evasion"):
 		dmg /= 2
+	
+	# Crit
+	if try_crit():
+		dmg += get_crit_damage()
 	
 	#deal normal damage once
 	if dmg > 0:
@@ -363,11 +392,14 @@ func _ready():
 	if not initialized:
 		return
 	
+	set_perm_stats()
+	
 	set_energy(max_energy)
 	
 	active_passives.clear()
 	
 	potential_destruction = 0
+	tattered_shawl = true
 
 
 # ---------------------------------------------------------
@@ -414,6 +446,9 @@ func end_turn():
 		if status_effects["empower"] == 0:
 			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
+	
+	if tattered_shawl == true:
+		tattered_shawl = false
 
 
 func _clear_temp_stats():
@@ -476,7 +511,7 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 	
 	# Freeze does not affect elemental damage (handled in perform_strike)
 	# Crit check
-	if randf() < get_crit_chance():
+	if try_crit():
 		dmg += get_crit_damage()
 	
 	return dmg
@@ -595,6 +630,10 @@ func register_passive(pname : String) -> void:
 
 func is_stunned() -> bool:
 	return status_effects["stun"] > 0
+
+
+func try_crit() -> bool:
+	return randf() < get_crit_chance()
 
 
 func try_dodge() -> bool:
