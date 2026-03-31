@@ -312,6 +312,10 @@ func apply_status(status_name: String, stacks: int = 1):
 	# Clamp Evasive to max 2
 	if status_name == "evasive":
 		status_effects[status_name] = clamp(status_effects[status_name], 0, 2)
+	
+	if status_name == "shock":
+		RunManager.player.add_energy(1)
+	
 	emit_signal("status_applied", status_name, status_effects[status_name])
 
 
