@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
 [resource]
 script = ExtResource("2_2gqhm")
 card_name = "Mystic Bolt"
-description = "(WIP) Attack for DMG +6. Choose to apply 2 Burn or 2 Shock"
+description = "Attack for DMG +6. Choose to apply 2 Burn or 2 Shock"
 energy_cost = 2
 artwork = ExtResource("1_2gqhm")
 frame_art = ExtResource("5_y8u8c")

@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
 [resource]
 script = ExtResource("2_88c81")
 card_name = "Spark of Magic"
-description = "(WIP) Choose to apply 2 Burn or 2 Shock. Draw 1 Card"
+description = "Choose to apply 2 Burn or 2 Shock. Draw 1 Card"
 energy_cost = 0
 card_type = 1
 artwork = ExtResource("1_5w1xt")
