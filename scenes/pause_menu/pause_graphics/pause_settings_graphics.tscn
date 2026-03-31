@@ -1,135 +1,137 @@
-[gd_scene format=3 uid="uid://b7xfcjtdbf3im"]
+[gd_scene format=3 uid="uid://c2off5xo6bbif"]
 
-[ext_resource type="Script" uid="uid://dujycmonnjecb" path="res://scenes/settings_menu/controls/setting_menu_controls.gd" id="1_m64no"]
-[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_i3jqd"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_ppgrx"]
-[ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="4_3kov3"]
-[ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="4_i3jqd"]
-[ext_resource type="Texture2D" uid="uid://dnjf2053kkm8i" path="res://scenes/settings_menu/controls/Graphics_Icon.png" id="4_ppgrx"]
-[ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="5_3kov3"]
-[ext_resource type="Texture2D" uid="uid://ct23d7brqxpst" path="res://scenes/settings_menu/controls/Blue_Controls_Icon.png" id="6_4fh8m"]
+[ext_resource type="Script" uid="uid://dp2i6aoahy63d" path="res://scenes/pause_menu/pause_graphics/pause_settings_graphics.gd" id="1_erajk"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_8l6vc"]
+[ext_resource type="Texture2D" uid="uid://dc125ju51cduy" path="res://scenes/settings_menu/graphics/Blue_Graphics_Icon.png" id="3_tcdec"]
+[ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="4_1373m"]
+[ext_resource type="Texture2D" uid="uid://b3126nvmfyvs6" path="res://scenes/settings_menu/controls/Controls_Icon.png" id="5_abk0r"]
+[ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="6_6xbq1"]
+[ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="7_62isq"]
+[ext_resource type="Texture2D" uid="uid://cgrsfwvngllyt" path="res://scenes/settings_menu/graphics/FullScreen_Icon.png" id="8_71g7v"]
+[ext_resource type="Texture2D" uid="uid://cd1f8n5hwqrf7" path="res://scenes/settings_menu/graphics/ON_Icon.png" id="9_usl5g"]
+[ext_resource type="Texture2D" uid="uid://cale3dtexbitf" path="res://scenes/settings_menu/graphics/OFF_Icon.png" id="10_o76gc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5h30"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja5ad"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5le3a"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_807kq"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mxoh"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3t8x"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ipew"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o00b5"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7el3e"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_edjtb"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bi2s"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_emrrn"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qneoh"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tbnbe"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kpxt"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aut5i"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs2a7"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cqfm"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4lhh"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3guu"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mc0i"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6v7s"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xxwn"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0goog"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcmle"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5175h"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(708, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q41l"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(472, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r50i4"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(236, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1d7ay"]
-atlas = ExtResource("4_3kov3")
+atlas = ExtResource("7_62isq")
 region = Rect2(0, 0, 236, 101)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_w43bv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_8fjuh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -232,81 +234,77 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="SettingMenuControls" type="Control" unique_id=2089465396]
+[node name="PauseSettingsGraphics" type="Control" unique_id=187093839]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m64no")
+script = ExtResource("1_erajk")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1533876153]
-texture = ExtResource("2_i3jqd")
-centered = false
-
-[node name="Unrolled_Scroll" type="Sprite2D" parent="." unique_id=2112571819]
+[node name="Unrolled_Scroll" type="Sprite2D" parent="." unique_id=1724869900]
 position = Vector2(961, 568)
 scale = Vector2(5.169, 7.421)
-texture = ExtResource("3_ppgrx")
+texture = ExtResource("2_8l6vc")
 
-[node name="Buttons" type="Control" parent="." unique_id=922829549]
+[node name="Buttons" type="Control" parent="." unique_id=212287426]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Graphics Button" type="Button" parent="Buttons" unique_id=193253769]
+[node name="Graphics Button" type="Button" parent="Buttons" unique_id=1853587866]
 layout_mode = 0
 offset_left = 330.0
 offset_top = 37.0
 offset_right = 715.0
 offset_bottom = 157.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=1812849026]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=2138462340]
 position = Vector2(194, 60)
 scale = Vector2(1.747, 1.696)
-texture = ExtResource("3_ppgrx")
+texture = ExtResource("2_8l6vc")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=521047717]
+[node name="Graphics" type="Sprite2D" parent="Buttons/Graphics Button" unique_id=1872696984]
 position = Vector2(211, 77)
 scale = Vector2(0.418, 0.40551353)
-texture = ExtResource("4_ppgrx")
+texture = ExtResource("3_tcdec")
 
-[node name="Sound Button" type="Button" parent="Buttons" unique_id=87864395]
+[node name="Sound Button" type="Button" parent="Buttons" unique_id=297031283]
 layout_mode = 0
 offset_left = 789.0
 offset_top = 41.0
 offset_right = 1138.0
 offset_bottom = 153.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Sound Button" unique_id=1856818554]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Sound Button" unique_id=1299130238]
 position = Vector2(166, 56)
 scale = Vector2(1.747, 1.696)
-texture = ExtResource("3_ppgrx")
+texture = ExtResource("2_8l6vc")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Sound Button" unique_id=1187500204]
+[node name="Sound" type="Sprite2D" parent="Buttons/Sound Button" unique_id=930851012]
 position = Vector2(168, 55)
 scale = Vector2(0.46699998, 0.45490578)
-texture = ExtResource("5_3kov3")
+texture = ExtResource("4_1373m")
 
-[node name="Control Button" type="Button" parent="Buttons" unique_id=441682214]
+[node name="Control Button" type="Button" parent="Buttons" unique_id=631962171]
 layout_mode = 0
 offset_left = 1257.0
 offset_top = 40.0
 offset_right = 1593.0
 offset_bottom = 157.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Control Button" unique_id=1620151712]
+[node name="Scroll" type="Sprite2D" parent="Buttons/Control Button" unique_id=1207676533]
 position = Vector2(128, 57)
 scale = Vector2(1.7469575, 1.696)
-texture = ExtResource("3_ppgrx")
+texture = ExtResource("2_8l6vc")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Control Button" unique_id=1861215499]
+[node name="Controls" type="Sprite2D" parent="Buttons/Control Button" unique_id=1862991787]
 position = Vector2(129.99997, 56)
 scale = Vector2(0.36300004, 0.39756447)
-texture = ExtResource("6_4fh8m")
+texture = ExtResource("5_abk0r")
 
-[node name="Exit" type="Button" parent="Buttons" unique_id=653754904]
+[node name="Exit" type="Button" parent="Buttons" unique_id=1231996388]
 layout_mode = 0
 offset_left = 810.0
 offset_top = 929.0
@@ -314,26 +312,58 @@ offset_right = 1054.0
 offset_bottom = 1038.0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(122, 54.5)
-icon = ExtResource("3_ppgrx")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=356271844]
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Exit" unique_id=1387280374]
+position = Vector2(122.00003, 54.083313)
+scale = Vector2(1.0000002, 1.0049505)
+texture = ExtResource("2_8l6vc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1337337409]
 position = Vector2(118.66669, 53.499996)
 scale = Vector2(0.175, 0.15215278)
-texture = ExtResource("4_i3jqd")
+texture = ExtResource("6_6xbq1")
 
-[node name="Scroll_Animation" type="Control" parent="." unique_id=1744398690]
+[node name="Scroll_Animation" type="Control" parent="." unique_id=710459800]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Scroll_Animation" unique_id=1322913140]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Scroll_Animation" unique_id=981127346]
 position = Vector2(961, 568)
 scale = Vector2(5.169, 7.421)
-sprite_frames = SubResource("SpriteFrames_w43bv")
+sprite_frames = SubResource("SpriteFrames_8fjuh")
 animation = &"Close"
 
-[node name="control_settings" type="Control" parent="." unique_id=1874290779]
+[node name="gsettingsoptions" type="Control" parent="." unique_id=884185958]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 52.0
+offset_top = -9.0
+offset_right = 229.0
+offset_bottom = 31.0
+
+[node name="FullScreen button" type="Button" parent="gsettingsoptions" unique_id=1737038882]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 378.0
+offset_right = 921.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+flat = true
+
+[node name="Fullscreen" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=1953480427]
+position = Vector2(101.000015, 37.000008)
+scale = Vector2(0.3308824, 0.27328083)
+texture = ExtResource("8_71g7v")
+
+[node name="Fullscreen ON" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=1003775558]
+position = Vector2(315, 36.999996)
+scale = Vector2(0.331, 0.273)
+texture = ExtResource("9_usl5g")
+
+[node name="Fullscreen OFF" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=1340550046]
+position = Vector2(327, 37)
+scale = Vector2(0.331, 0.273)
+texture = ExtResource("10_o76gc")
+
+[connection signal="pressed" from="gsettingsoptions/FullScreen button" to="." method="_on_full_screen_button_pressed"]
