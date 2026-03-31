@@ -7,9 +7,11 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="5_f0hci"]
 
 [node name="Goblin" type="Sprite2D" unique_id=1886209078]
+position = Vector2(567, 507)
 scale = Vector2(2, 2)
 script = ExtResource("2_f0hci")
 enemy_data = ExtResource("3_1hkhi")
+debug_status_vfx_test = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=354001421]
 modulate = Color(0, 1, 0, 1)
@@ -27,6 +29,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 horizontal_alignment = 2
 script = ExtResource("5_f0hci")
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemyHealth" type="ProgressBar" parent="." unique_id=1894055990]
 modulate = Color(1, 0, 0, 1)
@@ -68,6 +71,7 @@ offset_top = -95.0
 offset_right = -55.0
 offset_bottom = -45.0
 scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1249042514]
 offset_left = -105.0
@@ -75,6 +79,7 @@ offset_top = -55.0
 offset_right = -55.0
 offset_bottom = -5.0
 scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemyIntent3" type="TextureRect" parent="." unique_id=489344316]
 offset_left = -106.013
@@ -82,3 +87,4 @@ offset_top = -5.0
 offset_right = -56.013
 offset_bottom = 45.0
 scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
