@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cw0ra5ytlq0fk"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_a1yij"]
+[ext_resource type="Texture2D" uid="uid://cictxlgjmvvfr" path="res://cards/sprites/enchant.png" id="1_sniae"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_x4w1b"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="3_8wcnk"]
+[ext_resource type="Script" uid="uid://bcgt6s12xiu2y" path="res://cards/effects/choice_effect.gd" id="4_xmt2w"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="5_rqexr"]
+
+[sub_resource type="Resource" id="Resource_6wii0"]
+script = ExtResource("3_8wcnk")
+amount = 10
+include_base_dmg = true
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_skqms"]
+script = ExtResource("4_xmt2w")
+card_name = 2
+metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
+
+[resource]
+script = ExtResource("2_x4w1b")
+card_name = "Enchant"
+description = "Add DMG+10 Damage to Strike. Choose to Apply 4 Burn or 4 Shock"
+energy_cost = 2
+rarity = 2
+card_type = 1
+artwork = ExtResource("1_sniae")
+frame_art = ExtResource("5_rqexr")
+effects = Array[ExtResource("1_a1yij")]([SubResource("Resource_6wii0"), SubResource("Resource_skqms")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
