@@ -317,6 +317,10 @@ func _do_strike_on_target(target):
 	if active_passives.has("Evasion"):
 		dmg /= 2
 	
+	# Crit
+	if try_crit():
+		dmg += get_crit_damage()
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
@@ -507,7 +511,7 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 	
 	# Freeze does not affect elemental damage (handled in perform_strike)
 	# Crit check
-	if randf() < get_crit_chance():
+	if try_crit():
 		dmg += get_crit_damage()
 	
 	return dmg
@@ -626,6 +630,10 @@ func register_passive(pname : String) -> void:
 
 func is_stunned() -> bool:
 	return status_effects["stun"] > 0
+
+
+func try_crit() -> bool:
+	return randf() < get_crit_chance()
 
 
 func try_dodge() -> bool:
