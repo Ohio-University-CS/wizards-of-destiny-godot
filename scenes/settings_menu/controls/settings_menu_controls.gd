@@ -6,7 +6,11 @@ extends Control
 @onready var sound_button = $"Buttons/Sound Button"
 @onready var control_button = $"Buttons/Control Button"
 @onready var exit_button : Button = $Buttons/Exit
+@onready var seed_button : Button = $SeedOption
 @onready var unrolled_scroll = $Unrolled_Scroll
+
+@onready var seed_on : Sprite2D = $SeedOption/On
+@onready var seed_off : Sprite2D = $SeedOption/Off
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,12 +21,18 @@ func _ready() -> void:
 	#settings
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
+	seed_on.visible = RunManager.seed_scene
+	seed_off.visible = not RunManager.seed_scene
+	
 	#buttons
 	setup_button_hover(graphics_button)
 	setup_button_hover(sound_button)
 	setup_button_hover(control_button)
+	setup_button_hover(seed_button)
 	graphics_button.pressed.connect(_on_graphics_pressed)
 	sound_button.pressed.connect(_on_sound_pressed)
+	
+	seed_button.pressed.connect(_on_seed_pressed)
 	
 	exit_button.pressed.connect(_on_back_pressed)
 	
@@ -31,13 +41,16 @@ func _ready() -> void:
 
 func _cs_on() -> void:
 	unrolled_scroll.hide()
+	seed_button.hide()
 	AnimatedSprite.play("Open")
 	await AnimatedSprite.animation_finished
 	unrolled_scroll.show()
+	seed_button.show()
 
 
 func _cs_off() -> void:
 	unrolled_scroll.hide()
+	seed_button.hide()
 
 func _on_graphics_pressed():
 	graphics_button.disabled = true
@@ -61,7 +74,17 @@ func _on_sound_pressed():
 	get_tree().change_scene_to_file("res://scenes/settings_menu/sound/settings-menu-sound.tscn")
 	control_button.disabled = false
 	sound_button.disabled = false
+
+
+func _on_seed_pressed():
+	seed_on.visible = not seed_on.visible
+	seed_off.visible = not seed_off.visible
 	
+	if seed_on.visible:
+		RunManager.seed_scene = true
+	else:
+		RunManager.seed_scene = false
+
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")

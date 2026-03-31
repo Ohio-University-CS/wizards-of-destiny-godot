@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cs3cws2lg2c5s"]
+
+[ext_resource type="Script" uid="uid://7kpacktxtd48" path="res://scenes/seed_input/seed_input.gd" id="1_ru63g"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="1_s0v0s"]
+[ext_resource type="FontFile" uid="uid://criq0aiciy1id" path="res://fonts/Cinzel-Regular.ttf" id="2_ru63g"]
+
+[node name="SeedInput" type="Control" unique_id=123293999]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ru63g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1924827946]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 286.0
+offset_right = 1214.0
+offset_bottom = 326.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1526666542]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s0v0s")
+theme_override_font_sizes/font_size = 30
+text = "Enter Seed (Leave blank for random)"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer" unique_id=1283861927]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1031831399]
+layout_mode = 2
+alignment = 1
+
+[node name="RandomSeed" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1354530174]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ru63g")
+theme_override_font_sizes/font_size = 20
+text = "Random Seed"
+
+[node name="Proceed" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=537687214]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ru63g")
+theme_override_font_sizes/font_size = 20
+text = "Proceed"

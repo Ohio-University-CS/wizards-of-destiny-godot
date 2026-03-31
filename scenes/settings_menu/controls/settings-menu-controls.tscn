@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="5_gosnm"]
 [ext_resource type="Texture2D" uid="uid://ct23d7brqxpst" path="res://scenes/settings_menu/controls/Blue_Controls_Icon.png" id="6_hi7g2"]
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="7_umfc7"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="8_kit4c"]
 [ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="8_lxglu"]
+[ext_resource type="Texture2D" uid="uid://cale3dtexbitf" path="res://scenes/settings_menu/graphics/OFF_Icon.png" id="9_gosnm"]
+[ext_resource type="Texture2D" uid="uid://cd1f8n5hwqrf7" path="res://scenes/settings_menu/graphics/ON_Icon.png" id="10_hi7g2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("8_lxglu")
@@ -337,3 +340,32 @@ animation = &"Close"
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="SeedOption" type="Button" parent="." unique_id=1377604420]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 400.0
+offset_right = 936.0
+offset_bottom = 467.0
+flat = true
+
+[node name="Label" type="Label" parent="SeedOption" unique_id=1567566406]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 211.0
+offset_bottom = 47.25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_kit4c")
+theme_override_font_sizes/font_size = 40
+text = "Seed Option"
+
+[node name="Off" type="Sprite2D" parent="SeedOption" unique_id=1329333642]
+position = Vector2(364, 29)
+scale = Vector2(0.46470588, 0.3581662)
+texture = ExtResource("9_gosnm")
+
+[node name="On" type="Sprite2D" parent="SeedOption" unique_id=652746006]
+position = Vector2(364, 29)
+scale = Vector2(0.46470588, 0.3581662)
+texture = ExtResource("10_hi7g2")
