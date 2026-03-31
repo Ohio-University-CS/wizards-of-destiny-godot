@@ -5,8 +5,11 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_4kuee"]
 
 [node name="Player" type="Sprite2D" unique_id=46580540]
+position = Vector2(391, 372)
 scale = Vector2(2, 2)
 script = ExtResource("2_4kuee")
+initialized = true
+debug_status_vfx_test = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1597522331]
 scale = Vector2(6, 6)
