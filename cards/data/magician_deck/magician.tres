@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cniggcjjpnmqi" path="res://cards/class_data.gd" id="1_d3ap0"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_2wtbq"]
-[ext_resource type="Resource" uid="uid://d2cdt5te7vce" path="res://cards/data/magician_deck/common_cards/fire_storm.tres" id="3_d1cub"]
 [ext_resource type="Resource" uid="uid://dlba3lrk4k5fn" path="res://cards/data/magician_deck/starting cards/hex.tres" id="3_nfnmw"]
 [ext_resource type="Resource" uid="uid://cn3s07jgnyt8s" path="res://cards/data/magician_deck/starting cards/jinx.tres" id="3_nudi4"]
 [ext_resource type="Resource" uid="uid://crmy4pr4eh72s" path="res://cards/data/magician_deck/starting cards/protective_barrier.tres" id="4_7k8bs"]
@@ -13,5 +12,5 @@
 [resource]
 script = ExtResource("1_d3ap0")
 deck_name = "Magician"
-starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_d1cub"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj")])
+starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_nudi4"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj")])
 metadata/_custom_type_script = "uid://cniggcjjpnmqi"
