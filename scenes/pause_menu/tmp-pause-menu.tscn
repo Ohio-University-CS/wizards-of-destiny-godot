@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://0acum0juk6t2"]
+
+[ext_resource type="PackedScene" uid="uid://s14gmetyottx" path="res://scenes/pause_menu/pause-menu.tscn" id="1_2qcpo"]
+[ext_resource type="Texture2D" uid="uid://dbwqnix5jsvbk" path="res://essentials/Redhead.jpg" id="5_61vr3"]
+
+[sub_resource type="GDScript" id="GDScript_k4vn3"]
+script/source = "extends Control
+
+var pause_menu_scene = preload(\"res://scenes/pause_menu/pause-menu.tscn\")
+var pause_menu = null
+
+func _ready():
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	add_child(pause_menu)
+	
+	
+
+func _unhandled_input(event):
+	if event.is_action_pressed(\"ui_cancel\"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused
+"
+
+[node name="TmpPauseMenu" type="Control" unique_id=2071002295]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_k4vn3")
+metadata/_edit_use_anchors_ = true
+
+[node name="Backgroun" type="Sprite2D" parent="." unique_id=1076413357]
+position = Vector2(897, 456)
+texture = ExtResource("5_61vr3")
+
+[node name="Pause_menu_layer" type="CanvasLayer" parent="." unique_id=365011309]
+process_mode = 2
+visible = false
+
+[node name="Pause_menu" parent="Pause_menu_layer" unique_id=216180788 instance=ExtResource("1_2qcpo")]
