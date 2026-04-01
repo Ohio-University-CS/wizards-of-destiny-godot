@@ -18,10 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dnjf2053kkm8i" path="res://scenes/settings_menu/controls/Graphics_Icon.png" id="13_uf7x1"]
 [ext_resource type="Texture2D" uid="uid://dgmm2fwkh5hqc" path="res://scenes/settings_menu/sound/Blue_Sound_Icon.png" id="14_4bbrr"]
 [ext_resource type="Texture2D" uid="uid://ct23d7brqxpst" path="res://scenes/settings_menu/controls/Blue_Controls_Icon.png" id="15_516im"]
-<<<<<<< HEAD
-=======
 [ext_resource type="Script" uid="uid://bmipeekhdxeot" path="res://scenes/pause_menu/back_button.gd" id="18_ykakm"]
->>>>>>> pause-menu
 
 [sub_resource type="LabelSettings" id="LabelSettings_hoajq"]
 font_size = 50
@@ -442,40 +439,28 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="resume_scroll_animation" type="AnimatedSprite2D" parent="Pause_menu_options/Scroll_Animation" unique_id=481593354]
-<<<<<<< HEAD
-=======
 visible = false
->>>>>>> pause-menu
 position = Vector2(935.00006, 161)
 scale = Vector2(1.716, 1.582)
 sprite_frames = SubResource("SpriteFrames_yx3vr")
 animation = &"Close"
 
 [node name="setting_scroll_animation" type="AnimatedSprite2D" parent="Pause_menu_options/Scroll_Animation" unique_id=625190633]
-<<<<<<< HEAD
-=======
 visible = false
->>>>>>> pause-menu
 position = Vector2(938.00006, 356)
 scale = Vector2(1.716, 1.582)
 sprite_frames = SubResource("SpriteFrames_yx3vr")
 animation = &"Close"
 
 [node name="quit_scroll_animation" type="AnimatedSprite2D" parent="Pause_menu_options/Scroll_Animation" unique_id=585314178]
-<<<<<<< HEAD
-=======
 visible = false
->>>>>>> pause-menu
 position = Vector2(942.00006, 756)
 scale = Vector2(1.716, 1.582)
 sprite_frames = SubResource("SpriteFrames_yx3vr")
 animation = &"Close"
 
 [node name="main_menu_button" type="AnimatedSprite2D" parent="Pause_menu_options/Scroll_Animation" unique_id=613826198]
-<<<<<<< HEAD
-=======
 visible = false
->>>>>>> pause-menu
 position = Vector2(943.00006, 556)
 scale = Vector2(1.716, 1.582)
 sprite_frames = SubResource("SpriteFrames_yx3vr")
@@ -692,10 +677,7 @@ offset_bottom = 1038.0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(122, 54.5)
 flat = true
-<<<<<<< HEAD
-=======
 script = ExtResource("18_ykakm")
->>>>>>> pause-menu
 
 [node name="Sprite2D2" type="Sprite2D" parent="Pause_Settings_menu/Buttons/Back Button" unique_id=493058828]
 position = Vector2(122.00003, 54.083313)
