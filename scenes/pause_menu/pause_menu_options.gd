@@ -1,22 +1,11 @@
 # Pause Settings Menu - Graphics
 extends Control
 
-<<<<<<< HEAD
-
-=======
 @onready var resume_button = $"Buttons/resume_button"
->>>>>>> pause-menu
 @onready var settings_button = $"Buttons/settings_button"
 @onready var main_menu_butotn = $"Buttons/main_menu_button"
 @onready var quit_button = $"Buttons/quit_button"
 
-<<<<<<< HEAD
-
-
-func _ready() -> void:
-	main_menu_butotn.pressed.connect(_on_main_menu_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
-=======
 func _ready() -> void:
 	main_menu_butotn.pressed.connect(_on_main_menu_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
@@ -24,7 +13,6 @@ func _ready() -> void:
 	setup_button_hover(settings_button)
 	setup_button_hover(main_menu_butotn)
 	setup_button_hover(quit_button)
->>>>>>> pause-menu
 	pass
 
 func _on_main_menu_pressed():
