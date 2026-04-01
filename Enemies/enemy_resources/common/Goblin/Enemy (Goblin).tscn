@@ -12,6 +12,7 @@ scale = Vector2(2, 2)
 script = ExtResource("2_f0hci")
 enemy_data = ExtResource("3_1hkhi")
 debug_status_vfx_test = true
+debug_test_status = "block"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=354001421]
 modulate = Color(0, 1, 0, 1)

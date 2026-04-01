@@ -7,6 +7,7 @@ class_name StatusVFXHandler
 var parent_node: Node = null
 var _status_vfx_nodes := {}
 var _is_player: bool = false
+var _vfx_on: bool = true
 
 # ---------------------------------------------------------
 # INITIALIZATION
@@ -16,7 +17,6 @@ func _ready():
 	# Auto-connect to parent if it has the signals
 	if parent_node == null:
 		parent_node = get_parent()
-		# Detect if parent is a Player
 		_is_player = parent_node is Player
 	
 	_connect_to_parent()
@@ -103,7 +103,7 @@ func _on_status_expired(status_name: String) -> void:
 # VFX IMPLEMENTATIONS
 # ---------------------------------------------------------
 
-func _set_burn_vfx(stacks: int) -> void:	# burn could be tinkered with
+func _set_burn_vfx(stacks: int) -> void: # burn could be tinkered with
 	if stacks <= 0:
 		_on_status_expired("burn")
 		return
@@ -156,7 +156,7 @@ func _create_burn_particles() -> GPUParticles2D:
 	return particles
 
 
-func _set_regeneration_vfx(stacks: int) -> void:	# done 
+func _set_regeneration_vfx(stacks: int) -> void: # done
 	_set_status_particles_vfx(
 		"regeneration",
 		stacks,
@@ -172,15 +172,24 @@ func _set_regeneration_vfx(stacks: int) -> void:	# done
 
 
 func _set_block_vfx(stacks: int) -> void:
-	_set_status_particles_vfx(
-		"block",
-		stacks,
-		Color(0.55, 0.75, 1.0, 0.85),
-		Vector2(0, -10),
-		16,
-		24.0,
-		220.0
-	)
+	if stacks <= 0:
+		_on_status_expired("block")
+		return
+
+	var block_sprite: Sprite2D = null
+	if _status_vfx_nodes.has("block"):
+		block_sprite = _status_vfx_nodes["block"] as Sprite2D
+	else:
+		block_sprite = _create_block_vfx()
+		if block_sprite == null:
+			return
+		add_child(block_sprite)
+		_status_vfx_nodes["block"] = block_sprite
+		_start_block_glisten(block_sprite)
+
+	# Slightly scale with stacks so bigger block values feel more present.
+	block_sprite.position = _apply_scale_to_offset(Vector2(40, 50))
+	block_sprite.scale = Vector2.ONE * 3.0
 
 
 func _set_evasive_vfx(stacks: int) -> void:
@@ -285,7 +294,7 @@ func _create_status_particles(
 	particles.randomness = 0.8
 	particles.emitting = true
 
-	var particle_material := ParticleProcessMaterial.new()	#small particles
+	var particle_material := ParticleProcessMaterial.new() # small particles
 	particle_material.direction = Vector3(0.0, -1.0, 0.0)
 	particle_material.spread = 55.0
 	particle_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
@@ -331,7 +340,7 @@ func _create_staff_status_particles(
 	particles.randomness = 0.8
 	particles.emitting = true
 
-	var particle_material := ParticleProcessMaterial.new()	#small particles
+	var particle_material := ParticleProcessMaterial.new() # small particles
 	particle_material.direction = Vector3(0.0, -1.0, 0.0)
 	particle_material.spread = 35.0
 	particle_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
@@ -360,7 +369,40 @@ func _create_staff_status_particles(
 	
 	return particles
 
+func _create_block_vfx() -> Sprite2D:
+	var texture := _load_status_texture("block")
+	if texture == null:
+		return null
 
+	var sprite := Sprite2D.new()
+	sprite.name = "BlockSprite"
+	sprite.texture = texture
+	sprite.centered = true
+	sprite.position = _apply_scale_to_offset(Vector2(0, -14))
+	sprite.modulate = Color(1.0, 1.0, 1.0, 0.9)
+	return sprite
+
+
+func _start_block_glisten(block_sprite: Sprite2D) -> void:
+	if not is_instance_valid(block_sprite):
+		return
+
+	# Trigger a diagonal glint sweep at random intervals while block is active.
+	var delay: float = randf_range(1.2, 4.0)
+	var timer: SceneTreeTimer = get_tree().create_timer(delay)
+	timer.timeout.connect(func() -> void:
+		if not is_instance_valid(block_sprite):
+			return
+		_start_block_glisten(block_sprite)
+	)
+
+func _spawn_status_symbol(status_name: String) -> void:
+	if !status_name in ["burn", "regeneration", "block", "evasive", "freeze", "corroded", "shock", "stun"]:
+		return
+	var status_symbol = Sprite2D.new()
+	status_symbol.texture = _load_status_texture(status_name)
+	status_symbol.position = parent_node.health_bar.position + Vector2(0, -40) # Position above health bar
+	
 func _load_status_texture(status_name: String) -> Texture2D:
 	# For example: res://art_drop/status effects/burn.png for "burn" status
 	var texture_path = "res://art_drop/status effects/%s.png" % status_name

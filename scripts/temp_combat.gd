@@ -71,14 +71,39 @@ var is_combat_over: bool = false
 @export var preview_count: int = 5
 
 
+func _get_run_manager_player() -> Player:
+	var run_manager := get_node_or_null("/root/RunManager")
+	if run_manager == null:
+		return null
+
+	var run_player = run_manager.get("player")
+	if run_player is Player:
+		return run_player
+	return null
+
+
+func _set_run_manager_player(value: Player) -> void:
+	var run_manager := get_node_or_null("/root/RunManager")
+	if run_manager == null:
+		return
+
+	# In editor/tool contexts the singleton can appear as a plain Node;
+	# verify the script property exists before setting.
+	for prop in run_manager.get_property_list():
+		if String(prop.name) == "player":
+			run_manager.set("player", value)
+			return
+
+
 func _ready():
 	enemy_rng.randomize()
 
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	if RunManager.player:
-		player = RunManager.player
+	var stored_player := _get_run_manager_player()
+	if stored_player:
+		player = stored_player
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
@@ -126,7 +151,7 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 	
 	#keep reference updated
-	RunManager.player = player
+	_set_run_manager_player(player)
 	
 	#------------------------
 	# Spawn enemy
@@ -868,7 +893,7 @@ func _on_opponent_died() -> void:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		RunManager.player = player
+		_set_run_manager_player(player)
 	
 	# Build result data
 	var result = {
