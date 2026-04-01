@@ -44,6 +44,9 @@ grow_vertical = 2
 script = ExtResource("4_healthbar")
 metadata/_edit_use_anchors_ = true
 
+[node name="StatusStack" type="Node2D" parent="." unique_id=1410096842]
+position = Vector2(86, -136)
+
 [node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=2011105036]
 layout_mode = 1
 anchors_preset = -1
