@@ -10,8 +10,8 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn"
+const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/common/Wizard/Wizard.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData

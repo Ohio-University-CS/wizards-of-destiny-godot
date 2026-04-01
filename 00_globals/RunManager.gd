@@ -9,7 +9,7 @@ extends Node
 var player : Player = null
 var coins : int = 10
 
-var seed : int = 0
+var run_seed : int = 0
 var _rng := RandomNumberGenerator.new()
 
 var seed_scene : bool = false
@@ -42,10 +42,10 @@ func start_new_run(starting_player : Player, new_seed : int = -1):
 	level_floor = 1
 	stage = 1
 	if new_seed == -1:
-		seed = randi()
+		run_seed = randi()
 	else:
-		seed = new_seed
-	_rng.seed = seed
+		run_seed = new_seed
+	_rng.seed = run_seed
 	print("Seed: ", seed)
 
 func get_rng() -> RandomNumberGenerator:
@@ -56,7 +56,7 @@ func get_rng() -> RandomNumberGenerator:
 # ----------------
 
 func add_coins(amount : int):
-	seed = randi() # fallback to random seed if not provided
+	#run_seed = randi() # fallback to random seed if not provided
 
 	coins += amount
 

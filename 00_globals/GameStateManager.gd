@@ -60,8 +60,8 @@ func _on_exit_shop(_player: Player = null):
 	
 func _write_out_gamestate() -> bool:
 	var file_path = "res://save/" + str(selected_save) + ".json"
-	var save_file_string = FileAccess.get_file_as_string(file_path)
-	var save_file = FileAccess.open(str(file_path), FileAccess.WRITE)
+	var _save_file_string = FileAccess.get_file_as_string(file_path)
+	var _save_file = FileAccess.open(str(file_path), FileAccess.WRITE)
 	#var player_state_dictionary = {
 		#"current health" : gamestate_player.current_health,
 		#""
