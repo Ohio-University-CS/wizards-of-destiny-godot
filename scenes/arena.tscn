@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
 [ext_resource type="PackedScene" uid="uid://cge02g6n6iduc" path="res://Enemies/enemy_resources/common/Wizard/Wizard.tscn" id="5_dpxgc"]
 [ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
-[ext_resource type="Texture2D" uid="uid://p3xvkh7wkowc" path="res://scenes/level1/plainlevel1.png" id="6_oexds"]
+[ext_resource type="PackedScene" uid="uid://s14gmetyottx" path="res://scenes/pause_menu/pause-menu.tscn" id="8_oexds"]
 
 [node name="Arena" type="Node2D" unique_id=1267453808]
 script = ExtResource("1_4ag8t")
@@ -33,3 +33,10 @@ position = Vector2(387.99997, 584)
 scale = Vector2(1.75, 1.75)
 
 [node name="UI" parent="." unique_id=1102256735 instance=ExtResource("6_k1k1x")]
+
+[node name="Pause_Menu_Layer" type="CanvasLayer" parent="." unique_id=2126429020]
+layer = 10000000
+
+[node name="Pause_menu" parent="Pause_Menu_Layer" unique_id=216180788 instance=ExtResource("8_oexds")]
+visible = false
+size_flags_horizontal = 0

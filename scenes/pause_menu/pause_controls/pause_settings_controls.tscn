@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bk24mych5v83a"]
 
 [ext_resource type="Script" uid="uid://7ikj1axgssd4" path="res://scenes/pause_menu/pause_controls/pause_settings_controls.gd" id="1_e0u2a"]
+[ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="2_6c1ec"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_hl1n1"]
 [ext_resource type="Texture2D" uid="uid://dnjf2053kkm8i" path="res://scenes/settings_menu/controls/Graphics_Icon.png" id="3_6c1ec"]
 [ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="4_fjg8f"]
@@ -239,6 +240,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e0u2a")
+
+[node name="background" type="Sprite2D" parent="." unique_id=1520343900]
+modulate = Color(1, 1, 1, 0.44313726)
+position = Vector2(958, 527)
+scale = Vector2(1.9594998, 1.5952724)
+texture = ExtResource("2_6c1ec")
 
 [node name="Unrolled_Scroll" type="Sprite2D" parent="." unique_id=1928638353]
 position = Vector2(961, 568)

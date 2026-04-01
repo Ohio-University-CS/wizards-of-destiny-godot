@@ -56,6 +56,10 @@ var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+
+var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var pause_menu = null
+
 enum TurnState {
 	PLAYER,
 	ENEMY,
@@ -75,7 +79,17 @@ var is_combat_over: bool = false
 
 func _ready():
 	enemy_rng.randomize()
-
+	
+	var pause_layer = CanvasLayer.new()
+	pause_layer.layer = 100
+	add_child(pause_layer)
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_layer.add_child(pause_menu)
+	
+	
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -1121,3 +1135,12 @@ func _clear_editor_previews():
 	for c in to_remove:
 		if is_instance_valid(c):
 			c.queue_free()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused
