@@ -10,6 +10,7 @@ scale = Vector2(2, 2)
 script = ExtResource("2_4kuee")
 initialized = true
 debug_status_vfx_test = true
+debug_test_status = "corroded"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1597522331]
 scale = Vector2(6, 6)

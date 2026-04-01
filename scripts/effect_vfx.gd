@@ -114,6 +114,14 @@ func _on_status_applied(status_name: String, stacks: int) -> void:
 
 
 func _on_status_expired(status_name: String) -> void:
+	# Restore fighter tint if corroded is expiring.
+	if status_name == "corroded" and parent_node != null and parent_node.has_meta("corroded_original_modulate"):
+		var restore_target: CanvasItem = parent_node.get_node_or_null("Sprite2D") as CanvasItem
+		if restore_target == null:
+			restore_target = parent_node as CanvasItem
+		if restore_target != null:
+			restore_target.modulate = parent_node.get_meta("corroded_original_modulate") as Color
+		parent_node.remove_meta("corroded_original_modulate")
 	if _status_vfx_nodes.has(status_name):
 		var node = _status_vfx_nodes[status_name]
 		if is_instance_valid(node):
@@ -216,7 +224,6 @@ func _set_block_vfx(stacks: int) -> void:
 			return
 		add_child(block_sprite)
 		_status_vfx_nodes["block"] = block_sprite
-		_start_block_glisten(block_sprite)
 
 	# Slightly scale with stacks so bigger block values feel more present.
 	block_sprite.position = _apply_scale_to_offset(Vector2(40, 50))
@@ -248,14 +255,77 @@ func _set_freeze_vfx(stacks: int) -> void:
 
 
 func _set_corroded_vfx(stacks: int) -> void:
-	_set_status_particles_vfx(
-		"corroded",
-		stacks,
-		Color(0.7, 1.0, 0.25, 0.9),
-		Vector2(0, -14),
-		17,
-		34.0,
-		70.0
+	if stacks <= 0:
+		_on_status_expired("corroded")
+		return
+
+	# Apply green tint to the fighter sprite, storing original so it can be restored.
+	var tint_target: CanvasItem = parent_node.get_node_or_null("Sprite2D") as CanvasItem
+	if tint_target == null:
+		tint_target = parent_node as CanvasItem
+	if tint_target != null:
+		if not parent_node.has_meta("corroded_original_modulate"):
+			parent_node.set_meta("corroded_original_modulate", tint_target.modulate)
+		tint_target.modulate = Color(0.5, 1.0, 0.5, tint_target.modulate.a)
+
+	# Only start the fall loop once — skip if overlay already exists.
+	if _status_vfx_nodes.has("corroded"):
+		return
+
+	var overlay := Node2D.new()
+	overlay.name = "CorrodedOverlay"
+	add_child(overlay)
+	_status_vfx_nodes["corroded"] = overlay
+	_corroded_fall_loop(overlay)
+
+
+func _corroded_fall_loop(overlay: Node2D) -> void:
+	if not is_instance_valid(overlay):
+		return
+	_spawn_corroded_drip(overlay)
+	var timer: SceneTreeTimer = get_tree().create_timer(randf_range(0.2, 0.5))
+	timer.timeout.connect(func() -> void:
+		if is_instance_valid(overlay):
+			_corroded_fall_loop(overlay)
+	)
+
+
+func _spawn_corroded_drip(overlay: Node2D) -> void:
+	var texture: Texture2D = _load_status_texture("corroded")
+	if texture == null:
+		return
+
+	# Determine bounds from the fighter's Sprite2D if available.
+	var fighter_height: float = 120.0
+	var fighter_width: float = 60.0
+	var center_y: float = 0.0
+	if parent_node != null:
+		var sprite_child: Sprite2D = parent_node.get_node_or_null("Sprite2D") as Sprite2D
+		if sprite_child != null and sprite_child.texture != null:
+			var sz: Vector2 = sprite_child.texture.get_size() * absf(sprite_child.scale.x)
+			fighter_height = sz.y * 0.9
+			fighter_width = sz.x * 0.7
+			center_y = sprite_child.position.y
+
+	var x_offset: float = randf_range(-fighter_width * 0.5, fighter_width * 0.5)
+	var start_pos := Vector2(x_offset, center_y - fighter_height * 0.5)
+	var end_pos := Vector2(x_offset, center_y + fighter_height * 0.5)
+
+	var drip := Sprite2D.new()
+	drip.texture = texture
+	drip.centered = true
+	drip.position = start_pos
+	drip.modulate = Color(0.6, 1.0, 0.6, 0.0)
+	_apply_uniform_status_symbol_scale(drip)
+	overlay.add_child(drip)
+
+	var tween: Tween = create_tween()
+	tween.tween_property(drip, "modulate", Color(0.6, 1.0, 0.6, 0.85), 0.08)
+	tween.parallel().tween_property(drip, "position", end_pos, 0.65)
+	tween.tween_property(drip, "modulate", Color(0.6, 1.0, 0.6, 0.0), 0.15)
+	tween.finished.connect(func() -> void:
+		if is_instance_valid(drip):
+			drip.queue_free()
 	)
 
 
@@ -412,20 +482,6 @@ func _create_block_vfx() -> Sprite2D:
 	sprite.position = _apply_scale_to_offset(Vector2(0, -14))
 	sprite.modulate = Color(1.0, 1.0, 1.0, 0.9)
 	return sprite
-
-
-func _start_block_glisten(block_sprite: Sprite2D) -> void:
-	if not is_instance_valid(block_sprite):
-		return
-
-	# Trigger a diagonal glint sweep at random intervals while block is active.
-	var delay: float = randf_range(1.2, 4.0)
-	var timer: SceneTreeTimer = get_tree().create_timer(delay)
-	timer.timeout.connect(func() -> void:
-		if not is_instance_valid(block_sprite):
-			return
-		_start_block_glisten(block_sprite)
-	)
 
 func _spawn_status_symbol(status_name: String) -> void:
 	if status_name not in _STATUS_SYMBOLS:
