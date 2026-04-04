@@ -13,7 +13,9 @@ enum StatusType {
 	DRAINED,
 	SEALED,
 	EMPOWER,
-	EVASIVE
+	EVASIVE,
+	RAGE,
+	BROKEN
 }
 
 @export var status_type : StatusType = StatusType.NONE

@@ -10,8 +10,9 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/common/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_WARRIOR_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Warrior/Goblin_Warrior.tscn"
+const DEFAULT_GOBLIN_ARCHER_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Archer/Goblin_Archer.tscn"
+const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
@@ -77,9 +78,41 @@ var is_combat_over: bool = false
 @export var preview_count: int = 5
 
 
+# Utility to load enemy pools from JSON database
+func load_enemy_pool(level: String, floor_num: int, stage: int) -> Array[PackedScene]:
+	var file = FileAccess.open("res://data/enemy_pools.json", FileAccess.READ)
+	if not file:
+		push_error("Could not open enemy_pools.json")
+		return []
+	var data = JSON.parse_string(file.get_as_text())
+	file.close()
+	if typeof(data) != TYPE_DICTIONARY or not data.has(level):
+		push_error("Level not found in enemy_pools.json")
+		return []
+	var floor_key = "floor_%d" % floor_num
+	if not data[level].has(floor_key):
+		push_error("Floor not found in enemy_pools.json")
+		return []
+	var pool_type = "enemies"
+	if stage == 4:
+		pool_type = "mini_boss_4"
+	elif stage == 8:
+		pool_type = "mini_boss_8"
+	elif stage == 12:
+		pool_type = "boss_12"
+	var paths = data[level][floor_key].get(pool_type, [])
+	var pool: Array[PackedScene] = []
+	for path in paths:
+		var scene = load(path)
+		if scene is PackedScene:
+			pool.append(scene)
+	return pool
+
+
+
 func _ready():
 	enemy_rng.randomize()
-	
+
 	var pause_layer = CanvasLayer.new()
 	pause_layer.layer = 100
 	add_child(pause_layer)
@@ -88,8 +121,7 @@ func _ready():
 	pause_menu.visible = false
 	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	pause_layer.add_child(pause_menu)
-	
-	
+
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -98,11 +130,11 @@ func _ready():
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
-		
+
 		var ui = find_child("UI", true, false)
 		if ui and ui.has_method("_bind_player_ui"):
 			ui._bind_player_ui(self)
-	
+
 	#-------------------
 	# fallback
 	#-------------------
@@ -125,7 +157,7 @@ func _ready():
 				if child is Player:
 					player = child
 					break
-	
+
 	#------------------
 	# validate
 	#------------------
@@ -135,20 +167,24 @@ func _ready():
 		if player.class_data == null:
 			player.setup_from_class(class_data)
 			player.initialized = true
-			
+
 		if player.has_signal("health_changed"):
 			player.emit_signal("health_changed", player.current_health)
 		if player.has_signal("energy_changed"):
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
-	
+
 	#keep reference updated
 	RunManager.player = player
-	
+
 	#------------------------
-	# Spawn enemy
+	# Load enemy pool from database
 	#------------------------
+	# Example: enchanted_forest, floor 1, regular enemies (stage 1)
+	enemy_pool = load_enemy_pool("enchanted_forest", 1, 1)
+	# For mini-boss or boss, change stage to 4, 8, or 12
+
 	_spawn_random_enemy_entity()
-	
+
 	if opponent == null:
 		if has_node("Enemy") and get_node("Enemy") is Enemy:
 			opponent = get_node("Enemy")
@@ -165,7 +201,7 @@ func _ready():
 				var enemies = find_children("*", "Enemy", true, false)
 				if enemies.size() > 0 and enemies[0] is Enemy:
 					opponent = enemies[0]
-	
+
 	if opponent:
 		_position_enemy_container(opponent)
 		if opponent.has_signal("health_changed"):
@@ -174,7 +210,7 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
-	
+
 	#------------------
 	# Deck setup
 	#------------------
@@ -192,7 +228,7 @@ func _ready():
 				var combat_decks = find_children("*", "CombatDeck", true, false)
 				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
 					deck = combat_decks[0]
-	
+
 	if deck:
 		deck.setup_from_player(player)
 	else:
@@ -400,7 +436,11 @@ func _position_enemy_container(enemy: Enemy) -> void:
 
 func _get_default_enemy_pool() -> Array[PackedScene]:
 	var defaults: Array[PackedScene] = []
-	for path in [DEFAULT_GOBLIN_SCENE_PATH, DEFAULT_WIZARD_SCENE_PATH]:
+	for path in [
+			DEFAULT_GOBLIN_WARRIOR_SCENE_PATH,
+			DEFAULT_GOBLIN_ARCHER_SCENE_PATH,
+			DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH
+		]:
 		if ResourceLoader.exists(path):
 			var loaded = load(path)
 			if loaded is PackedScene:

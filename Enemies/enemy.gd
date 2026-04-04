@@ -68,7 +68,8 @@ var status_effects := {
 	"shock": 0, # deals damage when attacking
 	"stun": 0, # skips turn
 	"empower": 0, # deal +3 damage per stack, remove 1 at end of turn
-	"evasive": 0 # dodge next attack, remove a stack (max 2), remove at start of turn
+	"evasive": 0, # dodge next attack, remove a stack (max 2), remove at start of turn
+	"rage": 0 # deal +1 damage per stack, doesn't get removed
 }
 
 
@@ -234,6 +235,10 @@ func deal_damage(amount: int = 0, _element: String = "", include_base_damage: bo
 	# Empower: +3 damage per stack
 	if status_effects["empower"] > 0:
 		dmg += 3 * status_effects["empower"]
+	
+	# Rage: +1 damage per stack
+	if status_effects["rage"] > 0:
+		dmg += status_effects["rage"]
 
 	# Apply Freeze: -2 per stack, cannot go below 0
 	var freeze_stacks = status_effects["freeze"]

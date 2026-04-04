@@ -1,0 +1,49 @@
+{
+  "enchanted_forest": {
+	"floor_1": {
+	  "enemies": [
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/Goblin_Warrior.tscn",
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/Goblin_Archer.tscn",
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/Goblin_Assassin.tscn"
+	  ],
+	  "mini_boss_4": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss1/MiniBoss1.tscn"
+	  ],
+	  "mini_boss_8": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss2/MiniBoss2.tscn"
+	  ],
+	  "boss_12": [
+        "res://Enemies/enemy_resources/enchanted_forest/Boss/Boss.tscn"
+	  ]
+	},
+	"floor_2": {
+	  "enemies": [
+        "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
+	  ],
+	  "mini_boss_4": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss3/MiniBoss3.tscn"
+	  ],
+	  "mini_boss_8": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss4/MiniBoss4.tscn"
+	  ],
+	  "boss_12": [
+        "res://Enemies/enemy_resources/enchanted_forest/Boss2/Boss2.tscn"
+	  ]
+	},
+	"floor_3": {
+	  "enemies": [
+		"res://Enemies/enemy_resources/enchanted_forest/Goblin_Warrior/Goblin_Warrior.tscn",
+        "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
+	  ],
+	  "mini_boss_4": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss5/MiniBoss5.tscn"
+	  ],
+	  "mini_boss_8": [
+        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss6/MiniBoss6.tscn"
+	  ],
+	  "boss_12": [
+        "res://Enemies/enemy_resources/enchanted_forest/Boss3/Boss3.tscn"
+	  ]
+	}
+  }
+}

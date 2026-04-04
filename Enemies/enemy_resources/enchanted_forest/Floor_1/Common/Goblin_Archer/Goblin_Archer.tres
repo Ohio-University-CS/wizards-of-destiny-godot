@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://6s1dv3aga1ws"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_wriy6"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_mgx45"]
+[ext_resource type="Resource" uid="uid://cnrts2rlbb2i5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/Shot.tres" id="2_smued"]
+[ext_resource type="Resource" uid="uid://fahvjasjv8k0" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/Reload.tres" id="3_5omj5"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_smued"]
+
+[resource]
+script = ExtResource("3_smued")
+enemy_name = "Goblin Archer"
+hp_variation = Array[int]([35, 40, 45])
+moves = Array[ExtResource("1_wriy6")]([ExtResource("2_smued"), ExtResource("3_5omj5")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

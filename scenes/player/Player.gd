@@ -576,6 +576,7 @@ func _apply_burn():
 func _apply_heal():
 	if status_effects["regeneration"] > 0:
 		current_health = min(get_max_health(), current_health + status_effects["regeneration"])
+		clear_status("regeneration")
 		emit_signal("health_changed", current_health)
 
 
