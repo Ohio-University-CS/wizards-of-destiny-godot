@@ -19,6 +19,10 @@ var tattered_shawl : bool = true
 
 @export var initialized : bool = false
 
+@export var debug_status_vfx_test: bool = false
+@export var debug_test_status: String = "regeneration"
+@export var debug_test_stacks: int = 3
+
 # BASE STATS (from class)
 var base_max_health: int
 var base_damage: int
@@ -65,7 +69,7 @@ var current_health: int
 var energy: int = 3
 var max_energy: int = 3
 
-var deck_list : Array[CardData] = []
+var deck_list: Array[CardData] = []
 
 
 # Uses class_data resource
@@ -216,7 +220,7 @@ func reset_strike():
 	_emit_strike_changed()
 
 #add normal damage to strike
-func add_strike_damage(amount: int, _include_base_dmg : bool):
+func add_strike_damage(amount: int, _include_base_dmg: bool):
 	strike_bonus_damage += amount
 	if _include_base_dmg:
 		strike_bonus_damage += get_damage()
@@ -227,11 +231,11 @@ func add_strike_damage(amount: int, _include_base_dmg : bool):
 	
 	_emit_strike_changed()
 
-func multiply_strike_damage(amount : float):
+func multiply_strike_damage(amount: float):
 	@warning_ignore("narrowing_conversion")
 	strike_bonus_damage *= amount
 	@warning_ignore("narrowing_conversion")
-	strike_bonus_damage += ((get_damage() * amount) - get_damage()) #adds multiplied base strike damage
+	strike_bonus_damage += ((get_damage() * amount) - get_damage()) # adds multiplied base strike damage
 	for element in strike_elemental_damage:
 		if strike_elemental_damage[element] != 0:
 			strike_elemental_damage[element] *= amount
@@ -240,7 +244,7 @@ func multiply_strike_damage(amount : float):
 
 
 #add elemental damage to strike
-func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
+func add_strike_element(element: String, amount: int, _include_base_dmg: bool):
 	if strike_elemental_damage.has(element):
 		strike_elemental_damage[element] += amount
 		if _include_base_dmg:
@@ -269,7 +273,22 @@ func _emit_strike_changed():
 	emit_signal("strike_changed", total)
 
 
-#perform the actual strike
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.is_debug_build() or not debug_status_vfx_test:
+		return
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+
+	if key_event.keycode == KEY_BRACKETRIGHT:
+		apply_status(debug_test_status, 1)
+		print("Added status stack:", debug_test_status, " -> ", status_effects.get(debug_test_status, 0))
+	elif key_event.keycode == KEY_BRACKETLEFT:
+		clear_status(debug_test_status)
+		print("Cleared status:", debug_test_status)
 func perform_strike(target):
 	# Prevent strike if Broken is active
 	if status_effects["broken"] > 0:
@@ -393,6 +412,14 @@ func _ready():
 		return
 	
 	set_perm_stats()
+	# Create StatusVFXHandler as a child node to handle status effect visuals
+	var vfx_handler = StatusVFXHandler.new()
+	vfx_handler.name = "StatusVFXHandler"
+	add_child(vfx_handler)
+
+	if OS.is_debug_build() and debug_status_vfx_test:
+		apply_status(debug_test_status, max(debug_test_stacks, 1))
+		print("Player VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
 	
 	set_energy(max_energy)
 	
@@ -595,7 +622,7 @@ func set_energy(new_value: int) -> void:
 	emit_signal("energy_changed", energy, max_energy)
 
 
-func add_energy(amount : int) -> void:
+func add_energy(amount: int) -> void:
 	set_energy(energy + amount)
 
 
@@ -611,12 +638,12 @@ func spend_energy(amount: int) -> bool:
 # ---------------------------------------------------------
 
 # temporary passive (rituals, etc)
-func _add_temp_effect(ename : String):
+func _add_temp_effect(ename: String):
 	active_passives.append(ename)
 
 
 # Registers a passive card/effect if not already present
-func register_passive(pname : String) -> void:
+func register_passive(pname: String) -> void:
 	# this is in case we don't want duplicates
 	#if card in active_passives:
 		#return # Prevent duplicates
