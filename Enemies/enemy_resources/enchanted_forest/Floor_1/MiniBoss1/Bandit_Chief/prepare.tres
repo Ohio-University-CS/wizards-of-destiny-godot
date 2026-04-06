@@ -24,5 +24,6 @@ script = ExtResource("2_ksoos")
 name = "Prepare"
 effects = Array[ExtResource("1_k6u1d")]([SubResource("Resource_r4nx3"), SubResource("Resource_sdk4a")])
 weight = 20
+cooldown = 1
 intent_icons = Array[Texture2D]([ExtResource("3_0egof"), ExtResource("3_0egof")])
 metadata/_custom_type_script = "uid://t788w26yn03s"

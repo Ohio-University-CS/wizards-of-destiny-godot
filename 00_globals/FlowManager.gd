@@ -20,6 +20,7 @@ const REWARD_SCENE := "res://scenes/reward_screen/combat_reward.tscn"
 # ----------------
 
 func go_to_combat():
+	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	get_tree().change_scene_to_file(COMBAT_SCENE)
 
 

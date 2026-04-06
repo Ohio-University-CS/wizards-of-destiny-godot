@@ -177,11 +177,9 @@ func _ready():
 	RunManager.player = player
 
 	#------------------------
-	# Load enemy pool from database
+	# Load enemy pool from database using current floor and stage
 	#------------------------
-	# Example: enchanted_forest, floor 1, regular enemies (stage 1)
-	enemy_pool = load_enemy_pool("enchanted_forest", 1, 1)
-	# For mini-boss or boss, change stage to 4, 8, or 12
+	enemy_pool = load_enemy_pool("enchanted_forest", RunManager.level_floor, RunManager.stage)
 
 	_spawn_random_enemy_entity()
 

@@ -222,8 +222,9 @@ func add_strike_damage(amount: int, _include_base_dmg : bool):
 		strike_bonus_damage += get_damage()
 	
 	# Precision Passive
-	if active_passives.has("Precision"):
-		strike_bonus_damage += 1
+	for passive in active_passives:
+		if active_passives[passive] == "Precision":
+			strike_bonus_damage += 1
 	
 	_emit_strike_changed()
 
@@ -247,8 +248,9 @@ func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 			strike_elemental_damage[element] += get_damage()
 	
 	# Precision Passive
-	if active_passives.has("Precision"):
-		strike_bonus_damage += 1
+	for passive in active_passives:
+		if active_passives[passive] == "Precision":
+			strike_bonus_damage += 1
 	
 	_emit_strike_changed()
 
@@ -426,6 +428,7 @@ func start_turn():
 
 	# Reset block each turn
 	status_effects["block"] = 0
+	status_effects["broken"] = 0
 	
 	#Reset Strike
 	reset_strike()

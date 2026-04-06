@@ -4,7 +4,8 @@
 	  "enemies": [
 		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/Goblin_Warrior.tscn",
 		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/Goblin_Archer.tscn",
-        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/Goblin_Assassin.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/Goblin_Assassin.tscn",
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Twig_Blight/Twig_Blight.tscn"
 	  ],
 	  "mini_boss_4": [
         "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tscn"

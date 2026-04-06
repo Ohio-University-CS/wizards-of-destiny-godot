@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dt2g2tmpdiol4"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_64bnt"]
+[ext_resource type="Resource" uid="uid://cudd2c7e7s362" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Twig_Blight/scratch.tres" id="2_fn0jo"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_l8i60"]
+[ext_resource type="Resource" uid="uid://by57k6mkvndna" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Twig_Blight/shifty.tres" id="3_pjmdy"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_uhf5d"]
+[ext_resource type="Resource" uid="uid://dbt4bhqcje0sk" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Twig_Blight/snare.tres" id="4_yseo0"]
+
+[resource]
+script = ExtResource("3_uhf5d")
+enemy_name = "Twig Blight"
+hp_variation = Array[int]([38, 42, 45])
+moves = Array[ExtResource("1_64bnt")]([ExtResource("2_fn0jo"), ExtResource("3_pjmdy"), ExtResource("4_yseo0")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://by57k6mkvndna"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_8p50i"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_lkmmr"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="2_m8qj3"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_sojg1"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="4_pf4yi"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_msdpo"]
+
+[sub_resource type="Resource" id="Resource_lfpdn"]
+script = ExtResource("2_m8qj3")
+amount = 8
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_u3mod"]
+script = ExtResource("3_sojg1")
+status_type = 10
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_lkmmr")
+name = "Shifty"
+effects = Array[ExtResource("1_8p50i")]([SubResource("Resource_lfpdn"), SubResource("Resource_u3mod")])
+weight = 30
+intent_icons = Array[Texture2D]([ExtResource("4_pf4yi"), ExtResource("5_msdpo")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

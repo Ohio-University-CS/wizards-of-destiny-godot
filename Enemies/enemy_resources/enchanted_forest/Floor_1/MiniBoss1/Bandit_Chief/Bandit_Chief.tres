@@ -11,6 +11,6 @@
 [resource]
 script = ExtResource("3_fvr5r")
 enemy_name = "Bandit Chief"
-hp_variation = Array[int]([60])
+hp_variation = Array[int]([70])
 moves = Array[ExtResource("1_cqev4")]([ExtResource("2_5brms"), ExtResource("3_5ge11"), ExtResource("4_sjj4r"), ExtResource("5_q01rk")])
 metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

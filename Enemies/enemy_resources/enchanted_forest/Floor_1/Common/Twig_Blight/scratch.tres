@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cudd2c7e7s362"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_37pdq"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_an53j"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_nrsse"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_1fho0"]
+
+[sub_resource type="Resource" id="Resource_hdqap"]
+script = ExtResource("2_nrsse")
+amount = 6
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_an53j")
+name = "Scratch"
+effects = Array[ExtResource("1_37pdq")]([SubResource("Resource_hdqap")])
+weight = 40
+intent_icons = Array[Texture2D]([ExtResource("3_1fho0")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

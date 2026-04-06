@@ -16,8 +16,8 @@ var seed_scene : bool = false
 
 var item_inventory : Array[ItemData]
 
-var level_floor : int
-var stage : int
+var level_floor : int = 1
+var stage : int = 1
 
 enum StageType {
 	NORMAL,
@@ -68,6 +68,7 @@ func spend_coins(amount : int) -> bool:
 	return false
 
 func next_stage():
+	print("MOVING TO NEXT STAGE")
 	stage += 1
 	
 	if stage > 12:
