@@ -205,9 +205,20 @@ func _set_regeneration_vfx(stacks: int) -> void: # done
 		20.0,
 		20.0
 	)
+	# Spawn staff particles for player or Wizard-type enemies
 	if _is_player:
 		var staff_particles = _create_staff_status_particles("regeneration", Color(0.35, 1.0, 0.45, 0.85), Vector2(-40, -50), 20.0, 24.0)
 		add_child(staff_particles)
+	else:
+		if parent_node != null and parent_node is Enemy:
+			var enemy_res: EnemyResource = null
+			if parent_node.resource != null:
+				enemy_res = parent_node.resource
+			elif parent_node.enemy_data != null:
+				enemy_res = parent_node.enemy_data
+			if enemy_res != null and enemy_res.enemy_name == "Wizard":
+				var staff_particles = _create_staff_status_particles("regeneration", Color(0.35, 1.0, 0.45, 0.85), Vector2(-40, -50), 20.0, 24.0)
+				add_child(staff_particles)
 
 
 func _set_block_vfx(stacks: int) -> void:
@@ -283,7 +294,7 @@ func _corroded_fall_loop(overlay: Node2D) -> void:
 	if not is_instance_valid(overlay):
 		return
 	_spawn_corroded_drip(overlay)
-	var timer: SceneTreeTimer = get_tree().create_timer(randf_range(0.2, 0.5))
+	var timer: SceneTreeTimer = get_tree().create_timer(randf_range(0.6, 1))
 	timer.timeout.connect(func() -> void:
 		if is_instance_valid(overlay):
 			_corroded_fall_loop(overlay)
@@ -321,7 +332,7 @@ func _spawn_corroded_drip(overlay: Node2D) -> void:
 
 	var tween: Tween = create_tween()
 	tween.tween_property(drip, "modulate", Color(0.6, 1.0, 0.6, 0.85), 0.08)
-	tween.parallel().tween_property(drip, "position", end_pos, 0.65)
+	tween.parallel().tween_property(drip, "position", end_pos, 1.5)
 	tween.tween_property(drip, "modulate", Color(0.6, 1.0, 0.6, 0.0), 0.15)
 	tween.finished.connect(func() -> void:
 		if is_instance_valid(drip):

@@ -1,4 +1,4 @@
-#temp_combat.gd
+#combat.gd
 @tool
 extends Node2D
 
