@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d27n5bfah5q6p"]
+
+[ext_resource type="Texture2D" uid="uid://cd3sapv3xhrvm" path="res://cards/sprites/spark_of_magic.png" id="1_5w1xt"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_grfyu"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="2_0b7bk"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_88c81"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_5w1xt"]
+[ext_resource type="Script" uid="uid://bcgt6s12xiu2y" path="res://cards/effects/choice_effect.gd" id="4_33sqq"]
+
+[sub_resource type="Resource" id="Resource_33sqq"]
+script = ExtResource("2_0b7bk")
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[sub_resource type="Resource" id="Resource_smfu1"]
+script = ExtResource("4_33sqq")
+card_name = 5
+metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
+
+[resource]
+script = ExtResource("2_88c81")
+card_name = "Spark of Magic"
+description = "Choose to apply 2 Burn or 2 Shock. Draw 1 Card"
+energy_cost = 0
+card_type = 1
+artwork = ExtResource("1_5w1xt")
+frame_art = ExtResource("3_5w1xt")
+effects = Array[ExtResource("1_grfyu")]([SubResource("Resource_33sqq"), SubResource("Resource_smfu1")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

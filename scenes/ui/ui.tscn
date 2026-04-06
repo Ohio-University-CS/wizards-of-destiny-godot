@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://rswhiwfdb5bb"]
 
-[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scripts/ui_controller.gd" id="1_7vp6q"]
+[ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scenes/ui/ui_controller.gd" id="1_7vp6q"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
+[ext_resource type="Texture2D" uid="uid://bpwkk8nabxiqh" path="res://sprites/strike_visual.png" id="5_jcn1r"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
+[ext_resource type="Script" uid="uid://dgssro5ui3kge" path="res://scripts/inventory_hotbar.gd" id="6_h7bar"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_uegxj"]
+[ext_resource type="Script" uid="uid://dw1a1fwer3agr" path="res://scenes/ui/end_turn_button.gd" id="7_jcn1r"]
 
 [node name="UI" type="Control" unique_id=1263839368]
 layout_mode = 3
@@ -73,6 +77,27 @@ text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StrikeDamageIcon" type="TextureRect" parent="PlayerUI" unique_id=1917633088]
+offset_left = 634.0
+offset_top = 208.0
+offset_right = 674.0
+offset_bottom = 248.0
+scale = Vector2(3, 3)
+texture = ExtResource("5_jcn1r")
+
+[node name="StrikeDamageLabel" type="Label" parent="PlayerUI/StrikeDamageIcon" unique_id=1065728051]
+layout_mode = 0
+offset_left = -0.6666667
+offset_top = 10.333334
+offset_right = 39.333332
+offset_bottom = 33.333336
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_uegxj")
+theme_override_font_sizes/font_size = 13
+text = "5"
+horizontal_alignment = 1
+
 [node name="Panel" type="Panel" parent="." unique_id=392055822]
 layout_mode = 0
 offset_right = 1922.0
@@ -111,6 +136,7 @@ offset_top = 945.0
 offset_right = 1921.0
 offset_bottom = 1095.0
 text = "End Turn"
+script = ExtResource("7_jcn1r")
 
 [node name="MoveText" type="Label" parent="." unique_id=125204521]
 layout_mode = 0
@@ -140,17 +166,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="INVENTORY_PLACEHOLDER" type="Label" parent="." unique_id=424377098]
+[node name="InventoryHotbar" type="HBoxContainer" parent="." unique_id=424377098]
 layout_mode = 0
 offset_left = 1550.0
 offset_top = -11.0
 offset_right = 1912.0
 offset_bottom = 66.0
+theme_override_constants/separation = 8
+script = ExtResource("6_h7bar")
+
+[node name="INV" type="Label" parent="InventoryHotbar" unique_id=1537458866]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 28
-text = "inventory placeholder"
+text = "inventory exists"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true

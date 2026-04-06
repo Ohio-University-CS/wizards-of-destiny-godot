@@ -1,3 +1,5 @@
+# Parent class for creating enemy resources
+
 extends Resource
 class_name EnemyResource
 

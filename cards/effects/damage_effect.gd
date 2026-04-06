@@ -1,3 +1,5 @@
+# Used for attacks, deals damage to target
+
 class_name DamageEffect extends Effect
 
 enum Element {
@@ -17,7 +19,7 @@ func apply(source, target, _combat):
 	
 	var element_name = Element.keys()[element].to_lower()
 	
-	for i in range(hits):
+	for i in range(hits): # If attack hits multiple times
 		var dmg = source.deal_damage(
 			amount,
 			element_name,
@@ -25,3 +27,6 @@ func apply(source, target, _combat):
 		)
 		
 		target.take_damage(dmg)
+	
+	if source.has_method("_apply_shock"):
+		source._apply_shock()

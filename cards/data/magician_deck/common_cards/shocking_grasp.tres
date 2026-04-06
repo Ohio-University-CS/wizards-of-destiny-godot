@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bdau76shjs4sa"]
+
+[ext_resource type="Texture2D" uid="uid://dcp0lq45kskp6" path="res://cards/sprites/shocking_grasp.png" id="1_8qmso"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_ic1jc"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_5i6vk"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_kv7vq"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_8qmso"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="4_a0f87"]
+
+[sub_resource type="Resource" id="Resource_3lfx0"]
+script = ExtResource("2_kv7vq")
+amount = 2
+element = 4
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_8nd42"]
+script = ExtResource("3_8qmso")
+card_name = 8
+target_type = null
+chance = null
+tags = null
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_5i6vk")
+card_name = "Shocking Grasp"
+description = "Add 2 Electric Damage to Strike. Add 1 Shock. If enemy has Shock, draw 1 Card"
+card_type = 1
+artwork = ExtResource("1_8qmso")
+frame_art = ExtResource("4_a0f87")
+effects = Array[ExtResource("1_ic1jc")]([SubResource("Resource_3lfx0"), SubResource("Resource_8nd42")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

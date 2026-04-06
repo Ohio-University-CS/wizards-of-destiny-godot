@@ -1,4 +1,6 @@
-#temp_combat.gd
+# temp_combat.gd
+# Handles combat
+
 @tool
 extends Node2D
 
@@ -8,8 +10,8 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn"
+const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/common/Wizard/Wizard.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
@@ -21,6 +23,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
 @export var enemy_spawn_position: Vector2 = Vector2(1458.75, 167.5)
+@export var enemy_spawn_scale: Vector2 = Vector2(1.75, 1.75)
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
 @export var player_name_label_path: NodePath = NodePath("Player/PlayerName")
@@ -51,6 +54,11 @@ var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
+var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+
+var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var pause_menu = null
 
 enum TurnState {
 	PLAYER,
@@ -70,6 +78,34 @@ var is_combat_over: bool = false
 
 
 func _ready():
+	enemy_rng.randomize()
+	
+	var pause_layer = CanvasLayer.new()
+	pause_layer.layer = 100
+	add_child(pause_layer)
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_layer.add_child(pause_menu)
+	
+	
+	#------------------------------
+	# use persistent player if possible
+	#------------------------------
+	if RunManager.player:
+		player = RunManager.player
+		if player.get_parent():
+			player.get_parent().remove_child(player)
+			add_child(player)
+		
+		var ui = find_child("UI", true, false)
+		if ui and ui.has_method("_bind_player_ui"):
+			ui._bind_player_ui(self)
+	
+	#-------------------
+	# fallback
+	#-------------------
 	# Locate the player node by common names or by type to avoid null path errors
 	if player == null:
 		if has_node("Player"):
@@ -90,15 +126,27 @@ func _ready():
 					player = child
 					break
 	
-	if player:
-		player.setup_from_class(class_data)
+	#------------------
+	# validate
+	#------------------
+	if player == null:
+		push_error("TempCombat: no Player node found")
+	else:
+		if player.class_data == null:
+			player.setup_from_class(class_data)
+			player.initialized = true
+			
 		if player.has_signal("health_changed"):
 			player.emit_signal("health_changed", player.current_health)
 		if player.has_signal("energy_changed"):
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
-	else:
-		push_error("TempCombat: no Player node found; cannot call setup_from_class")
-
+	
+	#keep reference updated
+	RunManager.player = player
+	
+	#------------------------
+	# Spawn enemy
+	#------------------------
 	_spawn_random_enemy_entity()
 	
 	if opponent == null:
@@ -126,7 +174,31 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
-
+	
+	#------------------
+	# Deck setup
+	#------------------
+	if deck == null:
+		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
+			deck = get_node("CombatDeck")
+		elif has_node("PanelContainer/CombatDeck") and get_node("PanelContainer/CombatDeck") is CombatDeck:
+			deck = get_node("PanelContainer/CombatDeck")
+		else:
+			for child in get_children():
+				if child is CombatDeck:
+					deck = child
+					break
+			if deck == null:
+				var combat_decks = find_children("*", "CombatDeck", true, false)
+				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
+					deck = combat_decks[0]
+	
+	if deck:
+		deck.setup_from_player(player)
+	else:
+		push_error("TempCombat: no CombatDeck found, cannot draw cards")
+	
+	
 	# Initialize enemy intent UI nodes — they may live under the Enemy container or at the scene root
 	var _e1 = get_node_or_null("Enemy/EnemyIntent1")
 	if _e1 == null:
@@ -145,26 +217,6 @@ func _ready():
 		_e3 = get_node_or_null("EnemyIntent3")
 	if _e3 and _e3 is TextureRect:
 		enemy_intent_3 = _e3
-	
-	if deck == null:
-		if has_node("CombatDeck") and get_node("CombatDeck") is CombatDeck:
-			deck = get_node("CombatDeck")
-		elif has_node("PanelContainer/CombatDeck") and get_node("PanelContainer/CombatDeck") is CombatDeck:
-			deck = get_node("PanelContainer/CombatDeck")
-		else:
-			for child in get_children():
-				if child is CombatDeck:
-					deck = child
-					break
-			if deck == null:
-				var combat_decks = find_children("*", "CombatDeck", true, false)
-				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
-					deck = combat_decks[0]
-	
-	if deck:
-		deck.setup_from_class(class_data)
-	else:
-		push_error("TempCombat: no CombatDeck node found; cannot draw cards")
 	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
@@ -208,7 +260,7 @@ func _ready():
 
 	# Ensure the labels start invisible (alpha 0) so announce/fade works predictably
 	if player_move_label:
-		if player_move_label.has_method("get") or true:
+		if player_move_label:
 			var c = player_move_label.modulate
 			c.a = 0.0
 			player_move_label.modulate = c
@@ -286,22 +338,24 @@ func _spawn_random_enemy_entity() -> void:
 		push_error("TempCombat: enemy_pool is empty and no default enemy scenes were found")
 		return
 
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var selected_scene := pool[rng.randi_range(0, pool.size() - 1)]
+	var selected_scene := pool[enemy_rng.randi_range(0, pool.size() - 1)]
 	if selected_scene == null:
 		push_error("TempCombat: selected enemy scene is null")
 		return
 
 	var existing_enemy_container := get_node_or_null("Enemy")
 	if existing_enemy_container != null:
-		# Preserve an Enemy instance that was placed or modified in the editor
-		# (avoid replacing it with a fresh PackedScene instance). This lets
-		# editor-time changes — like resizing the node — persist into runtime
-		# for this scene instance.
-		existing_enemy_container.position = enemy_spawn_position
-		opponent = _find_enemy_in_container(existing_enemy_container)
-		return
+		if Engine.is_editor_hint():
+			# Keep editor-placed preview enemy while editing the scene.
+			existing_enemy_container.position = enemy_spawn_position
+			if existing_enemy_container is Node2D:
+				existing_enemy_container.scale = enemy_spawn_scale
+			opponent = _find_enemy_in_container(existing_enemy_container)
+			return
+
+		# In gameplay, replace any editor-placed enemy with a random pick.
+		remove_child(existing_enemy_container)
+		existing_enemy_container.free()
 
 	var spawned_enemy_container := selected_scene.instantiate()
 	if not (spawned_enemy_container is Node2D):
@@ -313,6 +367,7 @@ func _spawn_random_enemy_entity() -> void:
 	spawned_enemy_container.name = "Enemy"
 	add_child(spawned_enemy_container)
 	spawned_enemy_container.position = enemy_spawn_position
+	spawned_enemy_container.scale = enemy_spawn_scale
 
 	opponent = _find_enemy_in_container(spawned_enemy_container)
 	if opponent == null:
@@ -340,6 +395,7 @@ func _position_enemy_container(enemy: Enemy) -> void:
 		container = enemy.get_parent()
 	if container is Node2D:
 		container.position = enemy_spawn_position
+		container.scale = enemy_spawn_scale
 
 
 func _get_default_enemy_pool() -> Array[PackedScene]:
@@ -383,20 +439,29 @@ func _process(_delta: float) -> void:
 func draw_hand():
 	if deck == null:
 		return
-	
+
 	# Spawn visuals for cards already in hand
 	for existing_card in deck.hand:
 		if not _has_visual_for_instance(existing_card):
 			spawn_card(existing_card)
+
+	# Drained: draw one less card per stack (max 3)
+	var draw_size = deck.draw_hand_size
 	
+	# White Salt
+	if RunManager.has_item("White Salt"):
+		draw_size += 1
+	
+	if player and player.status_effects.has("drained"):
+		var drained = clamp(player.status_effects["drained"], 0, 3)
+		draw_size = max(0, draw_size - drained)
 	# Draw remaining cards
-	while hand_cards.size() < deck.max_hand_size:
+	while hand_cards.size() < draw_size:
 		var card_instance = deck.draw_card()
 		if card_instance == null:
 			break
-		
 		spawn_card(card_instance)
-	
+
 	_layout_hand(false)
 
 
@@ -476,7 +541,10 @@ func play_card(card_node) -> bool:
 		return false
 	
 	var instance = card_node.card_instance
-	
+	if not instance or not instance.data:
+		push_error("TempCombat: card_instance or its data is null!")
+		return false
+
 	if player.energy < instance.data.energy_cost:
 		return false
 	
@@ -491,22 +559,35 @@ func play_card(card_node) -> bool:
 	# Apply effects
 	_apply_effects(instance.data.effects, player)
 	
-	is_play_animating = true
-	_announce_move(true, instance.data.card_name)
-	
-	if card_node is Control:
-		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	if instance.exhausted:
+	# Register passive if card is passive, and exhaust it so it can't be played again
+	if instance.data.card_flag == CardData.CardFlag.PASSIVE:
+		player.register_passive(instance.data.card_name)
 		deck.exhaust_card(instance)
 	else:
-		deck.discard_card(instance)
-	
+		if instance.exhausted:
+			deck.exhaust_card(instance)
+		else:
+			deck.discard_card(instance)
+
+	# POOL OF ESSENCE: Draw a card when a ritual card is played and Pool of Essence is active
+	if instance.data.card_flag == CardData.CardFlag.RITUAL:
+		for passive in player.active_passives:
+			if passive == "Pool of Essence":
+				var drawn = deck.draw_card()
+				if drawn:
+					spawn_card(drawn)
+
+	is_play_animating = true
+	_announce_move(true, instance.data.card_name)
+
+	if card_node is Control:
+		card_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	hand_cards.erase(card_node)
 	_sync_deck_hand_to_visual_order()
 	_layout_hand(true)
 	_update_discard_button_state()
-	
+
 	await _animate_played_card(card_node)
 	card_node.queue_free()
 	is_play_animating = false
@@ -768,34 +849,33 @@ func _connect_ui_signals() -> void:
 	# Play button
 	var play_btn = ui.get_node_or_null("PanelContainer/Play") if ui.has_node("PanelContainer/Play") else ui.get_node_or_null("Play")
 	if play_btn != null and play_btn.has_signal("play_hand_requested"):
-		if not play_btn.is_connected("play_hand_requested", Callable(self, "play_hand")):
-			play_btn.connect("play_hand_requested", Callable(self, "play_hand"))
+		if not play_btn.is_connected("play_hand_requested", Callable(self , "play_hand")):
+			play_btn.connect("play_hand_requested", Callable(self , "play_hand"))
 
 	# End turn button
 	var end_btn = ui.get_node_or_null("EndTurn")
 	if end_btn != null and end_btn.has_signal("end_turn_requested"):
-		if not end_btn.is_connected("end_turn_requested", Callable(self, "force_end_player_turn")):
-			end_btn.connect("end_turn_requested", Callable(self, "force_end_player_turn"))
+		if not end_btn.is_connected("end_turn_requested", Callable(self , "force_end_player_turn")):
+			end_btn.connect("end_turn_requested", Callable(self , "force_end_player_turn"))
 
 	# Discard button
 	var disc_btn = ui.get_node_or_null("Discard")
 	if disc_btn != null and disc_btn.has_signal("discard_requested"):
-		if not disc_btn.is_connected("discard_requested", Callable(self, "discard_selected_cards")):
-			disc_btn.connect("discard_requested", Callable(self, "discard_selected_cards"))
+		if not disc_btn.is_connected("discard_requested", Callable(self , "discard_selected_cards")):
+			disc_btn.connect("discard_requested", Callable(self , "discard_selected_cards"))
 	# Player Health Bar
 	var health_bar = ui.get_node_or_null("PlayerHealth")
 	if health_bar and health_bar.has_method("set_target") == false and health_bar.has_variable("target_path"):
 		# ensure the NodePath points to the sibling Player
 		health_bar.target_path = NodePath("../Player")
+		#health_bar.set_target(player)
 	# Mana Indicator
 	var mana_bar = ui.get_node_or_null("PlayerManaBar")
 	if mana_bar and mana_bar.has_method("set_target") == false and mana_bar.has_variable("target_path"):
 		mana_bar.target_path = NodePath("../Player")
 	# Damage/Heal Indicator
-	var player_health_indicator = player.get_node_or_null("HealthIndicator")
+	var _player_health_indicator = player.get_node_or_null("HealthIndicator")
 		
-
-
 
 func _on_player_died() -> void:
 	_show_result(false)
@@ -803,6 +883,39 @@ func _on_player_died() -> void:
 
 func _on_opponent_died() -> void:
 	_show_result(true)
+	
+	# Remove temporary cards from all piles
+	if deck:
+		deck.draw_pile = deck.draw_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.hand = deck.hand.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.discard_pile = deck.discard_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+	
+	# Amulet of Undying
+	if RunManager.has_item("Amulet of Undying"):
+		player.heal(3)
+	
+	# detach player so it doesn't get freed
+	if player:
+		if player.get_parent():
+			player.get_parent().remove_child(player)
+		get_tree().root.add_child(player)
+		RunManager.player = player
+	
+	# Build result data
+	var result = {
+		"coins": 12,
+		"turns": turn_count,
+		"perfect": player.current_health == player.get_max_health()
+	}
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	FlowManager.on_combat_finished(result)
 
 
 func _show_result(player_won: bool) -> void:
@@ -823,7 +936,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-
+	GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
@@ -1022,3 +1135,12 @@ func _clear_editor_previews():
 	for c in to_remove:
 		if is_instance_valid(c):
 			c.queue_free()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bop5ro4aw5d4g"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_w67g7"]
+[ext_resource type="Texture2D" uid="uid://ctvdsfkmbeyyw" path="res://cards/sprites/unholy_bargain.png" id="1_ylwyh"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="2_bnxjb"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_stul4"]
+[ext_resource type="Script" uid="uid://b5kfp3nukqfte" path="res://cards/effects/gain_energy_effect.gd" id="3_ylwyh"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="4_16mb2"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="5_bnxjb"]
+
+[sub_resource type="Resource" id="Resource_h48ek"]
+script = ExtResource("2_bnxjb")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[sub_resource type="Resource" id="Resource_cfbkf"]
+script = ExtResource("3_ylwyh")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b5kfp3nukqfte"
+
+[sub_resource type="Resource" id="Resource_ad13p"]
+script = ExtResource("4_16mb2")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_stul4")
+card_name = "Unholy Bargain"
+description = "Lose 5 Health, Gain 2 Energy, Draw 2 Cards"
+energy_cost = 0
+rarity = 2
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_ylwyh")
+frame_art = ExtResource("5_bnxjb")
+effects = Array[ExtResource("1_w67g7")]([SubResource("Resource_h48ek"), SubResource("Resource_cfbkf"), SubResource("Resource_ad13p")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

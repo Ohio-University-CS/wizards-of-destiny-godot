@@ -1,3 +1,5 @@
+# Handles Player (so kind of a big deal)
+
 extends Node
 class_name Player
 
@@ -5,7 +7,17 @@ class_name Player
 # PLAYER STATS (Base + Modifiers)
 # ---------------------------------------------------------
 
+
 var class_data
+
+# List of active passive cards/effects
+var active_passives: Array = []
+
+# Other variables for random cards/effects
+var potential_destruction : int = 0
+var tattered_shawl : bool = true
+
+@export var initialized : bool = false
 
 # BASE STATS (from class)
 var base_max_health: int
@@ -53,10 +65,26 @@ var current_health: int
 var energy: int = 3
 var max_energy: int = 3
 
+var deck_list : Array[CardData] = []
 
+
+# Uses class_data resource
 func setup_from_class(data):
-	class_data = data
+	if data == null:
+		push_error("Player.setup_from_class called with null class data")
+		return
 
+	class_data = data
+	
+	deck_list = data.starting_deck.duplicate()
+	
+	set_perm_stats()
+	
+	active_passives.clear()
+	
+	tattered_shawl = true
+	
+	
 	base_max_health = data.max_health
 	base_damage = data.damage
 	base_elemental_power = data.elemental_power
@@ -72,6 +100,8 @@ func setup_from_class(data):
 	max_energy = data.max_energy
 	energy = max_energy
 	current_health = get_max_health()
+	initialized = true
+	emit_signal("health_changed", current_health)
 	emit_signal("energy_changed", energy, max_energy)
 
 
@@ -132,7 +162,7 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 		"DRAW":
 			stat_name = "draw"
 		"STRIKE_DAMAGE":
-			add_strike_damage(amount)
+			add_strike_damage(amount, false)
 			return
 		_:
 			stat_name = str(stat_type).to_lower()
@@ -143,9 +173,27 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 		modify_stat_permanent(stat_name, amount)
 
 
+func set_perm_stats():
+	#fresh reset
+	for m in perm_modifiers:
+		m = 0
+		
+	if RunManager.has_item("Gauntlets of Strength"):
+		modify_stat_permanent("damage", 1)
+	if RunManager.has_item("Ring of Life"):
+		modify_stat_permanent("max_health", 5)
+	if RunManager.has_item("Ruby-Hilted Dagger"):
+		modify_stat_permanent("crit_damage", 7)
+	if RunManager.has_item("Staff of Power"):
+		modify_stat_permanent("elemental_power", 25)
+	if RunManager.has_item("Boots of the Elves"):
+		modify_stat_permanent("dodge", 5)
+
 # ---------------------------------------------------------
 # STRIKE SYSTEM
 # ---------------------------------------------------------
+
+signal strike_changed(total_damage)
 
 var strike_bonus_damage: int = 0
 var strike_elemental_damage := {
@@ -156,6 +204,7 @@ var strike_elemental_damage := {
 }
 var strike_statuses: Array = []
 var damage_multiplier: float = 1.0
+var _strike_in_progress := false
 
 #reset all strike at start of turn
 func reset_strike():
@@ -163,15 +212,45 @@ func reset_strike():
 	strike_statuses.clear()
 	for element in strike_elemental_damage.keys():
 		strike_elemental_damage[element] = 0
+	
+	_emit_strike_changed()
 
 #add normal damage to strike
-func add_strike_damage(amount: int):
+func add_strike_damage(amount: int, _include_base_dmg : bool):
 	strike_bonus_damage += amount
+	if _include_base_dmg:
+		strike_bonus_damage += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
+	
+	_emit_strike_changed()
+
+func multiply_strike_damage(amount : float):
+	@warning_ignore("narrowing_conversion")
+	strike_bonus_damage *= amount
+	@warning_ignore("narrowing_conversion")
+	strike_bonus_damage += ((get_damage() * amount) - get_damage()) #adds multiplied base strike damage
+	for element in strike_elemental_damage:
+		if strike_elemental_damage[element] != 0:
+			strike_elemental_damage[element] *= amount
+	
+	_emit_strike_changed()
+
 
 #add elemental damage to strike
-func add_strike_element(element: String, amount: int):
+func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 	if strike_elemental_damage.has(element):
 		strike_elemental_damage[element] += amount
+		if _include_base_dmg:
+			strike_elemental_damage[element] += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
+	
+	_emit_strike_changed()
 
 #add status effect to strike
 func add_strike_status(status: String, stacks: int):
@@ -184,22 +263,78 @@ func add_strike_status(status: String, stacks: int):
 func apply_damage_multiplier(mult: float):
 	damage_multiplier *= mult
 
+
+func _emit_strike_changed():
+	var total = get_damage() + strike_bonus_damage
+	emit_signal("strike_changed", total)
+
+
 #perform the actual strike
 func perform_strike(target):
-	#normal damage
+	# Prevent strike if Broken is active
+	if status_effects["broken"] > 0:
+		print("Strike prevented: Player is Broken.")
+		return
+	_strike_in_progress = true
+	_do_strike_on_target(target)
+	# If Surge is active, hit again
+	if active_passives.has("Surge"):
+		print("Surge active: Strike hits twice!")
+		active_passives.erase("Surge")
+		_do_strike_on_target(target)
+	_strike_in_progress = false
+
+
+# Helper for strike logic (all effects)
+func _do_strike_on_target(target):
 	var dmg = get_damage() + strike_bonus_damage
+	
+	# Tattered Shawl
+	if RunManager.has_item("Tattered Shawl") and tattered_shawl:
+		dmg += 5
+	
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
+	
+	# Apply Freeze: -2 per stack, cannot go below 0
+	var freeze_stacks = status_effects["freeze"]
+	if freeze_stacks > 0:
+		dmg = max(0, dmg - 2 * freeze_stacks)
+		status_effects["freeze"] = 0
+		emit_signal("status_expired", "freeze")
+	
+	# Apply Shock: take stack amount of Lightning damage, remove one stack
+	var shock_stacks = status_effects["shock"]
+	if shock_stacks > 0:
+		take_damage(shock_stacks, "electric")
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
+	
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		dmg /= 2
+	
+	# Crit
+	if try_crit():
+		dmg += get_crit_damage()
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
-	print("Strike deals ", dmg, " damage")
 	
 	#elemental damage
 	for element in strike_elemental_damage.keys():
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
 			var elemental_dmg = deal_damage(amt, element)
-			#APPLY FREEZE/CRIT LATER DOWN THE LINE
+			
+			# Evasion Ritual
+			if active_passives.has("Evasion"):
+				elemental_dmg /= 2
+			
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
 	
@@ -207,7 +342,6 @@ func perform_strike(target):
 	for effect in strike_statuses:
 		target.apply_status(effect["name"], effect["stacks"])
 		print(" - Apply ", effect["name"], " x", effect["stacks"])
-	
 	damage_multiplier = 1.0
 
 
@@ -226,8 +360,17 @@ var status_effects := {
 	"corroded": 0, # increase incoming damage
 	"sealed": 0, # can't deal damage outside of strike
 	"shock": 0, # take damage when dealing damage
-	"stun": 0 # skips turn
+	"stun": 0, # skips turn
+	"broken": 0, # strike doesn't trigger (max 1)
+	"empower": 0 # deal +3 damage per stack, remove 1 at end of turn
 }
+
+# Electrostasis Passive variable
+var electrostasis : bool = false
+
+
+func get_block() -> int:
+	return status_effects["block"]
 
 # ---------------------------------------------------------
 # SIGNALS
@@ -246,9 +389,17 @@ signal healed(amount)
 # ---------------------------------------------------------
 
 func _ready():
-	energy = max_energy
-	current_health = get_max_health()
-	emit_signal("energy_changed", energy, max_energy)
+	if not initialized:
+		return
+	
+	set_perm_stats()
+	
+	set_energy(max_energy)
+	
+	active_passives.clear()
+	
+	potential_destruction = 0
+	tattered_shawl = true
 
 
 # ---------------------------------------------------------
@@ -256,9 +407,22 @@ func _ready():
 # ---------------------------------------------------------
 
 func start_turn():
+	# Stun: skip turn if stunned, remove one stack
+	if status_effects["stun"] > 0:
+		status_effects["stun"] -= 1
+		if status_effects["stun"] == 0:
+			emit_signal("status_expired", "stun")
+		return
+
 	# Apply start-of-turn effects
 	_apply_heal()
-	_apply_shock()
+	
+	# Passives
+	electrostasis = false
+	
+	# Rituals
+	if active_passives.has("Evasion"):
+		active_passives.erase("Evasion")
 
 	# Reset block each turn
 	status_effects["block"] = 0
@@ -276,7 +440,15 @@ func start_turn():
 
 func end_turn():
 	_apply_burn()
+	# Empower: remove one stack at end of turn
+	if status_effects["empower"] > 0:
+		status_effects["empower"] -= 1
+		if status_effects["empower"] == 0:
+			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
+	
+	if tattered_shawl == true:
+		tattered_shawl = false
 
 
 func _clear_temp_stats():
@@ -294,10 +466,12 @@ func take_damage(amount: int, _element: String = ""):
 	var dmg = amount
 
 	# Freeze reduces outgoing damage, not incoming
-	# Corroded increases incoming damage, stacks
+	# Corroded: +2 damage taken per stack, remove one stack after being hit
 	if status_effects["corroded"] > 0:
-		var multiplier = 1.0 + (0.10 * status_effects["corroded"])
-		dmg = int(dmg * multiplier)
+		dmg += 2 * status_effects["corroded"]
+		status_effects["corroded"] -= 1
+		if status_effects["corroded"] == 0:
+			emit_signal("status_expired", "corroded")
 
 	# Block reduces damage
 	if status_effects["block"] > 0:
@@ -316,10 +490,17 @@ func take_damage(amount: int, _element: String = ""):
 
 
 func deal_damage(amount: int, element: String = "", include_base_damage: bool = true) -> int:
+	# Sealed: Only Strike deals damage
+	if status_effects["sealed"] > 0 and not _strike_in_progress:
+		return 0
 	var dmg = amount
 	
 	if include_base_damage:
 		dmg += get_damage()
+	
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
 	
 	#Elemental bonuses
 	match element:
@@ -328,15 +509,9 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 		"poison": dmg += get_poison_power()
 		"electric": dmg += get_electric_power()
 	
-	#Freeze reduces outgoing damage by 10% per stack
-	var freeze_stacks = status_effects["freeze"]
-	if freeze_stacks > 0:
-		var multiplier = 1.0 - (0.1 * freeze_stacks)
-		multiplier = max(multiplier, 0.4) # can't drop below 40%
-		dmg = int(dmg * multiplier)
-	
-	#Crit check
-	if randf() < get_crit_chance():
+	# Freeze does not affect elemental damage (handled in perform_strike)
+	# Crit check
+	if try_crit():
 		dmg += get_crit_damage()
 	
 	return dmg
@@ -356,7 +531,12 @@ func apply_status(status_name: String, stacks: int = 1):
 		return
 
 	status_effects[status_name] += stacks
+	# Clamp Broken to max 1 stack
+	if status_name == "broken":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 1)
 	emit_signal("status_applied", status_name, status_effects[status_name])
+	if status_effects["broken"] > 0:
+		return
 
 
 func clear_status(status_name: String):
@@ -379,12 +559,18 @@ func modify_stat_temp(stat_name: String, amount: int):
 
 func add_block(amount: int):
 	status_effects["block"] += amount
+	
+	# Guardian Passive
+	if active_passives.has("Guardian"):
+		add_strike_damage(1, false)
 
 
 func _apply_burn():
 	if status_effects["burn"] > 0:
 		take_damage(status_effects["burn"])
 		status_effects["burn"] -= 1
+		if status_effects["burn"] == 0:
+			emit_signal("status_expired", "burn")
 
 
 func _apply_heal():
@@ -395,13 +581,22 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		set_energy(max(0, energy - status_effects["shock"]))
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 func set_energy(new_value: int) -> void:
-	energy = clamp(new_value, 0, max_energy)
+	energy = max(0, new_value) # Only clamp to zero, not max_energy
 	emit_signal("energy_changed", energy, max_energy)
+
+
+func add_energy(amount : int) -> void:
+	set_energy(energy + amount)
 
 
 func spend_energy(amount: int) -> bool:
@@ -412,6 +607,24 @@ func spend_energy(amount: int) -> bool:
 
 
 # ---------------------------------------------------------
+# Passive Effects
+# ---------------------------------------------------------
+
+# temporary passive (rituals, etc)
+func _add_temp_effect(ename : String):
+	active_passives.append(ename)
+
+
+# Registers a passive card/effect if not already present
+func register_passive(pname : String) -> void:
+	# this is in case we don't want duplicates
+	#if card in active_passives:
+		#return # Prevent duplicates
+	active_passives.append(pname)
+	# Optionally, trigger any setup logic for the passive here
+
+
+# ---------------------------------------------------------
 # UTILITY
 # ---------------------------------------------------------
 
@@ -419,7 +632,15 @@ func is_stunned() -> bool:
 	return status_effects["stun"] > 0
 
 
+func try_crit() -> bool:
+	return randf() < get_crit_chance()
+
+
 func try_dodge() -> bool:
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		return true
+	
 	return randf() < get_dodge_chance()
 
 

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c08cupugqrh0n"]
+
+[ext_resource type="Texture2D" uid="uid://b6wf2185j3ypi" path="res://cards/sprites/lay_on_hands.png" id="1_cmokd"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_ud8sn"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_6r30d"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="2_fttut"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_cmokd"]
+
+[sub_resource type="Resource" id="Resource_wsyst"]
+script = ExtResource("2_fttut")
+card_name = 5
+target_type = 0
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_6r30d")
+card_name = "Lay on Hands"
+description = "Remove all status effects from yourself. Gain 1 Empowered for each removed. Gain 6 Block"
+energy_cost = 2
+card_type = 1
+artwork = ExtResource("1_cmokd")
+frame_art = ExtResource("3_cmokd")
+effects = Array[ExtResource("1_ud8sn")]([SubResource("Resource_wsyst")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -1,3 +1,5 @@
+# Player's deck for the run
+
 extends Node
 class_name CombatDeck
 
@@ -6,20 +8,34 @@ var discard_pile: Array[CardInstance] = []
 var exhaust_pile: Array[CardInstance] = []
 var hand: Array[CardInstance] = []
 
-@export var max_hand_size := 5
+@export var max_hand_size := 10
+@export var draw_hand_size := 5
 
 @export var starting_deck: Array[CardData]
 
-func setup_from_class(class_data: ClassData):
+#func setup_from_class(class_data: ClassData):
+	#draw_pile.clear()
+	#discard_pile.clear()
+	#exhaust_pile.clear()
+	#hand.clear()
+#
+	#for card_data in class_data.starting_deck:
+		#draw_pile.append(CardInstance.new(card_data))
+#
+	#shuffle_draw()
+
+
+func setup_from_player(player : Player):
 	draw_pile.clear()
 	discard_pile.clear()
 	exhaust_pile.clear()
 	hand.clear()
-
-	for card_data in class_data.starting_deck:
+	
+	for card_data in player.deck_list:
 		draw_pile.append(CardInstance.new(card_data))
-
+	
 	shuffle_draw()
+
 
 func shuffle_draw():
 	draw_pile.shuffle()

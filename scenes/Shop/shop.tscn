@@ -2,11 +2,56 @@
 
 [ext_resource type="Script" uid="uid://c40oqkihcbi2e" path="res://scenes/Shop/shop.gd" id="1_1g71r"]
 [ext_resource type="Texture2D" uid="uid://d0kpwfntcol84" path="res://scenes/Shop/temp_shop_bg.png" id="1_5khn6"]
+[ext_resource type="PackedScene" uid="uid://8vsbg5004ad5" path="res://scenes/Shop/ShopCardUI.tscn" id="2_nj4jc"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
+[ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/common_cards/countermeasures.tres" id="3_35ukv"]
+[ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
+[ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
+[ext_resource type="Resource" uid="uid://n2pf7h4xkg51" path="res://cards/data/magician_deck/common_cards/burning_hands.tres" id="7_kx8h1"]
+[ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/uncommon_cards/shield.tres" id="7_nj4jc"]
+[ext_resource type="Resource" uid="uid://bo05i667eshff" path="res://cards/data/magician_deck/common_cards/cautious_steps.tres" id="7_qgvoo"]
+[ext_resource type="Resource" uid="uid://bdjv3n01gigwa" path="res://cards/data/magician_deck/common_cards/magic_missle.tres" id="8_nj4jc"]
+[ext_resource type="Resource" uid="uid://c5rgb5q5rn4m2" path="res://cards/data/magician_deck/common_cards/duplicate.tres" id="9_jafg1"]
+[ext_resource type="Resource" uid="uid://djo7ivi54ieol" path="res://cards/data/magician_deck/common_cards/stoneskin.tres" id="9_jpxio"]
+[ext_resource type="Script" uid="uid://b8sgmp127qnl6" path="res://scenes/player/Player.gd" id="10_nj4jc"]
+[ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
+[ext_resource type="Resource" uid="uid://c4fm0old2um78" path="res://cards/data/magician_deck/common_cards/arcane_insight.tres" id="11_j512n"]
+[ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
+[ext_resource type="Resource" uid="uid://d2cdt5te7vce" path="res://cards/data/magician_deck/common_cards/fire_storm.tres" id="13_2fwob"]
+[ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
+[ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
+[ext_resource type="Resource" uid="uid://c08cupugqrh0n" path="res://cards/data/magician_deck/common_cards/lay_on_hands.tres" id="14_tjyfs"]
+[ext_resource type="Resource" uid="uid://hykg0af24hdd" path="res://cards/data/magician_deck/common_cards/lightning_bolt.tres" id="15_5j3h6"]
+[ext_resource type="Resource" uid="uid://bdau76shjs4sa" path="res://cards/data/magician_deck/common_cards/shocking_grasp.tres" id="15_n5wbs"]
+[ext_resource type="Resource" uid="uid://bj818eibkxbjg" path="res://cards/data/magician_deck/common_cards/static_field.tres" id="16_2lsrc"]
+[ext_resource type="Resource" uid="uid://d27n5bfah5q6p" path="res://cards/data/magician_deck/common_cards/spark_of_magic.tres" id="16_jafg1"]
+[ext_resource type="Resource" uid="uid://c4w1vwldssmmg" path="res://cards/data/magician_deck/common_cards/mana_weave.tres" id="16_ronn0"]
+[ext_resource type="Resource" uid="uid://b06moxsoigmtk" path="res://cards/data/magician_deck/rare_cards/smite.tres" id="17_cbkss"]
+[ext_resource type="Resource" uid="uid://cuixxyk63vg8b" path="res://cards/data/magician_deck/uncommon_cards/pool_of_essence.tres" id="18_t785l"]
+[ext_resource type="Resource" uid="uid://da7mw5k6xppkc" path="res://cards/data/magician_deck/uncommon_cards/surge.tres" id="19_r34ar"]
+[ext_resource type="Resource" uid="uid://bnm7hlx1cloet" path="res://cards/data/magician_deck/uncommon_cards/conduit.tres" id="20_mmk1d"]
+[ext_resource type="Resource" uid="uid://brlv52tivlplm" path="res://cards/data/magician_deck/rare_cards/meteor_storm.tres" id="21_s6mfd"]
+[ext_resource type="Resource" uid="uid://dj18gihhkkxgx" path="res://cards/data/magician_deck/common_cards/rage.tres" id="22_s6mfd"]
+[ext_resource type="Resource" uid="uid://clfpdx7831vqr" path="res://cards/data/magician_deck/uncommon_cards/precision.tres" id="23_kfoi1"]
+[ext_resource type="Resource" uid="uid://b8il2dunnetk8" path="res://cards/data/magician_deck/uncommon_cards/guardian.tres" id="24_e5h2d"]
+[ext_resource type="Resource" uid="uid://ckrktnqafcmgg" path="res://cards/data/magician_deck/common_cards/zap.tres" id="25_vln2m"]
+[ext_resource type="Resource" uid="uid://llkwkxuxqkhe" path="res://cards/data/magician_deck/uncommon_cards/electrostasis.tres" id="26_i6tmi"]
+[ext_resource type="Resource" uid="uid://cg51qpankcalo" path="res://cards/data/magician_deck/uncommon_cards/evasion.tres" id="26_r8gmc"]
+[ext_resource type="Resource" uid="uid://bq86uq03p4ulw" path="res://cards/data/magician_deck/uncommon_cards/curse.tres" id="26_w4mlx"]
+[ext_resource type="Resource" uid="uid://dfgdrjkj6g8j" path="res://cards/data/magician_deck/common_cards/abjuration.tres" id="27_5wu3g"]
+[ext_resource type="Resource" uid="uid://bgcwahceecrw1" path="res://cards/data/magician_deck/uncommon_cards/overheat.tres" id="27_f1ko4"]
+[ext_resource type="Resource" uid="uid://2ybti81h0mfp" path="res://cards/data/magician_deck/common_cards/fire_bolt.tres" id="28_kt3wt"]
+[ext_resource type="Resource" uid="uid://xmp8sotus83" path="res://cards/data/magician_deck/uncommon_cards/lightning_strike.tres" id="30_qgs5q"]
+[ext_resource type="Resource" uid="uid://0uq1lyntjwe7" path="res://cards/data/magician_deck/uncommon_cards/potential_destruction.tres" id="31_4r704"]
+[ext_resource type="Resource" uid="uid://r4pos228sfyl" path="res://cards/data/magician_deck/rare_cards/divine_incantation.tres" id="34_rymir"]
+[ext_resource type="Resource" uid="uid://cjiqxdd8rxubd" path="res://cards/data/magician_deck/rare_cards/grand_finale.tres" id="35_kkcac"]
+[ext_resource type="Resource" uid="uid://s6osdcqxapgy" path="res://cards/data/magician_deck/rare_cards/thunderwave.tres" id="37_8e5es"]
+[ext_resource type="Resource" uid="uid://cw0ra5ytlq0fk" path="res://cards/data/magician_deck/rare_cards/enchant.tres" id="38_1t1sk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
 
-[node name="Shop" type="Control" unique_id=1199530725]
+[node name="Shop" type="Control" unique_id=1199530725 node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +59,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1g71r")
+player = NodePath("Player")
+shop_card_scene = ExtResource("2_nj4jc")
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -26,50 +74,75 @@ offset_left = 1587.0
 offset_top = 74.0
 offset_right = 1760.0
 offset_bottom = 129.0
-text = "Coins: 14"
+text = "Coins: "
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Cards Here" type="Label" parent="." unique_id=77795916]
+[node name="CoinAmount" type="Label" parent="." unique_id=1407741725]
 layout_mode = 0
-offset_left = 317.0
-offset_top = 450.0
-offset_right = 531.0
-offset_bottom = 505.0
-text = "Cards Here"
+offset_left = 1717.0
+offset_top = 74.0
+offset_right = 1890.0
+offset_bottom = 129.0
+text = "50"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="Items Here" type="Label" parent="." unique_id=1262789622]
 layout_mode = 0
-offset_left = 1038.0
-offset_top = 224.0
-offset_right = 1251.0
-offset_bottom = 279.0
+offset_left = 1044.0
+offset_top = 49.0
+offset_right = 1257.0
+offset_bottom = 104.0
 text = "Items Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
 layout_mode = 0
-offset_left = 1022.0
-offset_top = 787.0
-offset_right = 1314.0
-offset_bottom = 842.0
+offset_left = 997.0
+offset_top = 607.0
+offset_right = 1289.0
+offset_bottom = 662.0
 text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
-[node name="Next Stage" type="Button" parent="." unique_id=1443979795]
+[node name="CardsContainer" type="GridContainer" parent="." unique_id=1152559202]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076000005
+anchor_top = 0.108
+anchor_right = 0.40100002
+anchor_bottom = 0.92200005
+offset_left = 0.07998657
+offset_top = 0.3600006
+offset_right = 0.079956055
+offset_bottom = 0.2399292
+theme_override_constants/h_separation = 70
+theme_override_constants/v_separation = 50
+columns = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=1301152946]
+anchors_preset = 0
+offset_left = 1547.0
+offset_top = 456.0
+offset_right = 1870.0
+offset_bottom = 827.0
+
+[node name="Next Stage" type="Button" parent="Buttons" unique_id=1443979795]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 506.0
-offset_right = 1701.0
-offset_bottom = 537.0
+offset_left = 62.0
+offset_top = 50.0
+offset_right = 154.0
+offset_bottom = 81.0
 scale = Vector2(2, 2)
 text = "Next Stage"
 
-[node name="View Deck" type="Button" parent="." unique_id=1402221572]
+[node name="View Deck" type="Button" parent="Buttons" unique_id=1402221572]
 layout_mode = 0
-offset_left = 1609.0
-offset_top = 590.0
-offset_right = 1701.0
-offset_bottom = 621.0
+offset_left = 62.0
+offset_top = 134.0
+offset_right = 154.0
+offset_bottom = 165.0
 scale = Vector2(2, 2)
 text = "View Deck"
+
+[node name="Player" type="Node" parent="." unique_id=1821145247]
+script = ExtResource("10_nj4jc")
