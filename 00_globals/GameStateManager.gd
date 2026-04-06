@@ -8,6 +8,8 @@ var gamestate_stage : int = 1
 var gamestate_level_floor : int = 1
 var gamestate_inventory : Array[ItemData] = []
 
+var dummy_player : Player = null
+
 func _ready() -> void:
 	print("GAMESTATEMANAGER READY")
 	get_tree().scene_changed.connect(_on_scene_change)
@@ -37,6 +39,9 @@ func _update_current_gamestate():
 func _on_combat_end(player : Player):
 	if(player != null):
 		_update_current_gamestate()
+		var deck_array = _get_deck_from_save("res://save/" + selected_save + "_resources")
+		for card in deck_array:
+			print("Card : " + str(card))
 		if _write_out_gamestate():
 			print("Write to save file successful")
 		else:
@@ -60,13 +65,49 @@ func _on_exit_shop(_player: Player = null):
 	
 func _write_out_gamestate() -> bool:
 	var file_path = "res://save/" + str(selected_save) + ".json"
-	var _save_file_string = FileAccess.get_file_as_string(file_path)
-	var _save_file = FileAccess.open(str(file_path), FileAccess.WRITE)
+	var save_file_string = FileAccess.get_file_as_string(file_path)
+	var save_file = FileAccess.open(str(file_path), FileAccess.WRITE)
+	var save_resource_path = "res://save/" + str(selected_save) + "_resources"
+	_save_deck(save_resource_path, gamestate_player)
 	#var player_state_dictionary = {
 		#"current health" : gamestate_player.current_health,
 		#""
 	#}
 	return true
+	
+func _save_deck(resource_folder_path : String, current_player : Player):
+	var array_index = 0
+	for card in current_player.deck_list:
+		var save_path = resource_folder_path + "/card_" + str(array_index + 1) + ".tres"
+		print(save_path)
+		ResourceSaver.save(card, save_path)
+		array_index += 1
+	print("complete")
+
+func _get_deck_from_save(resource_folder_path) -> Array[CardData]:
+	print("GET DECK FROM SAVE")
+	var card_number = 1
+	var deck_array : Array[CardData] = []
+	while FileAccess.file_exists(resource_folder_path + "/card_" + str(card_number) + ".tres"):
+		print("card_" + str(card_number) + " exists")
+		var this_card_path = resource_folder_path + "/card_" + str(card_number) + ".tres"
+		var temp_card_data = load(this_card_path)
+		deck_array.append(temp_card_data)
+		card_number += 1
+	for card in deck_array:
+		print(card)
+	return deck_array
+	
+
+
+func _write_out_player_state(player : Player) -> Dictionary:
+	var player_state = {}
+	player_state["current_health"] = gamestate_player.current_health
+	
+	return player_state
+
+
+
 """
 @export var initialized : bool = false
 

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/Bolster.png" id="1_ytete"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_8vnev"]
+[ext_resource type="Script" path="res://cards/effects/apply_status_effect.gd" id="3_xnysm"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="4_qcagp"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_bxkmu"]
+
+[sub_resource type="Resource" id="Resource_oyu43"]
+script = ExtResource("3_xnysm")
+status_type = 5
+amount = 3
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_pmwjj"]
+script = ExtResource("3_xnysm")
+status_type = 9
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("5_bxkmu")
+card_name = "Bolster"
+description = "Gain 3 Regeneration, Gain Empowered"
+card_type = 1
+artwork = ExtResource("1_ytete")
+frame_art = ExtResource("4_qcagp")
+effects = Array[ExtResource("2_8vnev")]([SubResource("Resource_oyu43"), SubResource("Resource_pmwjj")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/Mystic_Bolt.png" id="1_mcjcg"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_s0lrs"]
+[ext_resource type="Script" path="res://cards/effects/damage_effect.gd" id="3_ubetj"]
+[ext_resource type="Script" path="res://cards/effects/choice_effect.gd" id="4_byduk"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="5_j6llf"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="6_ijpbt"]
+
+[sub_resource type="Resource" id="Resource_x3rxm"]
+script = ExtResource("3_ubetj")
+amount = 6
+include_base_damage = true
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_hi37g"]
+script = ExtResource("4_byduk")
+card_name = 4
+metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
+
+[resource]
+script = ExtResource("6_ijpbt")
+card_name = "Mystic Bolt"
+description = "Attack for DMG +6. Choose to apply 2 Burn or 2 Shock"
+energy_cost = 2
+artwork = ExtResource("1_mcjcg")
+frame_art = ExtResource("5_j6llf")
+effects = Array[ExtResource("2_s0lrs")]([SubResource("Resource_x3rxm"), SubResource("Resource_hi37g")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
