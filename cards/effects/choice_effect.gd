@@ -18,6 +18,8 @@ var choice_texts : Array[String]
 
 
 func apply(_source, _target, _combat):
+	choice_texts = []
+
 	if card_name == CardName.CURSE:
 		choice_texts.append("Double all Burn on Enemy")
 		choice_texts.append("Double all Shock on Enemy")
@@ -37,8 +39,24 @@ func apply(_source, _target, _combat):
 	if card_name == CardName.MYSTIC_BOLT or card_name == CardName.SPARK_OF_MAGIC:
 		choice_texts.append("Apply 2 Burn")
 		choice_texts.append("Apply 2 Shock")
-	
-	UIManager.show_card_choice(choice_texts, _on_choice_made.bind(_source, _target, _combat))
+
+	var scene_tree := Engine.get_main_loop() as SceneTree
+	if scene_tree == null:
+		push_warning("ChoiceEffect: SceneTree unavailable; cannot open card choice UI.")
+		return
+
+	var callback := _on_choice_made.bind(_source, _target, _combat)
+	var ui_manager = scene_tree.root.get_node_or_null("UIManager")
+	if ui_manager != null and ui_manager.has_method("show_card_choice"):
+		ui_manager.show_card_choice(choice_texts, callback)
+		return
+
+	# Fallback if autoload is unavailable: spawn the chooser directly.
+	var card_choice_scene = preload("res://cards/card_choice.tscn")
+	var card_choice = card_choice_scene.instantiate()
+	card_choice.setup(choice_texts)
+	card_choice.choice_made.connect(callback)
+	scene_tree.current_scene.add_child(card_choice)
 
 
 func _on_choice_made(index, _source, _target, _combat):

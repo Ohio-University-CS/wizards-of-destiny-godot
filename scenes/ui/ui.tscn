@@ -117,6 +117,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_pfayw")
 
+[node name="PlayerStatusStack" type="Node2D" parent="Panel" unique_id=341118905]
+position = Vector2(390, 30)
+
 [node name="Discard" type="Button" parent="." unique_id=1741533510]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 0

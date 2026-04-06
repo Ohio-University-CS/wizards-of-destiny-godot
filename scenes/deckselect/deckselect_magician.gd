@@ -20,4 +20,7 @@ func _on_judgement_pressed():
 # Go to arena (level select)
 func _on_level_select_pressed():
 	print("Level Select pressed")
-	get_tree().change_scene_to_file("res://items/Start_Item_Select.tscn")	
+	if RunManager.seed_scene:
+		get_tree().change_scene_to_file("res://scenes/seed_input/seed_input.tscn")
+	else:
+		get_tree().change_scene_to_file("res://items/Start_Item_Select.tscn")

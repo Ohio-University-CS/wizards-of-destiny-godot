@@ -9,6 +9,11 @@ extends Node
 var player : Player = null
 var coins : int = 10
 
+var run_seed : int = 0
+var _rng := RandomNumberGenerator.new()
+
+var seed_scene : bool = false
+
 var item_inventory : Array[ItemData]
 
 var level_floor : int
@@ -30,18 +35,29 @@ var last_combat_result : Dictionary = {}
 # Run Setup
 # ----------------
 
-func start_new_run(starting_player : Player):
+func start_new_run(starting_player : Player, new_seed : int = -1):
 	item_inventory.clear()
 	player = starting_player
 	coins = 10
 	level_floor = 1
 	stage = 1
+	if new_seed == -1:
+		run_seed = randi()
+	else:
+		run_seed = new_seed
+	_rng.seed = run_seed
+	print("Seed: ", seed)
+
+func get_rng() -> RandomNumberGenerator:
+	return _rng
 
 # ----------------
 # Progression
 # ----------------
 
 func add_coins(amount : int):
+	#run_seed = randi() # fallback to random seed if not provided
+
 	coins += amount
 
 

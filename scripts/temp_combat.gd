@@ -1,6 +1,4 @@
-# temp_combat.gd
-# Handles combat
-
+#combat.gd
 @tool
 extends Node2D
 
@@ -10,8 +8,8 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn"
+const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/common/Wizard/Wizard.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
@@ -56,6 +54,10 @@ var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+
+var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var pause_menu = null
+
 enum TurnState {
 	PLAYER,
 	ENEMY,
@@ -73,14 +75,49 @@ var is_combat_over: bool = false
 @export var preview_count: int = 5
 
 
+func _get_run_manager_player() -> Player:
+	var run_manager := get_node_or_null("/root/RunManager")
+	if run_manager == null:
+		return null
+
+	var run_player = run_manager.get("player")
+	if run_player is Player:
+		return run_player
+	return null
+
+
+func _set_run_manager_player(value: Player) -> void:
+	var run_manager := get_node_or_null("/root/RunManager")
+	if run_manager == null:
+		return
+
+	# In editor/tool contexts the singleton can appear as a plain Node;
+	# verify the script property exists before setting.
+	for prop in run_manager.get_property_list():
+		if String(prop.name) == "player":
+			run_manager.set("player", value)
+			return
+
+
 func _ready():
 	enemy_rng.randomize()
-
+	
+	var pause_layer = CanvasLayer.new()
+	pause_layer.layer = 100
+	add_child(pause_layer)
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_layer.add_child(pause_menu)
+	
+	
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	if RunManager.player:
-		player = RunManager.player
+	var stored_player := _get_run_manager_player()
+	if stored_player:
+		player = stored_player
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
@@ -128,7 +165,7 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 	
 	#keep reference updated
-	RunManager.player = player
+	_set_run_manager_player(player)
 	
 	#------------------------
 	# Spawn enemy
@@ -890,7 +927,7 @@ func _on_opponent_died() -> void:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		RunManager.player = player
+		_set_run_manager_player(player)
 	
 	# Build result data
 	var result = {
@@ -922,7 +959,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-	GameEventSignaler.combat_end.emit(player)
+	# GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
@@ -1121,3 +1158,12 @@ func _clear_editor_previews():
 	for c in to_remove:
 		if is_instance_valid(c):
 			c.queue_free()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused
