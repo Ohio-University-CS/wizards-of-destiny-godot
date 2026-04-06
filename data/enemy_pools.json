@@ -7,7 +7,7 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/Goblin_Assassin.tscn"
 	  ],
 	  "mini_boss_4": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss1/MiniBoss1.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tscn"
 	  ],
 	  "mini_boss_8": [
         "res://Enemies/enemy_resources/enchanted_forest/MiniBoss2/MiniBoss2.tscn"

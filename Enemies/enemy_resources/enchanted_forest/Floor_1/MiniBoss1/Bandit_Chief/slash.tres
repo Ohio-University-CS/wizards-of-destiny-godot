@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cjnjav73t4mvv"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_onh81"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_87exo"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_mh5dy"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_qjqwl"]
+
+[sub_resource type="Resource" id="Resource_6n3ne"]
+script = ExtResource("2_mh5dy")
+amount = 4
+hits = 3
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_87exo")
+name = "Slash"
+effects = Array[ExtResource("1_onh81")]([SubResource("Resource_6n3ne")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("3_qjqwl"), ExtResource("3_qjqwl"), ExtResource("3_qjqwl")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

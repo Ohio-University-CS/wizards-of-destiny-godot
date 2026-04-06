@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bdnl65fbxxd60"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_wmgqt"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_g45xp"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_rv76f"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_7ab6v"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_0hwmi"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_ltsud"]
+
+[sub_resource type="Resource" id="Resource_q2cv4"]
+script = ExtResource("2_rv76f")
+amount = 8
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_3geax"]
+script = ExtResource("3_7ab6v")
+amount = 10
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("2_g45xp")
+name = "Shiv"
+effects = Array[ExtResource("1_wmgqt")]([SubResource("Resource_q2cv4"), SubResource("Resource_3geax")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_0hwmi"), ExtResource("5_ltsud")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

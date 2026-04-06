@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://coy6pewivo12a"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_k6u1d"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_hlr4e"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_ksoos"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="3_0egof"]
+
+[sub_resource type="Resource" id="Resource_r4nx3"]
+script = ExtResource("2_hlr4e")
+status_type = 10
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_sdk4a"]
+script = ExtResource("2_hlr4e")
+status_type = 11
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_ksoos")
+name = "Prepare"
+effects = Array[ExtResource("1_k6u1d")]([SubResource("Resource_r4nx3"), SubResource("Resource_sdk4a")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("3_0egof"), ExtResource("3_0egof")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_3c0xf"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="5_f0hci"]
 
-[node name="Goblin_Warrior" type="Sprite2D" unique_id=1886209078]
+[node name="Goblin_Warrior" type="Node2D" unique_id=944237056]
 scale = Vector2(2, 2)
 script = ExtResource("2_f0hci")
 enemy_data = ExtResource("3_1hkhi")

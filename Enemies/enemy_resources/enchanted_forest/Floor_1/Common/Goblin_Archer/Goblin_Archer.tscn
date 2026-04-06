@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_trw6q"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_y6iaf"]
 
-[node name="Goblin_Archer" type="Sprite2D" unique_id=403525790]
+[node name="Goblin_Archer" type="Node2D" unique_id=1513663545]
 script = ExtResource("1_mty8r")
 enemy_data = ExtResource("2_3m3gd")
 

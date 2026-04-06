@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://d3anhqncehfmj"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_cqev4"]
+[ext_resource type="Resource" uid="uid://cjnjav73t4mvv" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/slash.tres" id="2_5brms"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_bf3wp"]
+[ext_resource type="Resource" uid="uid://coy6pewivo12a" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/prepare.tres" id="3_5ge11"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_fvr5r"]
+[ext_resource type="Resource" uid="uid://bdnl65fbxxd60" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/shiv.tres" id="4_sjj4r"]
+[ext_resource type="Resource" uid="uid://rt3gydtkjcny" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/war_cry.tres" id="5_q01rk"]
+
+[resource]
+script = ExtResource("3_fvr5r")
+enemy_name = "Bandit Chief"
+hp_variation = Array[int]([60])
+moves = Array[ExtResource("1_cqev4")]([ExtResource("2_5brms"), ExtResource("3_5ge11"), ExtResource("4_sjj4r"), ExtResource("5_q01rk")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"
