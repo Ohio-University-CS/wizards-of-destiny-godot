@@ -1,1 +1,30 @@
+name: Godot GUT Tests
 
+on:
+  push:
+    branches: ["settings-menu"]
+  pull_request:
+    branches: ["settings-menu"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    container:
+      image: barichello/godot-ci:4.5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import project
+        run: godot --headless --import --quit
+
+      - name: Run Settings Menu tests
+        run: |
+          godot \
+            --headless \
+            --path "$PWD" \
+            -s addons/gut/gut_cmdln.gd \
+            -gdir=res://test/Settings menu test/test_settings_menu_graphics.gd
+            -gexit
