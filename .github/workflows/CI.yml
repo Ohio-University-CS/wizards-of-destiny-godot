@@ -1,0 +1,30 @@
+name: Godot Unit Tests
+
+on:
+  push:
+    branches: [ "levelselect" ]
+  pull_request:
+    branches: [ "levelselect" ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out your repository
+      - uses: actions/checkout@v4
+
+      # Download and set up Godot (headless)
+      - name: Install Godot
+        run: |
+          wget https://downloads.tuxfamily.org/godotengine/3.5.2/Godot_v3.5.2-stable_x11.64.zip -O godot.zip
+          unzip godot.zip -d godot
+          chmod +x godot/Godot_v3.5.2-stable_x11.64
+          mv godot/Godot_v3.5.2-stable_x11.64 godot
+
+      # Run your unit tests
+      - name: Run Godot unit tests
+        run: |
+          ./godot --headless --script test/test_level_select.gd
