@@ -8,9 +8,10 @@
 [ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/starting cards/bolster.tres" id="5_bq3eg"]
 [ext_resource type="Resource" uid="uid://dc7rqa345pgir" path="res://cards/data/magician_deck/starting cards/mystic_bolt.tres" id="6_7k8bs"]
 [ext_resource type="Resource" uid="uid://d3rq2pnpk7isn" path="res://cards/data/magician_deck/starting cards/elemental_storm.tres" id="8_kwesj"]
+[ext_resource type="Resource" uid="uid://da7mw5k6xppkc" path="res://cards/data/magician_deck/uncommon_cards/surge.tres" id="9_d1cub"]
 
 [resource]
 script = ExtResource("1_d3ap0")
 deck_name = "Magician"
-starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_nudi4"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj")])
+starting_deck = Array[ExtResource("2_2wtbq")]([ExtResource("3_nudi4"), ExtResource("3_nudi4"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("3_nfnmw"), ExtResource("4_7k8bs"), ExtResource("4_7k8bs"), ExtResource("5_bq3eg"), ExtResource("6_7k8bs"), ExtResource("8_kwesj"), ExtResource("9_d1cub")])
 metadata/_custom_type_script = "uid://cniggcjjpnmqi"

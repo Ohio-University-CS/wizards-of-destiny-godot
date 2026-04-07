@@ -223,7 +223,7 @@ func add_strike_damage(amount: int, _include_base_dmg : bool):
 	
 	# Precision Passive
 	for passive in active_passives:
-		if active_passives[passive] == "Precision":
+		if passive == "Precision":
 			strike_bonus_damage += 1
 	
 	_emit_strike_changed()
@@ -249,7 +249,7 @@ func add_strike_element(element: String, amount: int, _include_base_dmg : bool):
 	
 	# Precision Passive
 	for passive in active_passives:
-		if active_passives[passive] == "Precision":
+		if passive == "Precision":
 			strike_bonus_damage += 1
 	
 	_emit_strike_changed()
