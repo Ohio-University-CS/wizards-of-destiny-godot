@@ -2,10 +2,9 @@ name: Godot GUT Tests
 
 on:
   push:
-    branches: ["settings-menu"]
+    branches: ["main"]
   pull_request:
-    branches: ["settings-menu"]
-  workflow_dispatch:
+    branches: ["main"]
 
 jobs:
   test:
@@ -17,14 +16,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y \
+            libfontconfig1 \
+            libwebkit2gtk-4.1-0
+
       - name: Import project
         run: godot --headless --import --quit
 
-      - name: Run Settings Menu tests
+      - name: Run GUT tests
         run: |
-          godot \
-            --headless \
-            --path "$PWD" \
-            -s addons/gut/gut_cmdln.gd \
-            -gdir=res://test/Settings menu test/test_settings_menu_graphics.gd
-            -gexit
+          godot --headless \
+          --path "$PWD" \
+          -s addons/gut/gut_cmdln.gd \
+          -gdir=res://test/settings_menu_tests \
+          -gexit
