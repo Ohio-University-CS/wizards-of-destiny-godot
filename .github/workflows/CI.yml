@@ -2,9 +2,9 @@ name: Godot GUT Tests
 
 on:
   push:
-    branches: ["main"]
+    branches: ["settings-menu"]
   pull_request:
-    branches: ["main"]
+    branches: ["settings-menu"]
 
 jobs:
   test:
