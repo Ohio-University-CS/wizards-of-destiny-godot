@@ -364,6 +364,7 @@ scale = Vector2(0.3308824, 0.27328083)
 texture = ExtResource("8_71g7v")
 
 [node name="Fullscreen ON" type="Sprite2D" parent="gsettingsoptions/FullScreen button" unique_id=1003775558]
+visible = false
 position = Vector2(315, 36.999996)
 scale = Vector2(0.331, 0.273)
 texture = ExtResource("9_usl5g")
