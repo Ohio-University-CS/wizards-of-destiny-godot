@@ -18,7 +18,7 @@ jobs:
       # 2️⃣ Download and set up Godot (headless) from GitHub releases
       - name: Install Godot
         run: |
-          wget https://github.com/godotengine/godot/releases/download/3.5.2/Godot_v3.5.2-stable_linux_headless.64.zip -O godot.zip
+          wget https://github.com/godotengine/godot/releases/download/3.5.2-stable/Godot_v3.5.2-stable_linux_headless.64.zip -O godot.zip
           unzip godot.zip -d godot
           chmod +x godot/Godot_v3.5.2-stable_linux_headless.64
 
