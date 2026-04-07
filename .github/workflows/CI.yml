@@ -5,7 +5,6 @@ on:
     branches: [ "levelselect" ]
   pull_request:
     branches: [ "levelselect" ]
-    
   workflow_dispatch:
 
 jobs:
@@ -13,18 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out your repository
+      # 1️⃣ Check out your repository
       - uses: actions/checkout@v4
 
-      # Download and set up Godot (headless)
+      # 2️⃣ Download and set up Godot (headless) from GitHub releases
       - name: Install Godot
         run: |
-          wget https://downloads.tuxfamily.org/godotengine/3.5.2/Godot_v3.5.2-stable_x11.64.zip -O godot.zip
+          wget https://github.com/godotengine/godot/releases/download/3.5.2/Godot_v3.5.2-stable_linux_headless.64.zip -O godot.zip
           unzip godot.zip -d godot
-          chmod +x godot/Godot_v3.5.2-stable_x11.64
-          mv godot/Godot_v3.5.2-stable_x11.64 godot
+          chmod +x godot/Godot_v3.5.2-stable_linux_headless.64
 
-      # Run your unit tests
+      # 3️⃣ Run your unit tests
       - name: Run Godot unit tests
         run: |
-          ./godot --headless --script test/test_level_select.gd
+          ./godot/Godot_v3.5.2-stable_linux_headless.64 --headless --script test/test_level_select.gd
