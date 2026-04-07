@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: barichello/godot-ci:4.5
+      image: barichello/godot-ci:4.6
 
     steps:
       - uses: actions/checkout@v4
