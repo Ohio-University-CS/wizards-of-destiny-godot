@@ -26,4 +26,4 @@ jobs:
       # Run your unit tests
       - name: Run Unit Tests
         run: |
-          ./Godot_v4.2-stable_linux.x86_64 --headless -s res://tests/test_runner.gd
+          ./Godot_v4.2-stable_linux.x86_64 --headless -s res://test/deckselecttest.gd
