@@ -16,4 +16,5 @@ name = "Scratch"
 effects = Array[ExtResource("1_37pdq")]([SubResource("Resource_hdqap")])
 weight = 40
 intent_icons = Array[Texture2D]([ExtResource("3_1fho0")])
+intent_damage_amount = Array[int]([6])
 metadata/_custom_type_script = "uid://t788w26yn03s"

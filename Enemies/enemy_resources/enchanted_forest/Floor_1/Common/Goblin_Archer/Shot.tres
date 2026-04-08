@@ -1,28 +1,29 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cnrts2rlbb2i5"]
 
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_typqw"]
-[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_gxy7q"]
-[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_uix6n"]
-[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_a8741"]
-[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_c2poo"]
-[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_3ya08"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_7xuda"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_hulvj"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_2gfqy"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_ubp88"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_bqq2m"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_exy5m"]
 
 [sub_resource type="Resource" id="Resource_c2poo"]
-script = ExtResource("2_uix6n")
+script = ExtResource("2_hulvj")
 amount = 8
 metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
 [sub_resource type="Resource" id="Resource_3ya08"]
-script = ExtResource("3_a8741")
+script = ExtResource("3_2gfqy")
 status_type = 10
 amount = 1
 target_type = 0
 metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [resource]
-script = ExtResource("2_gxy7q")
+script = ExtResource("6_exy5m")
 name = "Shot"
-effects = Array[ExtResource("1_typqw")]([SubResource("Resource_c2poo"), SubResource("Resource_3ya08")])
+effects = Array[ExtResource("1_7xuda")]([SubResource("Resource_c2poo"), SubResource("Resource_3ya08")])
 weight = 50
-intent_icons = Array[Texture2D]([ExtResource("4_c2poo"), ExtResource("5_3ya08")])
+intent_icons = Array[Texture2D]([ExtResource("4_ubp88"), ExtResource("5_bqq2m")])
+intent_damage_amount = Array[int]([8])
 metadata/_custom_type_script = "uid://t788w26yn03s"

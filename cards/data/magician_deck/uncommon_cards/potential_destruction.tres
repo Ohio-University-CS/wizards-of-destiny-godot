@@ -11,7 +11,6 @@
 script = ExtResource("2_0y3he")
 amount = 1
 include_base_dmg = true
-target_type = 0
 metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
 
 [sub_resource type="Resource" id="Resource_pk5b3"]
@@ -23,7 +22,7 @@ metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
 [resource]
 script = ExtResource("2_gdmtp")
 card_name = "Potential Destruction"
-description = "Attack for DMG +1. Increase this Card's Damage by DMG this Battle."
+description = "Add DMG +1 Damage to Strike. Increase this Card's Damage by DMG this Battle."
 rarity = 1
 artwork = ExtResource("1_fnqb3")
 frame_art = ExtResource("3_3o7fd")

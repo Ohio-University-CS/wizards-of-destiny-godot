@@ -1,19 +1,17 @@
-[gd_scene format=3 uid="uid://cbb3qxnwjvi4o"]
+[gd_scene format=3 uid="uid://dl1xrcsxttosf"]
 
-[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_ac4sl"]
-[ext_resource type="Resource" uid="uid://d3anhqncehfmj" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tres" id="2_vfxbo"]
-[ext_resource type="Texture2D" uid="uid://c4sk06uo7b0fq" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/bandit_chief.png" id="3_03ler"]
-[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_rb1gd"]
-[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_hhopg"]
-[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_vfxbo"]
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_k6rvj"]
+[ext_resource type="Resource" uid="uid://dm33t1il7jg3u" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/Kobold_Inventor.tres" id="2_ynffd"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_546wb"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_56f31"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_4tcxk"]
 
-[node name="Bandit_Chief" type="Node2D" unique_id=2045738616]
-script = ExtResource("1_ac4sl")
-enemy_data = ExtResource("2_vfxbo")
+[node name="Kobold_Inventor" type="Node2D" unique_id=2045738616]
+script = ExtResource("1_k6rvj")
+enemy_data = ExtResource("2_ynffd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=874388032]
 scale = Vector2(6, 6)
-texture = ExtResource("3_03ler")
 
 [node name="HealthIndicator" type="Label" parent="." unique_id=1747660486]
 offset_left = -39.0
@@ -25,7 +23,7 @@ theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 horizontal_alignment = 2
-script = ExtResource("4_rb1gd")
+script = ExtResource("4_546wb")
 
 [node name="EnemyHealth" type="ProgressBar" parent="." unique_id=432598369]
 modulate = Color(1, 0, 0, 1)
@@ -38,7 +36,7 @@ offset_right = 64.0
 offset_bottom = -124.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_hhopg")
+script = ExtResource("5_56f31")
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=947754798]
@@ -56,7 +54,7 @@ theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 28
-text = "Bandit Chief"
+text = "Kobold Inventor"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -74,7 +72,7 @@ offset_left = -28.000002
 offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
-theme_override_fonts/font = ExtResource("6_vfxbo")
+theme_override_fonts/font = ExtResource("6_4tcxk")
 
 [node name="EnemyIntent2" type="TextureRect" parent="." unique_id=866942873]
 offset_left = -105.0
@@ -89,7 +87,7 @@ offset_left = -28.000002
 offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
-theme_override_fonts/font = ExtResource("6_vfxbo")
+theme_override_fonts/font = ExtResource("6_4tcxk")
 
 [node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1285359075]
 offset_left = -106.013
@@ -104,4 +102,4 @@ offset_left = -28.000002
 offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
-theme_override_fonts/font = ExtResource("6_vfxbo")
+theme_override_fonts/font = ExtResource("6_4tcxk")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dm33t1il7jg3u"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_h5vcu"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="6_6lgaq"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="7_oak13"]
+
+[resource]
+script = ExtResource("7_oak13")
+enemy_name = "Kobold Inventor"
+hp_variation = Array[int]([80])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

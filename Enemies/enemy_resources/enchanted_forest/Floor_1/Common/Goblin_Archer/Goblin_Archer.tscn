@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c78l1thr2dhla" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer.png" id="2_mty8r"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_trw6q"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_y6iaf"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_ctsy7"]
 
 [node name="Goblin_Archer" type="Node2D" unique_id=1513663545]
 script = ExtResource("1_mty8r")
@@ -60,23 +61,47 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1006481046]
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1209591267]
 offset_left = -105.0
 offset_top = -95.0
 offset_right = -55.0
 offset_bottom = -45.0
 scale = Vector2(0.75, 0.75)
 
-[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=374255201]
+[node name="Label" type="Label" parent="EnemyIntent1" unique_id=2109248908]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=946741633]
 offset_left = -105.0
 offset_top = -55.0
 offset_right = -55.0
 offset_bottom = -5.0
 scale = Vector2(0.75, 0.75)
 
-[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=479550494]
+[node name="Label" type="Label" parent="EnemyIntent2" unique_id=870527026]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1516720210]
 offset_left = -106.013
 offset_top = -5.0
 offset_right = -56.013
 offset_bottom = 45.0
 scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent3" unique_id=1223358403]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")

@@ -1,28 +1,29 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cgyweuu5uxmfn"]
 
-[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_r07g1"]
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_t2300"]
-[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="2_i044b"]
-[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_ia4bp"]
-[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_8bmls"]
-[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="3_yw6xt"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_5smnl"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_ymdnc"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_ujkte"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_aqjsk"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_n6s80"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_tropo"]
 
 [sub_resource type="Resource" id="Resource_aonfm"]
-script = ExtResource("2_ia4bp")
+script = ExtResource("2_ymdnc")
 amount = 3
 metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
 [sub_resource type="Resource" id="Resource_u0bf5"]
-script = ExtResource("3_8bmls")
+script = ExtResource("3_ujkte")
 status_type = 10
 amount = 1
 target_type = 0
 metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [resource]
-script = ExtResource("1_r07g1")
+script = ExtResource("6_tropo")
 name = "Scurry"
-effects = Array[ExtResource("1_t2300")]([SubResource("Resource_aonfm"), SubResource("Resource_u0bf5")])
+effects = Array[ExtResource("1_5smnl")]([SubResource("Resource_aonfm"), SubResource("Resource_u0bf5")])
 weight = 20
-intent_icons = Array[Texture2D]([ExtResource("2_i044b"), ExtResource("3_yw6xt")])
+intent_icons = Array[Texture2D]([ExtResource("4_aqjsk"), ExtResource("5_n6s80")])
+intent_damage_amount = Array[int]([3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

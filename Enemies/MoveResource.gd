@@ -20,3 +20,5 @@ class_name MoveResource
 @export var element : String = "physical" # optional
 
 @export var intent_icons : Array[Texture2D] = [] # what icons to show for intent
+
+@export var intent_damage_amount : Array[int] = [] # how much damage move will do

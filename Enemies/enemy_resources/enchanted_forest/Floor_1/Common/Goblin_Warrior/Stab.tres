@@ -1,19 +1,20 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dee2qi5j250a0"]
 
-[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_bmbgj"]
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_m86uo"]
-[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="2_cdjhv"]
-[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_obgsv"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_3vy7e"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_xlf2o"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_1yns8"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="4_q7ly6"]
 
 [sub_resource type="Resource" id="Resource_4ss7h"]
-script = ExtResource("2_obgsv")
+script = ExtResource("2_xlf2o")
 amount = 7
 metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
 [resource]
-script = ExtResource("1_bmbgj")
+script = ExtResource("4_q7ly6")
 name = "Stab"
-effects = Array[ExtResource("1_m86uo")]([SubResource("Resource_4ss7h")])
+effects = Array[ExtResource("1_3vy7e")]([SubResource("Resource_4ss7h")])
 weight = 50
-intent_icons = Array[Texture2D]([ExtResource("2_cdjhv")])
+intent_icons = Array[Texture2D]([ExtResource("3_1yns8")])
+intent_damage_amount = Array[int]([7])
 metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -39,9 +39,12 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
-var enemy_intent_1: TextureRect = null
-var enemy_intent_2: TextureRect = null
-var enemy_intent_3: TextureRect = null
+var enemy_intent_1 : TextureRect = null
+var enemy_intent_1_label : Label = null
+var enemy_intent_2 : TextureRect = null
+var enemy_intent_2_label : Label = null
+var enemy_intent_3 : TextureRect = null
+var enemy_intent_3_label : Label = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -239,18 +242,36 @@ func _ready():
 		_e1 = get_node_or_null("EnemyIntent1")
 	if _e1 and _e1 is TextureRect:
 		enemy_intent_1 = _e1
+	
+	var _e1L = get_node_or_null("Enemy/EnemyIntent1/Label")
+	if _e1L == null:
+		_e1L = get_node_or_null("EnemyIntent1/Label")
+	if _e1L and _e1L is Label:
+		enemy_intent_1_label = _e1L
 
 	var _e2 = get_node_or_null("Enemy/EnemyIntent2")
 	if _e2 == null:
 		_e2 = get_node_or_null("EnemyIntent2")
 	if _e2 and _e2 is TextureRect:
 		enemy_intent_2 = _e2
+	
+	var _e2L = get_node_or_null("Enemy/EnemyIntent2/Label")
+	if _e2L == null:
+		_e2L = get_node_or_null("EnemyIntent2/Label")
+	if _e2L and _e2L is Label:
+		enemy_intent_2_label = _e2L
 
 	var _e3 = get_node_or_null("Enemy/EnemyIntent3")
 	if _e3 == null:
 		_e3 = get_node_or_null("EnemyIntent3")
 	if _e3 and _e3 is TextureRect:
 		enemy_intent_3 = _e3
+	
+	var _e3L = get_node_or_null("Enemy/EnemyIntent3/Label")
+	if _e3L == null:
+		_e3L = get_node_or_null("EnemyIntent3/Label")
+	if _e3L and _e3L is Label:
+		enemy_intent_3_label = _e3L
 	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
@@ -692,10 +713,13 @@ func _start_enemy_turn() -> void:
 func clear_enemy_intent() -> void:
 	if enemy_intent_1:
 		enemy_intent_1.texture = null
+		enemy_intent_1_label.text = ""
 	if enemy_intent_2:
 		enemy_intent_2.texture = null
+		enemy_intent_2_label.text = ""
 	if enemy_intent_3:
 		enemy_intent_3.texture = null
+		enemy_intent_3_label.text = ""
 
 
 func update_enemy_intent() -> void:
@@ -710,18 +734,27 @@ func update_enemy_intent() -> void:
 	# set textures only if intent_icons exist and the UI nodes are present
 	if next_move.intent_icons.size() > 0 and enemy_intent_1:
 		enemy_intent_1.texture = next_move.intent_icons[0]
+		if next_move.intent_damage_amount.size() > 0:
+			enemy_intent_1_label.text = str(next_move.intent_damage_amount[0])
 	elif enemy_intent_1:
 		enemy_intent_1.texture = null
+		enemy_intent_1_label.text = ""
 
 	if next_move.intent_icons.size() > 1 and enemy_intent_2:
 		enemy_intent_2.texture = next_move.intent_icons[1]
+		if next_move.intent_damage_amount.size() > 1:
+			enemy_intent_2_label.text = str(next_move.intent_damage_amount[1])
 	elif enemy_intent_2:
 		enemy_intent_2.texture = null
+		enemy_intent_2_label.text = ""
 
 	if next_move.intent_icons.size() > 2 and enemy_intent_3:
 		enemy_intent_3.texture = next_move.intent_icons[2]
+		if next_move.intent_damage_amount.size() > 2:
+			enemy_intent_3_label.text = str(next_move.intent_damage_amount[2])
 	elif enemy_intent_3:
 		enemy_intent_3.texture = null
+		enemy_intent_3_label.text = ""
 
 
 func _enemy_take_turn() -> void:

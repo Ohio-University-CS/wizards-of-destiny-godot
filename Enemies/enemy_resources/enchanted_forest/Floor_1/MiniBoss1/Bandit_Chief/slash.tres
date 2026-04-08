@@ -17,4 +17,5 @@ name = "Slash"
 effects = Array[ExtResource("1_onh81")]([SubResource("Resource_6n3ne")])
 weight = 50
 intent_icons = Array[Texture2D]([ExtResource("3_qjqwl"), ExtResource("3_qjqwl"), ExtResource("3_qjqwl")])
+intent_damage_amount = Array[int]([4, 4, 4])
 metadata/_custom_type_script = "uid://t788w26yn03s"

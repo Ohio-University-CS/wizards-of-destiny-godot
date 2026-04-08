@@ -1,28 +1,29 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bet15ff1clmde"]
 
-[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_733at"]
-[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_0xe42"]
-[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_ef40r"]
-[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_e8ycc"]
-[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_y7g47"]
-[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_xrh7d"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_mi33k"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_0dfry"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_gvsdp"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_3m87c"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_w7l15"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_juird"]
 
 [sub_resource type="Resource" id="Resource_36uik"]
-script = ExtResource("2_0xe42")
+script = ExtResource("2_0dfry")
 amount = 4
 element = 3
 metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
 [sub_resource type="Resource" id="Resource_0qgc7"]
-script = ExtResource("3_e8ycc")
+script = ExtResource("3_gvsdp")
 status_type = 3
 amount = 2
 metadata/_custom_type_script = "uid://b4gp05fbtexh5"
 
 [resource]
-script = ExtResource("2_ef40r")
+script = ExtResource("6_juird")
 name = "Poisoned Blade"
-effects = Array[ExtResource("1_733at")]([SubResource("Resource_36uik"), SubResource("Resource_0qgc7")])
+effects = Array[ExtResource("1_mi33k")]([SubResource("Resource_36uik"), SubResource("Resource_0qgc7")])
 weight = 30
-intent_icons = Array[Texture2D]([ExtResource("4_y7g47"), ExtResource("5_xrh7d")])
+intent_icons = Array[Texture2D]([ExtResource("4_3m87c"), ExtResource("5_w7l15")])
+intent_damage_amount = Array[int]([4])
 metadata/_custom_type_script = "uid://t788w26yn03s"

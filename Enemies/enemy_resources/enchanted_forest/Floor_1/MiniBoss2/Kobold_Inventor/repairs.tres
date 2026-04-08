@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://xrnm8ksvau5o"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_3whfm"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_6uhkl"]
+
+[resource]
+script = ExtResource("2_6uhkl")
+metadata/_custom_type_script = "uid://t788w26yn03s"
