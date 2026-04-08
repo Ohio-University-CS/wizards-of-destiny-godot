@@ -10,15 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    container:
+      image: barichello/godot-ci: 4.6.1
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install Godot
-        uses: firebelley/setup-godot@v1
-        with:
-          version: "4.2.1"
-          use-dotnet: false
 
       - name: Run test_shop.gd
         run: godot --headless -s addons/gut/gut_cmdln.gd -gfile=res://test/test_shop.gd -gexit
