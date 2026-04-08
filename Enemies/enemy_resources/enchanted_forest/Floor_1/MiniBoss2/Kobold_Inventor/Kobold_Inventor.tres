@@ -1,6 +1,10 @@
 [gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dm33t1il7jg3u"]
 
 [ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_h5vcu"]
+[ext_resource type="Resource" uid="uid://cfrr3k43t1rr3" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/ray_blast.tres" id="2_c5a70"]
+[ext_resource type="Resource" uid="uid://c00ul1uppdx1v" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/tinker.tres" id="3_3ot8t"]
+[ext_resource type="Resource" uid="uid://xrnm8ksvau5o" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/repairs.tres" id="4_s0i8w"]
+[ext_resource type="Resource" uid="uid://owryjhu3tuhy" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/explosives.tres" id="5_u6617"]
 [ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="6_6lgaq"]
 [ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="7_oak13"]
 
@@ -8,4 +12,5 @@
 script = ExtResource("7_oak13")
 enemy_name = "Kobold Inventor"
 hp_variation = Array[int]([80])
+moves = Array[ExtResource("1_h5vcu")]([ExtResource("2_c5a70"), ExtResource("3_3ot8t"), ExtResource("4_s0i8w"), ExtResource("5_u6617")])
 metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

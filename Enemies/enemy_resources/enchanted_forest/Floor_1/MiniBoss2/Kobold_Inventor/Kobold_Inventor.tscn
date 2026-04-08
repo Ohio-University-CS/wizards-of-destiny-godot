@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_k6rvj"]
 [ext_resource type="Resource" uid="uid://dm33t1il7jg3u" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/Kobold_Inventor.tres" id="2_ynffd"]
+[ext_resource type="Texture2D" uid="uid://c23n76nxganld" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/kobold_inventor.png" id="3_8osvm"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_546wb"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_56f31"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_4tcxk"]
@@ -12,6 +13,7 @@ enemy_data = ExtResource("2_ynffd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=874388032]
 scale = Vector2(6, 6)
+texture = ExtResource("3_8osvm")
 
 [node name="HealthIndicator" type="Label" parent="." unique_id=1747660486]
 offset_left = -39.0
@@ -60,9 +62,9 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1569387507]
-offset_left = -105.0
+offset_left = -150.0
 offset_top = -95.0
-offset_right = -55.0
+offset_right = -100.0
 offset_bottom = -45.0
 scale = Vector2(0.75, 0.75)
 
@@ -75,9 +77,9 @@ offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_4tcxk")
 
 [node name="EnemyIntent2" type="TextureRect" parent="." unique_id=866942873]
-offset_left = -105.0
+offset_left = -150.0
 offset_top = -55.0
-offset_right = -55.0
+offset_right = -100.0
 offset_bottom = -5.0
 scale = Vector2(0.75, 0.75)
 
@@ -90,9 +92,9 @@ offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_4tcxk")
 
 [node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1285359075]
-offset_left = -106.013
+offset_left = -150.0
 offset_top = -5.0
-offset_right = -56.013
+offset_right = -100.0
 offset_bottom = 45.0
 scale = Vector2(0.75, 0.75)
 

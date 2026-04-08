@@ -1,8 +1,36 @@
 [gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://owryjhu3tuhy"]
 
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_ewsqq"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_3e2sn"]
 [ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_xvray"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_jhyrp"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_6pitk"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_aryst"]
+
+[sub_resource type="Resource" id="Resource_3h542"]
+script = ExtResource("2_3e2sn")
+amount = 23
+element = 1
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_lt6w2"]
+script = ExtResource("3_jhyrp")
+status_type = 1
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_3e2sn"]
+script = ExtResource("2_3e2sn")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
 
 [resource]
 script = ExtResource("2_xvray")
+name = "Explosive"
+effects = Array[ExtResource("1_ewsqq")]([SubResource("Resource_3h542"), SubResource("Resource_lt6w2"), SubResource("Resource_3e2sn")])
+weight = 10
+cooldown = 3
+intent_icons = Array[Texture2D]([ExtResource("4_6pitk"), ExtResource("5_aryst")])
+intent_damage_amount = Array[int]([23])
 metadata/_custom_type_script = "uid://t788w26yn03s"

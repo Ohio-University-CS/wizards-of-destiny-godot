@@ -11,7 +11,7 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tscn"
 	  ],
 	  "mini_boss_8": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss2/MiniBoss2.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/Kobold_Inventor.tscn"
 	  ],
 	  "boss_12": [
         "res://Enemies/enemy_resources/enchanted_forest/Boss/Boss.tscn"
