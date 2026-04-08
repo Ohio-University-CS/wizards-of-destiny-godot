@@ -428,7 +428,6 @@ func start_turn():
 
 	# Reset block each turn
 	status_effects["block"] = 0
-	status_effects["broken"] = 0
 	
 	#Reset Strike
 	reset_strike()
@@ -452,6 +451,10 @@ func end_turn():
 	
 	if tattered_shawl == true:
 		tattered_shawl = false
+	
+	# remove end of turn status effects
+	status_effects["broken"] = 0
+	status_effects["sealed"] = 0
 
 
 func _clear_temp_stats():

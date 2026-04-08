@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dqw8j7c6el5ks"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_yw4af"]
+[ext_resource type="Resource" uid="uid://w6q5ksd3x3rd" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Needle_Blight/spikes.tres" id="2_q6rnm"]
+[ext_resource type="Resource" uid="uid://ohld8dcijwvf" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Needle_Blight/shifty.tres" id="3_8ulhx"]
+[ext_resource type="Resource" uid="uid://ddv8fsvaly3h3" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Needle_Blight/ensnare.tres" id="3_17lcc"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="5_p218n"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="6_idofg"]
+
+[resource]
+script = ExtResource("6_idofg")
+enemy_name = "Needle Blight"
+hp_variation = Array[int]([44, 48, 52])
+moves = Array[ExtResource("1_yw4af")]([ExtResource("2_q6rnm"), ExtResource("3_17lcc"), ExtResource("3_8ulhx")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"
