@@ -1,0 +1,17 @@
+name: Basic CI
+
+on:
+  push:
+    branches: [ enemies ]
+  pull_request:
+    branches: [ enemies ]
+
+jobs:
+  pass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Say hello
+        run: echo "Workflow ran successfully!"
