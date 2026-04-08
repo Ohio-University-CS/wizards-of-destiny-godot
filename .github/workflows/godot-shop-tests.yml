@@ -1,0 +1,24 @@
+name: Godot Shop Tests
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Godot
+        uses: firebelley/setup-godot@v1
+        with:
+          version: "4.2.1"
+          use-dotnet: false
+
+      - name: Run test_shop.gd
+        run: godot --headless -s addons/gut/gut_cmdln.gd -gfile=res://test/test_shop.gd -gexit
