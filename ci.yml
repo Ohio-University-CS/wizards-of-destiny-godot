@@ -1,0 +1,36 @@
+# Conner
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Run GUT tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Godot
+        run: |
+          GODOT_VERSION=4.6.0
+          URL="https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          wget -qO godot.zip "$URL"
+          unzip -q godot.zip
+          mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 Godot
+          chmod +x Godot/Godot
+
+      - name: Run GUT unit tests (headless)
+        run: |
+          mkdir -p test-results
+          ./Godot/Godot --headless --path . -s addons/gut/gut_cmdln.gd -gexit -gjunit_xml_file=test-results/gut-results.xml
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: gut-results
+          path: test-results/gut-results.xml
