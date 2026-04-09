@@ -730,12 +730,18 @@ func update_enemy_intent() -> void:
 	if next_move == null:
 		clear_enemy_intent()
 		return
+	
+	var extra_dmg : int = 0
+	if opponent.status_effects["empower"] > 0:
+		extra_dmg += opponent.status_effects["empower"] * 3
+	if opponent.status_effects["rage"] > 0:
+		extra_dmg += opponent.status_effects["rage"]
 
 	# set textures only if intent_icons exist and the UI nodes are present
 	if next_move.intent_icons.size() > 0 and enemy_intent_1:
 		enemy_intent_1.texture = next_move.intent_icons[0]
 		if next_move.intent_damage_amount.size() > 0:
-			enemy_intent_1_label.text = str(next_move.intent_damage_amount[0])
+			enemy_intent_1_label.text = str(next_move.intent_damage_amount[0] + extra_dmg)
 	elif enemy_intent_1:
 		enemy_intent_1.texture = null
 		enemy_intent_1_label.text = ""
@@ -743,7 +749,7 @@ func update_enemy_intent() -> void:
 	if next_move.intent_icons.size() > 1 and enemy_intent_2:
 		enemy_intent_2.texture = next_move.intent_icons[1]
 		if next_move.intent_damage_amount.size() > 1:
-			enemy_intent_2_label.text = str(next_move.intent_damage_amount[1])
+			enemy_intent_2_label.text = str(next_move.intent_damage_amount[1] + extra_dmg)
 	elif enemy_intent_2:
 		enemy_intent_2.texture = null
 		enemy_intent_2_label.text = ""
@@ -751,7 +757,7 @@ func update_enemy_intent() -> void:
 	if next_move.intent_icons.size() > 2 and enemy_intent_3:
 		enemy_intent_3.texture = next_move.intent_icons[2]
 		if next_move.intent_damage_amount.size() > 2:
-			enemy_intent_3_label.text = str(next_move.intent_damage_amount[2])
+			enemy_intent_3_label.text = str(next_move.intent_damage_amount[2] + extra_dmg)
 	elif enemy_intent_3:
 		enemy_intent_3.texture = null
 		enemy_intent_3_label.text = ""
@@ -978,8 +984,15 @@ func _on_opponent_died() -> void:
 		RunManager.player = player
 	
 	# Build result data
+	var coin_reward : int = 12
+	
+	if RunManager.stage == 4:
+		coin_reward += 5
+	if RunManager.stage == 8:
+		coin_reward += 10
+	
 	var result = {
-		"coins": 12,
+		"coins": coin_reward,
 		"turns": turn_count,
 		"perfect": player.current_health == player.get_max_health()
 	}
