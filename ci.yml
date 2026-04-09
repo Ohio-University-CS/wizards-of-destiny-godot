@@ -1,36 +1,59 @@
-# Conner
-name: CI
+name: "Godot Build & Test"
 
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
+
+permissions:
+  contents: write
 
 jobs:
+  # JOB 1: RUN UNIT TESTS
   test:
-    name: Run GUT tests
+    name: Run GUT Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download Godot
-        run: |
-          GODOT_VERSION=4.6.0
-          URL="https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
-          wget -qO godot.zip "$URL"
-          unzip -q godot.zip
-          mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 Godot
-          chmod +x Godot/Godot
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1 # Match this to your local Godot version
 
-      - name: Run GUT unit tests (headless)
+      - name: Run Tests (GUT)
         run: |
-          mkdir -p test-results
-          ./Godot/Godot --headless --path . -s addons/gut/gut_cmdln.gd -gexit -gjunit_xml_file=test-results/gut-results.xml
+          godot --headless --path . -s addons/gut/gut_cmdln.gd -gexit
 
-      - name: Upload test results
+  # JOB 2: EXPORT BINARIES (Only runs if tests pass)
+  export:
+    name: Export Game
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1
+
+      - name: Export Windows
+        run: |
+          mkdir -pv build/windows
+          godot --headless --path . --export-release "Windows Desktop" build/windows/game.exe
+
+      - name: Export Linux
+        run: |
+          mkdir -pv build/linux
+          godot --headless --path . --export-release "Linux/X11" build/linux/game.x86_64
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: gut-results
-          path: test-results/gut-results.xml
+          name: game-builds
+          path: build/
