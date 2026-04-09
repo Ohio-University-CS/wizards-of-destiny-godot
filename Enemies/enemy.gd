@@ -264,7 +264,6 @@ func take_damage(amount: int, _element: String = ""):
 		emit_signal("status_applied", "evasive", status_effects["evasive"])
 		if status_effects["evasive"] == 0:
 			emit_signal("status_expired", "evasive")
-		print("Enemy dodged the attack with Evasive!")
 		return
 
 	if try_dodge():
