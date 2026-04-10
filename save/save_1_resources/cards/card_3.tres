@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/HEX.png" id="1_e0qxh"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_y4pxw"]
+[ext_resource type="Script" path="res://cards/effects/add_strike_damage.gd" id="3_oorxw"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="4_8tcp6"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_mlpy8"]
+
+[sub_resource type="Resource" id="Resource_bat0r"]
+script = ExtResource("3_oorxw")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[resource]
+script = ExtResource("5_mlpy8")
+card_name = "Hex"
+description = "Add 5 Damage to Strike"
+artwork = ExtResource("1_e0qxh")
+frame_art = ExtResource("4_8tcp6")
+effects = Array[ExtResource("2_y4pxw")]([SubResource("Resource_bat0r")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
