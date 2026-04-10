@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
 [ext_resource type="Resource" uid="uid://c4fm0old2um78" path="res://cards/data/magician_deck/common_cards/arcane_insight.tres" id="11_j512n"]
 [ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
+[ext_resource type="Resource" uid="uid://d3rq2pnpk7isn" path="res://cards/data/magician_deck/common_cards/elemental_storm.tres" id="12_ed28i"]
 [ext_resource type="Resource" uid="uid://d2cdt5te7vce" path="res://cards/data/magician_deck/common_cards/fire_storm.tres" id="13_2fwob"]
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
@@ -30,6 +31,7 @@
 [ext_resource type="Resource" uid="uid://cuixxyk63vg8b" path="res://cards/data/magician_deck/uncommon_cards/pool_of_essence.tres" id="18_t785l"]
 [ext_resource type="Resource" uid="uid://da7mw5k6xppkc" path="res://cards/data/magician_deck/uncommon_cards/surge.tres" id="19_r34ar"]
 [ext_resource type="Resource" uid="uid://bnm7hlx1cloet" path="res://cards/data/magician_deck/uncommon_cards/conduit.tres" id="20_mmk1d"]
+[ext_resource type="Resource" uid="uid://dc7rqa345pgir" path="res://cards/data/magician_deck/common_cards/mystic_bolt.tres" id="20_w35uw"]
 [ext_resource type="Resource" uid="uid://brlv52tivlplm" path="res://cards/data/magician_deck/rare_cards/meteor_storm.tres" id="21_s6mfd"]
 [ext_resource type="Resource" uid="uid://dj18gihhkkxgx" path="res://cards/data/magician_deck/common_cards/rage.tres" id="22_s6mfd"]
 [ext_resource type="Resource" uid="uid://clfpdx7831vqr" path="res://cards/data/magician_deck/uncommon_cards/precision.tres" id="23_kfoi1"]
@@ -61,7 +63,7 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("12_ed28i"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("20_w35uw"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)

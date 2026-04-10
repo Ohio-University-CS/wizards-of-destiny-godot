@@ -47,10 +47,18 @@ func _display_rewards():
 	
 	# Speed
 	var turns = result.get("turns", 999)
-	if turns <= 3:
-		add_line("+3 Fast Clear")
-	elif turns <= 6:
-		add_line("+1 Quick Clear")
+	var miniboss = result.get("miniboss", false)
+	
+	if miniboss:
+		if turns <= 4:
+			add_line("+3 Fast Clear")
+		elif turns <= 8:
+			add_line("+1 Quick Clear")
+	else:
+		if turns <= 3:
+			add_line("+3 Fast Clear")
+		elif turns <= 6:
+			add_line("+1 Quick Clear")
 	
 	var total : int = result.get("total_coins", base)
 	total_label.text = "Total: " + str(total)

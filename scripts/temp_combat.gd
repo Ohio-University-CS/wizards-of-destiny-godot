@@ -985,15 +985,19 @@ func _on_opponent_died() -> void:
 	
 	# Build result data
 	var coin_reward : int = 12
+	var miniboss : bool = false
 	
 	if RunManager.stage == 4:
 		coin_reward += 5
+		miniboss = true
 	if RunManager.stage == 8:
 		coin_reward += 10
+		miniboss = true
 	
 	var result = {
 		"coins": coin_reward,
 		"turns": turn_count,
+		"miniboss": miniboss,
 		"perfect": player.current_health == player.get_max_health()
 	}
 	
