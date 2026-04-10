@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/Protective_Barrier.png" id="1_8olgx"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_nkr8u"]
+[ext_resource type="Script" path="res://cards/effects/block_effect.gd" id="3_7jlji"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="4_22y6s"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_48q3y"]
+
+[sub_resource type="Resource" id="Resource_y8aji"]
+script = ExtResource("3_7jlji")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("5_48q3y")
+card_name = "Protective Barrier"
+description = "Gain 5 Block."
+card_type = 1
+artwork = ExtResource("1_8olgx")
+frame_art = ExtResource("4_22y6s")
+effects = Array[ExtResource("2_nkr8u")]([SubResource("Resource_y8aji")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

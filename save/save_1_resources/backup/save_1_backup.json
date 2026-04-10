@@ -2,9 +2,8 @@
 	"coins": 10,
 	"level_floor": 0,
 	"player_state": {
-		"current_health": 46,
+		"current_health": 29,
 		"max_energy": 3,
-		"num_cards_in_deck": 10,
 		"perm_modifiers": {
 			"crit_chance": 0,
 			"crit_damage": 0,
@@ -14,7 +13,7 @@
 			"elemental_power": 0,
 			"fire": 0,
 			"ice": 0,
-			"max_health": 10,
+			"max_health": 0,
 			"poison": 0
 		}
 	},

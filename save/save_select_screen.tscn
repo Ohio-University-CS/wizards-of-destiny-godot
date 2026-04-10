@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://s7cxcis3svex"]
+
+[ext_resource type="Script" uid="uid://bd25cqfsfppf" path="res://save/save_select_control.gd" id="1_1laku"]
+
+[node name="SaveSelectScreen" type="Control" unique_id=1670806383]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1laku")
+
+[node name="Buttons" type="Control" parent="." unique_id=1224504151]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Save1" type="Button" parent="Buttons" unique_id=2076195946]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 50.0
+scale = Vector2(3, 3)
+text = "Save 1"
+
+[node name="Save2" type="Button" parent="Buttons" unique_id=491807187]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 80.0
+offset_bottom = 290.0
+scale = Vector2(3, 3)
+text = "Save 2
+"
+
+[node name="Save3" type="Button" parent="Buttons" unique_id=164621468]
+layout_mode = 0
+offset_top = 480.0
+offset_right = 80.0
+offset_bottom = 530.0
+scale = Vector2(3, 3)
+text = "Save 3
+
+"

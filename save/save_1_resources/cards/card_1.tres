@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/Jinx.png" id="1_q0301"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_e2nm2"]
+[ext_resource type="Script" path="res://cards/effects/damage_effect.gd" id="3_f6mw4"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="4_gmau7"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_7wnj5"]
+
+[sub_resource type="Resource" id="Resource_w5acr"]
+script = ExtResource("3_f6mw4")
+amount = 1
+include_base_damage = true
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("5_7wnj5")
+card_name = "Jinx"
+description = "Attack for DMG +1 (Undodgeable)"
+artwork = ExtResource("1_q0301")
+frame_art = ExtResource("4_gmau7")
+effects = Array[ExtResource("2_e2nm2")]([SubResource("Resource_w5acr")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
