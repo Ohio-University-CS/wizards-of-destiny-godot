@@ -11,7 +11,10 @@ enum CardName {
 	POTENTIAL_DESTRUCTION,
 	SHOCKING_GRASP,
 	STATIC_FIELD,
-	THUNDERWAVE
+	THUNDERWAVE,
+	FIRE_STORM,
+	CURSE,
+	ENCHANT
 }
 
 @export var card_name : CardName
@@ -124,4 +127,19 @@ func apply(source, target, combat):
 		if target and target.has_method("get_shock") and target.has_method("apply_status"):
 			if target.get_shock() > 0:
 				target.apply_status("stun", 1)
+	
+	if card_name == CardName.FIRE_STORM:
+		if source and source.has_method("modify_stat_temp"):
+			source.modify_stat_temp("fire", 1)
+			source.modify_stat_temp("electric", 1)
+	
+	if card_name == CardName.CURSE:
+		if target:
+			target.status_effects["burn"] *= 2
+			target.status_effects["shock"] *= 2
+	
+	if card_name == CardName.ENCHANT:
+		if target.has_method("apply_status"):
+			target.apply_status("burn", 3)
+			target.apply_status("shock", 3)
 	

@@ -60,7 +60,7 @@ func apply(_source, _target, _combat):
 
 
 func _on_choice_made(index, _source, _target, _combat):
-	if card_name == CardName.ELEMENTAL_STORM:
+	if card_name == CardName.CURSE:
 		if index == 0:
 			# Double all Burn
 			if _target:
