@@ -68,6 +68,7 @@ offset_top = -95.0
 offset_right = -55.0
 offset_bottom = -45.0
 scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="EnemyIntent1" unique_id=510785306]
 layout_mode = 0
@@ -83,6 +84,7 @@ offset_top = -55.0
 offset_right = -55.0
 offset_bottom = -5.0
 scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="EnemyIntent2" unique_id=465026232]
 layout_mode = 0

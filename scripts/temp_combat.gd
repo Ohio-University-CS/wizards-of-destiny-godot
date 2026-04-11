@@ -1,6 +1,4 @@
-# temp_combat.gd
-# Handles combat
-
+#combat.gd
 @tool
 extends Node2D
 
@@ -128,8 +126,9 @@ func _ready():
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	if RunManager.player:
-		player = RunManager.player
+	var stored_player := _get_run_manager_player()
+	if stored_player:
+		player = stored_player
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
@@ -177,8 +176,8 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 
 	#keep reference updated
-	RunManager.player = player
-
+	_set_run_manager_player(player)
+	
 	#------------------------
 	# Load enemy pool from database using current floor and stage
 	#------------------------
@@ -981,7 +980,7 @@ func _on_opponent_died() -> void:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		RunManager.player = player
+		_set_run_manager_player(player)
 	
 	# Build result data
 	var coin_reward : int = 12
@@ -1024,7 +1023,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-	GameEventSignaler.combat_end.emit(player)
+	# GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
