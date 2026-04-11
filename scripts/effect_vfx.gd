@@ -7,7 +7,7 @@ class_name StatusVFXHandler
 var parent_node: Node = null
 var _status_vfx_nodes := {}
 var _is_player: bool = false
-var _vfx_on: bool = true
+#var _vfx_on: bool = true
 var _status_symbol_area: Node2D = null
 var _status_symbol_order: Array[String] = []
 var _status_more_dots: Label = null

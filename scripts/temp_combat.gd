@@ -126,7 +126,7 @@ func _ready():
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	var stored_player := _get_run_manager_player()
+	var stored_player := RunManager.player
 	if stored_player:
 		player = stored_player
 		if player.get_parent():
@@ -176,7 +176,7 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 
 	#keep reference updated
-	_set_run_manager_player(player)
+	RunManager.player = player
 	
 	#------------------------
 	# Load enemy pool from database using current floor and stage
@@ -980,7 +980,7 @@ func _on_opponent_died() -> void:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		_set_run_manager_player(player)
+		RunManager.player = player
 	
 	# Build result data
 	var coin_reward : int = 12
