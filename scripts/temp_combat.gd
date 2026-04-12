@@ -126,7 +126,7 @@ func _ready():
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	var stored_player := RunManager.player
+	var stored_player : Player = RunManager.player
 	if stored_player:
 		player = stored_player
 		if player.get_parent():

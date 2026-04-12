@@ -13,14 +13,18 @@ class_name Shop
 # temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
-# numbber of cards that appear in shop
+# number of cards that appear in shop
 var shop_size := 4 
+
+# setting rng to run seed
+var rng
 
 
 func _ready() -> void:
 	player = RunManager.player
-	
 	player.visible = false
+	
+	rng = RunManager.get_rng()
 	
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
 	_update_coin_visual()
@@ -33,7 +37,11 @@ func _generate_shop():
 		child.queue_free()
 	
 	var pool = available_cards.duplicate()
-	pool.shuffle()
+	for i in range(pool.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+		var temp = pool[i]
+		pool[i] = pool[j]
+		pool[j] = temp
 	
 	for i in range(shop_size):
 		if i >= pool.size():
