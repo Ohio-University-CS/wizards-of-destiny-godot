@@ -291,6 +291,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif key_event.keycode == KEY_BRACKETLEFT:
 		clear_status(debug_test_status)
 		print("Cleared status:", debug_test_status)
+
 func perform_strike(target):
 	# Prevent strike if Broken is active
 	if status_effects["broken"] > 0:
@@ -420,9 +421,10 @@ func _ready():
 	add_child(vfx_handler)
 
 	if OS.is_debug_build() and debug_status_vfx_test:
-		apply_status(debug_test_status, max(debug_test_stacks, 1))
-		print("Player VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
-	
+		#apply_status(debug_test_status, max(debug_test_stacks, 1))
+		#print("Player VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
+		pass
+
 	set_energy(max_energy)
 	
 	active_passives.clear()

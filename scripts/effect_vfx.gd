@@ -129,9 +129,15 @@ func _on_status_expired(status_name: String) -> void:
 			restore_target.modulate = parent_node.get_meta("corroded_original_modulate") as Color
 			if is_instance_valid(parent_node):
 				parent_node.remove_meta("corroded_original_modulate")
+	# Remove overlay and timer if it exists
 	if _status_vfx_nodes.has(status_name):
 		var node = _status_vfx_nodes[status_name]
 		if is_instance_valid(node):
+			if status_name == "corroded" and node.has_meta("corroded_timer"):
+				var timer = node.get_meta("corroded_timer")
+				if timer != null and is_instance_valid(timer):
+					timer.stop()
+				timer.queue_free()
 			node.queue_free()
 		_status_vfx_nodes.erase(status_name)
 	# Clean up any associated behind sprite.
@@ -294,6 +300,7 @@ func _set_corroded_vfx(stacks: int) -> void:
 	overlay.name = "CorrodedOverlay"
 	add_child(overlay)
 	_status_vfx_nodes["corroded"] = overlay
+	overlay.set_meta("corroded_timer", null)
 	_corroded_fall_loop(overlay)
 
 
@@ -301,11 +308,17 @@ func _corroded_fall_loop(overlay: Node2D) -> void:
 	if not is_instance_valid(overlay):
 		return
 	_spawn_corroded_drip(overlay)
-	var timer: SceneTreeTimer = get_tree().create_timer(randf_range(0.6, 1))
-	timer.timeout.connect(func() -> void:
+	# Use a Timer node as a child of the overlay for safe cleanup
+	var timer := Timer.new()
+	timer.wait_time = randf_range(0.6, 1)
+	timer.one_shot = true
+	overlay.add_child(timer)
+	timer.start()
+	timer.timeout.connect(func():
 		if is_instance_valid(overlay):
 			_corroded_fall_loop(overlay)
 	)
+	overlay.set_meta("corroded_timer", timer)
 
 
 func _spawn_corroded_drip(overlay: Node2D) -> void:
@@ -513,7 +526,7 @@ func _spawn_status_symbol(status_name: String) -> void:
 		_status_symbol_area = Node2D.new()
 		_status_symbol_area.name = "StatusSymbolArea"
 		_status_symbol_area.z_as_relative = false
-		_status_symbol_area.z_index = 5000
+		_status_symbol_area.z_index = 4095
 		if _is_player:
 			var ui_stack: Node2D = _get_player_ui_status_stack()
 			if ui_stack != null:
