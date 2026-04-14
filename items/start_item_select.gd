@@ -16,7 +16,9 @@ var item2 : ItemData
 var item3 : ItemData
 
 func _ready():
-	# Removed call to RunManager.start_new_run(null) to preserve seed from seed_input scene
+	if RunManager.run_seed == -1:
+		RunManager.start_new_run(null)
+
 	item1_button.pressed.connect(_on_item1_picked)
 	item2_button.pressed.connect(_on_item2_picked)
 	item3_button.pressed.connect(_on_item3_picked)

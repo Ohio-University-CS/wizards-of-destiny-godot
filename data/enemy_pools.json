@@ -15,7 +15,7 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/Kobold_Inventor.tscn"
 	  ],
 	  "boss_12": [
-        "res://Enemies/enemy_resources/enchanted_forest/Boss/Boss.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman.tscn"
 	  ]
 	},
 	"floor_2": {

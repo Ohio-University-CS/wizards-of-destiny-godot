@@ -9,12 +9,12 @@ extends Node
 var player : Player = null
 var coins : int = 10
 
-var run_seed : int = 0
+var run_seed : int = -1
 var _rng := RandomNumberGenerator.new()
 
 var seed_scene : bool = false
 
-var item_inventory : Array[ItemData]
+var item_inventory : Array[ItemData] = []
 
 var level_floor : int = 1
 var stage : int = 1
@@ -46,7 +46,7 @@ func start_new_run(starting_player : Player, new_seed : int = -1):
 	else:
 		run_seed = new_seed
 	_rng.seed = run_seed
-	print("Seed: ", seed)
+	print("Run Seed: ", run_seed)
 
 func get_rng() -> RandomNumberGenerator:
 	return _rng

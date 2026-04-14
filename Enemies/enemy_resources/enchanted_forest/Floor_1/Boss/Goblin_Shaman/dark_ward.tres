@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://clmulvxak8m5p"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_7db7h"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_cyaig"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="2_o0qfn"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_1onge"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="4_vrvdq"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_klom0"]
+
+[sub_resource type="Resource" id="Resource_vrvdq"]
+script = ExtResource("2_o0qfn")
+amount = 15
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_klom0"]
+script = ExtResource("3_1onge")
+status_type = 11
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_cyaig")
+name = "Dark Ward"
+effects = Array[ExtResource("1_7db7h")]([SubResource("Resource_vrvdq"), SubResource("Resource_klom0")])
+weight = 20
+cooldown = 2
+intent_icons = Array[Texture2D]([ExtResource("4_vrvdq"), ExtResource("5_klom0")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

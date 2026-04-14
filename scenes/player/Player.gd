@@ -179,8 +179,8 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 
 func set_perm_stats():
 	#fresh reset
-	for m in perm_modifiers:
-		m = 0
+	for key in perm_modifiers.keys():
+		perm_modifiers[key] = 0
 		
 	if RunManager.has_item("Gauntlets of Strength"):
 		modify_stat_permanent("damage", 1)
