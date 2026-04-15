@@ -23,6 +23,29 @@ const _STATUS_SYMBOL_TARGET_SIZE: Vector2 = Vector2(24.0, 24.0)
 # INITIALIZATION
 # ---------------------------------------------------------
 
+# ---------------------------------------------------------
+# CLEANUP
+# ---------------------------------------------------------
+func clear_all_status_symbols() -> void:
+	# Free all status symbol nodes and clear references
+	for key in _status_vfx_nodes.keys():
+		var node = _status_vfx_nodes[key]
+		if is_instance_valid(node):
+			node.queue_free()
+	_status_vfx_nodes.clear()
+	_status_symbol_order.clear()
+	_current_status_symbol_key = ""
+	if _status_more_dots != null and is_instance_valid(_status_more_dots):
+		_status_more_dots.queue_free()
+		_status_more_dots = null
+	if _status_symbol_area != null and is_instance_valid(_status_symbol_area):
+		_status_symbol_area.queue_free()
+		_status_symbol_area = null
+
+func _exit_tree() -> void:
+	# Called when the node is about to be removed from the scene tree
+	clear_all_status_symbols()
+
 func _ready():
 	# Auto-connect to parent if it has the signals
 	if parent_node == null:
@@ -314,9 +337,11 @@ func _corroded_fall_loop(overlay: Node2D) -> void:
 	timer.one_shot = true
 	overlay.add_child(timer)
 	timer.start()
+	var overlay_ref: WeakRef = weakref(overlay)
 	timer.timeout.connect(func():
-		if is_instance_valid(overlay):
-			_corroded_fall_loop(overlay)
+		var overlay_obj = overlay_ref.get_ref()
+		if is_instance_valid(overlay_obj):
+			_corroded_fall_loop(overlay_obj)
 	)
 	overlay.set_meta("corroded_timer", timer)
 
