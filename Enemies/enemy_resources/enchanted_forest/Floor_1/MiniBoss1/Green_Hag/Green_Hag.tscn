@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://03gxyxwn66w7"]
+
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_uhib2"]
+[ext_resource type="Resource" uid="uid://63x05tws2ydd" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.tres" id="2_87pkt"]
+[ext_resource type="Texture2D" uid="uid://dx36e1iwt25ch" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.png" id="3_cw4kq"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_6kly6"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_rul36"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_qyhw5"]
+
+[node name="Bandit_Chief" type="Node2D" unique_id=2045738616]
+script = ExtResource("1_uhib2")
+enemy_data = ExtResource("2_87pkt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874388032]
+scale = Vector2(4, 4)
+texture = ExtResource("3_cw4kq")
+
+[node name="HealthIndicator" type="Label" parent="." unique_id=1747660486]
+offset_left = -39.0
+offset_top = -114.0
+offset_right = 42.99994
+offset_bottom = -67.0
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+script = ExtResource("4_6kly6")
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=432598369]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -150.0
+offset_right = 64.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+script = ExtResource("5_rul36")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=947754798]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5189405
+anchor_top = -0.018518519
+anchor_right = -0.5189405
+anchor_bottom = -0.018518519
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 239.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "Green Hag"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="Label" parent="EnemyHealth" unique_id=760528329]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 2.0
+offset_right = 81.0
+offset_bottom = 25.0
+horizontal_alignment = 1
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1569387507]
+offset_left = -155.987
+offset_top = -116.0
+offset_right = -105.987
+offset_bottom = -66.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent1" unique_id=708535760]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_qyhw5")
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=866942873]
+offset_left = -155.987
+offset_top = -76.0
+offset_right = -105.987
+offset_bottom = -26.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent2" unique_id=1294492895]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_qyhw5")
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1285359075]
+offset_left = -157.0
+offset_top = -26.0
+offset_right = -107.0
+offset_bottom = 24.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent3" unique_id=737805687]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_qyhw5")
