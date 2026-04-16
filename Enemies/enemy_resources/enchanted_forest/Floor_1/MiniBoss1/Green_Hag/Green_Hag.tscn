@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_rul36"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_qyhw5"]
 
-[node name="Bandit_Chief" type="Node2D" unique_id=2045738616]
+[node name="Green_Hag" type="Node2D" unique_id=2045738616]
 script = ExtResource("1_uhib2")
 enemy_data = ExtResource("2_87pkt")
 
@@ -16,10 +16,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_cw4kq")
 
 [node name="HealthIndicator" type="Label" parent="." unique_id=1747660486]
-offset_left = -39.0
-offset_top = -114.0
-offset_right = 42.99994
-offset_bottom = -67.0
+offset_left = 68.0
+offset_top = -117.0
+offset_right = 149.99994
+offset_bottom = -70.0
 theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
 theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
 theme_override_constants/outline_size = 8

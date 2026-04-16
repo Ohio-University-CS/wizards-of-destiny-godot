@@ -19,10 +19,10 @@ scale = Vector2(6, 6)
 texture = ExtResource("3_k0vvq")
 
 [node name="HealthIndicator" type="Label" parent="." unique_id=2000000001]
-offset_left = -39.0
-offset_top = -114.0
-offset_right = 42.99994
-offset_bottom = -67.0
+offset_left = 54.0
+offset_top = -117.5
+offset_right = 135.99994
+offset_bottom = -70.5
 theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
 theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
 theme_override_constants/outline_size = 8
