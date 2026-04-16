@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://xmp8sotus83"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_dnvhg"]
+[ext_resource type="Texture2D" uid="uid://du1dbas4vp1a2" path="res://cards/sprites/lightning_strike.png" id="1_ogkig"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_wbyhu"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_xutce"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_ogkig"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="3_yb5mo"]
+
+[sub_resource type="Resource" id="Resource_ogkig"]
+script = ExtResource("2_wbyhu")
+element = 4
+include_base_dmg = true
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_yftkx"]
+script = ExtResource("3_ogkig")
+card_name = 6
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_xutce")
+card_name = "Lightning Strike"
+description = "Add DMG Electric Damage to Strike. If Enemy is Shocked, gain 1 Energy. Add 2 Shock."
+energy_cost = 2
+rarity = 1
+card_type = 1
+artwork = ExtResource("1_ogkig")
+frame_art = ExtResource("3_yb5mo")
+effects = Array[ExtResource("1_dnvhg")]([SubResource("Resource_ogkig"), SubResource("Resource_yftkx")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

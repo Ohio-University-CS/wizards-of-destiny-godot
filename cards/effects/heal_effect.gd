@@ -1,3 +1,5 @@
+# Handles non-regeneration heals
+
 class_name HealEffect extends Effect
 
 @export var amount : int = 0

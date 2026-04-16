@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://dh80c15he03y6"]
+
+[ext_resource type="Script" path="res://scenes/deckselect/deckselect_judgement.gd" id="1_e23ap"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_oukx7"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_e23ap"]
+[ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_ogfrv"]
+[ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_imyfv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
+font_size = 50
+
+[node name="Menu" type="Control" unique_id=1065600331]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e23ap")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=78211613]
+texture = ExtResource("1_oukx7")
+centered = false
+
+[node name="Buttons" type="Control" parent="." unique_id=255705122]
+layout_mode = 1
+anchor_left = 0.37500003
+anchor_top = 0.42900002
+anchor_right = 0.37500003
+anchor_bottom = 0.42900002
+offset_left = 219.99994
+offset_top = 56.679993
+offset_right = 259.99994
+offset_bottom = 96.67999
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level Select" type="Button" parent="Buttons" unique_id=975534879]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425
+anchor_top = 10.862
+anchor_right = 0.425
+anchor_bottom = 10.862
+offset_left = -238.0
+offset_top = -113.48001
+offset_right = 6.0
+offset_bottom = -4.480011
+scale = Vector2(2, 2)
+icon = ExtResource("2_e23ap")
+flat = true
+
+[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
+layout_mode = 0
+offset_left = 41.5
+offset_top = 30.0
+offset_right = 210.5
+offset_bottom = 72.0
+text = "Judgement"
+label_settings = SubResource("LabelSettings_0qkqs")
+horizontal_alignment = 1
+
+[node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = -150.0
+offset_right = 308.0
+offset_bottom = -142.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Upgrades" unique_id=1541017295]
+visible = false
+texture = ExtResource("2_e23ap")
+
+[node name="Settings" type="Button" parent="Buttons" unique_id=1614388412]
+visible = false
+layout_mode = 0
+offset_left = -300.0
+offset_top = 150.0
+offset_right = -292.0
+offset_bottom = 158.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=1777698657]
+visible = false
+texture = ExtResource("2_e23ap")
+
+[node name="Label" type="Label" parent="Buttons/Settings" unique_id=917045816]
+visible = false
+layout_mode = 0
+offset_left = -64.5
+offset_top = -20.5
+offset_right = 104.5
+offset_bottom = 21.5
+text = "Settings"
+label_settings = SubResource("LabelSettings_0qkqs")
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=1738109675]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 150.0
+offset_right = 308.0
+offset_bottom = 158.0
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=51757949]
+visible = false
+texture = ExtResource("2_e23ap")
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=999302246]
+visible = false
+layout_mode = 0
+offset_left = -27.5
+offset_top = -21.5
+offset_right = 26.5
+offset_bottom = 20.5
+text = "Exit"
+label_settings = SubResource("LabelSettings_0qkqs")
+
+[node name="Back" type="Button" parent="Buttons" unique_id=1412095940]
+layout_mode = 0
+offset_left = -752.0
+offset_top = -74.0
+offset_right = -727.0
+offset_bottom = -50.0
+scale = Vector2(7, 7)
+icon = ExtResource("5_imyfv")
+flat = true
+
+[node name="Forward" type="Button" parent="Buttons" unique_id=1427195039]
+layout_mode = 0
+offset_left = 634.99994
+offset_top = -67.99999
+offset_right = 659.99994
+offset_bottom = -43.999992
+scale = Vector2(7, 7)
+icon = ExtResource("4_ogfrv")
+flat = true
+
+[node name="Label" type="Label" parent="." unique_id=2076492899]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 28.0
+offset_right = 1364.0
+offset_bottom = 97.0
+text = "Deck Select -Temp"
+label_settings = SubResource("LabelSettings_6ufdq")
+
+[connection signal="pressed" from="Buttons/Forward" to="." method="_on_forward_pressed"]

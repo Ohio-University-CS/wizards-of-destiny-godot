@@ -1,3 +1,5 @@
+# Handles enemy
+
 extends Node
 class_name Enemy
 
@@ -23,10 +25,24 @@ var current_move: MoveResource = null
 var last_move: MoveResource = null
 var repeat_count: int = 0
 
+@export var debug_status_vfx_test: bool = false
+@export var debug_test_status: String = "regeneration"
+@export var debug_test_stacks: int = 3
+
 
 func setup_from_resource(res: EnemyResource) -> void:
 	resource = res
 	base_max_health = res.hp_variation[0]
+	
+	if RunManager.stage in [5, 6, 7] and res.hp_variation.size() > 1:
+		base_max_health = res.hp_variation[1]
+	if RunManager.stage in [9, 10, 11] and res.hp_variation.size() > 2:
+		base_max_health = res.hp_variation[2]
+	
+	# Rune of Death
+	if RunManager.has_item("Rune of Death"):
+		base_max_health -= 3
+	
 	base_damage = res.base_damage
 	current_health = base_max_health
 
@@ -50,12 +66,22 @@ var status_effects := {
 	"burn": 0, # take fire damage per completed turn
 	"regeneration": 0, # regain hp
 	"block": 0, # decreases damage taken
-	"evasive": 0, # 25% chance to dodge per stack (base max 2)
 	"freeze": 0, # reduce outgoing damage
 	"corroded": 0, # increases incoming damage
 	"shock": 0, # deals damage when attacking
-	"stun": 0 # skips turn
+	"stun": 0, # skips turn
+	"empower": 0, # deal +3 damage per stack, remove 1 at end of turn
+	"evasive": 0, # dodge next attack, remove a stack (max 2), remove at start of turn
+	"rage": 0 # deal +1 damage per stack, doesn't get removed
 }
+
+
+func get_burn() -> int:
+	return status_effects["burn"]
+
+
+func get_shock() -> int:
+	return status_effects["shock"]
 
 # ---------------------------------------------------------
 # SIGNALS
@@ -80,20 +106,66 @@ func _ready():
 	
 	health_bar.set_target(self)
 
+	# Create StatusVFXHandler as a child node to handle status effect visuals
+	var vfx_handler = StatusVFXHandler.new()
+	vfx_handler.name = "StatusVFXHandler"
+	add_child(vfx_handler)
+
+	if OS.is_debug_build() and debug_status_vfx_test:
+		apply_status(debug_test_status, max(debug_test_stacks, 1))
+		print("Enemy VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
+
+	health_bar.set_target(self )
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.is_debug_build() or not debug_status_vfx_test:
+		return
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+
+	if key_event.keycode == KEY_BRACKETRIGHT:
+		apply_status(debug_test_status, 1)
+		print("Added status stack:", debug_test_status, " -> ", status_effects.get(debug_test_status, 0))
+	elif key_event.keycode == KEY_BRACKETLEFT:
+		clear_status(debug_test_status)
+		print("Cleared status:", debug_test_status)
+
 # ---------------------------------------------------------
 # COMBAT INTERFACE
 # ---------------------------------------------------------
 
 func start_turn():
+	# Stun: skip turn if stunned, remove one stack
+	if status_effects["stun"] > 0:
+		status_effects["stun"] -= 1
+		if status_effects["stun"] == 0:
+			emit_signal("status_expired", "stun")
+		return
+
+	# Evasive: remove one stack at start of turn
+	if status_effects["evasive"] > 0:
+		status_effects["evasive"] -= 1
+		if status_effects["evasive"] == 0:
+			emit_signal("status_expired", "evasive")
+
 	# Apply start-of-turn effects
+	_apply_burn()
 	_apply_heal()
-	_apply_shock()
 
 	# Reset block each turn
 	status_effects["block"] = 0
 
 func end_turn():
-	_apply_burn()
+	# Empower: remove one stack at end of turn
+	if status_effects["empower"] > 0:
+		status_effects["empower"] -= 1
+		if status_effects["empower"] == 0:
+			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
 
 
@@ -105,6 +177,7 @@ func _clear_temp_stats():
 # AI
 # ---------------------------------------------------------
 
+# Used for intent
 func prepare_next_move():
 	if resource == null or resource.moves.is_empty():
 		current_move = null
@@ -162,28 +235,52 @@ func deal_damage(amount: int = 0, _element: String = "", include_base_damage: bo
 	var dmg = amount
 	if include_base_damage:
 		dmg += base_damage
+	# Empower: +3 damage per stack
+	if status_effects["empower"] > 0:
+		dmg += 3 * status_effects["empower"]
+	
+	# Rage: +1 damage per stack
+	if status_effects["rage"] > 0:
+		dmg += status_effects["rage"]
 
-	# Apply outgoing modifiers here if desired
-	# Freeze reduces outgoing damage by 10% per stack
-	if status_effects.has("freeze"):
-		var freeze_stacks = status_effects["freeze"]
-		if freeze_stacks > 0:
-			var multiplier = 1.0 - (0.1 * freeze_stacks)
-			multiplier = max(multiplier, 0.4)
-			dmg = int(dmg * multiplier)
+	# Apply Freeze: -2 per stack, cannot go below 0
+	var freeze_stacks = status_effects["freeze"]
+	if freeze_stacks > 0:
+		dmg = max(0, dmg - 2 * freeze_stacks)
+		status_effects["freeze"] = 0
+		emit_signal("status_expired", "freeze")
+
+	# Apply Shock: take stack amount of Lightning damage, remove one stack
+	var shock_stacks = status_effects["shock"]
+	if shock_stacks > 0:
+		take_damage(shock_stacks, "electric")
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
+
 	return dmg
 
 func take_damage(amount: int, _element: String = ""):
+	# Evasive: dodge next attack, remove a stack
+	if status_effects["evasive"] > 0:
+		status_effects["evasive"] -= 1
+		emit_signal("status_applied", "evasive", status_effects["evasive"])
+		if status_effects["evasive"] == 0:
+			emit_signal("status_expired", "evasive")
+		return
+
 	if try_dodge():
 		return
 	
 	var dmg = amount
 	
 	# Freeze reduces outgoing damage, not incoming
-	# Poison increases incoming damage, stacks
+	# Corroded: +2 damage taken per stack, remove one stack after being hit
 	if status_effects["corroded"] > 0:
-		var multiplier = 1.0 + (0.10 * status_effects["corroded"])
-		dmg = int(dmg * multiplier)
+		dmg += 2 * status_effects["corroded"]
+		status_effects["corroded"] -= 1
+		if status_effects["corroded"] == 0:
+			emit_signal("status_expired", "corroded")
 
 	# Block reduces damage
 	if status_effects["block"] > 0:
@@ -195,7 +292,6 @@ func take_damage(amount: int, _element: String = ""):
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
 	
-	print("Player deals ", dmg, " to Enemy")
 	# Emit damaged for UI indicators
 	emit_signal("damaged", dmg)
 
@@ -217,6 +313,16 @@ func apply_status(status_name: String, stacks: int = 1):
 		return
 
 	status_effects[status_name] += stacks
+	# Clamp Burn to max 99 stacks
+	if status_name == "burn":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 99)
+	# Clamp Evasive to max 2
+	if status_name == "evasive":
+		status_effects[status_name] = clamp(status_effects[status_name], 0, 2)
+	
+	if status_name == "shock":
+		RunManager.player.add_energy(1)
+	
 	emit_signal("status_applied", status_name, status_effects[status_name])
 
 
@@ -240,8 +346,19 @@ func add_block(amount: int):
 
 func _apply_burn():
 	if status_effects["burn"] > 0:
-		take_damage(status_effects["burn"])
+		# If Overheat Passive is in play
+		if RunManager.player.active_passives.has("Overheat"):
+			if status_effects["burn"] > 6:
+				take_damage(status_effects["burn"] * 2)
+			else:
+				take_damage(status_effects["burn"] * 1.5)
+		else:
+			take_damage(status_effects["burn"])
+		
+		# Decrease by 1
 		status_effects["burn"] -= 1
+		if status_effects["burn"] == 0:
+			emit_signal("status_expired", "burn")
 
 
 func _apply_heal():
@@ -252,8 +369,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		pass
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 # ---------------------------------------------------------
@@ -265,9 +387,7 @@ func is_stunned() -> bool:
 
 
 func try_dodge() -> bool:
-	if status_effects["evasive"] > 0:
-		var chance = 0.25 * status_effects["evasive"]
-		return randf() < chance
+	# Evasive is now deterministic and handled in take_damage
 	return false
 
 

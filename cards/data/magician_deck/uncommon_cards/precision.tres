@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://clfpdx7831vqr"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_4doha"]
+[ext_resource type="Texture2D" uid="uid://b4mw8q0g07mbk" path="res://cards/sprites/precision.png" id="1_6nwiv"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_0jj6w"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="2_6nwiv"]
+
+[resource]
+script = ExtResource("2_0jj6w")
+card_name = "Precision"
+description = "Add 1 extra Damage to Strike every time you add Damage"
+rarity = 1
+card_type = 2
+card_flag = 2
+artwork = ExtResource("1_6nwiv")
+frame_art = ExtResource("2_6nwiv")
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

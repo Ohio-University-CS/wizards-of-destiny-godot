@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dc7rqa345pgir"]
+
+[ext_resource type="Texture2D" uid="uid://jyf2gprpxcxr" path="res://cards/sprites/Mystic_Bolt.png" id="1_kocrw"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_iv2yh"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="3_qut5s"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="4_jib8f"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="5_2juft"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="6_u2q33"]
+
+[sub_resource type="Resource" id="Resource_x3rxm"]
+script = ExtResource("3_qut5s")
+amount = 6
+include_base_damage = true
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_ty2jj"]
+script = ExtResource("4_jib8f")
+status_type = 1
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_hjobv"]
+script = ExtResource("4_jib8f")
+status_type = 4
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("6_u2q33")
+card_name = "Mystic Bolt"
+description = "Attack for DMG +6. Apply 1 Burn and 1 Shock"
+energy_cost = 2
+artwork = ExtResource("1_kocrw")
+frame_art = ExtResource("5_2juft")
+effects = Array[ExtResource("2_iv2yh")]([SubResource("Resource_x3rxm"), SubResource("Resource_ty2jj"), SubResource("Resource_hjobv")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

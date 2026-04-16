@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://cqbtcfr08ibs8"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_biwdf"]
+[ext_resource type="Resource" uid="uid://bm7jrc1335qoq" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Redcap/sickle.tres" id="2_8eufs"]
+[ext_resource type="Resource" uid="uid://bj8bvm7myb3am" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Redcap/scurry.tres" id="3_ptxey"]
+[ext_resource type="Resource" uid="uid://cn5ssgcjpmvgg" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Redcap/iron_boots.tres" id="4_beo4s"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="5_8a0wl"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="6_5yd3m"]
+
+[resource]
+script = ExtResource("6_5yd3m")
+enemy_name = "Redcap"
+hp_variation = Array[int]([55, 60, 65])
+moves = Array[ExtResource("1_biwdf")]([ExtResource("2_8eufs"), ExtResource("3_ptxey"), ExtResource("4_beo4s")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

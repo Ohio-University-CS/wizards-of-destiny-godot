@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cuixxyk63vg8b"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_4ebb5"]
+[ext_resource type="Texture2D" uid="uid://cku5u1pcemsir" path="res://cards/sprites/pool_of_essence.png" id="1_cn2ah"]
+[ext_resource type="Script" uid="uid://b0upwpofv1ojb" path="res://cards/effects/draw_cards_effect.gd" id="2_7w2oc"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_p2ae0"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="4_cn2ah"]
+
+[sub_resource type="Resource" id="Resource_h70jo"]
+script = ExtResource("2_7w2oc")
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[resource]
+script = ExtResource("2_p2ae0")
+card_name = "Pool of Essence"
+description = "Draw 1 Card. When you cast a Ritual, Draw 1 Card"
+energy_cost = 2
+rarity = 1
+card_type = 2
+card_flag = 2
+artwork = ExtResource("1_cn2ah")
+frame_art = ExtResource("4_cn2ah")
+effects = Array[ExtResource("1_4ebb5")]([SubResource("Resource_h70jo")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

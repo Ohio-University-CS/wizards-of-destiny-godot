@@ -1,3 +1,5 @@
+# Parent class
+
 class_name Effect extends Resource
 
 enum TargetType {

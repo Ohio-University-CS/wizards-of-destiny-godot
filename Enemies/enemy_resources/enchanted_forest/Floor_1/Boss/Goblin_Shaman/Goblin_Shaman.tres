@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://ci4f5sjuby1n1"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_i6asx"]
+[ext_resource type="Resource" uid="uid://148v5ph74kdc" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/arcane_bolt.tres" id="2_qwix1"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_yomom"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_b4vax"]
+[ext_resource type="Resource" uid="uid://bcpmmha6lr24e" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/crippling_jinx.tres" id="3_ktnlu"]
+[ext_resource type="Resource" uid="uid://clmulvxak8m5p" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/dark_ward.tres" id="4_i8wag"]
+[ext_resource type="Resource" uid="uid://cpwkco6nda5y1" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/evil_rites.tres" id="5_kmsrn"]
+[ext_resource type="Resource" uid="uid://dmcy2wmyl1kw5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/mystic_hex.tres" id="6_88cer"]
+
+[resource]
+script = ExtResource("3_b4vax")
+enemy_name = "Goblin Shaman"
+hp_variation = Array[int]([120])
+moves = Array[ExtResource("1_i6asx")]([ExtResource("2_qwix1"), ExtResource("3_ktnlu"), ExtResource("4_i8wag"), ExtResource("5_kmsrn"), ExtResource("6_88cer")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

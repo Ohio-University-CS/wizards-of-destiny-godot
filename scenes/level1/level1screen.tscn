@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b56t8mujyte6f"]
+
+[ext_resource type="Texture2D" uid="uid://p3xvkh7wkowc" path="res://scenes/level1/plainlevel1.png" id="1_5kq54"]
+[ext_resource type="Texture2D" uid="uid://bw0exkb62j0ej" path="res://scenes/level1/wizard_transparent.png" id="2_rmysr"]
+[ext_resource type="Texture2D" uid="uid://cmusrfnaxbhqx" path="res://scenes/level1/goblin_transparent.png" id="3_v5k3s"]
+
+[node name="Control" type="Control" unique_id=1329772604]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Node2D" type="Node2D" parent="." unique_id=298460996]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1905591842]
+position = Vector2(0, 2)
+scale = Vector2(1.8710938, 1.0585938)
+texture = ExtResource("1_5kq54")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=834143621]
+position = Vector2(518, 646)
+texture = ExtResource("2_rmysr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=569049297]
+position = Vector2(1440, 668)
+texture = ExtResource("3_v5k3s")

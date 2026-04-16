@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://b25tutba1v4jb"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_5cw32"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_cnj7j"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_n7net"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_kdf1t"]
+
+[sub_resource type="Resource" id="Resource_xg1ou"]
+script = ExtResource("2_n7net")
+amount = 6
+hits = 2
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_cnj7j")
+name = "Claw"
+effects = Array[ExtResource("1_5cw32")]([SubResource("Resource_xg1ou")])
+weight = 40
+intent_icons = Array[Texture2D]([ExtResource("3_kdf1t"), ExtResource("3_kdf1t")])
+intent_damage_amount = Array[int]([6, 6])
+metadata/_custom_type_script = "uid://t788w26yn03s"

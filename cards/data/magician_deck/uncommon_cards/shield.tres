@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c70eipsogd7"]
+
+[ext_resource type="Texture2D" uid="uid://bmnifj0xx2tyo" path="res://cards/sprites/Shield.png" id="1_oip83"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_hvb64"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_71ecm"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="4_oip83"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="5_v6fnu"]
+
+[sub_resource type="Resource" id="Resource_1r5qu"]
+script = ExtResource("3_71ecm")
+amount = 25
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("5_v6fnu")
+card_name = "Shield"
+description = "Gain 25 Block (Ritaul)"
+energy_cost = 2
+rarity = 1
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_oip83")
+frame_art = ExtResource("4_oip83")
+effects = Array[ExtResource("2_hvb64")]([SubResource("Resource_1r5qu")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

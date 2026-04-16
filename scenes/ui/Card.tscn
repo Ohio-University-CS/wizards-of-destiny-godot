@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d307hv6y8q8q" path="res://cards/Card.gd" id="1_yiag5"]
 [ext_resource type="Resource" uid="uid://gnt5ldhqgl87" path="res://cards/data/magician_deck/starting cards/bolster.tres" id="2_tgmmg"]
-[ext_resource type="Texture2D" uid="uid://duw1pflwh8rxj" path="res://cards/sprites/Card_Frame_Common.png" id="3_4dx8l"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_4dx8l"]
 [ext_resource type="Texture2D" uid="uid://b3auc2dmfqab" path="res://cards/sprites/HEX.png" id="4_52582"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="5_nqux3"]
 [ext_resource type="FontFile" uid="uid://criq0aiciy1id" path="res://fonts/Cinzel-Regular.ttf" id="6_5fnjj"]
@@ -66,6 +66,18 @@ offset_bottom = 286.16666
 theme_override_fonts/font = ExtResource("5_nqux3")
 text = "1"
 label_settings = SubResource("LabelSettings_4dx8l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tag" type="Label" parent="." unique_id=1881968716]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 264.0
+offset_right = 187.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("6_5fnjj")
 horizontal_alignment = 1
 vertical_alignment = 1
 

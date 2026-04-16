@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b06moxsoigmtk"]
+
+[ext_resource type="Texture2D" uid="uid://cfgesmfhyc8fm" path="res://cards/sprites/Smite.png" id="1_bmc6p"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_gybs8"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_dsh05"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="3_te2bw"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="4_m3u00"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="5_laj5m"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="6_bmc6p"]
+
+[sub_resource type="Resource" id="Resource_1abca"]
+script = ExtResource("3_te2bw")
+amount = 8
+target_type = 0
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_05cn2"]
+script = ExtResource("4_m3u00")
+amount = 25
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_rmn0r"]
+script = ExtResource("5_laj5m")
+status_type = 9
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_dsh05")
+card_name = "Smite"
+description = "Lose 8 Health. Add 25 Damage to Strike. Gain 1 Empowered"
+energy_cost = 2
+rarity = 2
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_bmc6p")
+frame_art = ExtResource("6_bmc6p")
+effects = Array[ExtResource("1_gybs8")]([SubResource("Resource_1abca"), SubResource("Resource_05cn2"), SubResource("Resource_rmn0r")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

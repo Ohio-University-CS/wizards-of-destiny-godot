@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dppbmdgjkoprd"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_nquje"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_i64mj"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_u1o2v"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="3_px6mr"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="4_i6hgc"]
+
+[sub_resource type="Resource" id="Resource_5cjlt"]
+script = ExtResource("2_u1o2v")
+status_type = 12
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_rf81q"]
+script = ExtResource("2_u1o2v")
+status_type = 11
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_nrtfb"]
+script = ExtResource("2_u1o2v")
+status_type = 10
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_i64mj")
+name = "Smoke Bomb"
+effects = Array[ExtResource("1_nquje")]([SubResource("Resource_5cjlt"), SubResource("Resource_rf81q"), SubResource("Resource_nrtfb")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("3_px6mr"), ExtResource("4_i6hgc")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

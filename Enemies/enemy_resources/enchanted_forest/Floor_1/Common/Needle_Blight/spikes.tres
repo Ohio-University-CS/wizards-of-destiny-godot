@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://w6q5ksd3x3rd"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_kplnn"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_beq7a"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_ofg8y"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_f4j7t"]
+
+[sub_resource type="Resource" id="Resource_wgj01"]
+script = ExtResource("2_beq7a")
+amount = 6
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_ofg8y")
+name = "Spikes"
+effects = Array[ExtResource("1_kplnn")]([SubResource("Resource_wgj01")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("3_f4j7t")])
+intent_damage_amount = Array[int]([6])
+metadata/_custom_type_script = "uid://t788w26yn03s"

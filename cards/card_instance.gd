@@ -1,3 +1,7 @@
+# Essentially used to clone cards
+# Prevents actual game data from changing
+# Instances are what are put in deck
+
 class_name CardInstance
 extends RefCounted
 

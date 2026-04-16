@@ -1,4 +1,7 @@
 #manager.gd
+# HEADS UP: OLD CODE, PROBABLY WILL DELETE SOON
+
+
 #@tool
 extends Node2D
 

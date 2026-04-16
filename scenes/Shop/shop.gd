@@ -1,3 +1,5 @@
+# Handles the after-combat shop
+
 extends Control
 class_name Shop
  
@@ -8,16 +10,25 @@ class_name Shop
 @export var player : Player
 @export var shop_card_scene : PackedScene
 
-#temporary card pool
+# temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
-var shop_size := 4
+# number of cards that appear in shop
+var shop_size := 4 
+
+# setting rng to run seed
+var rng
 
 
 func _ready() -> void:
 	player = RunManager.player
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/dev
 	player.visible = false
+	
+	rng = RunManager.get_rng()
 	
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
 	_update_coin_visual()
@@ -25,11 +36,16 @@ func _ready() -> void:
 
 
 func _generate_shop():
+	# Setup cards
 	for child in cards_container.get_children():
 		child.queue_free()
 	
 	var pool = available_cards.duplicate()
-	pool.shuffle()
+	for i in range(pool.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+		var temp = pool[i]
+		pool[i] = pool[j]
+		pool[j] = temp
 	
 	for i in range(shop_size):
 		if i >= pool.size():
@@ -40,6 +56,10 @@ func _generate_shop():
 		var ui = shop_card_scene.instantiate()
 		var price = _get_price(data)
 		
+		# Comedy Mask
+		if RunManager.has_item("Comedy Mask"):
+			price *= 0.75
+		
 		ui.setup(data, price)
 		ui.purchased.connect(_on_card_purchased)
 		cards_container.add_child(ui)
@@ -48,11 +68,11 @@ func _generate_shop():
 func _get_price(card : CardData) -> int:
 	match card.rarity:
 		card.CardRarity.COMMON:
-			return 5
+			return 12
 		card.CardRarity.UNCOMMON:
-			return 10
+			return 25
 		card.CardRarity.RARE:
-			return 20
+			return 50
 		_:
 			return 8
 
@@ -66,4 +86,8 @@ func _update_coin_visual():
 
 
 func _on_next_stage_pressed():
+<<<<<<< HEAD
 	FlowManager.go_to_combat()
+=======
+	FlowManager.after_shop()
+>>>>>>> origin/dev
