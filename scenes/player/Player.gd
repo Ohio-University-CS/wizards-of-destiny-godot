@@ -673,3 +673,47 @@ func try_dodge() -> bool:
 
 func _die():
 	emit_signal("died")
+
+
+func _load_player_from_savestate(data, save_state : Dictionary):
+	self.setup_from_class(data)
+	current_health = save_state["current_health"]
+	max_energy = save_state["max_energy"]
+	emit_signal("health_changed", current_health)
+	emit_signal("energy_changed", energy, max_energy)
+	perm_modifiers = save_state["perm_modifiers"]
+	print("loading player complete")
+	return
+#
+#
+func setup_from_save(data):
+	class_data = data
+	
+	active_passives.clear()
+	
+	tattered_shawl = true
+	
+	
+	base_max_health = data.max_health
+	base_damage = data.damage
+	base_elemental_power = data.elemental_power
+	base_crit_damage = data.crit_damage
+	base_crit_chance = data.crit_chance
+	base_dodge = data.dodge
+	
+	base_fire = 0
+	base_ice = 0
+	base_poison = 0
+	base_electric = 0
+
+	initialized = true
+	
+func _load_deck_from_save(save_resources_path : String, num_cards : int):
+	var index = 1
+	deck_list.clear()
+	while(index <= num_cards):
+		var card_file_name = save_resources_path + "/cards/card_" + str(index) + ".tres"
+		var temp_card = ResourceLoader.load(card_file_name)
+		deck_list.append(temp_card)
+		index += 1
+	print("Deck loading successful")

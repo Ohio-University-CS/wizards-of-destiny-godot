@@ -1,10 +1,10 @@
 # Game State Manager
 extends Node
 
-var selected_save : String = "" ### IMPLEMENT SAVE CHOOSING SCENE TO INITIALIZE
+var selected_save : String = ""
 var gamestate_player : Player = null
 var gamestate_coins : int = 0
-var num_battles : int = 0
+### gamestate_stage and gamestate_level_floor will be used to allow the user to resume and start the level select scene on the most recently played level
 var gamestate_stage : int = 1
 var gamestate_level_floor : int = 1
 var gamestate_inventory : Array[ItemData] = []
@@ -14,7 +14,9 @@ var save_resources_path : String = ""
 var backup_save_path : String = ""
 
 var gamestate_save_data : Dictionary = {}
-
+### max_stage and max_lvl_floor are to determine what levels the player can select
+var max_stage : int = 1
+var max_lvl_floor : int = 1
 var num_cards_in_deck : int = 10
 
 func _ready() -> void:
@@ -41,7 +43,7 @@ func _select_save(save_number : int):
 		_:
 			selected_save = "save_1"
 	print("[*]Save " + selected_save + " selected...")
-			
+	_load_game_from_save()
 
 
 func _on_scene_change():
@@ -50,12 +52,15 @@ func _on_scene_change():
 	#print(current_scene_path)
 	if(current_scene_name == "Arena"):
 		print("[*]Arena entered...")
+		_read_current_game_state()
 	elif(current_scene_name.begins_with("Level")):
 		print("[*]Level select entered...")
 
 
 func _on_exit_shop(_player: Player = null):
 	print("[*]Shop exited...")
+	_read_current_game_state()
+	_save_game_state()
 	pass
 	#_update_current_gamestate()
 	#if _write_out_gamestate():
@@ -147,12 +152,21 @@ func _write_out_player_state_string(player : Player) -> Dictionary:
 	
 ### Write out game state (player state, stage, level, coins, etc.) to <selected_save>.json
 func _write_out_gamestate(file_path : String) -> bool:
+	var player_setup_data = gamestate_player.class_data
+	ResourceSaver.save(player_setup_data, (save_resources_path + "/player_class_data.tres"))
 	var player_state_dict = _write_out_player_state_string(gamestate_player)
+	if(gamestate_stage > max_stage):
+		max_stage = gamestate_stage
+	elif(gamestate_stage == max_stage):
+		if(gamestate_level_floor >= max_lvl_floor):
+			max_lvl_floor = gamestate_level_floor
 	var save_data = {
 		"player_state": player_state_dict,
 		"coins": gamestate_coins,
 		"stage": gamestate_stage,
 		"level_floor": gamestate_level_floor,
+		"max_stage" : max_stage,
+		"max_level_floor" : max_lvl_floor
 	}
 	var save_file = FileAccess.open(str(file_path), FileAccess.WRITE)
 	var save_data_string = JSON.stringify(save_data, "\t")
@@ -162,16 +176,49 @@ func _write_out_gamestate(file_path : String) -> bool:
 	print("Save Successful")
 	return true
 	
-func _load_game_from_save(file_path : String):
+func _load_game_from_save():
 	### ASSIGN FILE PATHS
+	_assign_save_file_path()
+	_assign_save_resources_path()
+	_assign_backup_path()
 	### INPUT SAVE JSON TEXT
+	var save_file_dict = JSON.parse_string(FileAccess.get_file_as_string(save_file_path))
+	var player_setup_data
+	if(FileAccess.file_exists(save_resources_path + "/player_class_data.tres")):
+		player_setup_data = ResourceLoader.load((save_resources_path + "/player_class_data.tres"))
+	else:
+		player_setup_data = ResourceLoader.load("res://cards/data/magician_deck/magician.tres")
+	#var temp_player : Player = nul`l
+	### REINITIALIZE GAMESTATE_PLAYER WITH SAVE DATA
+	if gamestate_player != null:
+		gamestate_player.free()
+	gamestate_player = Player.new()
 	### VALIDATE SAVE JSON
 		### IF CORRUPTED, LOAD BACKUP
 	### LOAD GAMESTATE
-	### LOAD DECK
+	gamestate_coins = save_file_dict["coins"]
+	gamestate_stage = save_file_dict["stage"]
+	gamestate_level_floor = save_file_dict["level_floor"]
+	max_stage = save_file_dict["max_stage"]
+	max_lvl_floor = save_file_dict["max_level_floor"]
+	### LOAD PLAYER & DECK
+	gamestate_player._load_player_from_savestate(player_setup_data, save_file_dict["player_state"])
+	gamestate_player._load_deck_from_save(save_resources_path, save_file_dict["player_state"]["num_cards_in_deck"])
 	### LOAD INVENTORY
 	pass
 
+
+func _load_inventory_from_save(save_resources_path : String):
+	gamestate_inventory.clear()
+	var item_prefix = save_resources_path + "/inventory/item_"
+	var item_number = 1
+	var item_path = item_prefix + str(item_number) + ".tres"
+	while(FileAccess.file_exists(item_path)):
+		var temp_item = ResourceLoader.load(item_path)
+		gamestate_inventory.append(temp_item)
+		item_number += 1
+		item_path = item_prefix + str(item_number) + ".tres"
+	return
 #
 #func _get_deck_from_save(resource_folder_path) -> Array[CardData]:
 	#print("GET DECK FROM SAVE")

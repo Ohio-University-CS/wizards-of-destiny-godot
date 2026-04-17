@@ -1,8 +1,10 @@
 {
-	"coins": 10,
+	"coins": 24,
 	"level_floor": 0,
+	"max_level_floor": 1,
+	"max_stage": 1,
 	"player_state": {
-		"current_health": 46,
+		"current_health": 35,
 		"max_energy": 3,
 		"num_cards_in_deck": 10,
 		"perm_modifiers": {
