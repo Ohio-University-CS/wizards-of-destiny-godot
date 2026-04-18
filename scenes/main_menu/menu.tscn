@@ -3,14 +3,12 @@
 [ext_resource type="Script" uid="uid://elftbjqmvv35" path="res://scenes/main_menu/main_menu.gd" id="1_6ufdq"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_pt1kw"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_0qkqs"]
-[ext_resource type="Texture2D" uid="uid://b8am2fvma8rst" path="res://scenes/main_menu/Level Select .png" id="4_pm07s"]
+[ext_resource type="Texture2D" uid="uid://cnh1k7dqbeh6p" path="res://scenes/main_menu/Alphabet-1.png.png" id="4_8wk7e"]
+[ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="5_e4vlm"]
 [ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="5_q0knb"]
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="6_q0knb"]
+[ext_resource type="Texture2D" uid="uid://cinsacv227qyx" path="res://scenes/main_menu/Alphabet-4.png.png" id="6_seilu"]
 [ext_resource type="Texture2D" uid="uid://b1xr3qw02ree6" path="res://scenes/main_menu/Menu_info_button.png" id="7_mg445"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
-font_size = 30
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
 font_size = 50
@@ -53,30 +51,31 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_0qkqs")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/LevelSelect" unique_id=1197579669]
-position = Vector2(118.99999, 53.250008)
-scale = Vector2(0.12148207, 0.1691707)
-texture = ExtResource("4_pm07s")
+[node name="Level" type="Sprite2D" parent="Buttons/LevelSelect" unique_id=796527507]
+position = Vector2(90.35157, 110.75)
+scale = Vector2(0.15829682, 0.30177742)
+texture = ExtResource("4_8wk7e")
+
+[node name="Select" type="Sprite2D" parent="Buttons/LevelSelect" unique_id=1024644485]
+position = Vector2(184, 75.75001)
+scale = Vector2(0.17087501, 0.30999282)
+texture = ExtResource("5_e4vlm")
 
 [node name="Collection" type="Button" parent="Buttons" unique_id=763851864]
 layout_mode = 0
 offset_left = 190.0
 offset_top = -140.0
-offset_right = 434.0
+offset_right = 442.5
 offset_bottom = -31.0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_0qkqs")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Collection" unique_id=177031038]
-layout_mode = 0
-offset_left = 49.0
-offset_top = 32.75
-offset_right = 218.0
-offset_bottom = 74.75
-text = "Collection"
-label_settings = SubResource("LabelSettings_0qkqs")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Collection" unique_id=370210836]
+position = Vector2(122.499985, 59.25)
+scale = Vector2(0.18249997, 0.33228868)
+texture = ExtResource("6_seilu")
 
 [node name="Settings" type="Button" parent="Buttons" unique_id=1615403388]
 layout_mode = 0
