@@ -9,7 +9,8 @@
 		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Needle_Blight/Needle_Blight.tscn"
 	  ],
 	  "mini_boss_4": [
-        "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Bandit_Chief/Bandit_Chief.tscn",
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.tscn"
 	  ],
 	  "mini_boss_8": [
         "res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss2/Kobold_Inventor/Kobold_Inventor.tscn"
@@ -20,7 +21,7 @@
 	},
 	"floor_2": {
 	  "enemies": [
-        "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Redcap/Redcap.tscn"
 	  ],
 	  "mini_boss_4": [
         "res://Enemies/enemy_resources/enchanted_forest/MiniBoss3/MiniBoss3.tscn"

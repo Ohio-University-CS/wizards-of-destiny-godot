@@ -34,6 +34,11 @@ func setup_from_resource(res: EnemyResource) -> void:
 	resource = res
 	base_max_health = res.hp_variation[0]
 	
+	if RunManager.stage in [5, 6, 7] and res.hp_variation.size() > 1:
+		base_max_health = res.hp_variation[1]
+	if RunManager.stage in [9, 10, 11] and res.hp_variation.size() > 2:
+		base_max_health = res.hp_variation[2]
+	
 	# Rune of Death
 	if RunManager.has_item("Rune of Death"):
 		base_max_health -= 3

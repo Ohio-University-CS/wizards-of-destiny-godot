@@ -58,4 +58,7 @@ func _refresh() -> void:
 	max_value = max(1, int(max_hp))
 	value = clamp(int(current), 0, int(max_value))
 	
+	if current < 0:
+		current = 0
+	
 	bar_text.text = str(current) + " / " + str(max_hp)
