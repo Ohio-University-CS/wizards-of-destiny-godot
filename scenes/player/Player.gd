@@ -10,10 +10,6 @@ class_name Player
 
 var class_data
 
-<<<<<<< HEAD
-@export var initialized : bool = false
-
-=======
 # List of active passive cards/effects
 var active_passives: Array = []
 
@@ -27,7 +23,6 @@ var tattered_shawl : bool = true
 @export var debug_test_status: String = "regeneration"
 @export var debug_test_stacks: int = 3
 
->>>>>>> origin/dev
 # BASE STATS (from class)
 var base_max_health: int
 var base_damage: int
@@ -74,11 +69,7 @@ var current_health: int
 var energy: int = 3
 var max_energy: int = 3
 
-<<<<<<< HEAD
-var deck_list : Array[CardData] = []
-=======
 var deck_list: Array[CardData] = []
->>>>>>> origin/dev
 
 
 # Uses class_data resource
@@ -423,9 +414,6 @@ func _ready():
 	if not initialized:
 		return
 	
-<<<<<<< HEAD
-	set_energy(max_energy)
-=======
 	set_perm_stats()
 	# Create StatusVFXHandler as a child node to handle status effect visuals
 	var vfx_handler = StatusVFXHandler.new()
@@ -443,7 +431,6 @@ func _ready():
 	
 	potential_destruction = 0
 	tattered_shawl = true
->>>>>>> origin/dev
 
 
 # ---------------------------------------------------------
