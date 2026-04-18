@@ -1,0 +1,59 @@
+name: "Godot Build & Test"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  # JOB 1: RUN UNIT TESTS
+  test:
+    name: Run GUT Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1 # Match this to your local Godot version
+
+      - name: Run Tests (GUT)
+        run: |
+          godot --headless --path . -s addons/gut/gut_cmdln.gd -gexit
+
+  # JOB 2: EXPORT BINARIES (Only runs if tests pass)
+  export:
+    name: Export Game
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1
+
+      - name: Export Windows
+        run: |
+          mkdir -pv build/windows
+          godot --headless --path . --export-release "Windows Desktop" build/windows/game.exe
+
+      - name: Export Linux
+        run: |
+          mkdir -pv build/linux
+          godot --headless --path . --export-release "Linux/X11" build/linux/game.x86_64
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-builds
+          path: build/
