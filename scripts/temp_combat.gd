@@ -29,6 +29,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var discard_button_path: NodePath = NodePath("PanelContainer/Discard")
 @export var result_overlay_path: NodePath = NodePath("ResultCanvas/ResultOverlay")
 @export var result_label_path: NodePath = NodePath("ResultCanvas/ResultOverlay/ResultText")
+@export var level_background_path: NodePath = NodePath("")
 @export var move_text_hold_duration: float = 0.60
 @export var move_text_fade_duration: float = 0.40
 @export var turn_transition_delay: float = 0.20
@@ -36,9 +37,11 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
+
 var enemy_intent_1: TextureRect = null
 var enemy_intent_2: TextureRect = null
 var enemy_intent_3: TextureRect = null
+var level_background: Sprite2D = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -53,6 +56,7 @@ var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 
 enum TurnState {
 	PLAYER,
@@ -285,6 +289,18 @@ func _ready():
 	result_label = get_node_or_null(result_label_path)
 	if result_overlay:
 		result_overlay.visible = false
+
+	# Preload a level background texture based on RunManager selection
+	var _rm = get_node_or_null("/root/RunManager")
+	var _floor = 1
+	if _rm:
+		var maybe_floor = _rm.get("level_floor")
+		if maybe_floor != null:
+			_floor = maybe_floor
+	if _floor == 1:
+		var _bg_tex = preload("res://scenes/level1/forest1.png")
+		if level_background:
+			level_background.texture = _bg_tex
 	
 	if player and player.has_signal("died"):
 		if not player.died.is_connected(_on_player_died):
