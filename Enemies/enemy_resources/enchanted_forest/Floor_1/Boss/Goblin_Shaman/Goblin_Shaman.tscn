@@ -6,12 +6,64 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_f5p80"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_luhea"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_nmqw2"]
+[ext_resource type="Texture2D" uid="uid://dnjrncyyim2w8" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman_idle_animation.png" id="7_k4fep"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uattn"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(0, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3vrm"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(46, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiujq"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(92, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt4q3"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(0, 48, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g6ku"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(46, 48, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uktvw"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(92, 48, 46, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vskxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uattn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3vrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tiujq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt4q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g6ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uktvw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="Goblin_Shaman" type="Node2D" unique_id=2045738616]
 script = ExtResource("1_save2")
 enemy_data = ExtResource("2_nhqpx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=874388032]
+visible = false
 scale = Vector2(5, 5)
 texture = ExtResource("3_k4fep")
 
@@ -114,3 +166,9 @@ offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_nmqw2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=471317586]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_vskxj")
+animation = &"Idle"
+frame_progress = 0.16704556

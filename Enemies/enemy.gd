@@ -8,7 +8,7 @@ class_name Enemy
 # ---------------------------------------------------------
 
 @onready var health_bar = $EnemyHealth
-
+@onready var AnimatedSprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 var resource: EnemyResource = null
 @export var enemy_data: EnemyResource
 
@@ -114,6 +114,11 @@ func _ready():
 		print("Enemy VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
 
 	health_bar.set_target(self )
+	
+	# Only start the animation IF the node exists on this specific enemy
+	if AnimatedSprite != null:
+		AnimatedSprite.play("Idle")
+		AnimatedSprite.animation_finished.connect(_on_animation_finished)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -230,6 +235,10 @@ func select_move() -> MoveResource:
 # ---------------------------------------------------------
 
 func deal_damage(amount: int = 0, _element: String = "", include_base_damage: bool = true) -> int:
+	# Trigger the attack animation
+	if AnimatedSprite != null:
+		AnimatedSprite.play("Attack") # Make sure your animation is named exactly "Attack" in the SpriteFrames
+	
 	var dmg = amount
 	if include_base_damage:
 		dmg += base_damage
@@ -391,3 +400,12 @@ func try_dodge() -> bool:
 
 func _die():
 	emit_signal("died")
+
+# ---------------------------------------------------------
+# ANIMATION HANDLING
+# ---------------------------------------------------------
+
+func _on_animation_finished():
+	# When the attack animation finishes playing, go back to Idle
+	if AnimatedSprite != null and AnimatedSprite.animation == "Attack":
+		AnimatedSprite.play("Idle")
