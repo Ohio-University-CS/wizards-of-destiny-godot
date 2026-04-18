@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bq86uq03p4ulw"]
+
+[ext_resource type="Texture2D" uid="uid://bkk1myk80wshg" path="res://cards/sprites/curse.png" id="1_fxl4y"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_k2o3u"]
+[ext_resource type="Script" uid="uid://bcgt6s12xiu2y" path="res://cards/effects/choice_effect.gd" id="2_hme8y"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_pcebj"]
+[ext_resource type="Texture2D" uid="uid://bt6xb24qom8u0" path="res://cards/sprites/Card_Frame_Uncommon.png" id="3_fxl4y"]
+
+[sub_resource type="Resource" id="Resource_5gpev"]
+script = ExtResource("2_hme8y")
+metadata/_custom_type_script = "uid://bcgt6s12xiu2y"
+
+[resource]
+script = ExtResource("2_pcebj")
+card_name = "Curse"
+description = "Choose to double all Burn or double all Shock on Enemy"
+energy_cost = 2
+rarity = 1
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_fxl4y")
+frame_art = ExtResource("3_fxl4y")
+effects = Array[ExtResource("1_k2o3u")]([SubResource("Resource_5gpev")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

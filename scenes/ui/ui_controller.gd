@@ -1,12 +1,31 @@
 # ui controller
 extends Node
 
+
+# Hover effect variables
+@onready var strike_icon : TextureRect = $PlayerUI/StrikeDamageIcon
+var strike_icon_base_y : float = 0.0
+var strike_icon_hover_time : float = 0.0
+var strike_icon_hover_amplitude : float = 8.0 # pixels
+var strike_icon_hover_speed : float = 0.5 # cycles per second
+
 var strike_label = null
+
 
 func _ready() -> void:
 	await get_tree().process_frame
 	_connect_to_manager()
-	#call_deferred("_connect_to_manager")
+	# Store the base Y position for the hover effect
+	if strike_icon:
+		strike_icon_base_y = strike_icon.position.y
+
+
+# Bobbing hover effect for strike icon
+func _process(delta: float) -> void:
+	if strike_icon:
+		strike_icon_hover_time += delta
+		var offset = sin(strike_icon_hover_time * TAU * strike_icon_hover_speed) * strike_icon_hover_amplitude
+		strike_icon.position.y = strike_icon_base_y + offset
 
 
 func _connect_to_manager() -> void:

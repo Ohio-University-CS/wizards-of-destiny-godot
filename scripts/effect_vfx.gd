@@ -34,15 +34,17 @@ func _ready():
 
 
 func _connect_to_parent() -> void:
-	if parent_node == null:
+	if parent_node == null or not is_instance_valid(parent_node):
 		return
-	
+
 	# Check if parent has the signals and connect
 	if parent_node.has_signal("status_applied"):
-		parent_node.status_applied.connect(_on_status_applied)
-	
+		if not parent_node.status_applied.is_connected(_on_status_applied):
+			parent_node.status_applied.connect(_on_status_applied)
+
 	if parent_node.has_signal("status_expired"):
-		parent_node.status_expired.connect(_on_status_expired)
+		if not parent_node.status_expired.is_connected(_on_status_expired):
+			parent_node.status_expired.connect(_on_status_expired)
 
 
 func setup(parent: Node) -> void:
@@ -53,22 +55,24 @@ func setup(parent: Node) -> void:
 
 
 func _refresh_parent_identity() -> void:
-	if parent_node == null:
+	if parent_node == null or not is_instance_valid(parent_node):
 		_is_player = false
 		return
 
 	# Use multiple checks so player detection works even if class typing is inconsistent.
 	var script_path: String = ""
-	var script_ref: Script = parent_node.get_script() as Script
+	var script_ref: Script = null
+	if is_instance_valid(parent_node):
+		script_ref = parent_node.get_script() as Script
 	if script_ref != null:
 		script_path = script_ref.resource_path.to_lower()
 
-	_is_player = parent_node is Player or parent_node.name.to_lower() == "player" or script_path.ends_with("player.gd")
+	_is_player = (parent_node is Player) or (parent_node.name.to_lower() == "player") or script_path.ends_with("player.gd")
 
 
 func _get_scale_direction() -> float:
 	"""Get the X scale direction of parent. Returns 1.0 or -1.0"""
-	if parent_node == null:
+	if parent_node == null or not is_instance_valid(parent_node):
 		return 1.0
 	
 	# Check if parent is a Player class - if so, invert the X axis
@@ -115,13 +119,16 @@ func _on_status_applied(status_name: String, stacks: int) -> void:
 
 func _on_status_expired(status_name: String) -> void:
 	# Restore fighter tint if corroded is expiring.
-	if status_name == "corroded" and parent_node != null and parent_node.has_meta("corroded_original_modulate"):
-		var restore_target: CanvasItem = parent_node.get_node_or_null("Sprite2D") as CanvasItem
-		if restore_target == null:
+	if status_name == "corroded" and parent_node != null and is_instance_valid(parent_node) and parent_node.has_meta("corroded_original_modulate"):
+		var restore_target: CanvasItem = null
+		if is_instance_valid(parent_node):
+			restore_target = parent_node.get_node_or_null("Sprite2D") as CanvasItem
+		if restore_target == null and is_instance_valid(parent_node):
 			restore_target = parent_node as CanvasItem
-		if restore_target != null:
+		if restore_target != null and is_instance_valid(restore_target):
 			restore_target.modulate = parent_node.get_meta("corroded_original_modulate") as Color
-		parent_node.remove_meta("corroded_original_modulate")
+			if is_instance_valid(parent_node):
+				parent_node.remove_meta("corroded_original_modulate")
 	if _status_vfx_nodes.has(status_name):
 		var node = _status_vfx_nodes[status_name]
 		if is_instance_valid(node):

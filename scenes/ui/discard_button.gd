@@ -1,3 +1,4 @@
+# Discard Button
 extends Button
 
 signal discard_requested

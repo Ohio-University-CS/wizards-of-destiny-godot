@@ -33,6 +33,11 @@ var repeat_count: int = 0
 func setup_from_resource(res: EnemyResource) -> void:
 	resource = res
 	base_max_health = res.hp_variation[0]
+	
+	# Rune of Death
+	if RunManager.has_item("Rune of Death"):
+		base_max_health -= 3
+	
 	base_damage = res.base_damage
 	current_health = base_max_health
 
@@ -63,6 +68,14 @@ var status_effects := {
 	"empower": 0, # deal +3 damage per stack, remove 1 at end of turn
 	"evasive": 0 # dodge next attack, remove a stack (max 2), remove at start of turn
 }
+
+
+func get_burn() -> int:
+	return status_effects["burn"]
+
+
+func get_shock() -> int:
+	return status_effects["shock"]
 
 # ---------------------------------------------------------
 # SIGNALS
@@ -133,14 +146,13 @@ func start_turn():
 			emit_signal("status_expired", "evasive")
 
 	# Apply start-of-turn effects
+	_apply_burn()
 	_apply_heal()
-	_apply_shock()
 
 	# Reset block each turn
 	status_effects["block"] = 0
 
 func end_turn():
-	_apply_burn()
 	# Empower: remove one stack at end of turn
 	if status_effects["empower"] > 0:
 		status_effects["empower"] -= 1
@@ -296,6 +308,10 @@ func apply_status(status_name: String, stacks: int = 1):
 	# Clamp Evasive to max 2
 	if status_name == "evasive":
 		status_effects[status_name] = clamp(status_effects[status_name], 0, 2)
+	
+	if status_name == "shock":
+		RunManager.player.add_energy(1)
+	
 	emit_signal("status_applied", status_name, status_effects[status_name])
 
 
@@ -319,7 +335,16 @@ func add_block(amount: int):
 
 func _apply_burn():
 	if status_effects["burn"] > 0:
-		take_damage(status_effects["burn"])
+		# If Overheat Passive is in play
+		if RunManager.player.active_passives.has("Overheat"):
+			if status_effects["burn"] > 6:
+				take_damage(status_effects["burn"] * 2)
+			else:
+				take_damage(status_effects["burn"] * 1.5)
+		else:
+			take_damage(status_effects["burn"])
+		
+		# Decrease by 1
 		status_effects["burn"] -= 1
 		if status_effects["burn"] == 0:
 			emit_signal("status_expired", "burn")
@@ -333,8 +358,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		pass
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 # ---------------------------------------------------------

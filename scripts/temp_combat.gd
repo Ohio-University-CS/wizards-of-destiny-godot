@@ -8,8 +8,8 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/common/Goblin/Enemy (Goblin).tscn"
+const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/common/Wizard/Wizard.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
@@ -58,6 +58,9 @@ var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
+var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var pause_menu = null
+
 enum TurnState {
 	PLAYER,
 	ENEMY,
@@ -101,7 +104,17 @@ func _set_run_manager_player(value: Player) -> void:
 
 func _ready():
 	enemy_rng.randomize()
-
+	
+	var pause_layer = CanvasLayer.new()
+	pause_layer.layer = 100
+	add_child(pause_layer)
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_layer.add_child(pause_menu)
+	
+	
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -472,6 +485,11 @@ func draw_hand():
 
 	# Drained: draw one less card per stack (max 3)
 	var draw_size = deck.draw_hand_size
+	
+	# White Salt
+	if RunManager.has_item("White Salt"):
+		draw_size += 1
+	
 	if player and player.status_effects.has("drained"):
 		var drained = clamp(player.status_effects["drained"], 0, 3)
 		draw_size = max(0, draw_size - drained)
@@ -904,7 +922,22 @@ func _on_player_died() -> void:
 func _on_opponent_died() -> void:
 	_show_result(true)
 	
-	#detach player so it doesn't get freed
+	# Remove temporary cards from all piles
+	if deck:
+		deck.draw_pile = deck.draw_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.hand = deck.hand.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.discard_pile = deck.discard_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
+			return not card_instance.data.temporary)
+	
+	# Amulet of Undying
+	if RunManager.has_item("Amulet of Undying"):
+		player.heal(3)
+	
+	# detach player so it doesn't get freed
 	if player:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
@@ -941,7 +974,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-
+	# GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
@@ -1140,3 +1173,12 @@ func _clear_editor_previews():
 	for c in to_remove:
 		if is_instance_valid(c):
 			c.queue_free()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused

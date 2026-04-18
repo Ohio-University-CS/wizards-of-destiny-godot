@@ -1,3 +1,5 @@
+# Handles the after-combat shop
+
 extends Control
 class_name Shop
  
@@ -8,10 +10,11 @@ class_name Shop
 @export var player : Player
 @export var shop_card_scene : PackedScene
 
-#temporary card pool
+# temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
-var shop_size := 4
+# numbber of cards that appear in shop
+var shop_size := 4 
 
 
 func _ready() -> void:
@@ -25,6 +28,7 @@ func _ready() -> void:
 
 
 func _generate_shop():
+	# Setup cards
 	for child in cards_container.get_children():
 		child.queue_free()
 	
@@ -39,6 +43,10 @@ func _generate_shop():
 		
 		var ui = shop_card_scene.instantiate()
 		var price = _get_price(data)
+		
+		# Comedy Mask
+		if RunManager.has_item("Comedy Mask"):
+			price *= 0.75
 		
 		ui.setup(data, price)
 		ui.purchased.connect(_on_card_purchased)
@@ -66,4 +74,5 @@ func _update_coin_visual():
 
 
 func _on_next_stage_pressed():
+	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	FlowManager.go_to_combat()

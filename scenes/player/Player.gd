@@ -13,7 +13,11 @@ var class_data
 # List of active passive cards/effects
 var active_passives: Array = []
 
-@export var initialized: bool = false
+# Other variables for random cards/effects
+var potential_destruction : int = 0
+var tattered_shawl : bool = true
+
+@export var initialized : bool = false
 
 @export var debug_status_vfx_test: bool = false
 @export var debug_test_status: String = "regeneration"
@@ -77,6 +81,13 @@ func setup_from_class(data):
 	class_data = data
 	
 	deck_list = data.starting_deck.duplicate()
+	
+	set_perm_stats()
+	
+	active_passives.clear()
+	
+	tattered_shawl = true
+	
 	
 	base_max_health = data.max_health
 	base_damage = data.damage
@@ -166,6 +177,22 @@ func modify_stat(stat_type, amount: int, duration_turns: int = 0):
 		modify_stat_permanent(stat_name, amount)
 
 
+func set_perm_stats():
+	#fresh reset
+	for m in perm_modifiers:
+		m = 0
+		
+	if RunManager.has_item("Gauntlets of Strength"):
+		modify_stat_permanent("damage", 1)
+	if RunManager.has_item("Ring of Life"):
+		modify_stat_permanent("max_health", 5)
+	if RunManager.has_item("Ruby-Hilted Dagger"):
+		modify_stat_permanent("crit_damage", 7)
+	if RunManager.has_item("Staff of Power"):
+		modify_stat_permanent("elemental_power", 25)
+	if RunManager.has_item("Boots of the Elves"):
+		modify_stat_permanent("dodge", 5)
+
 # ---------------------------------------------------------
 # STRIKE SYSTEM
 # ---------------------------------------------------------
@@ -197,6 +224,11 @@ func add_strike_damage(amount: int, _include_base_dmg: bool):
 	strike_bonus_damage += amount
 	if _include_base_dmg:
 		strike_bonus_damage += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
+	
 	_emit_strike_changed()
 
 func multiply_strike_damage(amount: float):
@@ -217,6 +249,10 @@ func add_strike_element(element: String, amount: int, _include_base_dmg: bool):
 		strike_elemental_damage[element] += amount
 		if _include_base_dmg:
 			strike_elemental_damage[element] += get_damage()
+	
+	# Precision Passive
+	if active_passives.has("Precision"):
+		strike_bonus_damage += 1
 	
 	_emit_strike_changed()
 
@@ -272,6 +308,10 @@ func perform_strike(target):
 func _do_strike_on_target(target):
 	var dmg = get_damage() + strike_bonus_damage
 	
+	# Tattered Shawl
+	if RunManager.has_item("Tattered Shawl") and tattered_shawl:
+		dmg += 5
+	
 	# Empower: +3 damage per stack
 	if status_effects["empower"] > 0:
 		dmg += 3 * status_effects["empower"]
@@ -292,6 +332,14 @@ func _do_strike_on_target(target):
 			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
 	
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		dmg /= 2
+	
+	# Crit
+	if try_crit():
+		dmg += get_crit_damage()
+	
 	#deal normal damage once
 	if dmg > 0:
 		target.take_damage(dmg)
@@ -301,6 +349,11 @@ func _do_strike_on_target(target):
 		var amt = strike_elemental_damage[element]
 		if amt > 0:
 			var elemental_dmg = deal_damage(amt, element)
+			
+			# Evasion Ritual
+			if active_passives.has("Evasion"):
+				elemental_dmg /= 2
+			
 			target.take_damage(elemental_dmg, element)
 			print(" - Deals ", elemental_dmg, " ", element, " damage")
 	
@@ -331,6 +384,13 @@ var status_effects := {
 	"empower": 0 # deal +3 damage per stack, remove 1 at end of turn
 }
 
+# Electrostasis Passive variable
+var electrostasis : bool = false
+
+
+func get_block() -> int:
+	return status_effects["block"]
+
 # ---------------------------------------------------------
 # SIGNALS
 # ---------------------------------------------------------
@@ -351,6 +411,7 @@ func _ready():
 	if not initialized:
 		return
 	
+	set_perm_stats()
 	# Create StatusVFXHandler as a child node to handle status effect visuals
 	var vfx_handler = StatusVFXHandler.new()
 	vfx_handler.name = "StatusVFXHandler"
@@ -361,6 +422,11 @@ func _ready():
 		print("Player VFX debug active. Press ] to add stack and [ to clear status:", debug_test_status)
 	
 	set_energy(max_energy)
+	
+	active_passives.clear()
+	
+	potential_destruction = 0
+	tattered_shawl = true
 
 
 # ---------------------------------------------------------
@@ -377,7 +443,13 @@ func start_turn():
 
 	# Apply start-of-turn effects
 	_apply_heal()
-	_apply_shock()
+	
+	# Passives
+	electrostasis = false
+	
+	# Rituals
+	if active_passives.has("Evasion"):
+		active_passives.erase("Evasion")
 
 	# Reset block each turn
 	status_effects["block"] = 0
@@ -401,6 +473,9 @@ func end_turn():
 		if status_effects["empower"] == 0:
 			emit_signal("status_expired", "empower")
 	_clear_temp_stats()
+	
+	if tattered_shawl == true:
+		tattered_shawl = false
 
 
 func _clear_temp_stats():
@@ -462,8 +537,8 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 		"electric": dmg += get_electric_power()
 	
 	# Freeze does not affect elemental damage (handled in perform_strike)
-	#Crit check
-	if randf() < get_crit_chance():
+	# Crit check
+	if try_crit():
 		dmg += get_crit_damage()
 	
 	return dmg
@@ -511,6 +586,10 @@ func modify_stat_temp(stat_name: String, amount: int):
 
 func add_block(amount: int):
 	status_effects["block"] += amount
+	
+	# Guardian Passive
+	if active_passives.has("Guardian"):
+		add_strike_damage(1, false)
 
 
 func _apply_burn():
@@ -529,8 +608,13 @@ func _apply_heal():
 
 func _apply_shock():
 	if status_effects["shock"] > 0:
-		# Shock reduces energy
-		set_energy(max(0, energy - status_effects["shock"]))
+		# Shock deals damage when attacking
+		take_damage(status_effects["shock"])
+		
+		# Decrease by 1
+		status_effects["shock"] -= 1
+		if status_effects["shock"] == 0:
+			emit_signal("status_expired", "shock")
 
 
 func set_energy(new_value: int) -> void:
@@ -548,6 +632,10 @@ func spend_energy(amount: int) -> bool:
 	set_energy(energy - amount)
 	return true
 
+
+# ---------------------------------------------------------
+# Passive Effects
+# ---------------------------------------------------------
 
 # temporary passive (rituals, etc)
 func _add_temp_effect(ename: String):
@@ -571,7 +659,15 @@ func is_stunned() -> bool:
 	return status_effects["stun"] > 0
 
 
+func try_crit() -> bool:
+	return randf() < get_crit_chance()
+
+
 func try_dodge() -> bool:
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		return true
+	
 	return randf() < get_dodge_chance()
 
 

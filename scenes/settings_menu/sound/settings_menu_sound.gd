@@ -1,3 +1,4 @@
+# Settings Menu - Sound
 extends Control
 
 @onready var AnimatedSprite: AnimatedSprite2D = $Scroll_Animation/AnimatedSprite2D
@@ -17,6 +18,7 @@ var last_opened: String = "N/A"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#visibility
+	AnimatedSprite.speed_scale = 2.0  # 2x faster
 	_sso_off()
 	_sso_on()
 	#settings
@@ -44,7 +46,7 @@ func _on_graphics_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setting-menu-graphics.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 	pass
@@ -75,7 +77,7 @@ func _on_control_pressed():
 	_sso_off()
 	AnimatedSprite.play("Close")
 	await AnimatedSprite.animation_finished
-	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/setting-menu-controls.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings_menu/controls/settings-menu-controls.tscn")
 	control_button.disabled = false
 	graphics_button.disabled = false
 

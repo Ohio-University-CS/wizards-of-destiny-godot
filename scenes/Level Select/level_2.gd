@@ -7,6 +7,7 @@ extends Control
 func _ready() -> void:
 	forward_button.pressed.connect(_on_forward_button_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
+	level_select_button.pressed.connect(_level_select_button_pressed)
 
 func _process(_delta: float) -> void:
 	pass
@@ -28,3 +29,6 @@ func _on_forward_button_pressed():
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file(get_back_scene_path())
+
+func _level_select_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
