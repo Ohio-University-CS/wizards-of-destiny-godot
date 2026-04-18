@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dmnvuaeqp7thf" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/Goblin_Warrior.tscn" id="4_naajo"]
 [ext_resource type="PackedScene" uid="uid://btcs7b3hbdg7p" path="res://scenes/player/Player.tscn" id="5_41jku"]
 [ext_resource type="PackedScene" uid="uid://rswhiwfdb5bb" path="res://scenes/ui/ui.tscn" id="6_k1k1x"]
+[ext_resource type="PackedScene" uid="uid://b5kdcfrl5cp8f" path="res://scenes/game_end/Game Over.tscn" id="8_naajo"]
 [ext_resource type="PackedScene" uid="uid://s14gmetyottx" path="res://scenes/pause_menu/pause-menu.tscn" id="8_oexds"]
+[ext_resource type="PackedScene" uid="uid://djuatg0udufpt" path="res://scenes/game_end/Game_Won.tscn" id="9_41jku"]
 
 [node name="Arena" type="Node2D" unique_id=1267453808]
 script = ExtResource("1_4ag8t")
@@ -32,3 +34,9 @@ layer = 10000000
 [node name="Pause_menu" parent="Pause_Menu_Layer" unique_id=216180788 instance=ExtResource("8_oexds")]
 visible = false
 size_flags_horizontal = 0
+
+[node name="GameOver" parent="Pause_Menu_Layer" unique_id=1861457307 instance=ExtResource("8_naajo")]
+visible = false
+
+[node name="GameWon" parent="Pause_Menu_Layer" unique_id=451453607 instance=ExtResource("9_41jku")]
+visible = false
