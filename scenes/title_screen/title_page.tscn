@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_g7q6h"]
 [ext_resource type="Texture2D" uid="uid://cfd6li58h3ekt" path="res://scenes/title_screen/Title_Screen_Text.png" id="3_i8kf4"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="4_t6qk7"]
-[ext_resource type="Texture2D" uid="uid://b5s8mj7g2x8an" path="res://scenes/title_screen/Title_Screen_Exit.png" id="5_i8kf4"]
+[ext_resource type="Texture2D" uid="uid://duyw1dojafl1a" path="res://scenes/title_screen/exit.png" id="5_osne2"]
 [ext_resource type="Texture2D" uid="uid://h3on20g0jkvk" path="res://scenes/title_screen/Play.png" id="6_osne2"]
 
 [sub_resource type="Animation" id="Animation_v1xft"]
@@ -263,10 +263,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("4_t6qk7")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1411816059]
-position = Vector2(120, 55)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_i8kf4")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=264277802]
+position = Vector2(97.49997, 79.25)
+scale = Vector2(0.4095, 0.31554443)
+texture = ExtResource("5_osne2")
 
 [node name="Play" type="Button" parent="Buttons" unique_id=1813044529]
 layout_mode = 1
@@ -280,8 +280,8 @@ icon = ExtResource("4_t6qk7")
 flat = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Play" unique_id=830478601]
-position = Vector2(120.000015, 66.25)
-scale = Vector2(0.332, 0.3639864)
+position = Vector2(113.500015, 66.75001)
+scale = Vector2(0.332, 0.3524803)
 texture = ExtResource("6_osne2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1986724700]
