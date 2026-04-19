@@ -6,12 +6,140 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_trw6q"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_y6iaf"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_ctsy7"]
+[ext_resource type="Texture2D" uid="uid://dijsiq63xlckq" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer_attack.png" id="7_5ppfn"]
+[ext_resource type="Texture2D" uid="uid://bh0eas6co0ok5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer_idle_animation.png" id="8_qrug4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkeut"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5v5y"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1s7x"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xj0x"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n0jo"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl7rt"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqn7i"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x807c"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwmjg"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe6io"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ikco"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hllh3"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0df46"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohnqp"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odaww"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h80x8"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfled"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkeut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5v5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1s7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xj0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n0jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl7rt")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqn7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x807c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwmjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe6io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ikco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hllh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0df46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohnqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odaww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h80x8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="Goblin_Archer" type="Node2D" unique_id=1513663545]
 script = ExtResource("1_mty8r")
 enemy_data = ExtResource("2_3m3gd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1362981289]
+visible = false
 scale = Vector2(6, 6)
 texture = ExtResource("2_mty8r")
 
@@ -114,3 +242,8 @@ offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=181313413]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_mfled")
+animation = &"Attack"

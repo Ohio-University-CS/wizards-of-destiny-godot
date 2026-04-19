@@ -1,135 +1,135 @@
-[gd_scene format=3 uid="uid://b5kdcfrl5cp8f"]
+[gd_scene format=3 uid="uid://djuatg0udufpt"]
 
-[ext_resource type="Script" uid="uid://cedr7nobw8wnn" path="res://scenes/game_end/game_over.gd" id="1_7r5af"]
-[ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="1_iu1pj"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_ax117"]
-[ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="4_6f0nw"]
+[ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="1_4r2b8"]
+[ext_resource type="Script" uid="uid://dn21g6c24qaq1" path="res://scenes/game_end/game_won.gd" id="1_ancur"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_uvdpy"]
+[ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="4_nce4m"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_7r5af"]
+[sub_resource type="LabelSettings" id="LabelSettings_ancur"]
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5h30"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja5ad"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5le3a"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_807kq"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mxoh"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3t8x"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ipew"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o00b5"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7el3e"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_edjtb"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bi2s"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_emrrn"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qneoh"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tbnbe"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kpxt"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aut5i"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs2a7"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 303, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cqfm"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4lhh"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3guu"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mc0i"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 202, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6v7s"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xxwn"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0goog"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcmle"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 101, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5175h"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(708, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q41l"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(472, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r50i4"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(236, 0, 236, 101)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1d7ay"]
-atlas = ExtResource("4_6f0nw")
+atlas = ExtResource("4_nce4m")
 region = Rect2(0, 0, 236, 101)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_p8rfx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_omtls"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -232,7 +232,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ivk0s"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fpb6m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -335,37 +335,41 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_6f0nw"]
-font_size = 60
-
-[node name="GameOver" type="Control" unique_id=1861457307]
+[node name="GameWon" type="Control" unique_id=451453607]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7r5af")
+script = ExtResource("1_ancur")
 
-[node name="background" type="Sprite2D" parent="." unique_id=1587781594]
+[node name="background" type="Sprite2D" parent="." unique_id=224074970]
 modulate = Color(1, 1, 1, 0.44313726)
 position = Vector2(962, 513)
 scale = Vector2(1.9594998, 1.5952724)
-texture = ExtResource("1_iu1pj")
+texture = ExtResource("1_4r2b8")
 
-[node name="quit_button" type="Button" parent="." unique_id=1990362539]
+[node name="quit_button" type="Button" parent="." unique_id=672596108]
 layout_mode = 1
-offset_left = 789.0
-offset_top = 519.0
-offset_right = 1131.0
-offset_bottom = 638.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -21.0
+offset_right = 171.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="quit_scroll" type="Sprite2D" parent="quit_button" unique_id=67004702]
+[node name="quit_scroll" type="Sprite2D" parent="quit_button" unique_id=2121891282]
 position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
-texture = ExtResource("2_ax117")
+texture = ExtResource("2_uvdpy")
 
-[node name="quit_label" type="Label" parent="quit_button" unique_id=828777654]
+[node name="resume_label" type="Label" parent="quit_button" unique_id=900452522]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -379,23 +383,30 @@ offset_bottom = 59.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
-label_settings = SubResource("LabelSettings_7r5af")
+label_settings = SubResource("LabelSettings_ancur")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="main_menu_button" type="Button" parent="." unique_id=2108417088]
+[node name="main_menu_button" type="Button" parent="." unique_id=1816287522]
 layout_mode = 1
-offset_left = 789.0
-offset_top = 319.0
-offset_right = 1131.0
-offset_bottom = 438.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -221.0
+offset_right = 171.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="main_menu_scroll" type="Sprite2D" parent="main_menu_button" unique_id=1261689470]
+[node name="main_menu_scroll" type="Sprite2D" parent="main_menu_button" unique_id=1561700117]
 position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
-texture = ExtResource("2_ax117")
+texture = ExtResource("2_uvdpy")
 
-[node name="main_menu_label" type="Label" parent="main_menu_button" unique_id=1372303979]
+[node name="main_menu_label" type="Label" parent="main_menu_button" unique_id=2083363139]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -409,36 +420,25 @@ offset_bottom = 59.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Main Menu"
-label_settings = SubResource("LabelSettings_7r5af")
+label_settings = SubResource("LabelSettings_ancur")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Animations" type="Control" parent="." unique_id=1472015518]
+[node name="Animations" type="Control" parent="." unique_id=2065122864]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="main_menu_scroll_animation" type="AnimatedSprite2D" parent="Animations" unique_id=462407265]
+[node name="main_menu_scroll_animation" type="AnimatedSprite2D" parent="Animations" unique_id=1062117736]
 visible = false
 position = Vector2(963, 376)
 scale = Vector2(1.716, 1.582)
-sprite_frames = SubResource("SpriteFrames_p8rfx")
+sprite_frames = SubResource("SpriteFrames_omtls")
 animation = &"Close"
 
-[node name="quit_scroll_animation" type="AnimatedSprite2D" parent="Animations" unique_id=156101378]
+[node name="quit_scroll_animation" type="AnimatedSprite2D" parent="Animations" unique_id=148830878]
 visible = false
 position = Vector2(963, 576)
 scale = Vector2(1.716, 1.582)
-sprite_frames = SubResource("SpriteFrames_ivk0s")
+sprite_frames = SubResource("SpriteFrames_fpb6m")
 animation = &"Close"
-
-[node name="Label" type="Label" parent="." unique_id=1171210050]
-layout_mode = 0
-offset_left = 789.0
-offset_top = 29.0
-offset_right = 1109.0
-offset_bottom = 68.0
-text = "Game Over"
-label_settings = SubResource("LabelSettings_6f0nw")
-horizontal_alignment = 1
-vertical_alignment = 1

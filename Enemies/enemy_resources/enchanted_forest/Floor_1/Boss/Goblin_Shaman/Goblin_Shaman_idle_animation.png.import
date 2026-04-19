@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw0exkb62j0ej"
-path="res://.godot/imported/wizard_transparent.png-a6cf2d2e40f4530ec6de39b098f8469f.ctex"
+uid="uid://dnjrncyyim2w8"
+path="res://.godot/imported/Goblin_Shaman_idle_animation.png-126c7e9d34f4673039488a46f124f851.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/level1/wizard_transparent.png"
-dest_files=["res://.godot/imported/wizard_transparent.png-a6cf2d2e40f4530ec6de39b098f8469f.ctex"]
+source_file="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman_idle_animation.png"
+dest_files=["res://.godot/imported/Goblin_Shaman_idle_animation.png-126c7e9d34f4673039488a46f124f851.ctex"]
 
 [params]
 

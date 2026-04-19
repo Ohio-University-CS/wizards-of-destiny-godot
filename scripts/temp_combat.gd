@@ -30,6 +30,7 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var discard_button_path: NodePath = NodePath("PanelContainer/Discard")
 @export var result_overlay_path: NodePath = NodePath("ResultCanvas/ResultOverlay")
 @export var result_label_path: NodePath = NodePath("ResultCanvas/ResultOverlay/ResultText")
+@export var level_background_path: NodePath = NodePath("")
 @export var move_text_hold_duration: float = 0.60
 @export var move_text_fade_duration: float = 0.40
 @export var turn_transition_delay: float = 0.20
@@ -52,6 +53,7 @@ var enemy_name_label: Label = null
 var discard_button: Button = null
 var result_overlay: ColorRect = null
 var result_label: Label = null
+var level_background: TextureRect = null
 var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
 var hand_cards: Array = []
@@ -328,8 +330,21 @@ func _ready():
 	discard_button = get_node_or_null(discard_button_path)
 	result_overlay = get_node_or_null(result_overlay_path)
 	result_label = get_node_or_null(result_label_path)
+	level_background = get_node_or_null(level_background_path)
 	if result_overlay:
 		result_overlay.visible = false
+
+	# Preload a level background texture based on RunManager selection
+	var _rm = get_node_or_null("/root/RunManager")
+	var _floor = 1
+	if _rm:
+		var maybe_floor = _rm.get("level_floor")
+		if maybe_floor != null:
+			_floor = maybe_floor
+	if _floor == 1:
+		var _bg_tex = preload("res://scenes/level1/forest1.png")
+		if level_background:
+			level_background.texture = _bg_tex
 	
 	if player and player.has_signal("died"):
 		if not player.died.is_connected(_on_player_died):
