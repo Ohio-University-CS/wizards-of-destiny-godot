@@ -5,7 +5,7 @@ class_name Shop
  
 @onready var next_stage_button : Button = $"Buttons/Next Stage"
 @onready var cards_container : GridContainer = $CardsContainer
-@onready var items_container : GridContainer = $ItemsContainer
+@onready var items_container : HBoxContainer = $ItemsContainer
 @onready var coins : Label = $CoinAmount
 
 @export var player : Player
