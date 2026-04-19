@@ -112,6 +112,10 @@ func add_item(item : ItemData):
 		# Holy Goblet
 		if item.item_name == "Holy Goblet":
 			player.max_energy += 1
+		
+		# Recalculate stats if player exists
+		if player:
+			player.set_perm_stats()
 
 
 func remove_item(item : ItemData):

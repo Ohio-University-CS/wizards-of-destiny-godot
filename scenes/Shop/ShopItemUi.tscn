@@ -64,3 +64,4 @@ theme_override_fonts/font = ExtResource("3_dmqgc")
 theme_override_font_sizes/font_size = 25
 text = "Item Description"
 horizontal_alignment = 1
+autowrap_mode = 2
