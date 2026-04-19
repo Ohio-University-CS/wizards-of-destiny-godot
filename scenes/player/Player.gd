@@ -192,6 +192,8 @@ func set_perm_stats():
 		modify_stat_permanent("elemental_power", 25)
 	if RunManager.has_item("Boots of the Elves"):
 		modify_stat_permanent("dodge", 5)
+	if RunManager.has_item("Golden Talisman"):
+		modify_stat_permanent("crit_chance", 15)
 
 # ---------------------------------------------------------
 # STRIKE SYSTEM

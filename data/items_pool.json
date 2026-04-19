@@ -1,0 +1,23 @@
+{
+	"common": [
+		"res://items/data/amulet_of_undying.tres",
+		"res://items/data/boots_of_the_elves.tres",
+		"res://items/data/guantlets_of_strength.tres",
+		"res://items/data/ring_of_life.tres",
+		"res://items/data/ruby_hilted_dagger.tres",
+		"res://items/data/rune_of_death.tres",
+		"res://items/data/staff_of_power.tres",
+        "res://items/data/tattered_shawl.tres"
+	],
+	"uncommon": [
+		"res://items/data/comedy_mask.tres",
+		"res://items/data/golden_talisman.tres",
+		"res://items/data/rabbits_paw.tres",
+		"res://items/data/used_breastplate.tres",
+        "res://items/data/white_salt.tres"
+	],
+	"rare": [
+		"res://items/data/holy_goblet.tres",
+        "res://items/data/silver_heart.tres"
+	]
+}
