@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw0exkb62j0ej"
-path="res://.godot/imported/wizard_transparent.png-a6cf2d2e40f4530ec6de39b098f8469f.ctex"
+uid="uid://sfylxrtyc7ib"
+path="res://.godot/imported/forest1.png-ece8d4fb86ae6a6ad8a021d2860e0d6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/level1/wizard_transparent.png"
-dest_files=["res://.godot/imported/wizard_transparent.png-a6cf2d2e40f4530ec6de39b098f8469f.ctex"]
+source_file="res://scenes/level1/forest1.png"
+dest_files=["res://.godot/imported/forest1.png-ece8d4fb86ae6a6ad8a021d2860e0d6e.ctex"]
 
 [params]
 

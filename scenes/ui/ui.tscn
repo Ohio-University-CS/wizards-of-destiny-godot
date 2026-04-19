@@ -78,10 +78,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StrikeDamageIcon" type="TextureRect" parent="PlayerUI" unique_id=1917633088]
-offset_left = 634.0
-offset_top = 208.0
-offset_right = 674.0
-offset_bottom = 248.0
+offset_left = 491.0
+offset_top = 348.0
+offset_right = 532.0
+offset_bottom = 388.0
 scale = Vector2(3, 3)
 texture = ExtResource("5_jcn1r")
 
