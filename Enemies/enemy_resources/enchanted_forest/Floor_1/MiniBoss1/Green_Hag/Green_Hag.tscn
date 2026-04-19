@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_uhib2"]
 [ext_resource type="Resource" uid="uid://63x05tws2ydd" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.tres" id="2_87pkt"]
-[ext_resource type="Texture2D" uid="uid://dx36e1iwt25ch" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.png" id="3_cw4kq"]
+[ext_resource type="Texture2D" uid="uid://2p87mvjkbgcv" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/Green_Hag.png" id="3_cw4kq"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_6kly6"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_rul36"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_qyhw5"]

@@ -2,7 +2,7 @@
 	"common": [
 		"res://items/data/common/amulet_of_undying.tres",
 		"res://items/data/common/boots_of_the_elves.tres",
-		"res://items/data/common/guantlets_of_strength.tres",
+		"res://items/data/common/gauntlets_of_strength.tres",
 		"res://items/data/common/ring_of_life.tres",
 		"res://items/data/common/ruby_hilted_dagger.tres",
 		"res://items/data/common/rune_of_death.tres",

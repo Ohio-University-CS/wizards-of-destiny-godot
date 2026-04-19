@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
 [ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/common_cards/countermeasures.tres" id="3_35ukv"]
 [ext_resource type="PackedScene" uid="uid://3jgaiifsw41v" path="res://scenes/Shop/ShopItemUi.tscn" id="3_knd51"]
+[ext_resource type="PackedScene" uid="uid://ka2a6tf24wbt" path="res://scenes/Shop/ShopBuffUi.tscn" id="4_foy5n"]
 [ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
 [ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
 [ext_resource type="Resource" uid="uid://n2pf7h4xkg51" path="res://cards/data/magician_deck/common_cards/burning_hands.tres" id="7_kx8h1"]
@@ -50,15 +51,11 @@
 [ext_resource type="Resource" uid="uid://cjiqxdd8rxubd" path="res://cards/data/magician_deck/rare_cards/grand_finale.tres" id="35_kkcac"]
 [ext_resource type="Resource" uid="uid://s6osdcqxapgy" path="res://cards/data/magician_deck/rare_cards/thunderwave.tres" id="37_8e5es"]
 [ext_resource type="Resource" uid="uid://cw0ra5ytlq0fk" path="res://cards/data/magician_deck/rare_cards/enchant.tres" id="38_1t1sk"]
-[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="48_q246s"]
-[ext_resource type="Resource" uid="uid://bc1ywcyadf05g" path="res://items/data/common/amulet_of_undying.tres" id="49_knd51"]
-[ext_resource type="Resource" uid="uid://dge6lo4auctby" path="res://items/data/common/gauntlets_of_strength.tres" id="50_foy5n"]
-[ext_resource type="Resource" uid="uid://55nl2xyq0aep" path="res://items/data/common/boots_of_the_elves.tres" id="51_1l46u"]
-[ext_resource type="Resource" uid="uid://cryogkau5nqi1" path="res://items/data/common/rune_of_death.tres" id="52_ic4l5"]
-[ext_resource type="Resource" uid="uid://jxewo2y4e7t1" path="res://items/data/uncommon/comedy_mask.tres" id="54_tyn04"]
-[ext_resource type="Resource" uid="uid://c7qh83akywuba" path="res://items/data/uncommon/white_salt.tres" id="55_rx2kx"]
-[ext_resource type="Resource" uid="uid://bab1qy5wbwvkj" path="res://items/data/common/tattered_shawl.tres" id="56_vrljd"]
-[ext_resource type="Resource" uid="uid://ca28xndumf42a" path="res://items/data/common/ring_of_life.tres" id="57_8apbd"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="49_knd51"]
+[ext_resource type="Resource" uid="uid://c846myfc0mwyx" path="res://scenes/Shop/buff_data/scroll_large_dmg.tres" id="50_foy5n"]
+[ext_resource type="Resource" uid="uid://cmjp607hh26ws" path="res://scenes/Shop/buff_data/scroll_large_hp.tres" id="51_1l46u"]
+[ext_resource type="Resource" uid="uid://b3sqhk37nuul8" path="res://scenes/Shop/buff_data/scroll_small_dmg.tres" id="52_ic4l5"]
+[ext_resource type="Resource" uid="uid://35ne5u1lmchj" path="res://scenes/Shop/buff_data/scroll_small_hp.tres" id="53_tyn04"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -74,8 +71,9 @@ script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
 shop_item_scene = ExtResource("3_knd51")
+shop_buff_scene = ExtResource("4_foy5n")
 available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("12_ed28i"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("20_w35uw"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
-available_items = Array[ExtResource("48_q246s")]([ExtResource("49_knd51"), ExtResource("50_foy5n"), ExtResource("51_1l46u"), ExtResource("52_ic4l5"), ExtResource("54_tyn04"), ExtResource("55_rx2kx"), ExtResource("56_vrljd"), ExtResource("57_8apbd")])
+shop_buffs = Array[ExtResource("49_knd51")]([ExtResource("50_foy5n"), ExtResource("51_1l46u"), ExtResource("52_ic4l5"), ExtResource("53_tyn04")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -98,15 +96,6 @@ offset_top = 74.0
 offset_right = 1890.0
 offset_bottom = 129.0
 text = "50"
-label_settings = SubResource("LabelSettings_1g71r")
-
-[node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
-layout_mode = 0
-offset_left = 997.0
-offset_top = 607.0
-offset_right = 1289.0
-offset_bottom = 662.0
-text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="CardsContainer" type="GridContainer" parent="." unique_id=1152559202]
@@ -135,6 +124,20 @@ offset_left = 2.5199585
 offset_top = 35.11998
 offset_right = 2.6398926
 offset_bottom = 34.879974
+theme_override_constants/separation = 180
+alignment = 1
+
+[node name="BuffsContainer" type="HBoxContainer" parent="." unique_id=1900530663]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_top = 0.16100001
+anchor_right = 0.73300004
+anchor_bottom = 0.314
+offset_left = 2.5199585
+offset_top = 536.12
+offset_right = 2.6398926
+offset_bottom = 535.88
 theme_override_constants/separation = 180
 alignment = 1
 
