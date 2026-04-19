@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cnh1k7dqbeh6p" path="res://scenes/main_menu/Alphabet-1.png.png" id="4_8wk7e"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="5_e4vlm"]
 [ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="5_q0knb"]
-[ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="6_q0knb"]
 [ext_resource type="Texture2D" uid="uid://cinsacv227qyx" path="res://scenes/main_menu/Alphabet-4.png.png" id="6_seilu"]
 [ext_resource type="Texture2D" uid="uid://b1xr3qw02ree6" path="res://scenes/main_menu/Menu_info_button.png" id="7_mg445"]
+[ext_resource type="Texture2D" uid="uid://bnh78kd1e0um6" path="res://scenes/main_menu/Alphabet-2.png.png" id="8_8wk7e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
 font_size = 50
@@ -104,10 +104,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_0qkqs")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1248051304]
-position = Vector2(121.000015, 55.250004)
-scale = Vector2(0.21777777, 0.21770833)
-texture = ExtResource("6_q0knb")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1246314232]
+position = Vector2(136.00002, 68.25)
+scale = Vector2(0.28093746, 0.34030262)
+texture = ExtResource("8_8wk7e")
 
 [node name="Info" type="Button" parent="Buttons" unique_id=411843384]
 layout_mode = 0
