@@ -15,9 +15,6 @@ class_name Shop
 # temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
-# temporary item pool
-@export var available_items : Array[ItemData]
-
 # number of everything that appears in shop
 var shop_card_amount : int = 4
 var shop_item_amount : int = 3
@@ -71,7 +68,11 @@ func _generate_shop():
 	for child in items_container.get_children():
 		child.queue_free()
 	
-	var item_pool = available_items.duplicate()
+	var item_pool = []
+	for item in ItemUnlockManager.get_unlocked_items():
+		if not RunManager.has_item(item.item_name):
+			item_pool.append(item)
+	
 	for i in range(item_pool.size() - 1, 0, -1):
 		var j = rng.randi_range(0, i)
 		var temp = item_pool[i]

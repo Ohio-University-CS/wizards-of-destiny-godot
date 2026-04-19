@@ -16,6 +16,7 @@ var active_passives: Array = []
 # Other variables for random cards/effects
 var potential_destruction : int = 0
 var tattered_shawl : bool = true
+var silver_heart : int = 0
 
 @export var initialized : bool = false
 
@@ -337,13 +338,16 @@ func _do_strike_on_target(target):
 			emit_signal("status_expired", "shock")
 	dmg = int(dmg * damage_multiplier)
 	
-	# Evasion Ritual
-	if active_passives.has("Evasion"):
-		dmg /= 2
-	
 	# Crit
 	if try_crit():
 		dmg += get_crit_damage()
+	
+	# Silver Heart
+	dmg += silver_heart
+	
+	# Evasion Ritual
+	if active_passives.has("Evasion"):
+		dmg /= 2
 	
 	#deal normal damage once
 	if dmg > 0:
@@ -456,7 +460,12 @@ func start_turn():
 	# Rituals
 	if active_passives.has("Evasion"):
 		active_passives.erase("Evasion")
-
+	
+	# Used Breastplate
+	if RunManager.has_item("Used Breastplate"):
+		if status_effects["block"] > 0:
+			apply_status("empower", 1)
+	
 	# Reset block each turn
 	status_effects["block"] = 0
 	
@@ -509,14 +518,18 @@ func take_damage(amount: int, _element: String = ""):
 		status_effects["corroded"] -= 1
 		if status_effects["corroded"] == 0:
 			emit_signal("status_expired", "corroded")
-
+	
 	# Block reduces damage
 	if status_effects["block"] > 0:
 		var block_amt = status_effects["block"]
 		var reduced = min(block_amt, dmg)
 		dmg -= reduced
 		status_effects["block"] -= reduced
-
+	
+	# Silver Heart ticks up
+	if dmg > 0:
+		silver_heart += 2
+	
 	current_health -= dmg
 	emit_signal("health_changed", current_health)
 	# Emit damaged for UI indicators
@@ -546,7 +559,9 @@ func deal_damage(amount: int, element: String = "", include_base_damage: bool = 
 		"poison": dmg += get_poison_power()
 		"electric": dmg += get_electric_power()
 	
-	# Freeze does not affect elemental damage (handled in perform_strike)
+	# Silver Heart
+	dmg += silver_heart
+	
 	# Crit check
 	if try_crit():
 		dmg += get_crit_damage()
@@ -683,4 +698,12 @@ func try_dodge() -> bool:
 
 
 func _die():
-	emit_signal("died")
+	# Rabbit's Paw
+	if RunManager.has_item("Rabbit's Paw"):
+		RunManager.remove_item_by_name("Rabbit's Paw")
+		@warning_ignore("narrowing_conversion")
+		var new_hp : int = get_max_health() * 0.25
+		heal(new_hp)
+		print("Rabbit's Paw triggers")
+	else:
+		emit_signal("died")

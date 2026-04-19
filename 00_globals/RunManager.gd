@@ -36,6 +36,10 @@ var last_combat_result : Dictionary = {}
 # ----------------
 
 func start_new_run(starting_player : Player, new_seed : int = -1):
+	# Unlock all items at the start
+	for item in ItemUnlockManager.all_items:
+		ItemUnlockManager.unlock_item(item.item_name)
+
 	item_inventory.clear()
 	player = starting_player
 	coins = 10
@@ -47,6 +51,7 @@ func start_new_run(starting_player : Player, new_seed : int = -1):
 		run_seed = new_seed
 	_rng.seed = run_seed
 	print("Run Seed: ", run_seed)
+
 
 func get_rng() -> RandomNumberGenerator:
 	return _rng
@@ -103,8 +108,18 @@ func has_item(iname : String) -> bool:
 func add_item(item : ItemData):
 	if item not in item_inventory:
 		item_inventory.append(item)
+		
+		# Holy Goblet
+		if item.item_name == "Holy Goblet":
+			player.max_energy += 1
 
 
 func remove_item(item : ItemData):
 	if item in item_inventory:
 		item_inventory.erase(item)
+
+
+func remove_item_by_name(iname : String):
+	for i in item_inventory:
+		if iname == i.item_name:
+			item_inventory.erase(i)

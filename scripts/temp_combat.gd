@@ -375,6 +375,8 @@ func _ready():
 	else:
 		set_process(false)
 
+	# Extra setup
+	player.silver_heart = 0
 
 	_start_player_turn()
 

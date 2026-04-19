@@ -9,14 +9,17 @@ var unlocked_items : Array[String] = []
 
 
 func _ready():
-	load_items_from_json("res://data/item_pools.json")
+	load_items_from_json("res://data/items_pool.json")
 
 
 func load_items_from_json(path: String):
+	print("hey, items loading!")
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
+		print("file exists, phew")
 		var data = JSON.parse_string(file.get_as_text())
 		if typeof(data) == TYPE_DICTIONARY:
+			print("made it to this point")
 			for rarity in data.keys():
 				for res_path in data[rarity]:
 					var item_res = load(res_path)
@@ -24,6 +27,8 @@ func load_items_from_json(path: String):
 						all_items.append(item_res)
 						print("ItemManager: Loaded ", item_res.item_name)
 		file.close()
+	else:
+		print("no bueno")
 
 
 # Call to unlock an item by name or id
