@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://dyrpvq5cg2tgc"]
+
+[ext_resource type="Texture2D" uid="uid://dcq40hi733at4" path="res://scenes/Shop/sprites/potion_red.png" id="1_i42pk"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_1bsgl"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_i42pk"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_1bsgl"]
+
+[sub_resource type="Resource" id="Resource_1bsgl"]
+script = ExtResource("2_1bsgl")
+metadata/_custom_type_script = "uid://d0wbn5e2s0ygl"
+
+[resource]
+script = ExtResource("2_i42pk")
+buff_name = "Potion of Major Healing"
+description = "Heal to full health"
+price = 3
+art = ExtResource("1_i42pk")
+potion_effect = Array[ExtResource("2_1bsgl")]([SubResource("Resource_1bsgl")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

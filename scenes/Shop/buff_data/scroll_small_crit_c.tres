@@ -17,4 +17,5 @@ description = "Gain 2% Crit Chance"
 price = 1
 art = ExtResource("1_i58yu")
 scroll_effect = Array[ExtResource("3_mccds")]([SubResource("Resource_5yco3")])
+potion_effect = null
 metadata/_custom_type_script = "uid://b47bvaygn543d"

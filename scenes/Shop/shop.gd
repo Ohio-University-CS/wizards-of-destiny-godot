@@ -201,6 +201,8 @@ func _get_buff_price(buff : BuffData) -> int:
 			return 40
 		buff.Price.HIGH:
 			return 60
+		buff.Price.VERY_HIGH:
+			return 70
 		_:
 			return 10
 
@@ -229,6 +231,11 @@ func _on_buff_purchased(buff_data : BuffData):
 	if not buff_data.scroll_effect.size() == 0:
 		for e in buff_data.scroll_effect:
 			e.apply_scroll()
+	
+	# POTIONS
+	if not buff_data.potion_effect.size() == 0:
+		for p in buff_data.potion_effect:
+			p.apply_potion()
 	
 	# Remove the purchased buff UI from the shop
 	for child in buffs_container.get_children():

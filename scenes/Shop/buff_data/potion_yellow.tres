@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://cfotufscwvb0n"]
+
+[ext_resource type="Texture2D" uid="uid://4q6pkoapp8d6" path="res://scenes/Shop/sprites/potion_yellow.png" id="1_u264b"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_t1kk7"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="3_ixl6f"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="4_yf742"]
+
+[sub_resource type="Resource" id="Resource_1bsgl"]
+script = ExtResource("2_t1kk7")
+potion_color = 6
+metadata/_custom_type_script = "uid://d0wbn5e2s0ygl"
+
+[resource]
+script = ExtResource("3_ixl6f")
+buff_name = "Potion of Minor Healing"
+description = "Heal 25% of your Max Health"
+price = 1
+art = ExtResource("1_u264b")
+potion_effect = Array[ExtResource("2_t1kk7")]([SubResource("Resource_1bsgl")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

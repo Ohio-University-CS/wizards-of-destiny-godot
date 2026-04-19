@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="1_7fn42"]
 [ext_resource type="Texture2D" uid="uid://cmmuurswd5qx4" path="res://scenes/Shop/sprites/scroll_large_hp.png" id="1_rsn06"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_5yco3"]
 [ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_r3gr4"]
 
 [sub_resource type="Resource" id="Resource_5yco3"]
@@ -13,7 +14,7 @@ metadata/_custom_type_script = "uid://6rvao114epum"
 script = ExtResource("1_7fn42")
 buff_name = "Scroll of Major Vitality"
 description = "Gain 5 Max Health"
-price = 2
+price = 3
 art = ExtResource("1_rsn06")
 scroll_effect = Array[ExtResource("3_r3gr4")]([SubResource("Resource_5yco3")])
 metadata/_custom_type_script = "uid://b47bvaygn543d"

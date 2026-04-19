@@ -17,4 +17,5 @@ description = "Gain 4 Crit Damage"
 price = 1
 art = ExtResource("1_j7pxq")
 scroll_effect = Array[ExtResource("3_gfnfw")]([SubResource("Resource_5yco3")])
+potion_effect = null
 metadata/_custom_type_script = "uid://b47bvaygn543d"

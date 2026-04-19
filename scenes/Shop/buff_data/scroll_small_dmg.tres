@@ -16,4 +16,5 @@ description = "Gain 1 Damage"
 price = 1
 art = ExtResource("1_gecj5")
 scroll_effect = Array[ExtResource("3_lvj7o")]([SubResource("Resource_8hwok")])
+potion_effect = null
 metadata/_custom_type_script = "uid://b47bvaygn543d"

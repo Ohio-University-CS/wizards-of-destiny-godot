@@ -67,6 +67,9 @@
 [ext_resource type="Resource" uid="uid://cgeqmk02mov2t" path="res://scenes/Shop/buff_data/scroll_small_crit_c.tres" id="61_2wacr"]
 [ext_resource type="Resource" uid="uid://wl8or41qows0" path="res://scenes/Shop/buff_data/scroll_small_crit_d.tres" id="62_kkxur"]
 [ext_resource type="Resource" uid="uid://hfimc2dgfyjm" path="res://scenes/Shop/buff_data/scroll_small_elemental.tres" id="64_xlaao"]
+[ext_resource type="Resource" uid="uid://7284urq0pn1q" path="res://scenes/Shop/buff_data/potion_orange.tres" id="66_rukus"]
+[ext_resource type="Resource" uid="uid://dyrpvq5cg2tgc" path="res://scenes/Shop/buff_data/potion_red.tres" id="67_g5i6s"]
+[ext_resource type="Resource" uid="uid://cfotufscwvb0n" path="res://scenes/Shop/buff_data/potion_yellow.tres" id="68_n7mmm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -84,7 +87,7 @@ shop_card_scene = ExtResource("2_nj4jc")
 shop_item_scene = ExtResource("3_knd51")
 shop_buff_scene = ExtResource("4_foy5n")
 available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("12_ed28i"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("20_w35uw"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
-shop_buffs = Array[ExtResource("49_knd51")]([ExtResource("51_puws4"), ExtResource("52_q5ynm"), ExtResource("53_lrx1y"), ExtResource("54_rukus"), ExtResource("55_g5i6s"), ExtResource("56_n7mmm"), ExtResource("50_foy5n"), ExtResource("58_k11dl"), ExtResource("51_1l46u"), ExtResource("60_6ylni"), ExtResource("61_2wacr"), ExtResource("62_kkxur"), ExtResource("52_ic4l5"), ExtResource("64_xlaao"), ExtResource("53_tyn04")])
+shop_buffs = Array[ExtResource("49_knd51")]([ExtResource("51_puws4"), ExtResource("52_q5ynm"), ExtResource("53_lrx1y"), ExtResource("54_rukus"), ExtResource("55_g5i6s"), ExtResource("56_n7mmm"), ExtResource("50_foy5n"), ExtResource("58_k11dl"), ExtResource("51_1l46u"), ExtResource("60_6ylni"), ExtResource("61_2wacr"), ExtResource("62_kkxur"), ExtResource("52_ic4l5"), ExtResource("64_xlaao"), ExtResource("53_tyn04"), ExtResource("66_rukus"), ExtResource("67_g5i6s"), ExtResource("68_n7mmm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
