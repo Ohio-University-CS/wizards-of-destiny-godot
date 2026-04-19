@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://cgeqmk02mov2t"]
+
+[ext_resource type="Texture2D" uid="uid://baaslnkgis7vc" path="res://scenes/Shop/sprites/scroll_small_critc.png" id="1_i58yu"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_igg2w"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_mccds"]
+
+[sub_resource type="Resource" id="Resource_5yco3"]
+script = ExtResource("3_mccds")
+stat = 3
+amount = 2
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_igg2w")
+buff_name = "Scroll of Minor Accuracy"
+description = "Gain 2% Crit Chance"
+price = 1
+art = ExtResource("1_i58yu")
+scroll_effect = Array[ExtResource("3_mccds")]([SubResource("Resource_5yco3")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

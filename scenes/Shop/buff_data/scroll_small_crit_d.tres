@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://wl8or41qows0"]
+
+[ext_resource type="Texture2D" uid="uid://dkva4x5dmuusa" path="res://scenes/Shop/sprites/scroll_small_critd.png" id="1_j7pxq"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_md8ys"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_gfnfw"]
+
+[sub_resource type="Resource" id="Resource_5yco3"]
+script = ExtResource("3_gfnfw")
+stat = 4
+amount = 4
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_md8ys")
+buff_name = "Scroll of Minor Smite"
+description = "Gain 4 Crit Damage"
+price = 1
+art = ExtResource("1_j7pxq")
+scroll_effect = Array[ExtResource("3_gfnfw")]([SubResource("Resource_5yco3")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://6rvao114epum"
 
 [resource]
 script = ExtResource("2_lvj7o")
-buff_name = "Scroll of Minor Damage"
+buff_name = "Scroll of Minor Strength"
 description = "Gain 1 Damage"
 price = 1
 art = ExtResource("1_gecj5")

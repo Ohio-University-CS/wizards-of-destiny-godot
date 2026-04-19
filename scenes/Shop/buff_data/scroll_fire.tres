@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://b1u1h7601l6jq"]
+
+[ext_resource type="Texture2D" uid="uid://baf1jrcwsssdg" path="res://scenes/Shop/sprites/scroll_fire.png" id="1_wq6xm"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_ul7f0"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_3jd08"]
+
+[sub_resource type="Resource" id="Resource_4722s"]
+script = ExtResource("3_3jd08")
+stat = 5
+amount = 3
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_ul7f0")
+buff_name = "Scroll of Pyromancy"
+description = "Gain 3 Fire Damage"
+price = 1
+art = ExtResource("1_wq6xm")
+scroll_effect = Array[ExtResource("3_3jd08")]([SubResource("Resource_4722s")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://6rvao114epum"
 
 [resource]
 script = ExtResource("2_f0bf7")
-buff_name = "Scroll of Major Damage"
+buff_name = "Scroll of Major Strength"
 description = "Gain 2 Damage"
 price = 2
 art = ExtResource("1_ab61y")

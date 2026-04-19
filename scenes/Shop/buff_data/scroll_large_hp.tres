@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://6rvao114epum"
 
 [resource]
 script = ExtResource("1_7fn42")
-buff_name = "Scroll of Major Health"
+buff_name = "Scroll of Major Vitality"
 description = "Gain 5 Max Health"
 price = 2
 art = ExtResource("1_rsn06")

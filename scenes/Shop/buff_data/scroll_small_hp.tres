@@ -11,9 +11,8 @@ metadata/_custom_type_script = "uid://6rvao114epum"
 
 [resource]
 script = ExtResource("2_skmxi")
-buff_name = "Scroll of Minor Health"
+buff_name = "Scroll of Minor Vitality"
 description = "Gain 2 Max Health"
-price = 1
 art = ExtResource("1_sbee3")
 scroll_effect = Array[ExtResource("3_skmxi")]([SubResource("Resource_4722s")])
 metadata/_custom_type_script = "uid://b47bvaygn543d"

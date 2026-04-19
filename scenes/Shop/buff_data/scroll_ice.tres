@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://bqg8lhkfn1byy"]
+
+[ext_resource type="Texture2D" uid="uid://ca5jid5gs51eg" path="res://scenes/Shop/sprites/scroll_ice.png" id="1_c8bvg"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_kris1"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_0qb87"]
+
+[sub_resource type="Resource" id="Resource_4722s"]
+script = ExtResource("3_0qb87")
+stat = 6
+amount = 3
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_kris1")
+buff_name = "Scroll of Cryomancy"
+description = "Gain 3 Ice Damage"
+price = 1
+art = ExtResource("1_c8bvg")
+scroll_effect = Array[ExtResource("3_0qb87")]([SubResource("Resource_4722s")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"
