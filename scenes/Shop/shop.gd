@@ -246,7 +246,7 @@ func _on_buff_purchased(buff_data : BuffData):
 
 
 # Called when an item is purchased from the shop
-func _on_item_purchased(item_data):
+func _on_item_purchased(item_data : ItemData):
 	# Add the item to the player's inventory
 	RunManager.add_item(item_data)
 	# Remove the purchased item UI from the shop
@@ -254,6 +254,8 @@ func _on_item_purchased(item_data):
 		if child.item_data == item_data:
 			child.queue_free()
 			break
+	if item_data.item_name == "Comedy Mask":
+		_comedy_mask_update()
 	_update_coin_visual()
 
 
@@ -283,3 +285,15 @@ func update_buttons():
 			child.buy_button.disabled = true
 		else:
 			child.buy_button.disabled = false
+
+
+func _comedy_mask_update():
+	for child in cards_container.get_children():
+		child.price *= 0.75
+		child.buy_button.text = "Buy (" + str(child.price) + ")"
+	for child in items_container.get_children():
+		child.price *= 0.75
+		child.buy_button.text = "Buy (" + str(child.price) + ")"
+	for child in buffs_container.get_children():
+		child.price *= 0.75
+		child.buy_button.text = "Buy (" + str(child.price) + ")"
