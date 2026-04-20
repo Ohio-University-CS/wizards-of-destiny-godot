@@ -259,7 +259,27 @@ func _on_item_purchased(item_data):
 
 func _update_coin_visual():
 	coins.text = str(RunManager.coins)
+	update_buttons()
 
 
 func _on_next_stage_pressed():
 	FlowManager.after_shop()
+
+
+func update_buttons():
+	var coin_amt = RunManager.coins
+	for child in cards_container.get_children():
+		if child.price > coin_amt:
+			child.buy_button.disabled = true
+		else:
+			child.buy_button.disabled = false
+	for child in items_container.get_children():
+		if child.price > coin_amt:
+			child.buy_button.disabled = true
+		else:
+			child.buy_button.disabled = false
+	for child in buffs_container.get_children():
+		if child.price > coin_amt:
+			child.buy_button.disabled = true
+		else:
+			child.buy_button.disabled = false
