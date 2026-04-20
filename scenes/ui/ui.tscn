@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
+[ext_resource type="Texture2D" uid="uid://8bg77iqlhr4t" path="res://scenes/ui/energy_ball.png" id="4_4kltc"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://bpwkk8nabxiqh" path="res://sprites/strike_visual.png" id="5_jcn1r"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
@@ -50,7 +51,29 @@ theme_override_colors/font_outline_color = Color(0, 0.25, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 
+[node name="EnergySprite" type="TextureRect" parent="PlayerUI" unique_id=807512731]
+offset_left = 72.0
+offset_top = 715.0
+offset_right = 112.0
+offset_bottom = 755.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_4kltc")
+
+[node name="Label" type="Label" parent="PlayerUI/EnergySprite" unique_id=1233550166]
+layout_mode = 0
+offset_left = 0.6666666
+offset_top = 9.333313
+offset_right = 39.666668
+offset_bottom = 29.333313
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("6_uegxj")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_7vp6q")
+
 [node name="PlayerManaBar" type="ProgressBar" parent="PlayerUI" unique_id=1383878551]
+visible = false
 modulate = Color(0.2, 0.6, 1, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,8 +85,6 @@ offset_bottom = -219.0
 grow_horizontal = 2
 grow_vertical = 2
 show_percentage = false
-script = ExtResource("4_7vp6q")
-target_path = NodePath("../Player")
 
 [node name="PlayerName" type="Label" parent="PlayerUI" unique_id=994193201]
 offset_left = -1.0
