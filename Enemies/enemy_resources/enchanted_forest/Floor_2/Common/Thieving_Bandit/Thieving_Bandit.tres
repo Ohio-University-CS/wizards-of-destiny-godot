@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://c2p10wfjjc68f"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_ylc2u"]
+[ext_resource type="Resource" uid="uid://b6qrro6jhpe64" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Thieving_Bandit/backstab.tres" id="2_ksg53"]
+[ext_resource type="Resource" uid="uid://dhecwhd6jktht" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Thieving_Bandit/dagger.tres" id="3_artbn"]
+[ext_resource type="Resource" uid="uid://dxyijvxfqwntw" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Thieving_Bandit/sly_slice.tres" id="4_fjngb"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="5_novsq"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="6_brki7"]
+
+[resource]
+script = ExtResource("6_brki7")
+enemy_name = "Thieving Bandit"
+hp_variation = Array[int]([55, 60, 65])
+moves = Array[ExtResource("1_ylc2u")]([ExtResource("2_ksg53"), ExtResource("3_artbn"), ExtResource("4_fjngb")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

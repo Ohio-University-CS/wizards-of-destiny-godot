@@ -117,7 +117,6 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("2_f0hci")
 enemy_data = ExtResource("3_1hkhi")
-debug_status_vfx_test = false
 debug_test_status = "block"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=354001421]
@@ -167,6 +166,7 @@ offset_bottom = -1.0
 theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_v8vrd")
 theme_override_font_sizes/font_size = 28
 text = "Goblin Warrior"
 horizontal_alignment = 1
