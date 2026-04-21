@@ -1,4 +1,4 @@
-# Emperor
+# moon
 extends Control
 
 # Button nodes

@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
 [ext_resource type="Resource" uid="uid://c4fm0old2um78" path="res://cards/data/magician_deck/common_cards/arcane_insight.tres" id="11_j512n"]
 [ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
-[ext_resource type="Resource" uid="uid://d3rq2pnpk7isn" path="res://cards/data/magician_deck/common_cards/elemental_storm.tres" id="12_ed28i"]
+[ext_resource type="Resource" uid="uid://r28srv53eyoc" path="res://cards/data/magician_deck/common_cards/elemental_storm.tres" id="12_ed28i"]
 [ext_resource type="Resource" uid="uid://d2cdt5te7vce" path="res://cards/data/magician_deck/common_cards/fire_storm.tres" id="13_2fwob"]
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
@@ -33,7 +33,7 @@
 [ext_resource type="Resource" uid="uid://cuixxyk63vg8b" path="res://cards/data/magician_deck/uncommon_cards/pool_of_essence.tres" id="18_t785l"]
 [ext_resource type="Resource" uid="uid://da7mw5k6xppkc" path="res://cards/data/magician_deck/uncommon_cards/surge.tres" id="19_r34ar"]
 [ext_resource type="Resource" uid="uid://bnm7hlx1cloet" path="res://cards/data/magician_deck/uncommon_cards/conduit.tres" id="20_mmk1d"]
-[ext_resource type="Resource" uid="uid://dc7rqa345pgir" path="res://cards/data/magician_deck/common_cards/mystic_bolt.tres" id="20_w35uw"]
+[ext_resource type="Resource" uid="uid://d0qsc57g7flt0" path="res://cards/data/magician_deck/common_cards/mystic_bolt.tres" id="20_w35uw"]
 [ext_resource type="Resource" uid="uid://brlv52tivlplm" path="res://cards/data/magician_deck/rare_cards/meteor_storm.tres" id="21_s6mfd"]
 [ext_resource type="Resource" uid="uid://dj18gihhkkxgx" path="res://cards/data/magician_deck/common_cards/rage.tres" id="22_s6mfd"]
 [ext_resource type="Resource" uid="uid://clfpdx7831vqr" path="res://cards/data/magician_deck/uncommon_cards/precision.tres" id="23_kfoi1"]
@@ -71,6 +71,7 @@
 [ext_resource type="Resource" uid="uid://dyrpvq5cg2tgc" path="res://scenes/Shop/buff_data/potion_red.tres" id="67_g5i6s"]
 [ext_resource type="Resource" uid="uid://cfotufscwvb0n" path="res://scenes/Shop/buff_data/potion_yellow.tres" id="68_n7mmm"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="70_g5i6s"]
+[ext_resource type="PackedScene" uid="uid://cmlpytnj11d5n" path="res://scenes/deck_view/deck_view.tscn" id="72_n7mmm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -187,3 +188,7 @@ text = "View Deck"
 
 [node name="Player" type="Node" parent="." unique_id=1821145247]
 script = ExtResource("10_nj4jc")
+
+[node name="DeckView" parent="." unique_id=868404110 instance=ExtResource("72_n7mmm")]
+visible = false
+layout_mode = 1

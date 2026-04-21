@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d3rq2pnpk7isn"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://r28srv53eyoc"]
 
 [ext_resource type="Texture2D" uid="uid://6scfl45phbay" path="res://cards/sprites/Elemental_Storm.png" id="1_n1tkw"]
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_kktvk"]

@@ -1,4 +1,4 @@
- # Emperor
+ # star
 extends Control
 
 # Button nodes
