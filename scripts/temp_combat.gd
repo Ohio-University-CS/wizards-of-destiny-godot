@@ -62,7 +62,11 @@ var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var game_over_scene = preload("res://scenes/game_end/Game Over.tscn")
+var game_won_scene = preload("res://scenes/game_end/Game_Won.tscn")
 var pause_menu = null
+var game_over = null
+var game_won = null
 
 enum TurnState {
 	PLAYER,
@@ -115,7 +119,10 @@ func load_enemy_pool(level: String, floor_num: int, stage: int) -> Array[PackedS
 
 func _ready():
 	enemy_rng.randomize()
-
+	
+	#--------------------------------
+	#Pause Menu Setup
+	#--------------------------------
 	var pause_layer = CanvasLayer.new()
 	pause_layer.layer = 100
 	add_child(pause_layer)
@@ -124,7 +131,33 @@ func _ready():
 	pause_menu.visible = false
 	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	pause_layer.add_child(pause_menu)
+	
+	#--------------------------------
+	#Game Over Setup
+	#--------------------------------
+	var game_over_layer = CanvasLayer.new()
+	game_over_layer.layer = 101
+	add_child(game_over_layer)
 
+	game_over = game_over_scene.instantiate()
+	game_over.set_anchors_preset(Control.PRESET_FULL_RECT)
+	game_over.visible = false
+	game_over.process_mode = Node.PROCESS_MODE_ALWAYS
+	game_over_layer.add_child(game_over)
+	
+	#--------------------------------
+	#Game Won Setup
+	#--------------------------------
+	var game_won_layer = CanvasLayer.new()
+	game_won_layer.layer = 102
+	add_child(game_won_layer)
+
+	game_won = game_won_scene.instantiate()
+	game_won.set_anchors_preset(Control.PRESET_FULL_RECT)
+	game_won.visible = false
+	game_won.process_mode = Node.PROCESS_MODE_ALWAYS
+	game_won_layer.add_child(game_won)
+	
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
@@ -973,6 +1006,7 @@ func _connect_ui_signals() -> void:
 
 func _on_player_died() -> void:
 	_show_result(false)
+	show_game_over()
 
 
 func _on_opponent_died() -> void:
@@ -1249,3 +1283,11 @@ func _unhandled_input(event):
 func toggle_pause():
 	get_tree().paused = !get_tree().paused
 	pause_menu.visible = get_tree().paused
+	
+func show_game_over():
+	get_tree().paused = true
+	game_over.visible = true
+
+func show_game_won():
+	get_tree().paused = true
+	game_won.visible = true
