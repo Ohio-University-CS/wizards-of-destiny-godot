@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dc7rqa345pgir"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://d0qsc57g7flt0"]
 
 [ext_resource type="Texture2D" uid="uid://jyf2gprpxcxr" path="res://cards/sprites/Mystic_Bolt.png" id="1_kocrw"]
 [ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="2_iv2yh"]
