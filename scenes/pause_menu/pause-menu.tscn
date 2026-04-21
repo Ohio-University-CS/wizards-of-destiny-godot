@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://e4vy1lgo8fah" path="res://scenes/pause_menu/RESUME.png" id="5_i2b8q"]
 [ext_resource type="Texture2D" uid="uid://6d5x6qeuy6my" path="res://scenes/settings_menu/sound/Sound_Icon.png" id="5_uf7x1"]
 [ext_resource type="Texture2D" uid="uid://b3126nvmfyvs6" path="res://scenes/settings_menu/controls/Controls_Icon.png" id="6_4bbrr"]
+[ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="6_ct2hx"]
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="7_516im"]
 [ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="8_ykakm"]
 [ext_resource type="Texture2D" uid="uid://cgrsfwvngllyt" path="res://scenes/settings_menu/graphics/FullScreen_Icon.png" id="9_i2b8q"]
@@ -306,7 +307,7 @@ scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("1_hoajq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Pause_menu_options/Buttons/resume_button" unique_id=505632448]
-position = Vector2(95, 74.99999)
+position = Vector2(95, 72.99999)
 scale = Vector2(0.4555, 0.5576648)
 texture = ExtResource("5_i2b8q")
 
@@ -329,23 +330,10 @@ position = Vector2(169, 57)
 scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("1_hoajq")
 
-[node name="resume_label" type="Label" parent="Pause_menu_options/Buttons/settings_button" unique_id=588422640]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -59.5
-offset_right = 171.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Settings"
-label_settings = SubResource("LabelSettings_hoajq")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Pause_menu_options/Buttons/settings_button" unique_id=48619080]
+position = Vector2(169, 55.00001)
+scale = Vector2(0.39449987, 0.52149)
+texture = ExtResource("6_ct2hx")
 
 [node name="quit_button" type="Button" parent="Pause_menu_options/Buttons" unique_id=496618394]
 layout_mode = 1
