@@ -163,6 +163,7 @@ func _ready():
 	#------------------------------
 	var stored_player : Player = RunManager.player
 	if stored_player:
+		print("120: STORED PLAYER")
 		player = stored_player
 		if player.get_parent():
 			player.get_parent().remove_child(player)
@@ -177,6 +178,7 @@ func _ready():
 	#-------------------
 	# Locate the player node by common names or by type to avoid null path errors
 	if player == null:
+		print("135 PLAYER == NULL")
 		if has_node("Player"):
 			var maybe_player = get_node("Player")
 			if maybe_player is Player:
@@ -1011,7 +1013,7 @@ func _on_player_died() -> void:
 
 func _on_opponent_died() -> void:
 	_show_result(true)
-	
+	GameEventSignaler.combat_end.emit(player)
 	# Remove temporary cards from all piles
 	if deck:
 		deck.draw_pile = deck.draw_pile.filter(func(card_instance):

@@ -22,8 +22,11 @@ func _ready() -> void:
 func _on_settings_pressed():
 	get_tree().change_scene_to_file("res://scenes/settings_menu/graphics/setttings-menu-graphics.tscn")
 
+
+### WE GOTTA CHANGE THIS BUTTON TO SELECT SAVE OR SOMETHING
 func _on_level_select_pressed():
-	get_tree().change_scene_to_file("res://scenes/Level Select/level_1.tscn")
+	#get_tree().change_scene_to_file("res://scenes/Level Select/level_1.tscn")
+	get_tree().change_scene_to_file("res://save/save_select_screen.tscn")
 
 func _on_collections_pressed():
 	get_tree().change_scene_to_file("res://scenes/collection/collection.tscn")
