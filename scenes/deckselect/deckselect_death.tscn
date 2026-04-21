@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_ta53j"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_cql0h"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_2mlcd"]
+[ext_resource type="Texture2D" uid="uid://c5lej6ejbvorq" path="res://scenes/deckselect/death.png.png" id="4_5p72s"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_5p72s"]
 [ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_ta53j"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_cql0h"]
@@ -53,24 +54,14 @@ scale = Vector2(2, 2)
 icon = ExtResource("3_cql0h")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.49400002
-anchor_top = 0.5
-anchor_right = 0.49400002
-anchor_bottom = 0.5
-offset_left = -84.536
-offset_top = -23.0
-offset_right = 84.464
-offset_bottom = 19.0
-text = "Death"
-label_settings = SubResource("LabelSettings_0qkqs")
-horizontal_alignment = 1
-
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
 position = Vector2(35.5, -215)
 scale = Vector2(0.665625, 0.671875)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1545296030]
+position = Vector2(133, 128)
+scale = Vector2(0.35650003, 0.35673356)
+texture = ExtResource("4_5p72s")
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false
