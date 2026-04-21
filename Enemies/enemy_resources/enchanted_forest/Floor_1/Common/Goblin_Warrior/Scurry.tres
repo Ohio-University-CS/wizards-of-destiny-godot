@@ -25,4 +25,5 @@ name = "Scurry"
 effects = Array[ExtResource("1_5smnl")]([SubResource("Resource_aonfm"), SubResource("Resource_u0bf5")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_aqjsk"), ExtResource("5_n6s80")])
+intent_damage_amount = Array[int]([3])
 metadata/_custom_type_script = "uid://t788w26yn03s"
