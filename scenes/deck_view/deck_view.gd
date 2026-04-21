@@ -2,7 +2,7 @@ extends Control
 class_name DeckView
 
 @onready var back_button : Button = $Buttons/Exit
-@onready var card_list : VBoxContainer = $ScrollContainer/CardList
+@onready var card_list : GridContainer = $ScrollContainer/CardList
 
 
 func _ready() -> void:
@@ -16,13 +16,17 @@ func _on_exit_pressed():
 
 # Call this to populate the deck view with cards
 func show_deck(cards: Array, card_scene: PackedScene):
-	card_list.clear()
+	for child in card_list.get_children():
+		child.queue_free()
 	for card_data in cards:
 		var card_ui = card_scene.instantiate()
 		card_ui.setup(card_data, 0) # 0 disables buy button, or you can add a flag
 		if card_ui.has_node("VBoxContainer/BuyButton"):
 			card_ui.get_node("VBoxContainer/BuyButton").visible = false
+		card_ui.scale *= 1.5
 		card_list.add_child(card_ui)
+	# Ensure the grid container grows with its content for scrolling
+	card_list.custom_minimum_size = card_list.get_combined_minimum_size()
 	visible = true
 
 

@@ -24,20 +24,6 @@ position = Vector2(962, 513)
 scale = Vector2(1.9594998, 1.5952724)
 texture = ExtResource("1_kc8yi")
 
-
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1426185190]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CardList" type="VBoxContainer" parent="ScrollContainer" unique_id=2000000000]
-layout_mode = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Buttons" type="Control" parent="." unique_id=855786591]
 layout_mode = 1
 anchors_preset = 15
@@ -66,3 +52,18 @@ offset_bottom = 74.75
 theme_override_fonts/font = ExtResource("4_ixm8y")
 text = "Back"
 label_settings = SubResource("LabelSettings_7pjx2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1426185190]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 79.0
+offset_right = 1036.333
+offset_bottom = 685.667
+scale = Vector2(1.5, 1.5)
+
+[node name="CardList" type="GridContainer" parent="ScrollContainer" unique_id=587702798]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 4
