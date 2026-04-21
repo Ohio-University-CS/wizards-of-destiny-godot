@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://dqisx8e0rbe2i"]
 
-[ext_resource type="Script" path="res://scenes/deckselect/deckselect_magician.gd" id="1_ru5l6"]
+[ext_resource type="Script" uid="uid://bp6tp7higtw6j" path="res://scenes/deckselect/deckselect_magician.gd" id="1_ru5l6"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_j0yuy"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_4nt8v"]
 [ext_resource type="Texture2D" uid="uid://c8i7sbqvtt28r" path="res://scenes/deckselect/Magician_Card.png" id="4_2qfyw"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="5_nb7p2"]
+[ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_4nt8v"]
+[ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_2qfyw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
 font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
-font_size = 50
 
 [node name="Menu" type="Control" unique_id=1065600331]
 layout_mode = 3
@@ -65,7 +64,7 @@ label_settings = SubResource("LabelSettings_0qkqs")
 horizontal_alignment = 1
 
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
-position = Vector2(123.5, -180)
+position = Vector2(123.5, -168)
 scale = Vector2(0.665625, 0.671875)
 texture = ExtResource("4_2qfyw")
 
@@ -141,11 +140,10 @@ scale = Vector2(7, 7)
 icon = ExtResource("5_nb7p2")
 flat = true
 
-[node name="Label" type="Label" parent="." unique_id=2076492899]
-layout_mode = 0
-offset_left = 724.0
-offset_top = 28.0
-offset_right = 1364.0
-offset_bottom = 97.0
-text = "Deck Select -Temp"
-label_settings = SubResource("LabelSettings_6ufdq")
+[node name="Deck" type="Sprite2D" parent="." unique_id=1402624447]
+position = Vector2(788, 228)
+texture = ExtResource("6_4nt8v")
+
+[node name="select" type="Sprite2D" parent="." unique_id=827169509]
+position = Vector2(1325, 171)
+texture = ExtResource("7_2qfyw")
