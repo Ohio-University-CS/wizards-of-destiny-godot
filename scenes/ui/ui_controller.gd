@@ -88,7 +88,6 @@ func _bind_player_ui(temp_combat):
 
 	var health = find_child("PlayerHealthBar", true, false)
 	var mana = null
-	var energy_sprite = find_child("EnergySprite", true, false)
 	if energy_sprite:
 		mana = energy_sprite.find_child("Label", true, false)
 	self.strike_label = find_child("StrikeDamageLabel", true, false)
