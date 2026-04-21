@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://rt3gydtkjcny"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_g1xt6"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_02fvx"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="2_hp1yk"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_645sv"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="4_2mjjj"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_i8nan"]
+
+[sub_resource type="Resource" id="Resource_ygtdb"]
+script = ExtResource("2_hp1yk")
+amount = 10
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[sub_resource type="Resource" id="Resource_1bq4c"]
+script = ExtResource("3_645sv")
+status_type = 10
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_02fvx")
+name = "War Cry"
+effects = Array[ExtResource("1_g1xt6")]([SubResource("Resource_ygtdb"), SubResource("Resource_1bq4c")])
+weight = 10
+cooldown = 2
+intent_icons = Array[Texture2D]([ExtResource("4_2mjjj"), ExtResource("5_i8nan")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

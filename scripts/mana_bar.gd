@@ -1,16 +1,16 @@
 # mana bar
-extends ProgressBar
+extends Label
 
 @export var target_path: NodePath
 @export var show_mana_text: bool = true
 
 var target: Node = null
-var fraction_label: Label = null
+
 
 
 func _ready() -> void:
 	# Defer target assignment so the parent scene can finish instancing
-	_ensure_fraction_label()
+	# ...existing code...
 	call_deferred("_assign_target_from_path")
 	call_deferred("_refresh")
 
@@ -80,72 +80,15 @@ func _on_energy_changed(_new_value: int, _max_value: int) -> void:
 
 
 func _refresh() -> void:
-	min_value = 0
-	max_value = 3
-
-	if target == null:
-		value = 3
-		if show_mana_text:
-			tooltip_text = "3 / 3"
-			_update_bar_text(3, 3)
-		return
-
 	var current: int = _get_energy_value()
 	var max_mana: int = max(1, _get_max_energy_value())
-
-	max_value = max_mana
-	value = clamp(current, 0, max_mana)
+	var display_value = clamp(current, 0, max_mana)
 
 	if show_mana_text:
-		tooltip_text = "%d / %d" % [int(value), int(max_value)]
-		_update_bar_text(int(value), int(max_value))
+		text = "%d/%d" % [display_value, max_mana]
+	else:
+		text = ""
 
-
-func _update_bar_text(current: int, max_mana: int) -> void:
-	var fraction_text: String = "%d / %d" % [current, max_mana]
-	var props: Array = get_property_list()
-	var names: Array = []
-	for p in props:
-		names.append(p.name)
-
-	if "show_percentage" in names:
-		set("show_percentage", false)
-	if "percent_visible" in names:
-		set("percent_visible", false)
-
-	_ensure_fraction_label()
-	if fraction_label != null:
-		fraction_label.visible = show_mana_text
-		fraction_label.text = fraction_text
-
-
-func _ensure_fraction_label() -> void:
-	if fraction_label != null and is_instance_valid(fraction_label):
-		return
-
-	var existing: Node = get_node_or_null("ManaFractionLabel")
-	if existing is Label:
-		fraction_label = existing as Label
-		return
-
-	var label := Label.new()
-	label.name = "ManaFractionLabel"
-	label.anchor_left = 0.0
-	label.anchor_top = 0.0
-	label.anchor_right = 1.0
-	label.anchor_bottom = 1.0
-	label.offset_left = 0.0
-	label.offset_top = 0.0
-	label.offset_right = 0.0
-	label.offset_bottom = 0.0
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.set("theme_override_colors/font_color", Color(1, 1, 1, 1))
-	label.set("theme_override_colors/font_outline_color", Color(0, 0, 0, 1))
-	label.set("theme_override_constants/outline_size", 2)
-	add_child(label)
-	fraction_label = label
 
 
 func _get_energy_value() -> int:

@@ -1,0 +1,239 @@
+[gd_scene format=3 uid="uid://dmnvuaeqp7thf"]
+
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="2_f0hci"]
+[ext_resource type="Resource" uid="uid://re1pktkexv6b" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/Goblin_Warrior.tres" id="3_1hkhi"]
+[ext_resource type="Texture2D" uid="uid://byf4l860wxtgi" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/goblin_warrior.png" id="3_k0vvq"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_3c0xf"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="5_f0hci"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_v8vrd"]
+[ext_resource type="Texture2D" uid="uid://b6o04ri3om8a8" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/goblin_warrior_idle_animation.png" id="7_e6f17"]
+[ext_resource type="Texture2D" uid="uid://5x38sy6aqnlv" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Warrior/goblin_warrior_attack_animation.png" id="7_xryhm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nw7t"]
+atlas = ExtResource("7_xryhm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npvco"]
+atlas = ExtResource("7_xryhm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dticf"]
+atlas = ExtResource("7_xryhm")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xryhm"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ls3"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5g1p"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kps8"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abknh"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx2u5"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knpcw"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rjq6"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7kh4"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4eqq"]
+atlas = ExtResource("7_e6f17")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nw7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nw7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npvco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dticf")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xryhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ls3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5g1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kps8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abknh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx2u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knpcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rjq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7kh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4eqq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Goblin_Warrior" type="Node2D" unique_id=944237056]
+scale = Vector2(2, 2)
+script = ExtResource("2_f0hci")
+enemy_data = ExtResource("3_1hkhi")
+debug_test_status = "block"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=354001421]
+visible = false
+scale = Vector2(6, 6)
+texture = ExtResource("3_k0vvq")
+
+[node name="HealthIndicator" type="Label" parent="." unique_id=2000000001]
+offset_left = 54.0
+offset_top = -117.5
+offset_right = 135.99994
+offset_bottom = -70.5
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+script = ExtResource("5_f0hci")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=1894055990]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -150.0
+offset_right = 64.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+script = ExtResource("4_3c0xf")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=770634031]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5189405
+anchor_top = -0.018518519
+anchor_right = -0.5189405
+anchor_bottom = -0.018518519
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 239.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_v8vrd")
+theme_override_font_sizes/font_size = 28
+text = "Goblin Warrior"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="Label" parent="EnemyHealth" unique_id=1351933644]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 2.0
+offset_right = 81.0
+offset_bottom = 25.0
+horizontal_alignment = 1
+
+[node name="StatusStack" type="Node2D" parent="." unique_id=1435552789]
+position = Vector2(86, -136)
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=991316183]
+offset_left = -105.0
+offset_top = -95.0
+offset_right = -55.0
+offset_bottom = -45.0
+scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="EnemyIntent1" unique_id=2131128985]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_v8vrd")
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=1805899226]
+offset_left = -105.0
+offset_top = -55.0
+offset_right = -55.0
+offset_bottom = -5.0
+scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="EnemyIntent2" unique_id=1415628044]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_v8vrd")
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=8601403]
+offset_left = -106.013
+offset_top = -5.0
+offset_right = -56.013
+offset_bottom = 45.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent3" unique_id=1119050818]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_v8vrd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081874706]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_6nw7t")
+animation = &"Attack"
+frame = 2
+frame_progress = 1.0

@@ -2,7 +2,7 @@ extends Control
 
 @onready var forward_button : Button = $"Buttons/Forward Arrow"
 @onready var level_select_button : Button = $"Buttons/Level 1"
-@onready var exit_button : Button = $Buttons/Exit
+@onready var exit_button : Button = $"Buttons/Home Arrow"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

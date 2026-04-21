@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://bljnt2flbcr81"]
+
+[ext_resource type="Texture2D" uid="uid://ccrkk3haft18u" path="res://scenes/Shop/sprites/scroll_poison.png" id="1_p2ij5"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_qh8ca"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_gtgkm"]
+
+[sub_resource type="Resource" id="Resource_4722s"]
+script = ExtResource("3_gtgkm")
+stat = 7
+amount = 3
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_qh8ca")
+buff_name = "Scroll of Necromancy"
+description = "Gain 3 Poison Damage"
+price = 1
+art = ExtResource("1_p2ij5")
+scroll_effect = Array[ExtResource("3_gtgkm")]([SubResource("Resource_4722s")])
+potion_effect = null
+metadata/_custom_type_script = "uid://b47bvaygn543d"

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://7284urq0pn1q"]
+
+[ext_resource type="Texture2D" uid="uid://djsq6eg4h7xku" path="res://scenes/Shop/sprites/potion_orange.png" id="1_eik1l"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_tbsmy"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="3_xo1dn"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="4_kb78n"]
+
+[sub_resource type="Resource" id="Resource_1bsgl"]
+script = ExtResource("2_tbsmy")
+potion_color = 2
+metadata/_custom_type_script = "uid://d0wbn5e2s0ygl"
+
+[resource]
+script = ExtResource("3_xo1dn")
+buff_name = "Potion of Healing"
+description = "Heal 50% of your Max Health"
+price = 2
+art = ExtResource("1_eik1l")
+potion_effect = Array[ExtResource("2_tbsmy")]([SubResource("Resource_1bsgl")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

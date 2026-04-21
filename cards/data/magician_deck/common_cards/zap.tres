@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ckrktnqafcmgg"]
+
+[ext_resource type="Texture2D" uid="uid://culvt5gi23ley" path="res://cards/sprites/zap.png" id="1_mfjvr"]
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_yxmxs"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_p7wt0"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_wrggt"]
+[ext_resource type="Texture2D" uid="uid://blixivugxpp47" path="res://cards/sprites/Card_Frame_Common.png" id="3_81xkd"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="3_mfjvr"]
+
+[sub_resource type="Resource" id="Resource_mfjvr"]
+script = ExtResource("2_p7wt0")
+amount = 3
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_57jms"]
+script = ExtResource("3_mfjvr")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[resource]
+script = ExtResource("2_wrggt")
+card_name = "Zap"
+description = "(WIP) Attack for 3 Damage. Add 2 Damage to Strike for each copy of Zap in your deck"
+energy_cost = 0
+artwork = ExtResource("1_mfjvr")
+frame_art = ExtResource("3_81xkd")
+effects = Array[ExtResource("1_yxmxs")]([SubResource("Resource_mfjvr"), SubResource("Resource_57jms")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

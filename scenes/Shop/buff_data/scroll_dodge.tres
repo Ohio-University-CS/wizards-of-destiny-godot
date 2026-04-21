@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://biefucku7xaj3"]
+
+[ext_resource type="Texture2D" uid="uid://cj20dqdwmbaaa" path="res://scenes/Shop/sprites/scroll_dodge.png" id="1_h73jp"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_ty245"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_wri7r"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_wri7r"]
+
+[sub_resource type="Resource" id="Resource_4722s"]
+script = ExtResource("3_wri7r")
+stat = 2
+amount = 3
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_ty245")
+buff_name = "Scroll of Evasion"
+description = "Gain 3% Dodge"
+price = 1
+art = ExtResource("1_h73jp")
+scroll_effect = Array[ExtResource("3_wri7r")]([SubResource("Resource_4722s")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

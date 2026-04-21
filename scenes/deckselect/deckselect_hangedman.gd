@@ -21,4 +21,4 @@ func _on_back_pressed():
 # Go to arena (level select)
 func _on_level_select_pressed():
 	print("Level Select pressed")
-	get_tree().change_scene_to_file("res://scenes/arena.tscn")
+	get_tree().change_scene_to_file("res://items/Start_Item_Select.tscn")

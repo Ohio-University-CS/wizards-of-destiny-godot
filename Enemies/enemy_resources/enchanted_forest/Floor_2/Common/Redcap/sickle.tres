@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bm7jrc1335qoq"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_651sk"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_jufyx"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_yxjr5"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_ephyx"]
+
+[sub_resource type="Resource" id="Resource_xhlyk"]
+script = ExtResource("2_yxjr5")
+amount = 8
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_jufyx")
+name = "Sickle"
+effects = Array[ExtResource("1_651sk")]([SubResource("Resource_xhlyk")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("3_ephyx")])
+intent_damage_amount = Array[int]([8])
+metadata/_custom_type_script = "uid://t788w26yn03s"

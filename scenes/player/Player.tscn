@@ -5,8 +5,14 @@
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_4kuee"]
 
 [node name="Player" type="Sprite2D" unique_id=46580540]
+position = Vector2(391, 372)
 scale = Vector2(2, 2)
 script = ExtResource("2_4kuee")
+initialized = true
+debug_status_vfx_test = true
+debug_test_status = "corroded"
+debug_test_stacks = null
+luck = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1597522331]
 scale = Vector2(6, 6)
@@ -23,3 +29,5 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 horizontal_alignment = 2
 script = ExtResource("3_4kuee")
+
+[node name="Shadow" type="Node2D" parent="." unique_id=1272993406]

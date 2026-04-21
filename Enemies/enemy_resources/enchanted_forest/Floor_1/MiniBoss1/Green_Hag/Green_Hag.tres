@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://63x05tws2ydd"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_in5xu"]
+[ext_resource type="Resource" uid="uid://b25tutba1v4jb" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/claw.tres" id="2_j3a5i"]
+[ext_resource type="Resource" uid="uid://bxojwc1dcbcrk" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/hex.tres" id="3_wwv4i"]
+[ext_resource type="Resource" uid="uid://cvctxktsxvrfv" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/MiniBoss1/Green_Hag/invisible_passage.tres" id="4_13a30"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="6_yevpx"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="7_h5qdm"]
+
+[resource]
+script = ExtResource("7_h5qdm")
+enemy_name = "Green Hag"
+hp_variation = Array[int]([65])
+moves = Array[ExtResource("1_in5xu")]([ExtResource("2_j3a5i"), ExtResource("3_wwv4i"), ExtResource("4_13a30")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"
