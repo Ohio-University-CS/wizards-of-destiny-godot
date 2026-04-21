@@ -18,7 +18,7 @@ func after_each():
 
 
 func _reset_run_manager_state():
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 10
 	RunManager.stage = 1
 	RunManager.level_floor = 1
@@ -51,7 +51,7 @@ func _assert_gamestate(expected_player: Player, expected_coins: int, expected_st
 
 func test_scene_change_to_arena_updates_state():
 	# Normal case: entering Arena should sync state from RunManager.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 77
 	RunManager.stage = 3
 	RunManager.level_floor = 2
@@ -62,7 +62,7 @@ func test_scene_change_to_arena_updates_state():
 	_assert_gamestate(RunManager.player, 77, 3, 2, "Normal case should sync")
 
 	# Edge case: zero values should still sync correctly.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 0
 	RunManager.stage = 0
 	RunManager.level_floor = 0
@@ -77,7 +77,7 @@ func test_scene_change_to_arena_updates_state():
 	_gsm.gamestate_stage = 9
 	_gsm.gamestate_level_floor = 4
 	var sentinel_player = _gsm.gamestate_player
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 101
 	RunManager.stage = 8
 	RunManager.level_floor = 7
@@ -94,7 +94,7 @@ func test_enter_shop_scene_change_does_not_update_state():
 	_gsm.gamestate_stage = 8
 	_gsm.gamestate_level_floor = 3
 	var base_player = _gsm.gamestate_player
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 99
 	RunManager.stage = 4
 	RunManager.level_floor = 6
@@ -109,7 +109,7 @@ func test_enter_shop_scene_change_does_not_update_state():
 	_gsm.gamestate_stage = 10
 	_gsm.gamestate_level_floor = 11
 	var edge_player = _gsm.gamestate_player
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 1
 	RunManager.stage = 2
 	RunManager.level_floor = 12
@@ -124,7 +124,7 @@ func test_enter_shop_scene_change_does_not_update_state():
 	_gsm.gamestate_stage = 7
 	_gsm.gamestate_level_floor = 9
 	var err_player = _gsm.gamestate_player
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 200
 	RunManager.stage = 12
 	RunManager.level_floor = 10
@@ -136,7 +136,7 @@ func test_enter_shop_scene_change_does_not_update_state():
 	
 func test_on_combat_end_updates_state():
 	# Normal case: valid player should trigger gamestate sync.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 42
 	RunManager.stage = 6
 	RunManager.level_floor = 3
@@ -146,7 +146,7 @@ func test_on_combat_end_updates_state():
 	_assert_gamestate(RunManager.player, 42, 6, 3, "Normal combat end should sync")
 
 	# Edge case: zero values with valid player should still sync.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 0
 	RunManager.stage = 0
 	RunManager.level_floor = 0
@@ -160,7 +160,7 @@ func test_on_combat_end_updates_state():
 	_gsm.gamestate_stage = 2
 	_gsm.gamestate_level_floor = 8
 	var sentinel = _gsm.gamestate_player
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 300
 	RunManager.stage = 9
 	RunManager.level_floor = 9
@@ -172,7 +172,7 @@ func test_on_combat_end_updates_state():
 
 func test_exit_shop_signal_updates_state():
 	# Normal case: exit shop should sync values.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 64
 	RunManager.stage = 5
 	RunManager.level_floor = 9
@@ -182,7 +182,7 @@ func test_exit_shop_signal_updates_state():
 	_assert_gamestate(RunManager.player, 64, 5, 9, "Normal exit shop should sync")
 
 	# Edge case: method should accept optional player argument and still sync.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 1
 	RunManager.stage = 1
 	RunManager.level_floor = 1
@@ -192,7 +192,7 @@ func test_exit_shop_signal_updates_state():
 	_assert_gamestate(RunManager.player, 1, 1, 1, "Edge optional player arg should sync")
 
 	# Error case: missing RunManager.player should not crash and should store null player.
-	RunManager.player = null
+	RunManager.set_player(null)
 	RunManager.coins = 15
 	RunManager.stage = 4
 	RunManager.level_floor = 2
@@ -204,7 +204,7 @@ func test_exit_shop_signal_updates_state():
 
 func test_write_out_gamestate_returns_true():
 	# Normal case: write should return true with typical populated data.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	RunManager.coins = 33
 	_gsm._update_current_gamestate()
 	assert_true(_gsm._write_out_gamestate(), "Normal write should return true")
@@ -217,6 +217,6 @@ func test_write_out_gamestate_returns_true():
 	assert_true(_gsm._write_out_gamestate(), "Edge write with zeros should return true")
 
 	# Error case: write should still return true when player is null.
-	RunManager.player = null
+	RunManager.set_player(null)
 	_gsm._update_current_gamestate()
 	assert_true(_gsm._write_out_gamestate(), "Error write with null player should return true")

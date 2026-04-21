@@ -178,7 +178,7 @@ func _ready():
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
 
 	#keep reference updated
-	RunManager.player = player
+	RunManager.set_player(player)
 	
 	#------------------------
 	# Load enemy pool from database using current floor and stage
@@ -392,6 +392,7 @@ func _ready():
 
 	# Extra setup
 	player.silver_heart = 0
+	player.potential_destruction = 0
 
 	_start_player_turn()
 
@@ -997,7 +998,7 @@ func _on_opponent_died() -> void:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		RunManager.player = player
+		RunManager.set_player(player)
 	
 	# Build result data
 	var coin_reward : int = 12

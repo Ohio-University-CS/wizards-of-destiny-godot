@@ -127,3 +127,11 @@ func remove_item_by_name(iname : String):
 	for i in item_inventory:
 		if iname == i.item_name:
 			item_inventory.erase(i)
+
+
+signal player_changed(new_player)
+
+# When setting the player, emit the signal
+func set_player(new_player):
+	player = new_player
+	emit_signal("player_changed", new_player)

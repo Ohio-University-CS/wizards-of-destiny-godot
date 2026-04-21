@@ -21,7 +21,7 @@ func before_each():
 
 	_test_player = Player.new()
 	add_child_autofree(_test_player)
-	RunManager.player = _test_player
+	RunManager.set_player(_test_player)
 
 	GameEventSignaler.combat_end.connect(_on_combat_end)
 	GameEventSignaler.next_combat_begin.connect(_on_next_combat_begin)
@@ -36,7 +36,7 @@ func after_each():
 	if GameEventSignaler.first_combat_begin.is_connected(_on_first_combat_begin):
 		GameEventSignaler.first_combat_begin.disconnect(_on_first_combat_begin)
 
-	RunManager.player = null
+	RunManager.set_player(null)
 	_test_player = null
 
 
@@ -109,7 +109,7 @@ func test_shop_next_stage_emits_next_combat_begin_with_runmanager_player():
 
 	# Error case: null RunManager.player should still emit signal with null payload.
 	_reset_counters()
-	RunManager.player = null
+	RunManager.set_player(null)
 	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	assert_eq(_next_combat_begin_count, 1, "Error case should still emit next_combat_begin with null player")
 	assert_eq(_last_next_player, null, "Error case payload should be null when RunManager.player is missing")
@@ -131,7 +131,7 @@ func test_shop_next_stage_does_not_emit_first_combat_begin():
 	assert_eq(_first_combat_begin_count, 0, "Edge case repeated shop exits should not emit first_combat_begin")
 
 	# Error case: changing player references should still not emit first_combat_begin.
-	RunManager.player = _make_player()
+	RunManager.set_player(_make_player())
 	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	assert_eq(_first_combat_begin_count, 0, "Error case player replacement should not emit first_combat_begin")
 

@@ -72,20 +72,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_7vp6q")
 
-[node name="PlayerManaBar" type="ProgressBar" parent="PlayerUI" unique_id=1383878551]
-visible = false
-modulate = Color(0.2, 0.6, 1, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 53.0
-offset_top = 809.0
-offset_right = -1751.0
-offset_bottom = -219.0
-grow_horizontal = 2
-grow_vertical = 2
-show_percentage = false
-
 [node name="PlayerName" type="Label" parent="PlayerUI" unique_id=994193201]
 offset_left = -1.0
 offset_top = -10.0
