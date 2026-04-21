@@ -71,6 +71,7 @@
 [ext_resource type="Resource" uid="uid://dyrpvq5cg2tgc" path="res://scenes/Shop/buff_data/potion_red.tres" id="67_g5i6s"]
 [ext_resource type="Resource" uid="uid://cfotufscwvb0n" path="res://scenes/Shop/buff_data/potion_yellow.tres" id="68_n7mmm"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="70_g5i6s"]
+[ext_resource type="PackedScene" uid="uid://cmlpytnj11d5n" path="res://scenes/deck_view/deck_view.tscn" id="72_n7mmm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -187,3 +188,7 @@ text = "View Deck"
 
 [node name="Player" type="Node" parent="." unique_id=1821145247]
 script = ExtResource("10_nj4jc")
+
+[node name="DeckView" parent="." unique_id=868404110 instance=ExtResource("72_n7mmm")]
+visible = false
+layout_mode = 1

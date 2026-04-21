@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cmlpytnj11d5n"]
+
+[ext_resource type="Script" uid="uid://676xv376bioj" path="res://scenes/deck_view/deck_view.gd" id="1_2hjnp"]
+[ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="1_kc8yi"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_d82e6"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="4_ixm8y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7pjx2"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="DeckView" type="Control" unique_id=868404110]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2hjnp")
+
+[node name="background" type="Sprite2D" parent="." unique_id=809251642]
+modulate = Color(1, 1, 1, 0.64705884)
+position = Vector2(962, 513)
+scale = Vector2(1.9594998, 1.5952724)
+texture = ExtResource("1_kc8yi")
+
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1426185190]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardList" type="VBoxContainer" parent="ScrollContainer" unique_id=2000000000]
+layout_mode = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=855786591]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=165350402]
+layout_mode = 0
+offset_left = 1574.0
+offset_top = 53.0
+offset_right = 1818.0
+offset_bottom = 162.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("3_d82e6")
+flat = true
+
+[node name="Label" type="Label" parent="Buttons/Exit" unique_id=1161652717]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 32.75
+offset_right = 255.0
+offset_bottom = 74.75
+theme_override_fonts/font = ExtResource("4_ixm8y")
+text = "Back"
+label_settings = SubResource("LabelSettings_7pjx2")

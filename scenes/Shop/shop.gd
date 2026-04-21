@@ -8,6 +8,8 @@ class_name Shop
 @onready var items_container : HBoxContainer = $ItemsContainer
 @onready var buffs_container : HBoxContainer = $BuffsContainer
 @onready var coins : Label = $CoinAmount
+@onready var deck_view_button : Button = $"Buttons/View Deck"
+@onready var deck_view_scene : DeckView = $DeckView
 
 @export var player : Player
 @export var shop_card_scene : PackedScene
@@ -36,6 +38,7 @@ func _ready() -> void:
 	rng = RunManager.get_rng()
 	
 	next_stage_button.pressed.connect(_on_next_stage_pressed)
+	deck_view_button.pressed.connect(_on_deck_view_pressed)
 	_update_coin_visual()
 	_generate_shop()
 
@@ -266,6 +269,11 @@ func _update_coin_visual():
 
 func _on_next_stage_pressed():
 	FlowManager.after_shop()
+
+
+func _on_deck_view_pressed():
+	# Show the player's deck in the deck view
+	deck_view_scene.show_deck(player.deck_list, shop_card_scene)
 
 
 func update_buttons():
