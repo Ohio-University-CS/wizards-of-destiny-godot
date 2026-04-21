@@ -8,6 +8,8 @@ var gamestate_coins : int = 0
 var gamestate_stage : int = 1
 var gamestate_level_floor : int = 1
 var gamestate_inventory : Array[ItemData] = []
+var gamestate_deck_name : String
+
 
 var save_file_path : String = ""
 var save_resources_path : String = ""
@@ -152,8 +154,8 @@ func _write_out_player_state_string(player : Player) -> Dictionary:
 	
 ### Write out game state (player state, stage, level, coins, etc.) to <selected_save>.json
 func _write_out_gamestate(file_path : String) -> bool:
-	var player_setup_data = gamestate_player.class_data
-	ResourceSaver.save(player_setup_data, (save_resources_path + "/player_class_data.tres"))
+	var player_class_data = gamestate_player.class_data
+	ResourceSaver.save(player_class_data, (save_resources_path + "/player_class_data.tres"))
 	var player_state_dict = _write_out_player_state_string(gamestate_player)
 	if(gamestate_stage > max_stage):
 		max_stage = gamestate_stage
@@ -183,16 +185,12 @@ func _load_game_from_save():
 	_assign_backup_path()
 	### INPUT SAVE JSON TEXT
 	var save_file_dict = JSON.parse_string(FileAccess.get_file_as_string(save_file_path))
-	var player_setup_data
+	var player_class_data : ClassData
 	if(FileAccess.file_exists(save_resources_path + "/player_class_data.tres")):
-		player_setup_data = ResourceLoader.load((save_resources_path + "/player_class_data.tres"))
+		player_class_data = ResourceLoader.load((save_resources_path + "/player_class_data.tres"))
 	else:
-		player_setup_data = ResourceLoader.load("res://cards/data/magician_deck/magician.tres")
+		player_class_data = ResourceLoader.load("res://cards/data/magician_deck/magician.tres")
 	#var temp_player : Player = nul`l
-	### REINITIALIZE GAMESTATE_PLAYER WITH SAVE DATA
-	if gamestate_player != null:
-		gamestate_player.free()
-	gamestate_player = Player.new()
 	### VALIDATE SAVE JSON
 		### IF CORRUPTED, LOAD BACKUP
 	### LOAD GAMESTATE
@@ -201,10 +199,20 @@ func _load_game_from_save():
 	gamestate_level_floor = save_file_dict["level_floor"]
 	max_stage = save_file_dict["max_stage"]
 	max_lvl_floor = save_file_dict["max_level_floor"]
+	### REINITIALIZE GAMESTATE_PLAYER WITH SAVE DATA
+	if gamestate_player != null:
+		gamestate_player.free()
+	gamestate_player = Player.new()
 	### LOAD PLAYER & DECK
-	gamestate_player._load_player_from_savestate(player_setup_data, save_file_dict["player_state"])
+	gamestate_player._load_player_from_savestate(player_class_data, save_file_dict["player_state"])
 	gamestate_player._load_deck_from_save(save_resources_path, save_file_dict["player_state"]["num_cards_in_deck"])
 	### LOAD INVENTORY
+	_load_inventory_from_save(save_resources_path)
+	
+	RunManager.player = gamestate_player
+	
+	
+	
 	pass
 
 

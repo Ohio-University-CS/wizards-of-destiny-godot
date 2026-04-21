@@ -684,18 +684,9 @@ func _die():
 	emit_signal("died")
 
 
-func _load_player_from_savestate(data, save_state : Dictionary):
-	self.setup_from_class(data)
-	current_health = save_state["current_health"]
-	max_energy = save_state["max_energy"]
-	emit_signal("health_changed", current_health)
-	emit_signal("energy_changed", energy, max_energy)
-	perm_modifiers = save_state["perm_modifiers"]
-	print("loading player complete")
-	return
-#
-#
-func setup_from_save(data):
+func _load_player_from_savestate(data : ClassData, save_state : Dictionary):
+	if self == null:
+		print("How could this happen")
 	class_data = data
 	
 	active_passives.clear()
@@ -716,6 +707,15 @@ func setup_from_save(data):
 	base_electric = 0
 
 	initialized = true
+	print("END: setup_from_save")
+	current_health = save_state["current_health"]
+	max_energy = save_state["max_energy"]
+	emit_signal("health_changed", current_health)
+	emit_signal("energy_changed", energy, max_energy)
+	perm_modifiers = save_state["perm_modifiers"]
+	print("loading player complete")
+	return
+
 	
 func _load_deck_from_save(save_resources_path : String, num_cards : int):
 	var index = 1

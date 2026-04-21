@@ -21,7 +21,10 @@ func _on_forward_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/Level Select/level_2.tscn")
 
 func _level_select_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
+	if(RunManager.player == null):
+		get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
+	else:
+		get_tree().change_scene_to_file(FlowManager.COMBAT_SCENE)
 	
 func _on_exit_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
