@@ -1,4 +1,4 @@
-# Emperor
+# tower
 extends Control
 
 # Button nodes

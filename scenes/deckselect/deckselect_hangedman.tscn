@@ -4,13 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_f8yn5"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_a8pdl"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_04r8a"]
+[ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="5_f8yn5"]
+[ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="6_a8pdl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qkqs"]
 font_size = 30
 font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6ufdq"]
-font_size = 50
 
 [node name="Menu" type="Control" unique_id=1065600331]
 layout_mode = 3
@@ -143,11 +142,10 @@ scale = Vector2(7, 7)
 icon = ExtResource("5_04r8a")
 flat = true
 
-[node name="Label" type="Label" parent="." unique_id=2076492899]
-layout_mode = 0
-offset_left = 724.0
-offset_top = 28.0
-offset_right = 1364.0
-offset_bottom = 97.0
-text = "Deck Select -Temp"
-label_settings = SubResource("LabelSettings_6ufdq")
+[node name="Deck" type="Sprite2D" parent="." unique_id=814589422]
+position = Vector2(788, 228)
+texture = ExtResource("5_f8yn5")
+
+[node name="select" type="Sprite2D" parent="." unique_id=703918294]
+position = Vector2(1325, 171)
+texture = ExtResource("6_a8pdl")

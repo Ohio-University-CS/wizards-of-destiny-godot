@@ -128,8 +128,8 @@ func _on_status_applied(status_name: String, stacks: int) -> void:
 			_set_regeneration_vfx(stacks)
 		"block":
 			_set_block_vfx(stacks)
-		"evasive":
-			_set_evasive_vfx(stacks)
+		# "evasive":
+		# 	_set_evasive_vfx(stacks)
 		"freeze":
 			_set_freeze_vfx(stacks)
 		"corroded":
@@ -163,6 +163,13 @@ func _on_status_expired(status_name: String) -> void:
 				timer.queue_free()
 			node.queue_free()
 		_status_vfx_nodes.erase(status_name)
+	# Remove status-specific helper particles (for example, regeneration staff particles).
+	var staff_key := status_name + "_staff"
+	if _status_vfx_nodes.has(staff_key):
+		var staff_node = _status_vfx_nodes[staff_key]
+		if is_instance_valid(staff_node):
+			staff_node.queue_free()
+		_status_vfx_nodes.erase(staff_key)
 	# Clean up any associated behind sprite.
 	var sprite_key := status_name + "_sprite"
 	if _status_vfx_nodes.has(sprite_key):
@@ -232,6 +239,10 @@ func _create_burn_particles() -> GPUParticles2D:
 
 
 func _set_regeneration_vfx(stacks: int) -> void: # done
+	if stacks <= 0:
+		_on_status_expired("regeneration")
+		return
+
 	_set_status_particles_vfx(
 		"regeneration",
 		stacks,
@@ -241,20 +252,38 @@ func _set_regeneration_vfx(stacks: int) -> void: # done
 		20.0,
 		20.0
 	)
-	# Spawn staff particles for player or Wizard-type enemies
-	if _is_player:
-		var staff_particles = _create_staff_status_particles("regeneration", Color(0.35, 1.0, 0.45, 0.85), Vector2(-40, -50), 20.0, 24.0)
+
+	# Spawn staff particles for player or Wizard-type enemies.
+	var show_staff_particles: bool = _is_player
+	if not show_staff_particles and parent_node != null and parent_node is Enemy:
+		var enemy_res: EnemyResource = null
+		if parent_node.resource != null:
+			enemy_res = parent_node.resource
+		elif parent_node.enemy_data != null:
+			enemy_res = parent_node.enemy_data
+		show_staff_particles = enemy_res != null and enemy_res.enemy_name == "Wizard"
+
+	var staff_key := "regeneration_staff"
+	if not show_staff_particles:
+		if _status_vfx_nodes.has(staff_key):
+			var stale_staff = _status_vfx_nodes[staff_key]
+			if is_instance_valid(stale_staff):
+				stale_staff.queue_free()
+			_status_vfx_nodes.erase(staff_key)
+		return
+
+	var staff_particles: GPUParticles2D = null
+	if _status_vfx_nodes.has(staff_key):
+		staff_particles = _status_vfx_nodes[staff_key] as GPUParticles2D
+
+	if not is_instance_valid(staff_particles):
+		staff_particles = _create_staff_status_particles("regeneration", stacks, Color(0.35, 1.0, 0.45, 0.85), Vector2(-40, -50), 20.0, 24.0)
 		add_child(staff_particles)
+		_status_vfx_nodes[staff_key] = staff_particles
 	else:
-		if parent_node != null and parent_node is Enemy:
-			var enemy_res: EnemyResource = null
-			if parent_node.resource != null:
-				enemy_res = parent_node.resource
-			elif parent_node.enemy_data != null:
-				enemy_res = parent_node.enemy_data
-			if enemy_res != null and enemy_res.enemy_name == "Wizard":
-				var staff_particles = _create_staff_status_particles("regeneration", Color(0.35, 1.0, 0.45, 0.85), Vector2(-40, -50), 20.0, 24.0)
-				add_child(staff_particles)
+		staff_particles.amount = clampi(4 + stacks * 2, 4, 24)
+		staff_particles.scale = Vector2.ONE * min(1.0 + 0.06 * float(stacks), 1.5)
+		staff_particles.emitting = true
 
 
 func _set_block_vfx(stacks: int) -> void:
@@ -277,16 +306,16 @@ func _set_block_vfx(stacks: int) -> void:
 	block_sprite.scale = Vector2.ONE * 3.0
 
 
-func _set_evasive_vfx(stacks: int) -> void:
-	_set_status_particles_vfx(
-		"evasive",
-		stacks,
-		Color(0.9, 1.0, 1.0, 0.75),
-		Vector2(0, -18),
-		14,
-		20.0,
-		340.0
-	)
+# func _set_evasive_vfx(stacks: int) -> void:
+# 	_set_status_particles_vfx(
+# 		"evasive",
+# 		stacks,
+# 		Color(0.9, 1.0, 1.0, 0.75),
+# 		Vector2(0, -18),
+# 		14,
+# 		20.0,
+# 		340.0
+# 	)
 
 
 func _set_freeze_vfx(stacks: int) -> void:
@@ -482,6 +511,7 @@ func _create_status_particles(
 
 func _create_staff_status_particles(
 	status_name: String,
+	stacks: int,
 	base_color: Color,
 	offset: Vector2,
 	upward_speed: float,
@@ -491,10 +521,11 @@ func _create_staff_status_particles(
 	var particles := GPUParticles2D.new()
 	particles.name = "%sStaffParticles" % status_name.capitalize()
 	particles.position = _apply_scale_to_offset(offset)
-	particles.amount = 4
+	particles.amount = clampi(4 + stacks * 2, 4, 24)
 	particles.lifetime = 0.9
 	particles.preprocess = 0.4
 	particles.randomness = 0.8
+	particles.scale = Vector2.ONE * min(1.0 + 0.06 * float(stacks), 1.5)
 	particles.emitting = true
 
 	var particle_material := ParticleProcessMaterial.new() # small particles
