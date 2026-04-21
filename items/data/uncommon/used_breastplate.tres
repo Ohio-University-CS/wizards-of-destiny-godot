@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bcpqdfd2g8bhs"]
 
 [ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="1_juynm"]
+[ext_resource type="Texture2D" uid="uid://bjl3kse2utnmn" path="res://items/sprites/used_breastplate.png" id="1_n5j2h"]
 
 [resource]
 script = ExtResource("1_juynm")
 item_name = "Used Breastplate"
 description = "If you have have Block remaining at start of turn, gain 1 Empowered"
 rarity = 1
+art = ExtResource("1_n5j2h")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

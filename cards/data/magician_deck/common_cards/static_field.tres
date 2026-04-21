@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://bqpow07i80x21"
 
 [sub_resource type="Resource" id="Resource_jrwaf"]
 script = ExtResource("3_v7dke")
-card_name = 3
+card_name = 9
 metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
 
 [resource]

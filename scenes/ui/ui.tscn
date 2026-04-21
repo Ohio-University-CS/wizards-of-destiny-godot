@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
 [ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
+[ext_resource type="Texture2D" uid="uid://8bg77iqlhr4t" path="res://scenes/ui/energy_ball.png" id="4_4kltc"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://bpwkk8nabxiqh" path="res://sprites/strike_visual.png" id="5_jcn1r"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_pfayw"]
@@ -50,19 +51,26 @@ theme_override_colors/font_outline_color = Color(0, 0.25, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 34
 
-[node name="PlayerManaBar" type="ProgressBar" parent="PlayerUI" unique_id=1383878551]
-modulate = Color(0.2, 0.6, 1, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 53.0
-offset_top = 809.0
-offset_right = -1751.0
-offset_bottom = -219.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="EnergySprite" type="TextureRect" parent="PlayerUI" unique_id=807512731]
+offset_left = 72.0
+offset_top = 715.0
+offset_right = 112.0
+offset_bottom = 755.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_4kltc")
+
+[node name="Label" type="Label" parent="PlayerUI/EnergySprite" unique_id=1233550166]
+layout_mode = 0
+offset_left = 0.6666666
+offset_top = 9.333313
+offset_right = 39.666668
+offset_bottom = 29.333313
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("6_uegxj")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("4_7vp6q")
-target_path = NodePath("../Player")
 
 [node name="PlayerName" type="Label" parent="PlayerUI" unique_id=994193201]
 offset_left = -1.0
@@ -78,10 +86,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StrikeDamageIcon" type="TextureRect" parent="PlayerUI" unique_id=1917633088]
-offset_left = 634.0
-offset_top = 208.0
-offset_right = 674.0
-offset_bottom = 248.0
+offset_left = 491.0
+offset_top = 348.0
+offset_right = 532.0
+offset_bottom = 388.0
 scale = Vector2(3, 3)
 texture = ExtResource("5_jcn1r")
 
@@ -104,7 +112,7 @@ offset_right = 1922.0
 offset_bottom = 60.0
 
 [node name="PlayerHealthBar" type="ProgressBar" parent="Panel" unique_id=737147789]
-modulate = Color(7.797182e-06, 0.71552736, 0.17116347, 1)
+self_modulate = Color(0, 0.7137255, 0.17254902, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,7 +123,22 @@ offset_right = -1552.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+show_percentage = false
 script = ExtResource("5_pfayw")
+
+[node name="Health" type="Label" parent="Panel/PlayerHealthBar" unique_id=1812008591]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 5.0
+offset_right = 133.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("6_uegxj")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerStatusStack" type="Node2D" parent="Panel" unique_id=341118905]
+position = Vector2(390, 30)
 
 [node name="Discard" type="Button" parent="." unique_id=1741533510]
 custom_minimum_size = Vector2(150, 150)

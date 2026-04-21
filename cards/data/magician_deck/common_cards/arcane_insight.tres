@@ -16,6 +16,7 @@ metadata/_custom_type_script = "uid://b0upwpofv1ojb"
 script = ExtResource("2_fm56p")
 card_name = "Arcane Insight"
 description = "Draw 2 Cards"
+energy_cost = 0
 card_type = 1
 artwork = ExtResource("1_3orvj")
 frame_art = ExtResource("4_rjc2o")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://02ns252cs67c"]
+
+[ext_resource type="Texture2D" uid="uid://bphvxbmthqgbg" path="res://scenes/Shop/sprites/scroll_large_critd.png" id="1_4knxw"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_mqgpr"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_h5wby"]
+
+[sub_resource type="Resource" id="Resource_5yco3"]
+script = ExtResource("3_h5wby")
+stat = 4
+amount = 8
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_mqgpr")
+buff_name = "Scroll of Major Smite"
+description = "Gain 8 Crit Damage"
+price = 2
+art = ExtResource("1_4knxw")
+scroll_effect = Array[ExtResource("3_h5wby")]([SubResource("Resource_5yco3")])
+potion_effect = null
+metadata/_custom_type_script = "uid://b47bvaygn543d"

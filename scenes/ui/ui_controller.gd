@@ -4,10 +4,15 @@ extends Node
 
 # Hover effect variables
 @onready var strike_icon : TextureRect = $PlayerUI/StrikeDamageIcon
+@onready var energy_sprite : TextureRect = $PlayerUI/EnergySprite
 var strike_icon_base_y : float = 0.0
 var strike_icon_hover_time : float = 0.0
 var strike_icon_hover_amplitude : float = 8.0 # pixels
 var strike_icon_hover_speed : float = 0.5 # cycles per second
+var energy_sprite_base_y : float = 0.0
+var energy_sprite_hover_time : float = 0.0
+var energy_sprite_hover_amplitude : float = 7.0 # pixels
+var energy_sprite_hover_speed : float = 0.6 # cycles per second
 
 var strike_label = null
 
@@ -18,14 +23,20 @@ func _ready() -> void:
 	# Store the base Y position for the hover effect
 	if strike_icon:
 		strike_icon_base_y = strike_icon.position.y
+	if energy_sprite:
+		energy_sprite_base_y = energy_sprite.position.y
 
 
-# Bobbing hover effect for strike icon
+# Bobbing hover effect for strike icon and energy sprite
 func _process(delta: float) -> void:
 	if strike_icon:
 		strike_icon_hover_time += delta
 		var offset = sin(strike_icon_hover_time * TAU * strike_icon_hover_speed) * strike_icon_hover_amplitude
 		strike_icon.position.y = strike_icon_base_y + offset
+	if energy_sprite:
+		energy_sprite_hover_time += delta
+		var offset = sin(energy_sprite_hover_time * TAU * energy_sprite_hover_speed) * energy_sprite_hover_amplitude
+		energy_sprite.position.y = energy_sprite_base_y + offset
 
 
 func _connect_to_manager() -> void:
@@ -76,7 +87,10 @@ func _bind_player_ui(temp_combat):
 		player_node = RunManager.player
 
 	var health = find_child("PlayerHealthBar", true, false)
-	var mana = find_child("PlayerManaBar", true, false)
+	var mana = null
+	var energy_sprite = find_child("EnergySprite", true, false)
+	if energy_sprite:
+		mana = energy_sprite.find_child("Label", true, false)
 	self.strike_label = find_child("StrikeDamageLabel", true, false)
 
 	# Health UI: connect and update

@@ -1,6 +1,4 @@
-# temp_combat.gd
-# Handles combat
-
+#combat.gd
 @tool
 extends Node2D
 
@@ -10,8 +8,9 @@ signal turn_changed(turn_name, turn_count)
 @onready var deck: CombatDeck = null
 @onready var opponent: Enemy = null
 
-const DEFAULT_GOBLIN_SCENE_PATH := "res://Enemies/enemy_resources/Goblin/Goblin.tscn"
-const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.tscn"
+const DEFAULT_GOBLIN_WARRIOR_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Warrior/Goblin_Warrior.tscn"
+const DEFAULT_GOBLIN_ARCHER_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Archer/Goblin_Archer.tscn"
+const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
 
 @export var card_scene: PackedScene = null
 @export var class_data: ClassData
@@ -22,7 +21,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var enemy_move_cost: int = 1
 @export var enemy_move_base_amount: int = 1
 @export var enemy_move_delay: float = 0.35
-@export var enemy_spawn_position: Vector2 = Vector2(1458.75, 167.5)
+@export var enemy_spawn_position: Vector2 = Vector2(1350.0, 167.5)
 @export var enemy_spawn_scale: Vector2 = Vector2(1.75, 1.75)
 @export var player_move_label_path: NodePath = NodePath("PlayerMoveText")
 @export var enemy_move_label_path: NodePath = NodePath("EnemyMoveText")
@@ -31,6 +30,7 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var discard_button_path: NodePath = NodePath("PanelContainer/Discard")
 @export var result_overlay_path: NodePath = NodePath("ResultCanvas/ResultOverlay")
 @export var result_label_path: NodePath = NodePath("ResultCanvas/ResultOverlay/ResultText")
+@export var level_background_path: NodePath = NodePath("")
 @export var move_text_hold_duration: float = 0.60
 @export var move_text_fade_duration: float = 0.40
 @export var turn_transition_delay: float = 0.20
@@ -38,9 +38,12 @@ const DEFAULT_WIZARD_SCENE_PATH := "res://Enemies/enemy_resources/Wizard/Wizard.
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
-var enemy_intent_1: TextureRect = null
-var enemy_intent_2: TextureRect = null
-var enemy_intent_3: TextureRect = null
+var enemy_intent_1 : TextureRect = null
+var enemy_intent_1_label : Label = null
+var enemy_intent_2 : TextureRect = null
+var enemy_intent_2_label : Label = null
+var enemy_intent_3 : TextureRect = null
+var enemy_intent_3_label : Label = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -50,11 +53,16 @@ var enemy_name_label: Label = null
 var discard_button: Button = null
 var result_overlay: ColorRect = null
 var result_label: Label = null
+var level_background: TextureRect = null
 var player_move_tween: Tween = null
 var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+
+var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
+var pause_menu = null
 
 enum TurnState {
 	PLAYER,
@@ -73,22 +81,64 @@ var is_combat_over: bool = false
 @export var preview_count: int = 5
 
 
+# Utility to load enemy pools from JSON database
+func load_enemy_pool(level: String, floor_num: int, stage: int) -> Array[PackedScene]:
+	var file = FileAccess.open("res://data/enemy_pools.json", FileAccess.READ)
+	if not file:
+		push_error("Could not open enemy_pools.json")
+		return []
+	var data = JSON.parse_string(file.get_as_text())
+	file.close()
+	if typeof(data) != TYPE_DICTIONARY or not data.has(level):
+		push_error("Level not found in enemy_pools.json")
+		return []
+	var floor_key = "floor_%d" % floor_num
+	if not data[level].has(floor_key):
+		push_error("Floor not found in enemy_pools.json")
+		return []
+	var pool_type = "enemies"
+	if stage == 4:
+		pool_type = "mini_boss_4"
+	elif stage == 8:
+		pool_type = "mini_boss_8"
+	elif stage == 12:
+		pool_type = "boss_12"
+	var paths = data[level][floor_key].get(pool_type, [])
+	var pool: Array[PackedScene] = []
+	for path in paths:
+		var scene = load(path)
+		if scene is PackedScene:
+			pool.append(scene)
+	return pool
+
+
+
 func _ready():
 	enemy_rng.randomize()
+
+	var pause_layer = CanvasLayer.new()
+	pause_layer.layer = 100
+	add_child(pause_layer)
+	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pause_menu.visible = false
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pause_layer.add_child(pause_menu)
 
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	if RunManager.player:
-		player = RunManager.player
+	var stored_player : Player = RunManager.player
+	if stored_player:
+		player = stored_player
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 			add_child(player)
-		
+
 		var ui = find_child("UI", true, false)
 		if ui and ui.has_method("_bind_player_ui"):
 			ui._bind_player_ui(self)
-	
+
 	#-------------------
 	# fallback
 	#-------------------
@@ -111,7 +161,7 @@ func _ready():
 				if child is Player:
 					player = child
 					break
-	
+
 	#------------------
 	# validate
 	#------------------
@@ -121,20 +171,22 @@ func _ready():
 		if player.class_data == null:
 			player.setup_from_class(class_data)
 			player.initialized = true
-			
+
 		if player.has_signal("health_changed"):
 			player.emit_signal("health_changed", player.current_health)
 		if player.has_signal("energy_changed"):
 			player.emit_signal("energy_changed", player.energy, player.max_energy)
-	
+
 	#keep reference updated
-	RunManager.player = player
+	RunManager.set_player(player)
 	
 	#------------------------
-	# Spawn enemy
+	# Load enemy pool from database using current floor and stage
 	#------------------------
+	enemy_pool = load_enemy_pool("enchanted_forest", RunManager.level_floor, RunManager.stage)
+
 	_spawn_random_enemy_entity()
-	
+
 	if opponent == null:
 		if has_node("Enemy") and get_node("Enemy") is Enemy:
 			opponent = get_node("Enemy")
@@ -151,7 +203,7 @@ func _ready():
 				var enemies = find_children("*", "Enemy", true, false)
 				if enemies.size() > 0 and enemies[0] is Enemy:
 					opponent = enemies[0]
-	
+
 	if opponent:
 		_position_enemy_container(opponent)
 		if opponent.has_signal("health_changed"):
@@ -160,7 +212,7 @@ func _ready():
 			opponent.emit_signal("energy_changed", opponent.energy, opponent.max_energy)
 	else:
 		push_error("TempCombat: no Enemy node found; cards will not have a valid target")
-	
+
 	#------------------
 	# Deck setup
 	#------------------
@@ -178,7 +230,7 @@ func _ready():
 				var combat_decks = find_children("*", "CombatDeck", true, false)
 				if combat_decks.size() > 0 and combat_decks[0] is CombatDeck:
 					deck = combat_decks[0]
-	
+
 	if deck:
 		deck.setup_from_player(player)
 	else:
@@ -191,18 +243,36 @@ func _ready():
 		_e1 = get_node_or_null("EnemyIntent1")
 	if _e1 and _e1 is TextureRect:
 		enemy_intent_1 = _e1
+	
+	var _e1L = get_node_or_null("Enemy/EnemyIntent1/Label")
+	if _e1L == null:
+		_e1L = get_node_or_null("EnemyIntent1/Label")
+	if _e1L and _e1L is Label:
+		enemy_intent_1_label = _e1L
 
 	var _e2 = get_node_or_null("Enemy/EnemyIntent2")
 	if _e2 == null:
 		_e2 = get_node_or_null("EnemyIntent2")
 	if _e2 and _e2 is TextureRect:
 		enemy_intent_2 = _e2
+	
+	var _e2L = get_node_or_null("Enemy/EnemyIntent2/Label")
+	if _e2L == null:
+		_e2L = get_node_or_null("EnemyIntent2/Label")
+	if _e2L and _e2L is Label:
+		enemy_intent_2_label = _e2L
 
 	var _e3 = get_node_or_null("Enemy/EnemyIntent3")
 	if _e3 == null:
 		_e3 = get_node_or_null("EnemyIntent3")
 	if _e3 and _e3 is TextureRect:
 		enemy_intent_3 = _e3
+	
+	var _e3L = get_node_or_null("Enemy/EnemyIntent3/Label")
+	if _e3L == null:
+		_e3L = get_node_or_null("EnemyIntent3/Label")
+	if _e3L and _e3L is Label:
+		enemy_intent_3_label = _e3L
 	
 	player_move_label = get_node_or_null(player_move_label_path)
 	enemy_move_label = get_node_or_null(enemy_move_label_path)
@@ -260,8 +330,21 @@ func _ready():
 	discard_button = get_node_or_null(discard_button_path)
 	result_overlay = get_node_or_null(result_overlay_path)
 	result_label = get_node_or_null(result_label_path)
+	level_background = get_node_or_null(level_background_path)
 	if result_overlay:
 		result_overlay.visible = false
+
+	# Preload a level background texture based on RunManager selection
+	var _rm = get_node_or_null("/root/RunManager")
+	var _floor = 1
+	if _rm:
+		var maybe_floor = _rm.get("level_floor")
+		if maybe_floor != null:
+			_floor = maybe_floor
+	if _floor == 1:
+		var _bg_tex = preload("res://scenes/level1/forest1.png")
+		if level_background:
+			level_background.texture = _bg_tex
 	
 	if player and player.has_signal("died"):
 		if not player.died.is_connected(_on_player_died):
@@ -307,6 +390,9 @@ func _ready():
 	else:
 		set_process(false)
 
+	# Extra setup
+	player.silver_heart = 0
+	player.potential_destruction = 0
 
 	_start_player_turn()
 
@@ -386,7 +472,11 @@ func _position_enemy_container(enemy: Enemy) -> void:
 
 func _get_default_enemy_pool() -> Array[PackedScene]:
 	var defaults: Array[PackedScene] = []
-	for path in [DEFAULT_GOBLIN_SCENE_PATH, DEFAULT_WIZARD_SCENE_PATH]:
+	for path in [
+			DEFAULT_GOBLIN_WARRIOR_SCENE_PATH,
+			DEFAULT_GOBLIN_ARCHER_SCENE_PATH,
+			DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH
+		]:
 		if ResourceLoader.exists(path):
 			var loaded = load(path)
 			if loaded is PackedScene:
@@ -433,6 +523,11 @@ func draw_hand():
 
 	# Drained: draw one less card per stack (max 3)
 	var draw_size = deck.draw_hand_size
+	
+	# White Salt
+	if RunManager.has_item("White Salt"):
+		draw_size += 1
+	
 	if player and player.status_effects.has("drained"):
 		var drained = clamp(player.status_effects["drained"], 0, 3)
 		draw_size = max(0, draw_size - drained)
@@ -635,10 +730,13 @@ func _start_enemy_turn() -> void:
 func clear_enemy_intent() -> void:
 	if enemy_intent_1:
 		enemy_intent_1.texture = null
+		enemy_intent_1_label.text = ""
 	if enemy_intent_2:
 		enemy_intent_2.texture = null
+		enemy_intent_2_label.text = ""
 	if enemy_intent_3:
 		enemy_intent_3.texture = null
+		enemy_intent_3_label.text = ""
 
 
 func update_enemy_intent() -> void:
@@ -649,22 +747,37 @@ func update_enemy_intent() -> void:
 	if next_move == null:
 		clear_enemy_intent()
 		return
+	
+	var extra_dmg : int = 0
+	if opponent.status_effects["empower"] > 0:
+		extra_dmg += opponent.status_effects["empower"] * 3
+	if opponent.status_effects["rage"] > 0:
+		extra_dmg += opponent.status_effects["rage"]
 
 	# set textures only if intent_icons exist and the UI nodes are present
 	if next_move.intent_icons.size() > 0 and enemy_intent_1:
 		enemy_intent_1.texture = next_move.intent_icons[0]
+		if next_move.intent_damage_amount.size() > 0:
+			enemy_intent_1_label.text = str(next_move.intent_damage_amount[0] + extra_dmg)
 	elif enemy_intent_1:
 		enemy_intent_1.texture = null
+		enemy_intent_1_label.text = ""
 
 	if next_move.intent_icons.size() > 1 and enemy_intent_2:
 		enemy_intent_2.texture = next_move.intent_icons[1]
+		if next_move.intent_damage_amount.size() > 1:
+			enemy_intent_2_label.text = str(next_move.intent_damage_amount[1] + extra_dmg)
 	elif enemy_intent_2:
 		enemy_intent_2.texture = null
+		enemy_intent_2_label.text = ""
 
 	if next_move.intent_icons.size() > 2 and enemy_intent_3:
 		enemy_intent_3.texture = next_move.intent_icons[2]
+		if next_move.intent_damage_amount.size() > 2:
+			enemy_intent_3_label.text = str(next_move.intent_damage_amount[2] + extra_dmg)
 	elif enemy_intent_3:
 		enemy_intent_3.texture = null
+		enemy_intent_3_label.text = ""
 
 
 func _enemy_take_turn() -> void:
@@ -876,18 +989,32 @@ func _on_opponent_died() -> void:
 		deck.exhaust_pile = deck.exhaust_pile.filter(func(card_instance):
 			return not card_instance.data.temporary)
 	
+	# Amulet of Undying
+	if RunManager.has_item("Amulet of Undying"):
+		player.heal(3)
 	
 	# detach player so it doesn't get freed
 	if player:
 		if player.get_parent():
 			player.get_parent().remove_child(player)
 		get_tree().root.add_child(player)
-		RunManager.player = player
+		RunManager.set_player(player)
 	
 	# Build result data
+	var coin_reward : int = 12
+	var miniboss : bool = false
+	
+	if RunManager.stage == 4:
+		coin_reward += 5
+		miniboss = true
+	if RunManager.stage == 8:
+		coin_reward += 10
+		miniboss = true
+	
 	var result = {
-		"coins": 12,
+		"coins": coin_reward,
 		"turns": turn_count,
+		"miniboss": miniboss,
 		"perfect": player.current_health == player.get_max_health()
 	}
 	
@@ -914,7 +1041,7 @@ func _show_result(player_won: bool) -> void:
 		else:
 			result_label.text = "You Lose!"
 			result_label.modulate = Color(1.0, 0.2, 0.2, 1.0)
-
+	# GameEventSignaler.combat_end.emit(player)
 	_update_discard_button_state()
 
 
@@ -1113,3 +1240,12 @@ func _clear_editor_previews():
 	for c in to_remove:
 		if is_instance_valid(c):
 			c.queue_free()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
+
+func toggle_pause():
+	get_tree().paused = !get_tree().paused
+	pause_menu.visible = get_tree().paused

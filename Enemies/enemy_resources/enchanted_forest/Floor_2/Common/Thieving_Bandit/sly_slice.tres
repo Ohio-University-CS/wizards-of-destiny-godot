@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dxyijvxfqwntw"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_sdfil"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_k4wnd"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_7b2le"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_4fxpl"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="5_sdfil"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_pxvk0"]
+
+[sub_resource type="Resource" id="Resource_nuej7"]
+script = ExtResource("2_k4wnd")
+amount = 7
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_5sulv"]
+script = ExtResource("3_7b2le")
+status_type = 10
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("6_pxvk0")
+name = "Sly Slice"
+effects = Array[ExtResource("1_sdfil")]([SubResource("Resource_nuej7"), SubResource("Resource_5sulv")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("4_4fxpl"), ExtResource("5_sdfil")])
+intent_damage_amount = Array[int]([7])
+metadata/_custom_type_script = "uid://t788w26yn03s"

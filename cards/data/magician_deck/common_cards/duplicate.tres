@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_awhfu"]
 script = ExtResource("2_66ecp")
-card_name = 4
+card_name = 2
 target_type = 0
 metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
 

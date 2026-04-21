@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://c00ul1uppdx1v"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_oht1f"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_5h31m"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_w5qol"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="3_ebbsb"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="4_kmni4"]
+
+[sub_resource type="Resource" id="Resource_slg04"]
+script = ExtResource("2_5h31m")
+status_type = 11
+amount = 3
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_o7sak"]
+script = ExtResource("2_5h31m")
+status_type = 4
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_w5qol")
+name = "Tinker"
+effects = Array[ExtResource("1_oht1f")]([SubResource("Resource_slg04"), SubResource("Resource_o7sak")])
+weight = 30
+intent_icons = Array[Texture2D]([ExtResource("3_ebbsb"), ExtResource("4_kmni4")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

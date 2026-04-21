@@ -20,6 +20,7 @@ const REWARD_SCENE := "res://scenes/reward_screen/combat_reward.tscn"
 # ----------------
 
 func go_to_combat():
+	GameEventSignaler.next_combat_begin.emit(RunManager.player)
 	get_tree().change_scene_to_file(COMBAT_SCENE)
 
 
@@ -50,10 +51,18 @@ func on_combat_finished(result : Dictionary):
 		total += 5
 	
 	var turns = result.get("turns", 999)
-	if turns <= 3:
-		total += 5
-	elif turns <= 6:
-		total += 2
+	var miniboss = result.get("miniboss", false)
+	
+	if miniboss:
+		if turns <= 4:
+			total += 5
+		elif turns <= 8:
+			total += 2
+	else:
+		if turns <= 3:
+			total += 5
+		elif turns <= 6:
+			total += 2
 	
 	result["total_coins"] = total
 	

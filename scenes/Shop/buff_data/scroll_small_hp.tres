@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://35ne5u1lmchj"]
+
+[ext_resource type="Texture2D" uid="uid://bm48gjp3heuqp" path="res://scenes/Shop/sprites/scroll_small_hp.png" id="1_sbee3"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_skmxi"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_skmxi"]
+
+[sub_resource type="Resource" id="Resource_4722s"]
+script = ExtResource("3_skmxi")
+amount = 2
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_skmxi")
+buff_name = "Scroll of Minor Vitality"
+description = "Gain 2 Max Health"
+price = null
+art = ExtResource("1_sbee3")
+scroll_effect = Array[ExtResource("3_skmxi")]([SubResource("Resource_4722s")])
+potion_effect = null
+metadata/_custom_type_script = "uid://b47bvaygn543d"

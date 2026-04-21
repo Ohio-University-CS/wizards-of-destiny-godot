@@ -16,6 +16,9 @@ var item2 : ItemData
 var item3 : ItemData
 
 func _ready():
+	if RunManager.run_seed == -1:
+		RunManager.start_new_run(null)
+
 	item1_button.pressed.connect(_on_item1_picked)
 	item2_button.pressed.connect(_on_item2_picked)
 	item3_button.pressed.connect(_on_item3_picked)
@@ -33,15 +36,21 @@ func _ready():
 
 func _generate_choice():
 	var pool = item_options.duplicate()
-	pool.shuffle()
-	
+	var rng = RunManager.get_rng()
+	# Deterministic shuffle using the seeded RNG
+	for i in range(pool.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+		var temp = pool[i]
+		pool[i] = pool[j]
+		pool[j] = temp
+
 	if pool.size() < 3:
 		return
-	
+
 	item1 = pool[0]
 	item2 = pool[1]
 	item3 = pool[2]
-	
+
 	item1_button.icon = item1.art
 	item2_button.icon = item2.art
 	item3_button.icon = item3.art

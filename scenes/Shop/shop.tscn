@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://8vsbg5004ad5" path="res://scenes/Shop/ShopCardUI.tscn" id="2_nj4jc"]
 [ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_vrtdt"]
 [ext_resource type="Resource" uid="uid://brvaerogr0xcj" path="res://cards/data/magician_deck/common_cards/countermeasures.tres" id="3_35ukv"]
+[ext_resource type="PackedScene" uid="uid://3jgaiifsw41v" path="res://scenes/Shop/ShopItemUi.tscn" id="3_knd51"]
+[ext_resource type="PackedScene" uid="uid://ka2a6tf24wbt" path="res://scenes/Shop/ShopBuffUi.tscn" id="4_foy5n"]
 [ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
 [ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
 [ext_resource type="Resource" uid="uid://n2pf7h4xkg51" path="res://cards/data/magician_deck/common_cards/burning_hands.tres" id="7_kx8h1"]
@@ -17,6 +19,8 @@
 [ext_resource type="Resource" uid="uid://cweudncol8h4y" path="res://cards/data/magician_deck/common_cards/tactical_blast.tres" id="10_wri3e"]
 [ext_resource type="Resource" uid="uid://c4fm0old2um78" path="res://cards/data/magician_deck/common_cards/arcane_insight.tres" id="11_j512n"]
 [ext_resource type="Resource" uid="uid://bop5ro4aw5d4g" path="res://cards/data/magician_deck/rare_cards/unholy_bargain.tres" id="12_5difm"]
+[ext_resource type="Resource" uid="uid://d3rq2pnpk7isn" path="res://cards/data/magician_deck/common_cards/elemental_storm.tres" id="12_ed28i"]
+[ext_resource type="Resource" uid="uid://d2cdt5te7vce" path="res://cards/data/magician_deck/common_cards/fire_storm.tres" id="13_2fwob"]
 [ext_resource type="Resource" uid="uid://dvi2kjhfepq7w" path="res://cards/data/magician_deck/common_cards/abracadabra.tres" id="13_xaxl1"]
 [ext_resource type="Resource" uid="uid://boc1msj4xh8kq" path="res://cards/data/magician_deck/common_cards/flaming_sword.tres" id="14_16jyn"]
 [ext_resource type="Resource" uid="uid://c08cupugqrh0n" path="res://cards/data/magician_deck/common_cards/lay_on_hands.tres" id="14_tjyfs"]
@@ -29,6 +33,7 @@
 [ext_resource type="Resource" uid="uid://cuixxyk63vg8b" path="res://cards/data/magician_deck/uncommon_cards/pool_of_essence.tres" id="18_t785l"]
 [ext_resource type="Resource" uid="uid://da7mw5k6xppkc" path="res://cards/data/magician_deck/uncommon_cards/surge.tres" id="19_r34ar"]
 [ext_resource type="Resource" uid="uid://bnm7hlx1cloet" path="res://cards/data/magician_deck/uncommon_cards/conduit.tres" id="20_mmk1d"]
+[ext_resource type="Resource" uid="uid://dc7rqa345pgir" path="res://cards/data/magician_deck/common_cards/mystic_bolt.tres" id="20_w35uw"]
 [ext_resource type="Resource" uid="uid://brlv52tivlplm" path="res://cards/data/magician_deck/rare_cards/meteor_storm.tres" id="21_s6mfd"]
 [ext_resource type="Resource" uid="uid://dj18gihhkkxgx" path="res://cards/data/magician_deck/common_cards/rage.tres" id="22_s6mfd"]
 [ext_resource type="Resource" uid="uid://clfpdx7831vqr" path="res://cards/data/magician_deck/uncommon_cards/precision.tres" id="23_kfoi1"]
@@ -36,6 +41,7 @@
 [ext_resource type="Resource" uid="uid://ckrktnqafcmgg" path="res://cards/data/magician_deck/common_cards/zap.tres" id="25_vln2m"]
 [ext_resource type="Resource" uid="uid://llkwkxuxqkhe" path="res://cards/data/magician_deck/uncommon_cards/electrostasis.tres" id="26_i6tmi"]
 [ext_resource type="Resource" uid="uid://cg51qpankcalo" path="res://cards/data/magician_deck/uncommon_cards/evasion.tres" id="26_r8gmc"]
+[ext_resource type="Resource" uid="uid://bq86uq03p4ulw" path="res://cards/data/magician_deck/uncommon_cards/curse.tres" id="26_w4mlx"]
 [ext_resource type="Resource" uid="uid://dfgdrjkj6g8j" path="res://cards/data/magician_deck/common_cards/abjuration.tres" id="27_5wu3g"]
 [ext_resource type="Resource" uid="uid://bgcwahceecrw1" path="res://cards/data/magician_deck/uncommon_cards/overheat.tres" id="27_f1ko4"]
 [ext_resource type="Resource" uid="uid://2ybti81h0mfp" path="res://cards/data/magician_deck/common_cards/fire_bolt.tres" id="28_kt3wt"]
@@ -44,6 +50,27 @@
 [ext_resource type="Resource" uid="uid://r4pos228sfyl" path="res://cards/data/magician_deck/rare_cards/divine_incantation.tres" id="34_rymir"]
 [ext_resource type="Resource" uid="uid://cjiqxdd8rxubd" path="res://cards/data/magician_deck/rare_cards/grand_finale.tres" id="35_kkcac"]
 [ext_resource type="Resource" uid="uid://s6osdcqxapgy" path="res://cards/data/magician_deck/rare_cards/thunderwave.tres" id="37_8e5es"]
+[ext_resource type="Resource" uid="uid://cw0ra5ytlq0fk" path="res://cards/data/magician_deck/rare_cards/enchant.tres" id="38_1t1sk"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="49_knd51"]
+[ext_resource type="Resource" uid="uid://c846myfc0mwyx" path="res://scenes/Shop/buff_data/scroll_large_dmg.tres" id="50_foy5n"]
+[ext_resource type="Resource" uid="uid://cmjp607hh26ws" path="res://scenes/Shop/buff_data/scroll_large_hp.tres" id="51_1l46u"]
+[ext_resource type="Resource" uid="uid://biefucku7xaj3" path="res://scenes/Shop/buff_data/scroll_dodge.tres" id="51_puws4"]
+[ext_resource type="Resource" uid="uid://b3sqhk37nuul8" path="res://scenes/Shop/buff_data/scroll_small_dmg.tres" id="52_ic4l5"]
+[ext_resource type="Resource" uid="uid://w51gmulb1x3e" path="res://scenes/Shop/buff_data/scroll_electric.tres" id="52_q5ynm"]
+[ext_resource type="Resource" uid="uid://b1u1h7601l6jq" path="res://scenes/Shop/buff_data/scroll_fire.tres" id="53_lrx1y"]
+[ext_resource type="Resource" uid="uid://35ne5u1lmchj" path="res://scenes/Shop/buff_data/scroll_small_hp.tres" id="53_tyn04"]
+[ext_resource type="Resource" uid="uid://bqg8lhkfn1byy" path="res://scenes/Shop/buff_data/scroll_ice.tres" id="54_rukus"]
+[ext_resource type="Resource" uid="uid://bn0c7mbwmqslh" path="res://scenes/Shop/buff_data/scroll_large_crit_c.tres" id="55_g5i6s"]
+[ext_resource type="Resource" uid="uid://02ns252cs67c" path="res://scenes/Shop/buff_data/scroll_large_crit_d.tres" id="56_n7mmm"]
+[ext_resource type="Resource" uid="uid://g1u8uxwmao8q" path="res://scenes/Shop/buff_data/scroll_large_elemental.tres" id="58_k11dl"]
+[ext_resource type="Resource" uid="uid://bljnt2flbcr81" path="res://scenes/Shop/buff_data/scroll_poison.tres" id="60_6ylni"]
+[ext_resource type="Resource" uid="uid://cgeqmk02mov2t" path="res://scenes/Shop/buff_data/scroll_small_crit_c.tres" id="61_2wacr"]
+[ext_resource type="Resource" uid="uid://wl8or41qows0" path="res://scenes/Shop/buff_data/scroll_small_crit_d.tres" id="62_kkxur"]
+[ext_resource type="Resource" uid="uid://hfimc2dgfyjm" path="res://scenes/Shop/buff_data/scroll_small_elemental.tres" id="64_xlaao"]
+[ext_resource type="Resource" uid="uid://7284urq0pn1q" path="res://scenes/Shop/buff_data/potion_orange.tres" id="66_rukus"]
+[ext_resource type="Resource" uid="uid://dyrpvq5cg2tgc" path="res://scenes/Shop/buff_data/potion_red.tres" id="67_g5i6s"]
+[ext_resource type="Resource" uid="uid://cfotufscwvb0n" path="res://scenes/Shop/buff_data/potion_yellow.tres" id="68_n7mmm"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="70_g5i6s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -58,7 +85,10 @@ grow_vertical = 2
 script = ExtResource("1_1g71r")
 player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
-available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("28_kt3wt"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
+shop_item_scene = ExtResource("3_knd51")
+shop_buff_scene = ExtResource("4_foy5n")
+available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("12_ed28i"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("20_w35uw"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
+shop_buffs = Array[ExtResource("49_knd51")]([ExtResource("51_puws4"), ExtResource("52_q5ynm"), ExtResource("53_lrx1y"), ExtResource("54_rukus"), ExtResource("55_g5i6s"), ExtResource("56_n7mmm"), ExtResource("50_foy5n"), ExtResource("58_k11dl"), ExtResource("51_1l46u"), ExtResource("60_6ylni"), ExtResource("61_2wacr"), ExtResource("62_kkxur"), ExtResource("52_ic4l5"), ExtResource("64_xlaao"), ExtResource("53_tyn04"), ExtResource("66_rukus"), ExtResource("67_g5i6s"), ExtResource("68_n7mmm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -71,34 +101,18 @@ offset_left = 1587.0
 offset_top = 74.0
 offset_right = 1760.0
 offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("70_g5i6s")
 text = "Coins: "
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="CoinAmount" type="Label" parent="." unique_id=1407741725]
 layout_mode = 0
-offset_left = 1717.0
+offset_left = 1730.0
 offset_top = 74.0
-offset_right = 1890.0
+offset_right = 1903.0
 offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("70_g5i6s")
 text = "50"
-label_settings = SubResource("LabelSettings_1g71r")
-
-[node name="Items Here" type="Label" parent="." unique_id=1262789622]
-layout_mode = 0
-offset_left = 1044.0
-offset_top = 49.0
-offset_right = 1257.0
-offset_bottom = 104.0
-text = "Items Here"
-label_settings = SubResource("LabelSettings_1g71r")
-
-[node name="Stats Buffs Here" type="Label" parent="." unique_id=1010229035]
-layout_mode = 0
-offset_left = 997.0
-offset_top = 607.0
-offset_right = 1289.0
-offset_bottom = 662.0
-text = "Stat Buffs Here"
 label_settings = SubResource("LabelSettings_1g71r")
 
 [node name="CardsContainer" type="GridContainer" parent="." unique_id=1152559202]
@@ -116,6 +130,34 @@ theme_override_constants/h_separation = 70
 theme_override_constants/v_separation = 50
 columns = 2
 
+[node name="ItemsContainer" type="HBoxContainer" parent="." unique_id=2128175089]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_top = 0.16100001
+anchor_right = 0.73300004
+anchor_bottom = 0.314
+offset_left = 2.5199585
+offset_top = 35.11998
+offset_right = 2.6398926
+offset_bottom = 34.879974
+theme_override_constants/separation = 180
+alignment = 1
+
+[node name="BuffsContainer" type="HBoxContainer" parent="." unique_id=1900530663]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_top = 0.16100001
+anchor_right = 0.73300004
+anchor_bottom = 0.314
+offset_left = -4.4800415
+offset_top = 569.12
+offset_right = -4.3601074
+offset_bottom = 568.88
+theme_override_constants/separation = 180
+alignment = 1
+
 [node name="Buttons" type="Control" parent="." unique_id=1301152946]
 anchors_preset = 0
 offset_left = 1547.0
@@ -130,6 +172,7 @@ offset_top = 50.0
 offset_right = 154.0
 offset_bottom = 81.0
 scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("70_g5i6s")
 text = "Next Stage"
 
 [node name="View Deck" type="Button" parent="Buttons" unique_id=1402221572]
@@ -139,6 +182,7 @@ offset_top = 134.0
 offset_right = 154.0
 offset_bottom = 165.0
 scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("70_g5i6s")
 text = "View Deck"
 
 [node name="Player" type="Node" parent="." unique_id=1821145247]

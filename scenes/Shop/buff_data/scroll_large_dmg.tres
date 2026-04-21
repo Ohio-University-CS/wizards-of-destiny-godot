@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://c846myfc0mwyx"]
+
+[ext_resource type="Texture2D" uid="uid://csj860g5m6d33" path="res://scenes/Shop/sprites/scroll_large_dmg.png" id="1_ab61y"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_f0bf7"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_nello"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_f0bf7"]
+
+[sub_resource type="Resource" id="Resource_f0bf7"]
+script = ExtResource("3_f0bf7")
+stat = 1
+amount = 2
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_f0bf7")
+buff_name = "Scroll of Major Strength"
+description = "Gain 2 Damage"
+price = 3
+art = ExtResource("1_ab61y")
+scroll_effect = Array[ExtResource("3_f0bf7")]([SubResource("Resource_f0bf7")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"
