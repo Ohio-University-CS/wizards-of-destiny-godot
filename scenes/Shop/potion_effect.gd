@@ -15,6 +15,10 @@ enum PotionColor {
 @export var potion_color : PotionColor = PotionColor.RED
 
 
+func get_color() -> String:
+	return PotionColor.keys()[int(potion_color)]
+
+
 func apply_potion():
 	if RunManager.player:
 		if potion_color == PotionColor.ORANGE:

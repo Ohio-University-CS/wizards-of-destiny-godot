@@ -10,22 +10,26 @@ class_name Shop
 @onready var coins : Label = $CoinAmount
 @onready var deck_view_button : Button = $"Buttons/View Deck"
 @onready var deck_view_scene : DeckView = $DeckView
+@onready var remove_card_scene : RemoveCard = $RemoveCard
 
 @export var player : Player
 @export var shop_card_scene : PackedScene
 @export var shop_item_scene : PackedScene
 @export var shop_buff_scene : PackedScene
+@export var card_scene : PackedScene
 
 # temporary card pool, has all cards
 @export var available_cards : Array[CardData]
 
 # Buff pool
-@export var shop_buffs : Array[BuffData]
+@export var shop_scrolls : Array[BuffData]
+@export var shop_potions : Array[BuffData]
 
 # number of everything that appears in shop
 var shop_card_amount : int = 4
 var shop_item_amount : int = 3
-var shop_buff_amount : int = 3
+var shop_scroll_amount : int = 2
+var shop_potion_amount : int = 1
 
 # setting rng to run seed
 var rng
@@ -94,21 +98,52 @@ func _generate_shop():
 	# ----
 	
 	# Setup buffs
+	# Scrolls
 	for child in buffs_container.get_children():
 		child.queue_free()
 	
-	var buff_pool = shop_buffs.duplicate()
-	for i in range(buff_pool.size() - 1, 0, -1):
+	var scroll_pool = shop_scrolls.duplicate()
+	for i in range(scroll_pool.size() - 1, 0, -1):
 		var j = rng.randi_range(0, i)
-		var temp = buff_pool[i]
-		buff_pool[i] = buff_pool[j]
-		buff_pool[j] = temp
+		var temp = scroll_pool[i]
+		scroll_pool[i] = scroll_pool[j]
+		scroll_pool[j] = temp
 	
-	for i in range(shop_buff_amount):
-		if i >= buff_pool.size():
+	for i in range(shop_scroll_amount):
+		if i >= scroll_pool.size():
 			break
 		
-		var data = buff_pool[i]
+		var data = scroll_pool[i]
+		
+		var ui = shop_buff_scene.instantiate()
+		var price = _get_buff_price(data)
+		
+		# Comedy Mask
+		if RunManager.has_item("Comedy Mask"):
+			price *= 0.75
+		
+		ui.setup(data, price)
+		ui.purchased.connect(_on_buff_purchased)
+		buffs_container.add_child(ui)
+	
+	# Potions
+	var potion_pool = shop_potions.duplicate()
+	for i in range(potion_pool.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+		var temp = potion_pool[i]
+		potion_pool[i] = potion_pool[j]
+		potion_pool[j] = temp
+	
+	for i in range(shop_potion_amount):
+		if i >= potion_pool.size():
+			break
+		
+		var data = potion_pool[i]
+		
+		# Prevent purple potion if less than 6 cards
+		if data.potion_effect[0].get_color() == "PURPLE":
+			if RunManager.player.deck_list.size() < 6:
+				data = potion_pool[i+1]
 		
 		var ui = shop_buff_scene.instantiate()
 		var price = _get_buff_price(data)
@@ -239,6 +274,8 @@ func _on_buff_purchased(buff_data : BuffData):
 	if not buff_data.potion_effect.size() == 0:
 		for p in buff_data.potion_effect:
 			p.apply_potion()
+			if p.get_color() == "PURPLE":
+				remove_card_scene.show_deck(player.deck_list, card_scene)
 	
 	# Remove the purchased buff UI from the shop
 	for child in buffs_container.get_children():

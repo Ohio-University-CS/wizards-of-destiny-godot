@@ -135,3 +135,7 @@ signal player_changed(new_player)
 func set_player(new_player):
 	player = new_player
 	emit_signal("player_changed", new_player)
+
+
+func remove_card_from_deck(index : int):
+	player.deck_list.pop_at(index)

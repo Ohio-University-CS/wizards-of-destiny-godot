@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://3jgaiifsw41v" path="res://scenes/Shop/ShopItemUi.tscn" id="3_knd51"]
 [ext_resource type="PackedScene" uid="uid://ka2a6tf24wbt" path="res://scenes/Shop/ShopBuffUi.tscn" id="4_foy5n"]
 [ext_resource type="Resource" uid="uid://cd3bcpl7esyu5" path="res://cards/data/magician_deck/common_cards/cure_wounds.tres" id="4_nj4jc"]
-[ext_resource type="PackedScene" uid="uid://bd02jux3b0xrm" path="res://scenes/Shop/RemoveCardUI.tscn" id="5_tyn04"]
 [ext_resource type="Resource" uid="uid://cw5q72qqbvtlg" path="res://cards/data/magician_deck/uncommon_cards/Fireball.tres" id="6_nj4jc"]
 [ext_resource type="Resource" uid="uid://n2pf7h4xkg51" path="res://cards/data/magician_deck/common_cards/burning_hands.tres" id="7_kx8h1"]
 [ext_resource type="Resource" uid="uid://c70eipsogd7" path="res://cards/data/magician_deck/uncommon_cards/shield.tres" id="7_nj4jc"]
@@ -53,28 +52,12 @@
 [ext_resource type="Resource" uid="uid://s6osdcqxapgy" path="res://cards/data/magician_deck/rare_cards/thunderwave.tres" id="37_8e5es"]
 [ext_resource type="Resource" uid="uid://cw0ra5ytlq0fk" path="res://cards/data/magician_deck/rare_cards/enchant.tres" id="38_1t1sk"]
 [ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="49_knd51"]
-[ext_resource type="Resource" uid="uid://c846myfc0mwyx" path="res://scenes/Shop/buff_data/scroll_large_dmg.tres" id="50_foy5n"]
-[ext_resource type="Resource" uid="uid://cmjp607hh26ws" path="res://scenes/Shop/buff_data/scroll_large_hp.tres" id="51_1l46u"]
-[ext_resource type="Resource" uid="uid://biefucku7xaj3" path="res://scenes/Shop/buff_data/scroll_dodge.tres" id="51_puws4"]
-[ext_resource type="Resource" uid="uid://b3sqhk37nuul8" path="res://scenes/Shop/buff_data/scroll_small_dmg.tres" id="52_ic4l5"]
-[ext_resource type="Resource" uid="uid://w51gmulb1x3e" path="res://scenes/Shop/buff_data/scroll_electric.tres" id="52_q5ynm"]
-[ext_resource type="Resource" uid="uid://covp8wma15jmo" path="res://scenes/Shop/buff_data/potion_purple.tres" id="53_1l46u"]
-[ext_resource type="Resource" uid="uid://b1u1h7601l6jq" path="res://scenes/Shop/buff_data/scroll_fire.tres" id="53_lrx1y"]
-[ext_resource type="Resource" uid="uid://35ne5u1lmchj" path="res://scenes/Shop/buff_data/scroll_small_hp.tres" id="53_tyn04"]
-[ext_resource type="Resource" uid="uid://bqg8lhkfn1byy" path="res://scenes/Shop/buff_data/scroll_ice.tres" id="54_rukus"]
-[ext_resource type="Resource" uid="uid://bn0c7mbwmqslh" path="res://scenes/Shop/buff_data/scroll_large_crit_c.tres" id="55_g5i6s"]
-[ext_resource type="Resource" uid="uid://02ns252cs67c" path="res://scenes/Shop/buff_data/scroll_large_crit_d.tres" id="56_n7mmm"]
-[ext_resource type="PackedScene" uid="uid://dbfl3a3f3y06c" path="res://scenes/Shop/remove_card.tscn" id="58_ic4l5"]
-[ext_resource type="Resource" uid="uid://g1u8uxwmao8q" path="res://scenes/Shop/buff_data/scroll_large_elemental.tres" id="58_k11dl"]
-[ext_resource type="Resource" uid="uid://bljnt2flbcr81" path="res://scenes/Shop/buff_data/scroll_poison.tres" id="60_6ylni"]
-[ext_resource type="Resource" uid="uid://cgeqmk02mov2t" path="res://scenes/Shop/buff_data/scroll_small_crit_c.tres" id="61_2wacr"]
-[ext_resource type="Resource" uid="uid://wl8or41qows0" path="res://scenes/Shop/buff_data/scroll_small_crit_d.tres" id="62_kkxur"]
-[ext_resource type="Resource" uid="uid://hfimc2dgfyjm" path="res://scenes/Shop/buff_data/scroll_small_elemental.tres" id="64_xlaao"]
-[ext_resource type="Resource" uid="uid://7284urq0pn1q" path="res://scenes/Shop/buff_data/potion_orange.tres" id="66_rukus"]
 [ext_resource type="Resource" uid="uid://dyrpvq5cg2tgc" path="res://scenes/Shop/buff_data/potion_red.tres" id="67_g5i6s"]
 [ext_resource type="Resource" uid="uid://cfotufscwvb0n" path="res://scenes/Shop/buff_data/potion_yellow.tres" id="68_n7mmm"]
+[ext_resource type="Resource" uid="uid://covp8wma15jmo" path="res://scenes/Shop/buff_data/potion_purple.tres" id="69_6ylni"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="70_g5i6s"]
 [ext_resource type="PackedScene" uid="uid://cmlpytnj11d5n" path="res://scenes/deck_view/deck_view.tscn" id="72_n7mmm"]
+[ext_resource type="PackedScene" uid="uid://dbfl3a3f3y06c" path="res://scenes/Shop/remove_card.tscn" id="74_2wacr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g71r"]
 font_size = 40
@@ -91,10 +74,8 @@ player = NodePath("Player")
 shop_card_scene = ExtResource("2_nj4jc")
 shop_item_scene = ExtResource("3_knd51")
 shop_buff_scene = ExtResource("4_foy5n")
-card_scene = ExtResource("5_tyn04")
 available_cards = Array[ExtResource("2_vrtdt")]([ExtResource("27_5wu3g"), ExtResource("13_xaxl1"), ExtResource("11_j512n"), ExtResource("7_kx8h1"), ExtResource("7_qgvoo"), ExtResource("3_35ukv"), ExtResource("4_nj4jc"), ExtResource("9_jafg1"), ExtResource("12_ed28i"), ExtResource("28_kt3wt"), ExtResource("13_2fwob"), ExtResource("14_16jyn"), ExtResource("14_tjyfs"), ExtResource("15_5j3h6"), ExtResource("8_nj4jc"), ExtResource("16_ronn0"), ExtResource("20_w35uw"), ExtResource("22_s6mfd"), ExtResource("15_n5wbs"), ExtResource("16_jafg1"), ExtResource("16_2lsrc"), ExtResource("9_jpxio"), ExtResource("10_wri3e"), ExtResource("25_vln2m"), ExtResource("20_mmk1d"), ExtResource("26_w4mlx"), ExtResource("26_i6tmi"), ExtResource("26_r8gmc"), ExtResource("6_nj4jc"), ExtResource("24_e5h2d"), ExtResource("30_qgs5q"), ExtResource("27_f1ko4"), ExtResource("18_t785l"), ExtResource("31_4r704"), ExtResource("23_kfoi1"), ExtResource("7_nj4jc"), ExtResource("19_r34ar"), ExtResource("34_rymir"), ExtResource("38_1t1sk"), ExtResource("35_kkcac"), ExtResource("21_s6mfd"), ExtResource("17_cbkss"), ExtResource("37_8e5es"), ExtResource("12_5difm")])
-shop_scrolls = Array[ExtResource("49_knd51")]([ExtResource("51_puws4"), ExtResource("52_q5ynm"), ExtResource("53_lrx1y"), ExtResource("54_rukus"), ExtResource("55_g5i6s"), ExtResource("56_n7mmm"), ExtResource("50_foy5n"), ExtResource("58_k11dl"), ExtResource("51_1l46u"), ExtResource("60_6ylni"), ExtResource("61_2wacr"), ExtResource("62_kkxur"), ExtResource("52_ic4l5"), ExtResource("64_xlaao"), ExtResource("53_tyn04")])
-shop_potions = Array[ExtResource("49_knd51")]([ExtResource("66_rukus"), ExtResource("53_1l46u"), ExtResource("67_g5i6s"), ExtResource("68_n7mmm")])
+shop_buffs = Array[ExtResource("49_knd51")]([ExtResource("67_g5i6s"), ExtResource("68_n7mmm"), ExtResource("69_6ylni")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=338908273]
 scale = Vector2(2, 2)
@@ -198,6 +179,6 @@ script = ExtResource("10_nj4jc")
 visible = false
 layout_mode = 1
 
-[node name="RemoveCard" parent="." unique_id=1158494419 instance=ExtResource("58_ic4l5")]
+[node name="RemoveCard" parent="." unique_id=375734862 instance=ExtResource("74_2wacr")]
 visible = false
 layout_mode = 1

@@ -1,33 +1,51 @@
 extends Control
-class_name DeckView
+class_name RemoveCard
 
-@onready var back_button : Button = $Buttons/Exit
+@onready var remove_button : Button = $Buttons/Remove
 @onready var card_list : GridContainer = $ScrollContainer/CardList
 
 
+# The currently selected card node and its index in the deck
+var selected_card_index : int = -1
+
+
+
 func _ready() -> void:
-	setup_button_hover(back_button)
-	back_button.pressed.connect(_on_exit_pressed)
+	setup_button_hover(remove_button)
+	remove_button.pressed.connect(_on_remove_pressed)
+	remove_button.visible = false
 
 
-func _on_exit_pressed():
-	visible = false
+
+func _on_remove_pressed():
+	if selected_card_index >= 0:
+		RunManager.remove_card_from_deck(selected_card_index)
+		visible = false
+		selected_card_index = -1
+		remove_button.visible = false
 
 
 # Call this to populate the deck view with cards
 func show_deck(cards: Array, card_scene: PackedScene):
 	for child in card_list.get_children():
 		child.queue_free()
-	for card_data in cards:
+	for i in cards.size():
+		var card_data = cards[i]
 		var card_ui = card_scene.instantiate()
-		card_ui.setup(card_data, 0) # Pass CardData and price (0 for deck view)
-		if card_ui.has_node("VBoxContainer/BuyButton"):
-			card_ui.get_node("VBoxContainer/BuyButton").visible = false
+		card_ui.setup(card_data, i)
+		card_ui.card_selected.connect(_on_card_selected)
 		card_ui.scale *= 1.5
 		card_list.add_child(card_ui)
 	# Ensure the grid container grows with its content for scrolling
 	card_list.custom_minimum_size = card_list.get_combined_minimum_size()
 	visible = true
+
+
+# Slot to handle card selection
+func _on_card_selected(index: int):
+	selected_card_index = index
+	if not remove_button.visible:
+		remove_button.visible = true
 
 
 #used for buttons
