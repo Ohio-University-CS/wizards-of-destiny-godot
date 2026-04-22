@@ -14,6 +14,8 @@
 [ext_resource type="Resource" uid="uid://cryogkau5nqi1" path="res://items/data/common/rune_of_death.tres" id="8_r3vw4"]
 [ext_resource type="Resource" uid="uid://chpufs6j1lfud" path="res://items/data/common/staff_of_power.tres" id="9_tq7yl"]
 [ext_resource type="Resource" uid="uid://bab1qy5wbwvkj" path="res://items/data/common/tattered_shawl.tres" id="10_18gop"]
+[ext_resource type="Texture2D" uid="uid://sfylxrtyc7ib" path="res://scenes/level1/forest1.png" id="11_twu4s"]
+[ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="12_3nn4w"]
 
 [node name="StartItemSelect" type="Control" unique_id=957808992]
 layout_mode = 3
@@ -24,6 +26,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wkau7")
 item_options = Array[ExtResource("2_5se7s")]([ExtResource("3_jt7p4"), ExtResource("4_twu4s"), ExtResource("5_3nn4w"), ExtResource("6_0jafp"), ExtResource("7_iy8n1"), ExtResource("8_r3vw4"), ExtResource("9_tq7yl"), ExtResource("10_18gop")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1937497109]
+position = Vector2(968, 546)
+texture = ExtResource("11_twu4s")
+
+[node name="background" type="Sprite2D" parent="." unique_id=156998519]
+modulate = Color(1, 1, 1, 0.75686276)
+position = Vector2(960, 537)
+scale = Vector2(1.9594998, 1.5952724)
+texture = ExtResource("12_3nn4w")
 
 [node name="Label" type="Label" parent="." unique_id=1868213526]
 layout_mode = 0
