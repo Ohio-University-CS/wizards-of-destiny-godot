@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b3ta3xje7i5xt" path="res://scenes/info_page/info_page.gd" id="1_pnuhd"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_pnuhd"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="3_msiiv"]
+[ext_resource type="Texture2D" uid="uid://bnh78kd1e0um6" path="res://scenes/main_menu/Alphabet-2.png.png" id="4_wr0h2"]
 [ext_resource type="Texture2D" uid="uid://d2i14pdbrg0qk" path="res://art_drop/status effects/block.png" id="5_xn2yo"]
 [ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="6_hcy2l"]
 [ext_resource type="Texture2D" uid="uid://c0gwjrlylbi8g" path="res://art_drop/status effects/burn.png" id="7_sddm3"]
@@ -12,10 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dsptqa1wloejp" path="res://art_drop/status effects/shock.png" id="10_a7s83"]
 [ext_resource type="Texture2D" uid="uid://ycijsulkvm1c" path="res://art_drop/status effects/evasive.png" id="11_sjfpx"]
 [ext_resource type="Texture2D" uid="uid://cokvy5nk7twdf" path="res://art_drop/status effects/stun.png" id="12_dvuqo"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_xn2yo"]
-font_size = 30
-font_color = Color(0, 0, 0, 1)
 
 [node name="InfoPage" type="Control" unique_id=967636714]
 layout_mode = 3
@@ -49,15 +46,10 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("2_pnuhd")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Exit" unique_id=1333020114]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 32.75
-offset_right = 255.0
-offset_bottom = 74.75
-theme_override_fonts/font = ExtResource("3_msiiv")
-text = "Back"
-label_settings = SubResource("LabelSettings_xn2yo")
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1970765630]
+position = Vector2(136.00002, 68.25)
+scale = Vector2(0.28093746, 0.34030262)
+texture = ExtResource("4_wr0h2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=958880367]
 layout_mode = 0
