@@ -38,12 +38,12 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
 
-var enemy_intent_1 : TextureRect = null
-var enemy_intent_1_label : Label = null
-var enemy_intent_2 : TextureRect = null
-var enemy_intent_2_label : Label = null
-var enemy_intent_3 : TextureRect = null
-var enemy_intent_3_label : Label = null
+var enemy_intent_1: TextureRect = null
+var enemy_intent_1_label: Label = null
+var enemy_intent_2: TextureRect = null
+var enemy_intent_2_label: Label = null
+var enemy_intent_3: TextureRect = null
+var enemy_intent_3_label: Label = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -59,6 +59,7 @@ var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var _editor_transform_syncing: bool = false
 
 
 var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
@@ -116,7 +117,6 @@ func load_enemy_pool(level: String, floor_num: int, stage: int) -> Array[PackedS
 	return pool
 
 
-
 func _ready():
 	enemy_rng.randomize()
 	
@@ -161,7 +161,7 @@ func _ready():
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	var stored_player : Player = RunManager.player
+	var stored_player: Player = RunManager.player
 	if stored_player:
 		player = stored_player
 		if player.get_parent():
@@ -170,7 +170,7 @@ func _ready():
 
 		var ui = find_child("UI", true, false)
 		if ui and ui.has_method("_bind_player_ui"):
-			ui._bind_player_ui(self)
+			ui._bind_player_ui(self )
 
 	#-------------------
 	# fallback
@@ -529,21 +529,37 @@ func _exit_tree():
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
 		return
+	if _editor_transform_syncing:
+		return
 
-	# sync handle -> enemy_spawn_position when moved in editor
-	var handle = get_node_or_null("EnemySpawnHandle")
-	if handle and handle is Marker2D:
-		if handle.position != enemy_spawn_position:
-			enemy_spawn_position = handle.position
-			# move any existing Enemy container in the scene to reflect change
-			var existing_enemy = get_node_or_null("Enemy")
-			if existing_enemy and existing_enemy is Node2D:
-				existing_enemy.position = enemy_spawn_position
+	_editor_transform_syncing = true
 
-	# ensure the handle follows property changes made in the inspector
-	if handle and handle is Marker2D:
-		if enemy_spawn_position != handle.position:
+	var handle := get_node_or_null("EnemySpawnHandle")
+	var existing_enemy := get_node_or_null("Enemy")
+
+	var handle_moved := false
+	var enemy_moved := false
+	if handle != null and handle is Marker2D:
+		handle_moved = handle.position.distance_to(enemy_spawn_position) > 0.01
+	if existing_enemy != null and existing_enemy is Node2D:
+		enemy_moved = existing_enemy.position.distance_to(enemy_spawn_position) > 0.01
+
+	# Allow moving either the editor handle or the Enemy node and keep runtime spawn in sync.
+	if handle_moved:
+		enemy_spawn_position = handle.position
+	elif enemy_moved:
+		enemy_spawn_position = existing_enemy.position
+
+	if handle != null and handle is Marker2D:
+		if handle.position.distance_to(enemy_spawn_position) > 0.01:
 			handle.position = enemy_spawn_position
+	if existing_enemy != null and existing_enemy is Node2D:
+		if existing_enemy.position.distance_to(enemy_spawn_position) > 0.01:
+			existing_enemy.position = enemy_spawn_position
+		if existing_enemy.scale.distance_to(enemy_spawn_scale) > 0.001:
+			existing_enemy.scale = enemy_spawn_scale
+
+	_editor_transform_syncing = false
 
 func draw_hand():
 	if deck == null:
@@ -781,7 +797,7 @@ func update_enemy_intent() -> void:
 		clear_enemy_intent()
 		return
 	
-	var extra_dmg : int = 0
+	var extra_dmg: int = 0
 	if opponent.status_effects["empower"] > 0:
 		extra_dmg += opponent.status_effects["empower"] * 3
 	if opponent.status_effects["rage"] > 0:
@@ -1035,8 +1051,8 @@ func _on_opponent_died() -> void:
 		RunManager.set_player(player)
 	
 	# Build result data
-	var coin_reward : int = 12
-	var miniboss : bool = false
+	var coin_reward: int = 12
+	var miniboss: bool = false
 	
 	if RunManager.stage == 4:
 		coin_reward += 5
