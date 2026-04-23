@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_kkefg"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_f5xq3"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_3qkos"]
+[ext_resource type="Texture2D" uid="uid://dhhi2v0e65r85" path="res://scenes/deckselect/magicaincard-1.png (5).png" id="4_35pys"]
+[ext_resource type="Texture2D" uid="uid://bm4ex0ftpsqo" path="res://scenes/deckselect/star.png.png" id="4_tajaj"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_tajaj"]
 [ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_f5xq3"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_3qkos"]
@@ -53,26 +55,15 @@ scale = Vector2(2, 2)
 icon = ExtResource("3_f5xq3")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -81.0
-offset_top = -22.0
-offset_right = 88.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Star"
-label_settings = SubResource("LabelSettings_0qkqs")
-horizontal_alignment = 1
-
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
-position = Vector2(35.5, -215)
-scale = Vector2(0.665625, 0.671875)
+position = Vector2(122.5, -161.49998)
+scale = Vector2(0.27287126, 0.2524229)
+texture = ExtResource("4_35pys")
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=952003917]
+position = Vector2(249, 155.75003)
+scale = Vector2(0.426, 0.40329507)
+texture = ExtResource("4_tajaj")
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false

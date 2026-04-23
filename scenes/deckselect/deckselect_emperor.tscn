@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_mrv5p"]
 [ext_resource type="Texture2D" uid="uid://bxbnu56gucxje" path="res://scenes/deckselect/emperor.png.png" id="4_7uu05"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_iiixl"]
+[ext_resource type="Texture2D" uid="uid://dhtwd41tfbjl0" path="res://scenes/deckselect/magicaincard-1.png (2).png" id="4_nkog0"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_7uu05"]
 [ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_mrv5p"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_iiixl"]
@@ -55,8 +56,9 @@ icon = ExtResource("3_mrv5p")
 flat = true
 
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
-position = Vector2(35.5, -215)
-scale = Vector2(0.665625, 0.671875)
+position = Vector2(121.5, -161)
+scale = Vector2(0.2488499, 0.2534118)
+texture = ExtResource("4_nkog0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1917131398]
 position = Vector2(157.375, 124.625)
