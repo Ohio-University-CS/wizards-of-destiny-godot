@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://ru66dy3jjm0m"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_1c3y5"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_crql7"]
+[ext_resource type="Resource" uid="uid://dpge000h3jnkq" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/claw.tres" id="2_tp5d6"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_dn1in"]
+[ext_resource type="Resource" uid="uid://dcdu4i7152n8m" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/beak.tres" id="3_l4t2v"]
+[ext_resource type="Resource" uid="uid://cwqmkt5opah8n" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/roar.tres" id="4_jspmn"]
+
+[resource]
+script = ExtResource("3_dn1in")
+enemy_name = "OwlBear"
+hp_variation = Array[int]([120])
+moves = Array[ExtResource("1_1c3y5")]([ExtResource("2_tp5d6"), ExtResource("3_l4t2v"), ExtResource("4_jspmn")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

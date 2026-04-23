@@ -28,7 +28,7 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/Corrupted_Treant.tscn"
 	  ],
 	  "mini_boss_8": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss4/MiniBoss4.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/OwlBear.tscn"
 	  ],
 	  "boss_12": [
         "res://Enemies/enemy_resources/enchanted_forest/Boss2/Boss2.tscn"
