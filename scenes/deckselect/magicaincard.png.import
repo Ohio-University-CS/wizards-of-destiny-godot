@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yat7vocti0i"
-path="res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"
+uid="uid://dhgcsprkpmu1f"
+path="res://.godot/imported/magicaincard.png-a01f18a95a8453917838e98a354e69e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/deckselect/judgementcard.png"
-dest_files=["res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"]
+source_file="res://scenes/deckselect/magicaincard.png"
+dest_files=["res://.godot/imported/magicaincard.png-a01f18a95a8453917838e98a354e69e5.ctex"]
 
 [params]
 

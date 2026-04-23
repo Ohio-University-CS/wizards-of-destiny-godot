@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yat7vocti0i"
-path="res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"
+uid="uid://btueugk8rrirb"
+path="res://.godot/imported/towercard.png-c2e7267585fd93f8f39ed1cb43f478cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/deckselect/judgementcard.png"
-dest_files=["res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"]
+source_file="res://scenes/deckselect/towercard.png"
+dest_files=["res://.godot/imported/towercard.png-c2e7267585fd93f8f39ed1cb43f478cb.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yat7vocti0i"
-path="res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"
+uid="uid://dyvye0y23xogd"
+path="res://.godot/imported/deathcard.png-76737c3c5d1ff6da06551ba83a74811f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/deckselect/judgementcard.png"
-dest_files=["res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"]
+source_file="res://scenes/deckselect/deathcard.png"
+dest_files=["res://.godot/imported/deathcard.png-76737c3c5d1ff6da06551ba83a74811f.ctex"]
 
 [params]
 

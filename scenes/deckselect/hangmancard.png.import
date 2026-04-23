@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yat7vocti0i"
-path="res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"
+uid="uid://2k5xoglgw81j"
+path="res://.godot/imported/hangmancard.png-74c9938b75ceadeb98275980997096aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/deckselect/judgementcard.png"
-dest_files=["res://.godot/imported/judgementcard.png-e9b25fb83440373ff0cc50c5d2836fa7.ctex"]
+source_file="res://scenes/deckselect/hangmancard.png"
+dest_files=["res://.godot/imported/hangmancard.png-74c9938b75ceadeb98275980997096aa.ctex"]
 
 [params]
 
