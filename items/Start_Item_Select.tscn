@@ -16,6 +16,10 @@
 [ext_resource type="Resource" uid="uid://bab1qy5wbwvkj" path="res://items/data/common/tattered_shawl.tres" id="10_18gop"]
 [ext_resource type="Texture2D" uid="uid://sfylxrtyc7ib" path="res://scenes/level1/forest1.png" id="11_twu4s"]
 [ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="12_3nn4w"]
+[ext_resource type="Texture2D" uid="uid://cuoax07mcrxog" path="res://scenes/collection/CHOOSE.png" id="13_r3vw4"]
+[ext_resource type="Texture2D" uid="uid://bau6277qqlm0e" path="res://scenes/collection/A.png" id="14_tq7yl"]
+[ext_resource type="Texture2D" uid="uid://dky6xv4umgico" path="res://scenes/collection/STARTING.png" id="15_18gop"]
+[ext_resource type="Texture2D" uid="uid://de2rmfa1dncmw" path="res://scenes/collection/ITEM.png" id="16_rbuur"]
 
 [node name="StartItemSelect" type="Control" unique_id=957808992]
 layout_mode = 3
@@ -33,20 +37,29 @@ texture = ExtResource("11_twu4s")
 
 [node name="background" type="Sprite2D" parent="." unique_id=156998519]
 modulate = Color(1, 1, 1, 0.75686276)
-position = Vector2(960, 537)
+position = Vector2(992, 538)
 scale = Vector2(1.9594998, 1.5952724)
 texture = ExtResource("12_3nn4w")
 
-[node name="Label" type="Label" parent="." unique_id=1868213526]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 111.0
-offset_right = 1676.0
-offset_bottom = 231.83334
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("1_52xl4")
-theme_override_font_sizes/font_size = 100
-text = "CHOOSE  A  STARTING  ITEM"
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=88983595]
+position = Vector2(506.49997, 217)
+scale = Vector2(0.73899996, 0.7578797)
+texture = ExtResource("13_r3vw4")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1059763693]
+position = Vector2(801.99994, 193.49998)
+scale = Vector2(0.692, 0.75501424)
+texture = ExtResource("14_tq7yl")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=42121297]
+position = Vector2(1118.9999, 192.25)
+scale = Vector2(0.6459999, 0.8431232)
+texture = ExtResource("15_18gop")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=859414301]
+position = Vector2(1585.0001, 194.49997)
+scale = Vector2(0.704, 0.7636102)
+texture = ExtResource("16_rbuur")
 
 [node name="Buttons" type="Control" parent="." unique_id=990668956]
 anchors_preset = 0
