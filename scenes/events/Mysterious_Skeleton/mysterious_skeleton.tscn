@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://usj56ro1qkhq"]
+
+[ext_resource type="Texture2D" uid="uid://cvg7gq72n0q5d" path="res://scenes/events/Mysterious_Skeleton/mysterious_skeleton.png" id="1_6pojo"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="2_tdf3g"]
+
+[node name="MysteriousSkeleton" type="Node2D" unique_id=1361244539]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=239788215]
+scale = Vector2(8, 8)
+texture = ExtResource("1_6pojo")
+centered = false
+
+[node name="EventLabel" type="Label" parent="." unique_id=23145280]
+offset_left = 549.0
+offset_top = 63.0
+offset_right = 1818.0
+offset_bottom = 183.83334
+theme_override_colors/font_color = Color(1, 0.77254903, 0.19607843, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_tdf3g")
+theme_override_font_sizes/font_size = 100
+text = "MYSTERIOUS SKELETON"
+
+[node name="Description" type="Label" parent="." unique_id=791841641]
+offset_left = 641.0
+offset_top = 234.0
+offset_right = 1788.0
+offset_bottom = 457.5
+theme_override_fonts/font = ExtResource("2_tdf3g")
+theme_override_font_sizes/font_size = 60
+text = "  Out of a swirling portal, a smiling skeleton pops his head up.
+  \"Wanna make a deal?\" He asks."
+autowrap_mode = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=782393694]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 808.0
+offset_top = 563.0
+offset_right = 848.0
+offset_bottom = 603.0
+
+[node name="DealButton" type="Button" parent="Buttons" unique_id=1113262215]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -27.0
+offset_right = 259.0
+offset_bottom = 1.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("2_tdf3g")
+text = "Make a Deal: Lose 10 Health, Gain 3 Damage"
+
+[node name="LeaveButton" type="Button" parent="Buttons" unique_id=255238382]
+layout_mode = 0
+offset_left = -78.0
+offset_top = 99.0
+offset_right = 83.0
+offset_bottom = 127.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("2_tdf3g")
+text = "Decline his Offer"
