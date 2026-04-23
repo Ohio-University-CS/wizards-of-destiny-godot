@@ -15,17 +15,17 @@
 script = ExtResource("1_4ag8t")
 card_scene = ExtResource("2_dpxgc")
 class_data = ExtResource("3_oexds")
-enemy_spawn_position = Vector2(1555, 651)
+enemy_spawn_position = Vector2(1350, 620)
 hand_origin = Vector2(500, 750)
 
 [node name="Enemy" parent="." unique_id=1886209078 instance=ExtResource("4_naajo")]
-position = Vector2(1350, 640)
+position = Vector2(1350, 620)
 scale = Vector2(1.75, 1.75)
 debug_status_vfx_test = true
 debug_test_status = "evasive"
 
 [node name="Player" parent="." unique_id=1096254011 instance=ExtResource("5_41jku")]
-position = Vector2(387.99997, 584)
+position = Vector2(500, 620)
 scale = Vector2(1.75, 1.75)
 debug_test_stacks = 3
 luck = 0.0
