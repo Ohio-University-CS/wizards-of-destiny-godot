@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://c36i1hidm0rht"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_f6rf7"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_mh8kq"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_ypa8g"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_cin3n"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="4_ypa8g"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_rvxw4"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_0lwht"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="7_cin3n"]
+
+[sub_resource type="Resource" id="Resource_ftxdu"]
+script = ExtResource("2_mh8kq")
+amount = 4
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_bqfde"]
+script = ExtResource("3_ypa8g")
+amount = 8
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_rvxw4"]
+script = ExtResource("4_ypa8g")
+status_type = 8
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("6_0lwht")
+name = "Vines"
+effects = Array[ExtResource("1_f6rf7")]([SubResource("Resource_ftxdu"), SubResource("Resource_bqfde"), SubResource("Resource_rvxw4")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_cin3n"), ExtResource("5_rvxw4"), ExtResource("7_cin3n")])
+intent_damage_amount = Array[int]([4])
+metadata/_custom_type_script = "uid://t788w26yn03s"

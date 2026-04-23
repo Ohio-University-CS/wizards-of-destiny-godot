@@ -25,7 +25,7 @@
 		"res://Enemies/enemy_resources/enchanted_forest/Floor_2/Common/Thieving_Bandit/Thieving_Bandit.tscn"
 	  ],
 	  "mini_boss_4": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss3/MiniBoss3.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/Corrupted_Treant.tscn"
 	  ],
 	  "mini_boss_8": [
         "res://Enemies/enemy_resources/enchanted_forest/MiniBoss4/MiniBoss4.tscn"

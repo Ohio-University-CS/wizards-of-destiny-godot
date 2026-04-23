@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bjs45jbf8tveh"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_4m276"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="2_4m276"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_cf0kn"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="4_4m276"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_doa23"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_3wl1s"]
+
+[sub_resource type="Resource" id="Resource_gnjcq"]
+script = ExtResource("2_4m276")
+amount = 14
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[sub_resource type="Resource" id="Resource_bqfde"]
+script = ExtResource("3_cf0kn")
+amount = 8
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("6_3wl1s")
+name = "Nature Magic"
+effects = Array[ExtResource("1_4m276")]([SubResource("Resource_gnjcq"), SubResource("Resource_bqfde")])
+weight = 10
+intent_icons = Array[Texture2D]([ExtResource("4_4m276"), ExtResource("5_doa23")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

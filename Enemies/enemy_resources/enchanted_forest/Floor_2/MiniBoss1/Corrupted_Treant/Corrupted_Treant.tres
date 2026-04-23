@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://btrlkxn1m3tmf"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_gur2q"]
+[ext_resource type="Resource" uid="uid://dt6tw6lw6qp68" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/slash.tres" id="2_1w3rs"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_p61qm"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_2qnye"]
+[ext_resource type="Resource" uid="uid://c36i1hidm0rht" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/vines.tres" id="3_vyaco"]
+[ext_resource type="Resource" uid="uid://btu2yn1q4p7fu" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/roots.tres" id="4_84nux"]
+[ext_resource type="Resource" uid="uid://bjs45jbf8tveh" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss1/Corrupted_Treant/nature_magic.tres" id="5_yk60h"]
+
+[resource]
+script = ExtResource("3_2qnye")
+enemy_name = "Corrupted Treant"
+hp_variation = Array[int]([100])
+moves = Array[ExtResource("1_gur2q")]([ExtResource("2_1w3rs"), ExtResource("3_vyaco"), ExtResource("4_84nux"), ExtResource("5_yk60h")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

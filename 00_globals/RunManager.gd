@@ -43,8 +43,8 @@ func start_new_run(starting_player : Player, new_seed : int = -1):
 	item_inventory.clear()
 	player = starting_player
 	coins = 10
-	level_floor = 1
-	stage = 1
+	level_floor = 2
+	stage = 4
 	if new_seed == -1:
 		run_seed = randi()
 	else:
