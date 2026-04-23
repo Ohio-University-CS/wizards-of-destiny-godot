@@ -37,13 +37,16 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var hand_origin: Vector2 = Vector2(300, 500)
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
+@export var hand_x_offset: float = 0.0
+@export var hand_y_offset: float = 50.0
+@export var hand_container_path: NodePath = NodePath("UI")
 
-var enemy_intent_1 : TextureRect = null
-var enemy_intent_1_label : Label = null
-var enemy_intent_2 : TextureRect = null
-var enemy_intent_2_label : Label = null
-var enemy_intent_3 : TextureRect = null
-var enemy_intent_3_label : Label = null
+var enemy_intent_1: TextureRect = null
+var enemy_intent_1_label: Label = null
+var enemy_intent_2: TextureRect = null
+var enemy_intent_2_label: Label = null
+var enemy_intent_3: TextureRect = null
+var enemy_intent_3_label: Label = null
 
 var is_play_animating: bool = false
 var player_move_label: Label = null
@@ -59,6 +62,8 @@ var enemy_move_tween: Tween = null
 var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var _editor_transform_syncing: bool = false
+var hand_container: Node = null
 
 
 var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
@@ -116,7 +121,6 @@ func load_enemy_pool(level: String, floor_num: int, stage: int) -> Array[PackedS
 	return pool
 
 
-
 func _ready():
 	enemy_rng.randomize()
 	
@@ -161,7 +165,7 @@ func _ready():
 	#------------------------------
 	# use persistent player if possible
 	#------------------------------
-	var stored_player : Player = RunManager.player
+	var stored_player: Player = RunManager.player
 	if stored_player:
 		player = stored_player
 		if player.get_parent():
@@ -170,7 +174,7 @@ func _ready():
 
 		var ui = find_child("UI", true, false)
 		if ui and ui.has_method("_bind_player_ui"):
-			ui._bind_player_ui(self)
+			ui._bind_player_ui(self )
 
 	#-------------------
 	# fallback
@@ -393,6 +397,7 @@ func _ready():
 	_update_discard_button_state()
 
 	_apply_game_speed_to_ui()
+	hand_container = _get_hand_container()
 
 	# Ensure exported scene overrides that were set to `null` get sensible defaults
 	if enemy_spawn_position == null:
@@ -529,21 +534,37 @@ func _exit_tree():
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
 		return
+	if _editor_transform_syncing:
+		return
 
-	# sync handle -> enemy_spawn_position when moved in editor
-	var handle = get_node_or_null("EnemySpawnHandle")
-	if handle and handle is Marker2D:
-		if handle.position != enemy_spawn_position:
-			enemy_spawn_position = handle.position
-			# move any existing Enemy container in the scene to reflect change
-			var existing_enemy = get_node_or_null("Enemy")
-			if existing_enemy and existing_enemy is Node2D:
-				existing_enemy.position = enemy_spawn_position
+	_editor_transform_syncing = true
 
-	# ensure the handle follows property changes made in the inspector
-	if handle and handle is Marker2D:
-		if enemy_spawn_position != handle.position:
+	var handle := get_node_or_null("EnemySpawnHandle")
+	var existing_enemy := get_node_or_null("Enemy")
+
+	var handle_moved := false
+	var enemy_moved := false
+	if handle != null and handle is Marker2D:
+		handle_moved = handle.position.distance_to(enemy_spawn_position) > 0.01
+	if existing_enemy != null and existing_enemy is Node2D:
+		enemy_moved = existing_enemy.position.distance_to(enemy_spawn_position) > 0.01
+
+	# Allow moving either the editor handle or the Enemy node and keep runtime spawn in sync.
+	if handle_moved:
+		enemy_spawn_position = handle.position
+	elif enemy_moved:
+		enemy_spawn_position = existing_enemy.position
+
+	if handle != null and handle is Marker2D:
+		if handle.position.distance_to(enemy_spawn_position) > 0.01:
 			handle.position = enemy_spawn_position
+	if existing_enemy != null and existing_enemy is Node2D:
+		if existing_enemy.position.distance_to(enemy_spawn_position) > 0.01:
+			existing_enemy.position = enemy_spawn_position
+		if existing_enemy.scale.distance_to(enemy_spawn_scale) > 0.001:
+			existing_enemy.scale = enemy_spawn_scale
+
+	_editor_transform_syncing = false
 
 func draw_hand():
 	if deck == null:
@@ -613,7 +634,8 @@ func _get_selected_playable_cards() -> Array:
 
 func spawn_card(instance: CardInstance):
 	var card = card_scene.instantiate()
-	add_child(card)
+	var parent = _get_hand_container()
+	parent.add_child(card)
 
 	card.setup(instance)
 
@@ -781,7 +803,7 @@ func update_enemy_intent() -> void:
 		clear_enemy_intent()
 		return
 	
-	var extra_dmg : int = 0
+	var extra_dmg: int = 0
 	if opponent.status_effects["empower"] > 0:
 		extra_dmg += opponent.status_effects["empower"] * 3
 	if opponent.status_effects["rage"] > 0:
@@ -1035,8 +1057,8 @@ func _on_opponent_died() -> void:
 		RunManager.set_player(player)
 	
 	# Build result data
-	var coin_reward : int = 12
-	var miniboss : bool = false
+	var coin_reward: int = 12
+	var miniboss: bool = false
 	
 	if RunManager.stage == 4:
 		coin_reward += 5
@@ -1197,7 +1219,45 @@ func _layout_hand(animated: bool, skip_card: Control = null) -> void:
 
 
 func _slot_position_for_index(index: int) -> Vector2:
-	return Vector2(hand_origin.x + (hand_spacing * index), hand_origin.y)
+	var center: Vector2 = _get_hand_center_in_container()
+	var count: int = max(hand_cards.size(), 1)
+	var total_width: float = hand_spacing * float(max(count - 1, 0))
+	var start_x: float = center.x - (total_width * 0.5)
+	return Vector2(start_x + (hand_spacing * float(index)), center.y)
+
+
+func _get_hand_center_in_container() -> Vector2:
+	var center := hand_origin
+	var parent = _get_hand_container()
+
+	if parent != self and parent is CanvasItem and self is CanvasItem:
+		var parent_canvas := parent as CanvasItem
+		var self_canvas := self as CanvasItem
+		var global_center: Vector2 = self_canvas.get_global_transform_with_canvas() * hand_origin
+		center = parent_canvas.get_global_transform_with_canvas().affine_inverse() * global_center
+
+	# Always center hand on viewport X, then convert to the hand container's local space.
+	var viewport_center_x: float = (get_viewport_rect().size.x * 0.5) + hand_x_offset
+	if parent is CanvasItem:
+		var parent_canvas_x := parent as CanvasItem
+		var viewport_local: Vector2 = parent_canvas_x.get_global_transform_with_canvas().affine_inverse() * Vector2(viewport_center_x, 0.0)
+		center.x = viewport_local.x
+	else:
+		center.x = viewport_center_x
+
+	center.y += hand_y_offset
+	return center
+
+
+func _get_hand_container() -> Node:
+	if hand_container != null and is_instance_valid(hand_container):
+		return hand_container
+
+	hand_container = get_node_or_null(hand_container_path)
+	if hand_container == null:
+		hand_container = self
+
+	return hand_container
 
 
 func _has_visual_for_instance(instance: CardInstance) -> bool:

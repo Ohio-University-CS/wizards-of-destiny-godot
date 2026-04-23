@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://b3126nvmfyvs6" path="res://scenes/settings_menu/controls/Controls_Icon.png" id="6_4bbrr"]
 [ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="6_ct2hx"]
 [ext_resource type="Texture2D" uid="uid://blgub1cki2s1r" path="res://scenes/main_menu/Back_Icon.png" id="7_516im"]
+[ext_resource type="Texture2D" uid="uid://vwdxl0oogpbs" path="res://scenes/pause_menu/QUIT.png" id="7_invp5"]
+[ext_resource type="Texture2D" uid="uid://bbalnhl8exvnw" path="res://scenes/pause_menu/MAIN.png" id="8_ilqcs"]
 [ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="8_ykakm"]
 [ext_resource type="Texture2D" uid="uid://cgrsfwvngllyt" path="res://scenes/settings_menu/graphics/FullScreen_Icon.png" id="9_i2b8q"]
+[ext_resource type="Texture2D" uid="uid://c1lg2dd8ekef3" path="res://scenes/main_menu/menu.png" id="9_j33tr"]
 [ext_resource type="Script" uid="uid://chd076nfnlswo" path="res://scenes/pause_menu/sound.gd" id="10_6k3gd"]
 [ext_resource type="Texture2D" uid="uid://cd1f8n5hwqrf7" path="res://scenes/settings_menu/graphics/ON_Icon.png" id="10_ct2hx"]
 [ext_resource type="Texture2D" uid="uid://cale3dtexbitf" path="res://scenes/settings_menu/graphics/OFF_Icon.png" id="11_a8nm8"]
@@ -21,10 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://dgmm2fwkh5hqc" path="res://scenes/settings_menu/sound/Blue_Sound_Icon.png" id="14_4bbrr"]
 [ext_resource type="Texture2D" uid="uid://ct23d7brqxpst" path="res://scenes/settings_menu/controls/Blue_Controls_Icon.png" id="15_516im"]
 [ext_resource type="Script" uid="uid://bmipeekhdxeot" path="res://scenes/pause_menu/back_button.gd" id="18_ykakm"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_hoajq"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("8_ykakm")
@@ -354,23 +353,10 @@ position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("1_hoajq")
 
-[node name="resume_label" type="Label" parent="Pause_menu_options/Buttons/quit_button" unique_id=719349475]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -59.5
-offset_right = 171.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit"
-label_settings = SubResource("LabelSettings_hoajq")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Pause_menu_options/Buttons/quit_button" unique_id=1274073338]
+position = Vector2(149.00002, 67.000015)
+scale = Vector2(0.44199994, 0.51002866)
+texture = ExtResource("7_invp5")
 
 [node name="main_menu_button" type="Button" parent="Pause_menu_options/Buttons" unique_id=1855561364]
 layout_mode = 1
@@ -391,23 +377,15 @@ position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("1_hoajq")
 
-[node name="main_menu_label" type="Label" parent="Pause_menu_options/Buttons/main_menu_button" unique_id=1194129563]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -59.5
-offset_right = 171.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Main Menu"
-label_settings = SubResource("LabelSettings_hoajq")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="Pause_menu_options/Buttons/main_menu_button" unique_id=784165291]
+position = Vector2(148.99998, 67.999985)
+scale = Vector2(0.36525, 0.5229227)
+texture = ExtResource("8_ilqcs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Pause_menu_options/Buttons/main_menu_button" unique_id=39049961]
+position = Vector2(268, 93.999985)
+scale = Vector2(0.30899996, 0.54297996)
+texture = ExtResource("9_j33tr")
 
 [node name="Scroll_Animation" type="Control" parent="Pause_menu_options" unique_id=915336064]
 anchors_preset = 0
