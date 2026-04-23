@@ -707,3 +707,48 @@ func _die():
 		print("Rabbit's Paw triggers")
 	else:
 		emit_signal("died")
+	emit_signal("died")
+
+
+func _load_player_from_savestate(data : ClassData, save_state : Dictionary):
+	if self == null:
+		print("How could this happen")
+	class_data = data
+	
+	active_passives.clear()
+	
+	tattered_shawl = true
+	
+	
+	base_max_health = data.max_health
+	base_damage = data.damage
+	base_elemental_power = data.elemental_power
+	base_crit_damage = data.crit_damage
+	base_crit_chance = data.crit_chance
+	base_dodge = data.dodge
+	
+	base_fire = 0
+	base_ice = 0
+	base_poison = 0
+	base_electric = 0
+
+	initialized = true
+	print("END: setup_from_save")
+	current_health = save_state["current_health"]
+	max_energy = save_state["max_energy"]
+	emit_signal("health_changed", current_health)
+	emit_signal("energy_changed", energy, max_energy)
+	perm_modifiers = save_state["perm_modifiers"]
+	print("loading player complete")
+	return
+
+	
+func _load_deck_from_save(save_resources_path : String, num_cards : int):
+	var index = 1
+	deck_list.clear()
+	while(index <= num_cards):
+		var card_file_name = save_resources_path + "/cards/card_" + str(index) + ".tres"
+		var temp_card = ResourceLoader.load(card_file_name)
+		deck_list.append(temp_card)
+		index += 1
+	print("Deck loading successful")

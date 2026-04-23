@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" format=3]
+
+[ext_resource type="Script" path="res://cards/class_data.gd" id="1_3isdn"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="2_ddjdt"]
+[ext_resource type="Resource" path="res://cards/data/magician_deck/starting cards/jinx.tres" id="3_nxcgs"]
+[ext_resource type="Resource" path="res://cards/data/magician_deck/starting cards/hex.tres" id="4_t0vq4"]
+[ext_resource type="Resource" path="res://cards/data/magician_deck/starting cards/protective_barrier.tres" id="5_q8hcy"]
+[ext_resource type="Resource" path="res://cards/data/magician_deck/starting cards/bolster.tres" id="6_jq4fa"]
+
+[resource]
+script = ExtResource("1_3isdn")
+deck_name = "Magician"
+damage = 200
+starting_deck = Array[ExtResource("2_ddjdt")]([ExtResource("3_nxcgs"), ExtResource("3_nxcgs"), ExtResource("3_nxcgs"), ExtResource("4_t0vq4"), ExtResource("4_t0vq4"), ExtResource("4_t0vq4"), ExtResource("5_q8hcy"), ExtResource("5_q8hcy"), ExtResource("5_q8hcy"), ExtResource("6_jq4fa")])
+metadata/_custom_type_script = "uid://cniggcjjpnmqi"

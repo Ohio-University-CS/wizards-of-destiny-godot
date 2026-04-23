@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene format=3 uid="uid://meqnwahu4cnj"]
+=======
+[gd_scene format=3 uid="uid://ckshbboyurm2f"]
+>>>>>>> load-save-logic
 
 [sub_resource type="GDScript" id="GDScript_foav6"]
 script/source = "extends Node
