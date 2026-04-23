@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://blge1oecll87t" path="res://scenes/deckselect/judgement.png.png" id="4_imyfv"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_ogfrv"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_imyfv"]
+[ext_resource type="Texture2D" uid="uid://cu5m3anebjv0q" path="res://scenes/deckselect/judgementcard.png" id="5_mut2k"]
 [ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_2oqtn"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_ogfrv"]
 
@@ -58,6 +59,11 @@ flat = true
 position = Vector2(124.5, 127.5)
 scale = Vector2(0.20699997, 0.33560172)
 texture = ExtResource("4_imyfv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Level Select" unique_id=834153668]
+position = Vector2(124, -162.5)
+scale = Vector2(0.2502965, 0.25870252)
+texture = ExtResource("5_mut2k")
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false
