@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://c60imojvxfumo" path="res://scenes/deckselect/deckselect_moon.gd" id="1_4v33i"]
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="2_seprx"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_72qpc"]
+[ext_resource type="Texture2D" uid="uid://b2isk02i42kcj" path="res://scenes/deckselect/magicaincard-1.png (4).png" id="4_ecix2"]
 [ext_resource type="Texture2D" uid="uid://ddfahprft4yga" path="res://scenes/deckselect/ForwardButton.png" id="4_j3ivp"]
+[ext_resource type="Texture2D" uid="uid://dexaiohug0wbu" path="res://scenes/deckselect/moon.png.png" id="4_pi6du"]
 [ext_resource type="Texture2D" uid="uid://fpni06gt4al0" path="res://scenes/deckselect/BackButton.png" id="5_pi6du"]
 [ext_resource type="Texture2D" uid="uid://c7hfmels5356k" path="res://scenes/deckselect/deck.png.png" id="6_72qpc"]
 [ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="7_j3ivp"]
@@ -53,19 +55,15 @@ scale = Vector2(2, 2)
 icon = ExtResource("3_72qpc")
 flat = true
 
-[node name="Label" type="Label" parent="Buttons/Level Select" unique_id=677204681]
-layout_mode = 0
-offset_left = 37.5
-offset_top = 32.0
-offset_right = 206.5
-offset_bottom = 74.0
-text = "Moon"
-label_settings = SubResource("LabelSettings_0qkqs")
-horizontal_alignment = 1
-
 [node name="MagicianCardPic" type="Sprite2D" parent="Buttons/Level Select" unique_id=1802944246]
-position = Vector2(35.5, -215)
-scale = Vector2(0.665625, 0.671875)
+position = Vector2(122.80488, -162.82813)
+scale = Vector2(0.25906315, 0.25131032)
+texture = ExtResource("4_ecix2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Level Select" unique_id=1583931330]
+position = Vector2(229.25, 159.87503)
+scale = Vector2(0.4145, 0.4258596)
+texture = ExtResource("4_pi6du")
 
 [node name="Upgrades" type="Button" parent="Buttons" unique_id=670086768]
 visible = false

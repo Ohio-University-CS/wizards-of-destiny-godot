@@ -37,6 +37,9 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var hand_origin: Vector2 = Vector2(300, 500)
 @export var hand_spacing: float = 180.0
 @export var hand_return_duration: float = 0.22
+@export var hand_x_offset: float = 0.0
+@export var hand_y_offset: float = 50.0
+@export var hand_container_path: NodePath = NodePath("UI")
 
 var enemy_intent_1: TextureRect = null
 var enemy_intent_1_label: Label = null
@@ -60,6 +63,7 @@ var hand_cards: Array = []
 var dragged_hand_card: Control = null
 var enemy_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _editor_transform_syncing: bool = false
+var hand_container: Node = null
 
 
 var pause_menu_scene = preload("res://scenes/pause_menu/pause-menu.tscn")
@@ -393,6 +397,7 @@ func _ready():
 	_update_discard_button_state()
 
 	_apply_game_speed_to_ui()
+	hand_container = _get_hand_container()
 
 	# Ensure exported scene overrides that were set to `null` get sensible defaults
 	if enemy_spawn_position == null:
@@ -629,7 +634,8 @@ func _get_selected_playable_cards() -> Array:
 
 func spawn_card(instance: CardInstance):
 	var card = card_scene.instantiate()
-	add_child(card)
+	var parent = _get_hand_container()
+	parent.add_child(card)
 
 	card.setup(instance)
 
@@ -1213,7 +1219,45 @@ func _layout_hand(animated: bool, skip_card: Control = null) -> void:
 
 
 func _slot_position_for_index(index: int) -> Vector2:
-	return Vector2(hand_origin.x + (hand_spacing * index), hand_origin.y)
+	var center: Vector2 = _get_hand_center_in_container()
+	var count: int = max(hand_cards.size(), 1)
+	var total_width: float = hand_spacing * float(max(count - 1, 0))
+	var start_x: float = center.x - (total_width * 0.5)
+	return Vector2(start_x + (hand_spacing * float(index)), center.y)
+
+
+func _get_hand_center_in_container() -> Vector2:
+	var center := hand_origin
+	var parent = _get_hand_container()
+
+	if parent != self and parent is CanvasItem and self is CanvasItem:
+		var parent_canvas := parent as CanvasItem
+		var self_canvas := self as CanvasItem
+		var global_center: Vector2 = self_canvas.get_global_transform_with_canvas() * hand_origin
+		center = parent_canvas.get_global_transform_with_canvas().affine_inverse() * global_center
+
+	# Always center hand on viewport X, then convert to the hand container's local space.
+	var viewport_center_x: float = (get_viewport_rect().size.x * 0.5) + hand_x_offset
+	if parent is CanvasItem:
+		var parent_canvas_x := parent as CanvasItem
+		var viewport_local: Vector2 = parent_canvas_x.get_global_transform_with_canvas().affine_inverse() * Vector2(viewport_center_x, 0.0)
+		center.x = viewport_local.x
+	else:
+		center.x = viewport_center_x
+
+	center.y += hand_y_offset
+	return center
+
+
+func _get_hand_container() -> Node:
+	if hand_container != null and is_instance_valid(hand_container):
+		return hand_container
+
+	hand_container = get_node_or_null(hand_container_path)
+	if hand_container == null:
+		hand_container = self
+
+	return hand_container
 
 
 func _has_visual_for_instance(instance: CardInstance) -> bool:
