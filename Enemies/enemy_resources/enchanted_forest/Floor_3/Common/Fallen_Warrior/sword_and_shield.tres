@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://t7y6fdol6fwu"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_jw2b8"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_4w82b"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_sxx66"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_7n73b"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_47gku"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_1705i"]
+
+[sub_resource type="Resource" id="Resource_u5y06"]
+script = ExtResource("2_sxx66")
+amount = 9
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_el2k0"]
+script = ExtResource("3_7n73b")
+amount = 7
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("2_4w82b")
+name = "Sword And Shield"
+effects = Array[ExtResource("1_jw2b8")]([SubResource("Resource_u5y06"), SubResource("Resource_el2k0")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("4_47gku"), ExtResource("5_1705i")])
+intent_damage_amount = Array[int]([9])
+metadata/_custom_type_script = "uid://t788w26yn03s"

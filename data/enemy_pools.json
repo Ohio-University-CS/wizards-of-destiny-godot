@@ -36,8 +36,7 @@
 	},
 	"floor_3": {
 	  "enemies": [
-		"res://Enemies/enemy_resources/enchanted_forest/Goblin_Warrior/Goblin_Warrior.tscn",
-        "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/Fallen_Warrior.tscn"
 	  ],
 	  "mini_boss_4": [
         "res://Enemies/enemy_resources/enchanted_forest/MiniBoss5/MiniBoss5.tscn"
