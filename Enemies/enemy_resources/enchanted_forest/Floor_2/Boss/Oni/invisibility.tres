@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://d3sfioma0c67p"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_snh2m"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_0ujc7"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_ataxp"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="3_ebw1w"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="4_0os1b"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="5_fk756"]
+
+[sub_resource type="Resource" id="Resource_lbepl"]
+script = ExtResource("2_ataxp")
+status_type = 10
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_15o07"]
+script = ExtResource("3_ebw1w")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[resource]
+script = ExtResource("2_0ujc7")
+name = "Invisibility"
+effects = Array[ExtResource("1_snh2m")]([SubResource("Resource_lbepl"), SubResource("Resource_15o07")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_0os1b"), ExtResource("5_fk756")])
+metadata/_custom_type_script = "uid://t788w26yn03s"

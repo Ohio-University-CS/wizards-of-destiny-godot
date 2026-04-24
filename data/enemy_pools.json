@@ -31,7 +31,7 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/OwlBear.tscn"
 	  ],
 	  "boss_12": [
-        "res://Enemies/enemy_resources/enchanted_forest/Boss2/Boss2.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/Oni.tscn"
 	  ]
 	},
 	"floor_3": {
