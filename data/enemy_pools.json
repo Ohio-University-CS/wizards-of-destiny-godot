@@ -42,7 +42,8 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/Banshee.tscn"
 	  ],
 	  "mini_boss_8": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss6/MiniBoss6.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Blade/Judgements_Blade.tscn",
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Shield/Judgements_Shield.tscn"
 	  ],
 	  "boss_12": [
         "res://Enemies/enemy_resources/enchanted_forest/Boss3/Boss3.tscn"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://8ocsau2n2mu2"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_d178f"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_3l6dj"]
+[ext_resource type="Resource" uid="uid://eauxb18rajpy" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Blade/slice.tres" id="2_6n2l8"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_111gy"]
+[ext_resource type="Resource" uid="uid://dnk7r7n3ckjfl" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Blade/slash.tres" id="3_lad1n"]
+[ext_resource type="Resource" uid="uid://dp084d04nav7k" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Blade/stab.tres" id="4_3antj"]
+
+[resource]
+script = ExtResource("3_111gy")
+enemy_name = "Judgement's Blade"
+hp_variation = Array[int]([150])
+moves = Array[ExtResource("1_d178f")]([ExtResource("2_6n2l8"), ExtResource("3_lad1n"), ExtResource("4_3antj")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"
