@@ -51,7 +51,7 @@ func _show_item(item_data : ItemData):
 	if item_data.rarity == ItemData.Rarity.COMMON:
 		view_item_rarity.text = "Common"
 	elif item_data.rarity == ItemData.Rarity.UNCOMMON:
-		view_item_rarity.text = "Unommon"
+		view_item_rarity.text = "Uncommon"
 	else:
 		view_item_rarity.text = "Rare"
 	
