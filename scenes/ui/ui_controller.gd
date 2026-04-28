@@ -3,16 +3,16 @@ extends Node
 
 
 # Hover effect variables
-@onready var strike_icon : TextureRect = $PlayerUI/StrikeDamageIcon
-@onready var energy_sprite : TextureRect = $PlayerUI/EnergySprite
-var strike_icon_base_y : float = 0.0
-var strike_icon_hover_time : float = 0.0
-var strike_icon_hover_amplitude : float = 8.0 # pixels
-var strike_icon_hover_speed : float = 0.5 # cycles per second
-var energy_sprite_base_y : float = 0.0
-var energy_sprite_hover_time : float = 0.0
-var energy_sprite_hover_amplitude : float = 7.0 # pixels
-var energy_sprite_hover_speed : float = 0.6 # cycles per second
+@onready var strike_icon: TextureRect = $PlayerUI/StrikeDamageIcon
+@onready var energy_sprite: TextureRect = $PlayerUI/EnergySprite
+var strike_icon_base_y: float = 0.0
+var strike_icon_hover_time: float = 0.0
+var strike_icon_hover_amplitude: float = 8.0 # pixels
+var strike_icon_hover_speed: float = 0.5 # cycles per second
+var energy_sprite_base_y: float = 0.0
+var energy_sprite_hover_time: float = 0.0
+var energy_sprite_hover_amplitude: float = 7.0 # pixels
+var energy_sprite_hover_speed: float = 0.6 # cycles per second
 
 var strike_label = null
 
@@ -61,22 +61,11 @@ func _connect_to_manager() -> void:
 	_bind_player_ui(temp_combat)
 
 
-func _connect_buttons(target, temp_combat, _manager):
-	var play_btn = find_child("Play", true, false)
-	if play_btn and play_btn.has_signal("play_hand_requested"):
-		if not play_btn.is_connected("play_hand_requested", Callable(target, "play_hand")):
-			play_btn.connect("play_hand_requested", Callable(target, "play_hand"))
-
+func _connect_buttons(_target, temp_combat, _manager):
 	var end_btn = find_child("EndTurn", true, false)
 	if end_btn and end_btn.has_signal("end_turn_requested"):
 		if temp_combat and temp_combat.has_method("force_end_player_turn"):
 			end_btn.connect("end_turn_requested", Callable(temp_combat, "force_end_player_turn"))
-
-	var disc_btn = find_child("Discard", true, false)
-	if disc_btn and disc_btn.has_signal("discard_requested"):
-		if temp_combat and temp_combat.has_method("discard_selected_cards"):
-			disc_btn.connect("discard_requested", Callable(temp_combat, "discard_selected_cards"))
-
 
 
 func _bind_player_ui(temp_combat):
@@ -114,7 +103,7 @@ func _bind_player_ui(temp_combat):
 
 	# Strike UI: connect and update
 	if self.strike_label and player_node:
-		var callable = Callable(self, "_on_strike_changed")
+		var callable = Callable(self , "_on_strike_changed")
 		if player_node.is_connected("strike_changed", callable):
 			player_node.disconnect("strike_changed", callable)
 		player_node.connect("strike_changed", callable)
