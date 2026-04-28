@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dgmm2fwkh5hqc" path="res://scenes/settings_menu/sound/Blue_Sound_Icon.png" id="14_4bbrr"]
 [ext_resource type="Texture2D" uid="uid://ct23d7brqxpst" path="res://scenes/settings_menu/controls/Blue_Controls_Icon.png" id="15_516im"]
 [ext_resource type="Script" uid="uid://bmipeekhdxeot" path="res://scenes/pause_menu/back_button.gd" id="18_ykakm"]
-[ext_resource type="Texture2D" uid="uid://dqsanab6pvciw" path="res://sprites/Brown_Background.png" id="25_j33tr"]
+[ext_resource type="Texture2D"  path="res://sprites/Brown_Background.png" id="25_j33tr"]
 [ext_resource type="Texture2D" uid="uid://ce7e8bw62qb2y" path="res://sprites/Health.png" id="26_nj32i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]

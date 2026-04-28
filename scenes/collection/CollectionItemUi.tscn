@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bkwxaa8ap3l88"]
+[gd_scene format=3 ]
 
-[ext_resource type="Script" uid="uid://dl1e84ifyf77h" path="res://scenes/collection/collection_item_ui.gd" id="1_0dmvr"]
+[ext_resource type="Script"  path="res://scenes/collection/collection_item_ui.gd" id="1_0dmvr"]
 
 [node name="CollectionItemUi" type="Control" unique_id=1268231388]
 layout_mode = 3

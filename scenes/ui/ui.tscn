@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://6ls0th4pkr4a" path="res://scenes/ui/ui_controller.gd" id="1_7vp6q"]
 [ext_resource type="Script" uid="uid://bevfes5sfxjye" path="res://cards/combat_deck.gd" id="1_g5kmx"]
-[ext_resource type="Script" uid="uid://2cjf3k15v06f" path="res://scenes/ui/play_button.gd" id="2_0dwhk"]
-[ext_resource type="Script" uid="uid://bibcwhcrg51l" path="res://scenes/ui/discard_button.gd" id="3_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://8bg77iqlhr4t" path="res://scenes/ui/energy_ball.png" id="4_4kltc"]
 [ext_resource type="Script" uid="uid://4r65adhwog7r" path="res://scripts/mana_bar.gd" id="4_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://bpwkk8nabxiqh" path="res://sprites/strike_visual.png" id="5_jcn1r"]
@@ -19,6 +17,7 @@ anchors_preset = 0
 script = ExtResource("1_7vp6q")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1798303673]
+visible = false
 layout_mode = 0
 offset_left = -1.0
 offset_top = 944.0
@@ -29,16 +28,6 @@ offset_bottom = 1094.0
 script = ExtResource("1_g5kmx")
 max_hand_size = null
 starting_deck = null
-
-[node name="Play" type="Button" parent="PanelContainer" unique_id=1254286619]
-clip_contents = true
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-size_flags_stretch_ratio = 2.0
-text = "Play"
-script = ExtResource("2_0dwhk")
 
 [node name="PlayerUI" type="Node" parent="." unique_id=1551879210]
 
@@ -108,6 +97,7 @@ text = "5"
 horizontal_alignment = 1
 
 [node name="Panel" type="Panel" parent="." unique_id=392055822]
+self_modulate = Color(0.17254902, 0.105882354, 0.07058824, 1)
 layout_mode = 0
 offset_right = 1922.0
 offset_bottom = 60.0
@@ -141,24 +131,13 @@ vertical_alignment = 1
 [node name="PlayerStatusStack" type="Node2D" parent="Panel" unique_id=341118905]
 position = Vector2(390, 30)
 
-[node name="Discard" type="Button" parent="." unique_id=1741533510]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 0
-offset_left = 1619.0
-offset_top = 945.0
-offset_right = 1769.0
-offset_bottom = 1095.0
-disabled = true
-text = "Discard"
-script = ExtResource("3_7vp6q")
-
 [node name="EndTurn" type="Button" parent="." unique_id=404048436]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 offset_left = 1771.0
-offset_top = 945.0
+offset_top = 931.0
 offset_right = 1921.0
-offset_bottom = 1095.0
+offset_bottom = 1081.0
 text = "End Turn"
 script = ExtResource("7_jcn1r")
 

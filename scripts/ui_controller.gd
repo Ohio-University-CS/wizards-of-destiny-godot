@@ -5,7 +5,7 @@ func _ready() -> void:
 	_connect_to_manager()
 	# Listen for player node changes (reparenting after combat)
 	if RunManager.has_signal("player_changed"):
-		RunManager.connect("player_changed", Callable(self, "_on_player_changed"), CONNECT_DEFERRED)
+		RunManager.connect("player_changed", Callable(self , "_on_player_changed"), CONNECT_DEFERRED)
 
 func _connect_to_manager() -> void:
 	var scene_root = get_tree().current_scene
@@ -63,7 +63,7 @@ func _bind_player_ui(temp_combat):
 	var mana = null
 	var energy_sprite = find_child("EnergySprite", true, false)
 	if energy_sprite:
-	    mana = energy_sprite.find_child("Label", true, false)
+		mana = energy_sprite.find_child("Label", true, false)
 	print("Found mana:", mana)
 
 	if health and health.has_method("set_target") and player_node:
@@ -78,5 +78,5 @@ func _bind_player_ui(temp_combat):
 
 
 # Called when the player node is replaced or reparented (after combat)
-func _on_player_changed(new_player):
+func _on_player_changed(_new_player):
 	_bind_player_ui(null)
