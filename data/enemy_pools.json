@@ -31,19 +31,19 @@
         "res://Enemies/enemy_resources/enchanted_forest/Floor_2/MiniBoss2/OwlBear/OwlBear.tscn"
 	  ],
 	  "boss_12": [
-        "res://Enemies/enemy_resources/enchanted_forest/Boss2/Boss2.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/Oni.tscn"
 	  ]
 	},
 	"floor_3": {
 	  "enemies": [
-		"res://Enemies/enemy_resources/enchanted_forest/Goblin_Warrior/Goblin_Warrior.tscn",
-        "res://Enemies/enemy_resources/enchanted_forest/Goblin_Assassin/Goblin_Assassin.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/Fallen_Warrior.tscn"
 	  ],
 	  "mini_boss_4": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss5/MiniBoss5.tscn"
+        "res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/Banshee.tscn"
 	  ],
 	  "mini_boss_8": [
-        "res://Enemies/enemy_resources/enchanted_forest/MiniBoss6/MiniBoss6.tscn"
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Blade/Judgements_Blade.tscn",
+		"res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Shield/Judgements_Shield.tscn"
 	  ],
 	  "boss_12": [
         "res://Enemies/enemy_resources/enchanted_forest/Boss3/Boss3.tscn"

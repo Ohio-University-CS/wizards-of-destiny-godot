@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="1_iu1pj"]
 [ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/save_screen/Title_Screen_Button.png" id="2_ax117"]
 [ext_resource type="Texture2D" uid="uid://bd7gagdcykbh3" path="res://scenes/settings_menu/Title_Screen_Animation-tmp/settings-cutscene.png" id="4_6f0nw"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7r5af"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://vwdxl0oogpbs" path="res://scenes/pause_menu/QUIT.png" id="4_p8rfx"]
+[ext_resource type="Texture2D" uid="uid://bbalnhl8exvnw" path="res://scenes/pause_menu/MAIN.png" id="5_gwn8g"]
+[ext_resource type="Texture2D" uid="uid://c1lg2dd8ekef3" path="res://scenes/main_menu/menu.png" id="6_0sfl0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rar45"]
 atlas = ExtResource("4_6f0nw")
@@ -365,23 +364,10 @@ position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("2_ax117")
 
-[node name="quit_label" type="Label" parent="quit_button" unique_id=828777654]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -59.5
-offset_right = 171.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit"
-label_settings = SubResource("LabelSettings_7r5af")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="quit_button" unique_id=897322178]
+position = Vector2(159, 65.000015)
+scale = Vector2(0.41024995, 0.48782235)
+texture = ExtResource("4_p8rfx")
 
 [node name="main_menu_button" type="Button" parent="." unique_id=2108417088]
 layout_mode = 1
@@ -395,23 +381,15 @@ position = Vector2(174, 57)
 scale = Vector2(1.7161018, 1.5816834)
 texture = ExtResource("2_ax117")
 
-[node name="main_menu_label" type="Label" parent="main_menu_button" unique_id=1372303979]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -59.5
-offset_right = 171.0
-offset_bottom = 59.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Main Menu"
-label_settings = SubResource("LabelSettings_7r5af")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="main_menu_button" unique_id=632439907]
+position = Vector2(148.00003, 66.000015)
+scale = Vector2(0.35350007, 0.5286533)
+texture = ExtResource("5_gwn8g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="main_menu_button" unique_id=70333387]
+position = Vector2(267, 90.62498)
+scale = Vector2(0.31949997, 0.5254297)
+texture = ExtResource("6_0sfl0")
 
 [node name="Animations" type="Control" parent="." unique_id=1472015518]
 anchors_preset = 0

@@ -495,6 +495,9 @@ func end_turn():
 	# remove end of turn status effects
 	status_effects["broken"] = 0
 	status_effects["sealed"] = 0
+	
+	if status_effects["drained"] > 0:
+		status_effects["drained"] -= 1
 
 
 func _clear_temp_stats():

@@ -325,8 +325,8 @@ scale = Vector2(1.0000002, 1.0049505)
 texture = ExtResource("3_yva5c")
 
 [node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1949047644]
-position = Vector2(118.66669, 53.499996)
-scale = Vector2(0.175, 0.15215278)
+position = Vector2(122.95715, 53.656494)
+scale = Vector2(0.2186111, 0.22274311)
 texture = ExtResource("7_e8p2v")
 
 [node name="Scroll_Animation" type="Control" parent="." unique_id=1012413467]

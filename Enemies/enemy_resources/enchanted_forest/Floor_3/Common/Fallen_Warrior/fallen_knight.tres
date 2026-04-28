@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dlnf7wmy6hn3v"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_lhqky"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_ktnnv"]
+[ext_resource type="Resource" uid="uid://t7y6fdol6fwu" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/sword_and_shield.tres" id="2_xlmuw"]
+[ext_resource type="Resource" uid="uid://48r1mg5wmcic" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/knights_courage.tres" id="3_8mgef"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_qv1j2"]
+[ext_resource type="Resource" uid="uid://bqmwgkels24d8" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/valor.tres" id="4_d8vtc"]
+
+[resource]
+script = ExtResource("3_qv1j2")
+enemy_name = "Fallen Warrior"
+hp_variation = Array[int]([80, 85, 95])
+moves = Array[ExtResource("1_lhqky")]([ExtResource("2_xlmuw"), ExtResource("3_8mgef"), ExtResource("4_d8vtc")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

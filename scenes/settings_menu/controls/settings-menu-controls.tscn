@@ -320,9 +320,9 @@ pivot_offset = Vector2(122, 54.5)
 icon = ExtResource("3_bwtrl")
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=356271844]
-position = Vector2(118.66669, 53.499996)
-scale = Vector2(0.175, 0.15215278)
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons/Exit" unique_id=1216056615]
+position = Vector2(122.95715, 53.656494)
+scale = Vector2(0.2186111, 0.22274311)
 texture = ExtResource("7_umfc7")
 
 [node name="Scroll_Animation" type="Control" parent="." unique_id=1744398690]

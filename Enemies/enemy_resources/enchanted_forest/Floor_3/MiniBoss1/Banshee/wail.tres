@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dua07u6ugjby5"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_jrrcp"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_jan4k"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_r0qfs"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_7nnw1"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_pj4ff"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_oao0l"]
+
+[sub_resource type="Resource" id="Resource_4mg2i"]
+script = ExtResource("2_jan4k")
+amount = 3
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_7bbs4"]
+script = ExtResource("3_7nnw1")
+status_type = 7
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_r0qfs")
+name = "Wail"
+effects = Array[ExtResource("1_jrrcp")]([SubResource("Resource_4mg2i"), SubResource("Resource_7bbs4")])
+weight = 20
+cooldown = 1
+intent_icons = Array[Texture2D]([ExtResource("4_pj4ff"), ExtResource("5_oao0l")])
+intent_damage_amount = Array[int]([3])
+metadata/_custom_type_script = "uid://t788w26yn03s"

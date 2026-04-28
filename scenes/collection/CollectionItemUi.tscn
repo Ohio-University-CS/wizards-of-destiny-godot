@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bkwxaa8ap3l88"]
+
+[ext_resource type="Script" uid="uid://dl1e84ifyf77h" path="res://scenes/collection/collection_item_ui.gd" id="1_0dmvr"]
+
+[node name="CollectionItemUi" type="Control" unique_id=1268231388]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 96.0
+script = ExtResource("1_0dmvr")
+
+[node name="Art" type="TextureRect" parent="." unique_id=637303518]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0

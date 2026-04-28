@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://b51bgjg8dapsb"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_rld8i"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_75et4"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_ju6v8"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_lcpqw"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_7svrg"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_ll264"]
+
+[sub_resource type="Resource" id="Resource_s6w08"]
+script = ExtResource("2_75et4")
+amount = 5
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_q5ow5"]
+script = ExtResource("3_lcpqw")
+amount = 15
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("2_ju6v8")
+name = "Bash"
+effects = Array[ExtResource("1_rld8i")]([SubResource("Resource_s6w08"), SubResource("Resource_q5ow5")])
+weight = 50
+intent_icons = Array[Texture2D]([ExtResource("4_7svrg"), ExtResource("5_ll264")])
+intent_damage_amount = Array[int]([5])
+metadata/_custom_type_script = "uid://t788w26yn03s"
