@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" format=3]
 
-[ext_resource type="Texture2D" path="res://items/sprites/Ring of Life.png" id="1_s35iv"]
+[ext_resource type="Texture2D" path="res://items/sprites/Holy_Goblet.png.png" id="1_s35iv"]
 [ext_resource type="Script" path="res://items/item_data.gd" id="2_ykx44"]
 
 [resource]
 script = ExtResource("2_ykx44")
-item_name = "Ring of Life"
-description = "Gain +5 Max Health"
+item_name = "Holy Goblet"
+description = "Gain +1 Max Energy"
+rarity = 2
 art = ExtResource("1_s35iv")
 metadata/_custom_type_script = "uid://dii8d12ououjr"

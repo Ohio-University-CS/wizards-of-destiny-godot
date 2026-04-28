@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/arcane_insight.png" id="1_rmvx0"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_b4g3f"]
+[ext_resource type="Script" path="res://cards/effects/draw_cards_effect.gd" id="3_ellgs"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="4_f4abv"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_haydc"]
+
+[sub_resource type="Resource" id="Resource_npcfh"]
+script = ExtResource("3_ellgs")
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b0upwpofv1ojb"
+
+[resource]
+script = ExtResource("5_haydc")
+card_name = "Arcane Insight"
+description = "Draw 2 Cards"
+energy_cost = 0
+card_type = 1
+artwork = ExtResource("1_rmvx0")
+frame_art = ExtResource("4_f4abv")
+effects = Array[ExtResource("2_b4g3f")]([SubResource("Resource_npcfh")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
