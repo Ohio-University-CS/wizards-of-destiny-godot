@@ -16,9 +16,8 @@ var item2 : ItemData
 var item3 : ItemData
 
 func _ready():
-	if RunManager.run_seed == -1:
+	if RunManager.run_seed == -1 && RunManager.player == null:
 		RunManager.start_new_run(null)
-
 	item1_button.pressed.connect(_on_item1_picked)
 	item2_button.pressed.connect(_on_item2_picked)
 	item3_button.pressed.connect(_on_item3_picked)

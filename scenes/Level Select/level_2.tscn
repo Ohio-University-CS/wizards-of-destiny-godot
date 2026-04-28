@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_xdadj"]
 [ext_resource type="Script" uid="uid://p82v34s6jxmd" path="res://scenes/Level Select/level_2.gd" id="1_xwgpu"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_1y8me"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/save_screen/Title_Screen_Button.png" id="2_1y8me"]
 [ext_resource type="Texture2D" uid="uid://clx1uog4bsd0u" path="res://scenes/Level Select/BackButton.png.png" id="3_n7ypv"]
 [ext_resource type="Texture2D" uid="uid://cdi6q61yf2u8r" path="res://scenes/Level Select/New Piskel-1.png (1).png" id="4_2indx"]
 [ext_resource type="Texture2D" uid="uid://pmuyd4ndos1i" path="res://scenes/Level Select/level2background.png" id="4_ly812"]

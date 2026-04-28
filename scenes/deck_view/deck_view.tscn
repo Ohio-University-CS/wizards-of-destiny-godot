@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://676xv376bioj" path="res://scenes/deck_view/deck_view.gd" id="1_2hjnp"]
 [ext_resource type="Texture2D" uid="uid://cunhvmg0hsjr7" path="res://sprites/black_background.png" id="1_kc8yi"]
-[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="3_d82e6"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/save_screen/Title_Screen_Button.png" id="3_d82e6"]
 [ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="4_ixm8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7pjx2"]

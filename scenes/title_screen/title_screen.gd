@@ -40,7 +40,7 @@ func start_shimmer_loop():
 
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_menu/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/save_screen/save_select_interface.tscn")
 
 
 func _on_exit_pressed():

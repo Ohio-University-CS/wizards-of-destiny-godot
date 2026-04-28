@@ -37,7 +37,7 @@ var rng
 
 func _ready() -> void:
 	player = RunManager.player
-	player.visible = false
+	#player.visible = false
 	
 	rng = RunManager.get_rng()
 	

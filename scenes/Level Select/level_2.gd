@@ -39,7 +39,10 @@ func _on_back_button_pressed():
 
 func _level_select_button_pressed():
 	await _animation_close()
-	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
+	if(GameStateManager.game_loaded):
+		FlowManager.go_to_combat()
+	else:
+		get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
 
 func _animation_open():
 	Buttons.hide()

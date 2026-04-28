@@ -1,0 +1,25 @@
+{
+	"coins": 105,
+	"level_floor": 2,
+	"max_level_floor": 1,
+	"max_stage": 12,
+	"player_state": {
+		"current_health": 60,
+		"max_energy": 4,
+		"num_cards_in_deck": 20,
+		"perm_modifiers": {
+			"crit_chance": 0.0,
+			"crit_damage": 0.0,
+			"damage": 0.0,
+			"dodge": 0.0,
+			"electric": 0.0,
+			"elemental_power": 0.0,
+			"fire": 0.0,
+			"ice": 0.0,
+			"max_health": 5.0,
+			"poison": 0.0
+		}
+	},
+	"seed": 2229488406,
+	"stage": 4
+}

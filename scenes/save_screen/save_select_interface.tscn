@@ -1,9 +1,83 @@
 [gd_scene format=3 uid="uid://cdkm78wlcdeto"]
 
+[ext_resource type="Script" uid="uid://cjjlhi26w1hjd" path="res://scenes/save_screen/save_select.gd" id="1_wcg5u"]
+[ext_resource type="Texture2D" uid="uid://dqsanab6pvciw" path="res://sprites/Brown_Background.png" id="2_7copv"]
+[ext_resource type="FontFile" uid="uid://criq0aiciy1id" path="res://fonts/Cinzel-Regular.ttf" id="2_wwe7a"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/save_screen/Title_Screen_Button.png" id="4_m5byk"]
+
 [node name="SaveSelectInterface" type="Control" unique_id=1871534945]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.0070001
+offset_bottom = 0.4399414
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wcg5u")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=417415489]
+z_index = -3
+position = Vector2(960, 540)
+scale = Vector2(1.9200001, 1.5472779)
+texture = ExtResource("2_7copv")
+
+[node name="Buttons" type="Control" parent="." unique_id=1379131248]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Save1Button" type="Button" parent="Buttons" unique_id=1110055872]
+z_index = 1
+layout_mode = 0
+offset_left = 152.0
+offset_top = 728.0
+offset_right = 488.0
+offset_bottom = 808.0
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_fonts/font = ExtResource("2_wwe7a")
+theme_override_font_sizes/font_size = 45
+text = "Select Save 1"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Save1Button" unique_id=1860200720]
+z_index = -1
+position = Vector2(167.99998, 40)
+scale = Vector2(1.5593221, 1)
+texture = ExtResource("4_m5byk")
+
+[node name="Save3Button" type="Button" parent="Buttons" unique_id=764947607]
+z_index = 1
+layout_mode = 0
+offset_left = 792.0
+offset_top = 728.0
+offset_right = 1128.0
+offset_bottom = 808.0
+theme_override_colors/font_color = Color(0.007843138, 0.007843138, 0.007843138, 1)
+theme_override_fonts/font = ExtResource("2_wwe7a")
+theme_override_font_sizes/font_size = 45
+text = "Select Save 2"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Save3Button" unique_id=410566442]
+z_index = -1
+position = Vector2(808, 40)
+scale = Vector2(1.576271, 1)
+texture = ExtResource("4_m5byk")
+
+[node name="Save2Button" type="Button" parent="Buttons" unique_id=375817576]
+z_index = 1
+layout_mode = 0
+offset_left = 1432.0
+offset_top = 728.0
+offset_right = 1768.0
+offset_bottom = 808.0
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_fonts/font = ExtResource("2_wwe7a")
+theme_override_font_sizes/font_size = 45
+text = "Select Save 3"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Save2Button" unique_id=698835348]
+z_index = -1
+position = Vector2(-472.00003, 40)
+scale = Vector2(1.5593216, 1)
+texture = ExtResource("4_m5byk")

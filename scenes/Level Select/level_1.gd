@@ -27,7 +27,11 @@ func _on_forward_button_pressed():
 
 func _level_select_button_pressed():
 	await _animation_close()
-	get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
+	if(GameStateManager.game_loaded):
+		RunManager.load_run_from_save()
+		FlowManager.go_to_combat()
+	else:
+		get_tree().change_scene_to_file("res://scenes/deckselect/deckselect_magician.tscn")
 	
 func _on_exit_pressed():
 	await _animation_close()

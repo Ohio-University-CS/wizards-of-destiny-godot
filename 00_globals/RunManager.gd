@@ -58,6 +58,26 @@ func start_new_run(starting_player: Player, new_seed: int = -1):
 	_emit_run_progress_changed()
 
 
+
+func load_run_from_save():
+		# Unlock all items at the start
+	if(!GameStateManager.game_loaded):
+		return
+	for item in ItemUnlockManager.all_items:
+		ItemUnlockManager.unlock_item(item.item_name)
+
+	item_inventory.clear()
+	player = GameStateManager.gamestate_player
+	coins = GameStateManager.gamestate_coins
+	current_level = LevelType.FOREST
+	level_floor = GameStateManager.gamestate_level_floor
+	stage = GameStateManager.gamestate_stage
+	run_seed = GameStateManager.gamestate_seed
+	_rng.seed = run_seed
+	print("Run Seed: ", run_seed)
+	_emit_run_progress_changed()
+	
+	
 func get_rng() -> RandomNumberGenerator:
 	return _rng
 

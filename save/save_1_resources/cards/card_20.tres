@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/conduit.png" id="1_r24pd"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_fg6om"]
+[ext_resource type="Script" path="res://cards/effects/apply_status_effect.gd" id="3_2wjm6"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Uncommon.png" id="4_w7n1j"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="5_lxy35"]
+
+[sub_resource type="Resource" id="Resource_h7t1l"]
+script = ExtResource("3_2wjm6")
+status_type = 4
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("5_lxy35")
+card_name = "Conduit"
+description = "(WIP) Apply 2 Shock. Strike deals 1 extra Damage per Shock on Enemy"
+energy_cost = 2
+rarity = 1
+card_type = 1
+artwork = ExtResource("1_r24pd")
+frame_art = ExtResource("4_w7n1j")
+effects = Array[ExtResource("2_fg6om")]([SubResource("Resource_h7t1l")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

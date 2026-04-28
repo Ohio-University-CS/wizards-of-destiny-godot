@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/flaming_sword.png" id="1_7k1nu"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_uk7vu"]
+[ext_resource type="Script" path="res://cards/effects/damage_effect.gd" id="3_h07y3"]
+[ext_resource type="Script" path="res://cards/effects/apply_status_effect.gd" id="4_m8bxo"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Common.png" id="5_k5hjv"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="6_i7ugi"]
+
+[sub_resource type="Resource" id="Resource_fs8pi"]
+script = ExtResource("3_h07y3")
+element = 1
+include_base_damage = true
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_3k78g"]
+script = ExtResource("4_m8bxo")
+status_type = 1
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("6_i7ugi")
+card_name = "Flaming Sword"
+description = "Attack for DMG Fire Damage. Apply 1 Burn"
+artwork = ExtResource("1_7k1nu")
+frame_art = ExtResource("5_k5hjv")
+effects = Array[ExtResource("2_uk7vu")]([SubResource("Resource_fs8pi"), SubResource("Resource_3k78g")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://cards/sprites/guardian.png" id="1_te70d"]
+[ext_resource type="Script" path="res://cards/effects/effect.gd" id="2_5wdl5"]
+[ext_resource type="Texture2D" path="res://cards/sprites/Card_Frame_Uncommon.png" id="3_s6u1m"]
+[ext_resource type="Script" path="res://cards/card_data.gd" id="4_twp32"]
+
+[resource]
+script = ExtResource("4_twp32")
+card_name = "Guardian"
+description = "Add 1 Damage to Strike every time you gain Block"
+energy_cost = 2
+rarity = 1
+card_type = 2
+card_flag = 2
+artwork = ExtResource("1_te70d")
+frame_art = ExtResource("3_s6u1m")
+metadata/_custom_type_script = "uid://c3657u1f1ygos"
