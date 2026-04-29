@@ -5,6 +5,7 @@
 
 [node name="ShopItemUi" type="Control" unique_id=1268231388]
 layout_mode = 3
+anchors_preset = 0
 offset_left = -48.0
 offset_top = -54.0
 offset_right = 48.0
@@ -18,6 +19,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -57.0
 offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Art" type="TextureRect" parent="VBoxContainer" unique_id=637303518]
 custom_minimum_size = Vector2(96, 96)

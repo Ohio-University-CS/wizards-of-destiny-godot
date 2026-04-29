@@ -17,4 +17,5 @@ name = "Snare"
 effects = Array[ExtResource("1_ixp30")]([SubResource("Resource_0mlq2")])
 weight = 30
 intent_icons = Array[Texture2D]([ExtResource("3_tsnwr")])
+intent_types = Array[int]([3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

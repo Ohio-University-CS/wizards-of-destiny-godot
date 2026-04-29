@@ -173,3 +173,21 @@ scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_vskxj")
 animation = &"Idle"
 frame_progress = 0.16704556
+
+[node name="IntentTooltip" type="Panel" parent="." unique_id=469594738]
+visible = false
+offset_left = -206.0
+offset_top = -237.0
+offset_right = -6.0
+offset_bottom = -187.0
+
+[node name="Label" type="Label" parent="IntentTooltip" unique_id=1041170797]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_nmqw2")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1

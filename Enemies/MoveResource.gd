@@ -3,6 +3,14 @@
 extends Resource
 class_name MoveResource
 
+enum Type {
+	ATTACK,
+	BLOCK,
+	BUFF,
+	DEBUFF,
+	HEAL
+}
+
 #-------------
 # Variables
 #-------------
@@ -22,3 +30,5 @@ class_name MoveResource
 @export var intent_icons : Array[Texture2D] = [] # what icons to show for intent
 
 @export var intent_damage_amount : Array[int] = [] # how much damage move will do
+
+@export var intent_types : Array[Type] = [] # used for intent tooltip

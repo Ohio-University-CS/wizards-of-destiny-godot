@@ -18,4 +18,5 @@ name = "Reload"
 effects = Array[ExtResource("1_d4um5")]([SubResource("Resource_04vlx")])
 weight = 50
 intent_icons = Array[Texture2D]([ExtResource("3_46w6y")])
+intent_types = Array[int]([2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -26,4 +26,5 @@ name = "Shifty"
 effects = Array[ExtResource("1_trh2i")]([SubResource("Resource_gk1fu"), SubResource("Resource_trh2i")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_dxh13"), ExtResource("5_xplg3")])
+intent_types = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

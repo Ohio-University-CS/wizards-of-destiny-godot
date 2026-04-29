@@ -26,4 +26,5 @@ name = "Crush"
 effects = Array[ExtResource("1_jb12j")]([SubResource("Resource_ka7yg"), SubResource("Resource_kn2is")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_rg3aj"), ExtResource("5_tdiyr")])
+intent_types = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

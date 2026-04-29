@@ -25,4 +25,5 @@ name = "Incorporeal Movement"
 effects = Array[ExtResource("1_nx7p6")]([SubResource("Resource_p6f2s"), SubResource("Resource_x3whf")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("3_ttsws"), ExtResource("3_ttsws")])
+intent_types = Array[int]([2, 2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

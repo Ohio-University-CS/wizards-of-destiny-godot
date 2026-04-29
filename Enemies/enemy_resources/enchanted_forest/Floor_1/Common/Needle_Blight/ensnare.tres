@@ -17,4 +17,5 @@ name = "Ensnare"
 effects = Array[ExtResource("1_pg8gj")]([SubResource("Resource_beeh4")])
 weight = 30
 intent_icons = Array[Texture2D]([ExtResource("3_qk7th")])
+intent_types = Array[int]([3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

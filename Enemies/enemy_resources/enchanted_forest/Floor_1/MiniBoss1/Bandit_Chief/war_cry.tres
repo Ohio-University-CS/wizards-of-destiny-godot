@@ -27,4 +27,5 @@ effects = Array[ExtResource("1_g1xt6")]([SubResource("Resource_ygtdb"), SubResou
 weight = 10
 cooldown = 2
 intent_icons = Array[Texture2D]([ExtResource("4_2mjjj"), ExtResource("5_i8nan")])
+intent_types = Array[int]([4, 2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -26,4 +26,5 @@ name = "Valor"
 effects = Array[ExtResource("1_ldq5k")]([SubResource("Resource_dug6j"), SubResource("Resource_el2k0")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_ipibe"), ExtResource("5_nnqq3")])
+intent_types = Array[int]([2, 1])
 metadata/_custom_type_script = "uid://t788w26yn03s"

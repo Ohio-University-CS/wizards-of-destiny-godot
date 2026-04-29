@@ -34,4 +34,5 @@ name = "Shape-Shift"
 effects = Array[ExtResource("1_6h64d")]([SubResource("Resource_eblrb"), SubResource("Resource_ai6f0"), SubResource("Resource_4hsnq")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("5_ve1vp"), ExtResource("6_8dveo"), ExtResource("7_ie4d4")])
+intent_types = Array[int]([1, 2, 4])
 metadata/_custom_type_script = "uid://t788w26yn03s"

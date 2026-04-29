@@ -25,4 +25,5 @@ name = "Tinker"
 effects = Array[ExtResource("1_oht1f")]([SubResource("Resource_slg04"), SubResource("Resource_o7sak")])
 weight = 30
 intent_icons = Array[Texture2D]([ExtResource("3_ebbsb"), ExtResource("4_kmni4")])
+intent_types = Array[int]([2, 3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

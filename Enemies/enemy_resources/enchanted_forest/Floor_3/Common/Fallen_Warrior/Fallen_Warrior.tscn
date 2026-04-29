@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu8ibpd2jxc6h"]
 
 [ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_3v81i"]
-[ext_resource type="Resource" uid="uid://dlnf7wmy6hn3v" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/fallen_knight.tres" id="2_64p3h"]
+[ext_resource type="Resource" uid="uid://dlnf7wmy6hn3v" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/fallen_warrior.tres" id="2_64p3h"]
 [ext_resource type="Texture2D" uid="uid://c6ua1p58fc4g5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/Common/Fallen_Warrior/temp_fallen_warrior.png" id="3_p0amj"]
 [ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_dg8en"]
 [ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_lxldo"]
@@ -115,3 +115,21 @@ offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_soq0b")
+
+[node name="IntentTooltip" type="Panel" parent="." unique_id=2044555107]
+visible = false
+offset_left = -213.0
+offset_top = -199.0
+offset_right = -13.0
+offset_bottom = -149.0
+
+[node name="Label" type="Label" parent="IntentTooltip" unique_id=1826609674]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_soq0b")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1

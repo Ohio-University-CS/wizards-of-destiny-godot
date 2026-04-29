@@ -32,4 +32,5 @@ name = "Smoke Bomb"
 effects = Array[ExtResource("1_nquje")]([SubResource("Resource_5cjlt"), SubResource("Resource_rf81q"), SubResource("Resource_nrtfb")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("3_px6mr"), ExtResource("4_i6hgc")])
+intent_types = Array[int]([2, 3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

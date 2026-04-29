@@ -18,4 +18,5 @@ name = "Roar"
 effects = Array[ExtResource("1_ejv7t")]([SubResource("Resource_rvxw4")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("3_401du")])
+intent_types = Array[int]([2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

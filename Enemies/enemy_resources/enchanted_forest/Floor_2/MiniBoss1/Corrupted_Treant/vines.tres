@@ -33,4 +33,5 @@ effects = Array[ExtResource("1_f6rf7")]([SubResource("Resource_ftxdu"), SubResou
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_cin3n"), ExtResource("5_rvxw4"), ExtResource("7_cin3n")])
 intent_damage_amount = Array[int]([4])
+intent_types = Array[int]([0, 1, 3])
 metadata/_custom_type_script = "uid://t788w26yn03s"

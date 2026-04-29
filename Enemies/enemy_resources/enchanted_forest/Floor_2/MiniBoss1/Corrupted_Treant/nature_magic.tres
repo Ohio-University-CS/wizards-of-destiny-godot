@@ -25,4 +25,5 @@ name = "Nature Magic"
 effects = Array[ExtResource("1_4m276")]([SubResource("Resource_gnjcq"), SubResource("Resource_bqfde")])
 weight = 10
 intent_icons = Array[Texture2D]([ExtResource("4_4m276"), ExtResource("5_doa23")])
+intent_types = Array[int]([4, 1])
 metadata/_custom_type_script = "uid://t788w26yn03s"

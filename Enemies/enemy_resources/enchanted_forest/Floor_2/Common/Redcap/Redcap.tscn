@@ -115,3 +115,21 @@ offset_top = -10.666667
 offset_right = 11.999998
 offset_bottom = 12.333333
 theme_override_fonts/font = ExtResource("6_v0fe0")
+
+[node name="IntentTooltip" type="Panel" parent="." unique_id=44386897]
+visible = false
+offset_left = -208.0
+offset_top = -191.0
+offset_right = -8.0
+offset_bottom = -141.0
+
+[node name="Label" type="Label" parent="IntentTooltip" unique_id=500633619]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_v0fe0")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1

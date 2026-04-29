@@ -26,4 +26,5 @@ name = "Repairs"
 effects = Array[ExtResource("1_3whfm")]([SubResource("Resource_s4fi1"), SubResource("Resource_37j0m")])
 weight = 20
 intent_icons = Array[Texture2D]([ExtResource("4_ibkik"), ExtResource("5_6qnq7")])
+intent_types = Array[int]([4, 2])
 metadata/_custom_type_script = "uid://t788w26yn03s"

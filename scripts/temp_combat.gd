@@ -41,6 +41,8 @@ const DEFAULT_GOBLIN_ASSASSIN_SCENE_PATH := "res://Enemies/enemy_resources/encha
 @export var hand_y_offset: float = 50.0
 @export var hand_container_path: NodePath = NodePath("UI")
 
+var enemy_intent_tooltip : Panel = null
+var enemy_intent_tooltip_label : Label = null
 var enemy_intent_1: TextureRect = null
 var enemy_intent_1_label: Label = null
 var enemy_intent_2: TextureRect = null
@@ -275,11 +277,25 @@ func _ready():
 	
 	
 	# Initialize enemy intent UI nodes — they may live under the Enemy container or at the scene root
+	var _e = get_node_or_null("Enemy/IntentTooltip")
+	if _e == null:
+		_e = get_node_or_null("IntentTooltip")
+	if _e and _e is Panel:
+		enemy_intent_tooltip = _e
+	
+	var _ei = get_node_or_null("Enemy/IntentTooltip/Label")
+	if _ei == null:
+		_ei = get_node_or_null("IntentTooltip/Label")
+	if _ei and _ei is Label:
+		enemy_intent_tooltip_label = _ei
+	
 	var _e1 = get_node_or_null("Enemy/EnemyIntent1")
 	if _e1 == null:
 		_e1 = get_node_or_null("EnemyIntent1")
 	if _e1 and _e1 is TextureRect:
 		enemy_intent_1 = _e1
+		enemy_intent_1.mouse_entered.connect(func(): _show_intent_tooltip(1))
+		enemy_intent_1.mouse_exited.connect(_hide_intent_tooltip)
 	
 	var _e1L = get_node_or_null("Enemy/EnemyIntent1/Label")
 	if _e1L == null:
@@ -292,6 +308,8 @@ func _ready():
 		_e2 = get_node_or_null("EnemyIntent2")
 	if _e2 and _e2 is TextureRect:
 		enemy_intent_2 = _e2
+		enemy_intent_2.mouse_entered.connect(func(): _show_intent_tooltip(2))
+		enemy_intent_2.mouse_exited.connect(_hide_intent_tooltip)
 	
 	var _e2L = get_node_or_null("Enemy/EnemyIntent2/Label")
 	if _e2L == null:
@@ -304,6 +322,8 @@ func _ready():
 		_e3 = get_node_or_null("EnemyIntent3")
 	if _e3 and _e3 is TextureRect:
 		enemy_intent_3 = _e3
+		enemy_intent_3.mouse_entered.connect(func(): _show_intent_tooltip(3))
+		enemy_intent_3.mouse_exited.connect(_hide_intent_tooltip)
 	
 	var _e3L = get_node_or_null("Enemy/EnemyIntent3/Label")
 	if _e3L == null:
@@ -833,6 +853,63 @@ func update_enemy_intent() -> void:
 	elif enemy_intent_3:
 		enemy_intent_3.texture = null
 		enemy_intent_3_label.text = ""
+
+
+func _show_intent_tooltip(intent : int):
+	var next_move = opponent.get_next_move()
+	if next_move.intent_types == null or next_move.intent_types.size() < intent:
+		return
+	
+	var extra_dmg: int = 0
+	if opponent.status_effects["empower"] > 0:
+		extra_dmg += opponent.status_effects["empower"] * 3
+	if opponent.status_effects["rage"] > 0:
+		extra_dmg += opponent.status_effects["rage"]
+	
+	if intent == 1 and not enemy_intent_1.texture == null:
+		if next_move.intent_types[0] == MoveResource.Type.BUFF:
+			enemy_intent_tooltip_label.text = "Enemy will gain a Buff"
+		elif next_move.intent_types[0] == MoveResource.Type.DEBUFF:
+			enemy_intent_tooltip_label.text = "Enemy will apply a Debuff"
+		elif next_move.intent_types[0] == MoveResource.Type.BLOCK:
+			enemy_intent_tooltip_label.text = "Enemy will gain Block"
+		elif next_move.intent_types[0] == MoveResource.Type.HEAL:
+			enemy_intent_tooltip_label.text = "Enemy will Heal"
+		else:
+			enemy_intent_tooltip_label.text = "Enemy will deal " + str(next_move.intent_damage_amount[0] + extra_dmg) + " damage"
+		enemy_intent_tooltip.visible = true
+		
+	
+	if intent == 2 and not enemy_intent_2.texture == null:
+		if next_move.intent_types[1] == MoveResource.Type.BUFF:
+			enemy_intent_tooltip_label.text = "Enemy will gain a Buff"
+		elif next_move.intent_types[1] == MoveResource.Type.DEBUFF:
+			enemy_intent_tooltip_label.text = "Enemy will apply a Debuff"
+		elif next_move.intent_types[1] == MoveResource.Type.BLOCK:
+			enemy_intent_tooltip_label.text = "Enemy will gain Block"
+		elif next_move.intent_types[1] == MoveResource.Type.HEAL:
+			enemy_intent_tooltip_label.text = "Enemy will Heal"
+		else:
+			enemy_intent_tooltip_label.text = "Enemy will deal " + str(next_move.intent_damage_amount[1] + extra_dmg) + " damage"
+		enemy_intent_tooltip.visible = true
+		
+	
+	if intent == 3 and not enemy_intent_3.texture == null:
+		if next_move.intent_types[2] == MoveResource.Type.BUFF:
+			enemy_intent_tooltip_label.text = "Enemy will gain a Buff"
+		elif next_move.intent_types[2] == MoveResource.Type.DEBUFF:
+			enemy_intent_tooltip_label.text = "Enemy will apply a Debuff"
+		elif next_move.intent_types[2] == MoveResource.Type.BLOCK:
+			enemy_intent_tooltip_label.text = "Enemy will gain Block"
+		elif next_move.intent_types[2] == MoveResource.Type.HEAL:
+			enemy_intent_tooltip_label.text = "Enemy will Heal"
+		else:
+			enemy_intent_tooltip_label.text = "Enemy will deal " + str(next_move.intent_damage_amount[2] + extra_dmg) + " damage"
+		enemy_intent_tooltip.visible = true
+
+
+func _hide_intent_tooltip():
+	enemy_intent_tooltip.visible = false
 
 
 func _enemy_take_turn() -> void:

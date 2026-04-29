@@ -33,4 +33,5 @@ weight = 10
 cooldown = 3
 intent_icons = Array[Texture2D]([ExtResource("4_6pitk"), ExtResource("5_aryst")])
 intent_damage_amount = Array[int]([23])
+intent_types = Array[int]([0, 3])
 metadata/_custom_type_script = "uid://t788w26yn03s"
