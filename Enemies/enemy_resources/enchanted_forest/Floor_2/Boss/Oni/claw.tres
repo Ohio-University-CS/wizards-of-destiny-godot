@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://dl4cffqtgu7ui"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_hqtar"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_4bkxy"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_k63ij"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="3_c88wb"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_fxy37"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="5_obiwy"]
+
+[sub_resource type="Resource" id="Resource_7gp54"]
+script = ExtResource("2_4bkxy")
+amount = 6
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_74srm"]
+script = ExtResource("3_c88wb")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[resource]
+script = ExtResource("2_k63ij")
+name = "Claw"
+effects = Array[ExtResource("1_hqtar")]([SubResource("Resource_7gp54"), SubResource("Resource_74srm")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_fxy37"), ExtResource("5_obiwy")])
+intent_damage_amount = Array[int]([6])
+intent_types = Array[int]([0, 4])
+metadata/_custom_type_script = "uid://t788w26yn03s"

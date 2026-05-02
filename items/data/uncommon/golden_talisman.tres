@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bgqwrlkytblw3"]
+
+[ext_resource type="Texture2D" uid="uid://cv0ts4gofdext" path="res://items/sprites/Golden Talisman.png" id="1_11vlv"]
+[ext_resource type="Script" uid="uid://dii8d12ououjr" path="res://items/item_data.gd" id="2_capyt"]
+
+[resource]
+script = ExtResource("2_capyt")
+item_name = "Golden Talisman"
+description = "Gaiin +15% Crit Chance"
+rarity = 1
+art = ExtResource("1_11vlv")
+metadata/_custom_type_script = "uid://dii8d12ououjr"

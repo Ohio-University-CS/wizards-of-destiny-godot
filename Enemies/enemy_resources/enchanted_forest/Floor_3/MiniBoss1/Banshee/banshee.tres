@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://ctvv0m0kjxcaa"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_ydyiw"]
+[ext_resource type="Resource" uid="uid://bv567224b3p78" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/corrupting_touch.tres" id="2_keoig"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_r5snc"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_qgxaq"]
+[ext_resource type="Resource" uid="uid://dua07u6ugjby5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/wail.tres" id="3_tcy4s"]
+[ext_resource type="Resource" uid="uid://s3ofmr6k6ql0" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/incorporeal_movement.tres" id="4_3mcne"]
+[ext_resource type="Resource" uid="uid://cee6lfxtt7d6w" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss1/Banshee/horrifying_visage.tres" id="5_q7euy"]
+
+[resource]
+script = ExtResource("3_qgxaq")
+enemy_name = "Banshee"
+hp_variation = Array[int]([160])
+moves = Array[ExtResource("1_ydyiw")]([ExtResource("2_keoig"), ExtResource("3_tcy4s"), ExtResource("4_3mcne"), ExtResource("5_q7euy")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

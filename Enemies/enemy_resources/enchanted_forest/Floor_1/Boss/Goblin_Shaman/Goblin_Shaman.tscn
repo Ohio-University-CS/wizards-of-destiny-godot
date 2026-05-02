@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://dsyvcei2vxma5"]
+
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_save2"]
+[ext_resource type="Resource" uid="uid://ci4f5sjuby1n1" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman.tres" id="2_nhqpx"]
+[ext_resource type="Texture2D" uid="uid://bq5gblde8ojgc" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman.png" id="3_k4fep"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="4_f5p80"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="5_luhea"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_nmqw2"]
+[ext_resource type="Texture2D" uid="uid://dnjrncyyim2w8" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Boss/Goblin_Shaman/Goblin_Shaman_idle_animation.png" id="7_k4fep"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uattn"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(0, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3vrm"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(46, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiujq"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(92, 0, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt4q3"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(0, 48, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g6ku"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(46, 48, 46, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uktvw"]
+atlas = ExtResource("7_k4fep")
+region = Rect2(92, 48, 46, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vskxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uattn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3vrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tiujq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt4q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g6ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uktvw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Goblin_Shaman" type="Node2D" unique_id=2045738616]
+script = ExtResource("1_save2")
+enemy_data = ExtResource("2_nhqpx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874388032]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("3_k4fep")
+
+[node name="HealthIndicator" type="Label" parent="." unique_id=1747660486]
+offset_left = 48.0
+offset_top = -123.0
+offset_right = 129.99994
+offset_bottom = -76.0
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+script = ExtResource("4_f5p80")
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=432598369]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -150.0
+offset_right = 64.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+script = ExtResource("5_luhea")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=947754798]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5189405
+anchor_top = -0.018518519
+anchor_right = -0.5189405
+anchor_bottom = -0.018518519
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 239.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_nmqw2")
+theme_override_font_sizes/font_size = 28
+text = "Goblin Shaman"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="Label" parent="EnemyHealth" unique_id=1610282955]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 2.0
+offset_right = 81.0
+offset_bottom = 25.0
+horizontal_alignment = 1
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1569387507]
+offset_left = -150.0
+offset_top = -95.0
+offset_right = -100.0
+offset_bottom = -45.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent1" unique_id=708535760]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_nmqw2")
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=866942873]
+offset_left = -150.0
+offset_top = -55.0
+offset_right = -100.0
+offset_bottom = -5.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent2" unique_id=1294492895]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_nmqw2")
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1285359075]
+offset_left = -150.0
+offset_top = -5.0
+offset_right = -100.0
+offset_bottom = 45.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent3" unique_id=737805687]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_nmqw2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=471317586]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_vskxj")
+animation = &"Idle"
+frame_progress = 0.16704556
+
+[node name="IntentTooltip" type="Panel" parent="." unique_id=469594738]
+visible = false
+offset_left = -206.0
+offset_top = -237.0
+offset_right = -6.0
+offset_bottom = -187.0
+
+[node name="Label" type="Label" parent="IntentTooltip" unique_id=1041170797]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_nmqw2")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1

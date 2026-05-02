@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhbpblqcjrp3n"]
+
+[ext_resource type="Script" uid="uid://2lqlladhmhlx" path="res://test/deck_select_test.gd" id="1_owqio"]
+
+[node name="DeckSelectScence" type="Node2D" unique_id=114419331]
+script = ExtResource("1_owqio")

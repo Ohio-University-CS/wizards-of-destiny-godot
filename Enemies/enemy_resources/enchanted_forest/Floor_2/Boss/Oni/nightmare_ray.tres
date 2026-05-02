@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bkdc4itj62trb"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_lpf3r"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_sn3i0"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_w7yaa"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_4hwwt"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="4_x7ray"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="5_xp07k"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="6_cn77t"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="7_vljbx"]
+
+[sub_resource type="Resource" id="Resource_m6ec4"]
+script = ExtResource("2_w7yaa")
+amount = 4
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_t27ft"]
+script = ExtResource("3_4hwwt")
+status_type = 12
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_ocnun"]
+script = ExtResource("4_x7ray")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[resource]
+script = ExtResource("2_sn3i0")
+name = "Nightmare Ray"
+effects = Array[ExtResource("1_lpf3r")]([SubResource("Resource_m6ec4"), SubResource("Resource_t27ft"), SubResource("Resource_ocnun")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("5_xp07k"), ExtResource("6_cn77t"), ExtResource("7_vljbx")])
+intent_damage_amount = Array[int]([4])
+intent_types = Array[int]([0, 3, 4])
+metadata/_custom_type_script = "uid://t788w26yn03s"

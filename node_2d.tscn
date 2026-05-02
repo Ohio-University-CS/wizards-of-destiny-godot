@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d311xauexkokj"]
+
+[ext_resource type="Script" uid="uid://b0mgkghd63ep" path="res://tests/unit/test_combat_logic.gd" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D" unique_id=1293674070]
+script = ExtResource("1_wtcfe")

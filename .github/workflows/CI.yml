@@ -1,0 +1,60 @@
+<<<<<<< HEAD
+name: Godot Unit Tests
+
+on:
+  push:
+    branches: [ "levelselect" ]
+  pull_request:
+    branches: [ "levelselect" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Check out your repository
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Download and set up Godot (headless) from GitHub releases
+      - name: Install Godot
+        run: |
+          wget https://github.com/godotengine/godot/releases/download/3.5.2-stable/Godot_v3.5.2-stable_linux_headless.64.zip -O godot.zip
+          unzip godot.zip -d godot
+          chmod +x godot/Godot_v3.5.2-stable_linux_headless.64
+
+      # 3️⃣ Run your unit tests
+      - name: Run Godot unit tests
+        run: |
+          ./godot/Godot_v3.5.2-stable_linux_headless.64 --headless --script test/test_level_select.gd
+=======
+name: Godot CI - Unit Tests
+
+on:
+  push:
+    branches: [ "deckselect" ]
+  pull_request:
+    branches: [ "deckselect" ]
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your repo
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      # Download Godot (Linux version for GitHub Actions)
+      - name: Download Godot
+        run: |
+          wget https://github.com/godotengine/godot/releases/download/4.2-stable/Godot_v4.2-stable_linux.x86_64.zip
+          unzip Godot_v4.2-stable_linux.x86_64.zip
+          chmod +x Godot_v4.2-stable_linux.x86_64
+
+      # Run your unit tests
+      - name: Run Unit Tests
+        run: |
+          ./Godot_v4.2-stable_linux.x86_64 --headless -s res://test/deckselecttest.gd || true
+>>>>>>> b8db99320225ed28d295008f72b9e73bfdd47790

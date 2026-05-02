@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://b3sqhk37nuul8"]
+
+[ext_resource type="Texture2D" uid="uid://btlulsf470t2a" path="res://scenes/Shop/sprites/scroll_small_dmg.png" id="1_gecj5"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="2_lvj7o"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="3_lvj7o"]
+
+[sub_resource type="Resource" id="Resource_8hwok"]
+script = ExtResource("3_lvj7o")
+stat = 1
+metadata/_custom_type_script = "uid://6rvao114epum"
+
+[resource]
+script = ExtResource("2_lvj7o")
+buff_name = "Scroll of Minor Strength"
+description = "Gain 1 Damage"
+price = 1
+art = ExtResource("1_gecj5")
+scroll_effect = Array[ExtResource("3_lvj7o")]([SubResource("Resource_8hwok")])
+potion_effect = null
+metadata/_custom_type_script = "uid://b47bvaygn543d"

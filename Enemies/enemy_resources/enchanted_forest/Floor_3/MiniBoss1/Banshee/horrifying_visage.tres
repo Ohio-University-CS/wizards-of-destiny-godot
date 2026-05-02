@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cee6lfxtt7d6w"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_bswfl"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_eptcb"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_lj8s5"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="3_k1kcr"]
+
+[sub_resource type="Resource" id="Resource_cetfa"]
+script = ExtResource("2_eptcb")
+amount = 18
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[resource]
+script = ExtResource("2_lj8s5")
+name = "Horrifying Visage"
+effects = Array[ExtResource("1_bswfl")]([SubResource("Resource_cetfa")])
+weight = 10
+cooldown = 1
+intent_icons = Array[Texture2D]([ExtResource("3_k1kcr")])
+intent_damage_amount = Array[int]([18])
+intent_types = Array[int]([0])
+metadata/_custom_type_script = "uid://t788w26yn03s"

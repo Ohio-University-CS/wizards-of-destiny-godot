@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://48r1mg5wmcic"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_lk6a6"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_j1ax2"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_lk6a6"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_dtifs"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_j1ax2"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_ri5hv"]
+
+[sub_resource type="Resource" id="Resource_u5y06"]
+script = ExtResource("2_j1ax2")
+amount = 14
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_7bq3b"]
+script = ExtResource("3_lk6a6")
+status_type = 1
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("6_ri5hv")
+name = "Knight's Courage"
+effects = Array[ExtResource("1_lk6a6")]([SubResource("Resource_u5y06"), SubResource("Resource_7bq3b")])
+weight = 30
+intent_icons = Array[Texture2D]([ExtResource("4_dtifs"), ExtResource("5_j1ax2")])
+intent_damage_amount = Array[int]([14])
+intent_types = Array[int]([0, 3])
+metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cvctxktsxvrfv"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_25cqq"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_2ffjq"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_hofhx"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="3_m8sq0"]
+
+[sub_resource type="Resource" id="Resource_ilge3"]
+script = ExtResource("2_hofhx")
+status_type = 10
+amount = 3
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_8nqe7"]
+script = ExtResource("2_hofhx")
+status_type = 11
+amount = 2
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_2ffjq")
+name = "Invisible Passage"
+effects = Array[ExtResource("1_25cqq")]([SubResource("Resource_ilge3"), SubResource("Resource_8nqe7")])
+weight = 30
+cooldown = 2
+intent_icons = Array[Texture2D]([ExtResource("3_m8sq0"), ExtResource("3_m8sq0")])
+intent_types = Array[int]([2, 2])
+metadata/_custom_type_script = "uid://t788w26yn03s"

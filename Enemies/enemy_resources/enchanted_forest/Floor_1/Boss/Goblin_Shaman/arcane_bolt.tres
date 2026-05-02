@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://148v5ph74kdc"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_a1h4g"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_7revr"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_k8mc6"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_s765o"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_aa2ie"]
+[ext_resource type="Texture2D" uid="uid://ba26alkde55r2" path="res://Enemies/intent_sprites/Debuff_Intent.png" id="5_mnhpd"]
+
+[sub_resource type="Resource" id="Resource_aa2ie"]
+script = ExtResource("2_k8mc6")
+amount = 25
+element = 4
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_mnhpd"]
+script = ExtResource("3_s765o")
+status_type = 4
+amount = 1
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_7revr")
+name = "Arcane Bolt"
+effects = Array[ExtResource("1_a1h4g")]([SubResource("Resource_aa2ie"), SubResource("Resource_mnhpd")])
+weight = 20
+cooldown = 2
+intent_icons = Array[Texture2D]([ExtResource("4_aa2ie"), ExtResource("5_mnhpd")])
+intent_damage_amount = Array[int]([25])
+intent_types = Array[int]([0, 3])
+metadata/_custom_type_script = "uid://t788w26yn03s"

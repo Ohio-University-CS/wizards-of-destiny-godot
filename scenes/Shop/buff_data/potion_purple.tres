@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuffData" format=3 uid="uid://covp8wma15jmo"]
+
+[ext_resource type="Texture2D" uid="uid://bbhaptlcbrxb0" path="res://scenes/Shop/sprites/potion_purple.png" id="1_biwqa"]
+[ext_resource type="Script" uid="uid://d0wbn5e2s0ygl" path="res://scenes/Shop/potion_effect.gd" id="2_6a687"]
+[ext_resource type="Script" uid="uid://b47bvaygn543d" path="res://scenes/Shop/buff_data.gd" id="3_xkeld"]
+[ext_resource type="Script" uid="uid://6rvao114epum" path="res://scenes/Shop/scroll_effect.gd" id="4_kcc5l"]
+
+[sub_resource type="Resource" id="Resource_1bsgl"]
+script = ExtResource("2_6a687")
+potion_color = 4
+metadata/_custom_type_script = "uid://d0wbn5e2s0ygl"
+
+[resource]
+script = ExtResource("3_xkeld")
+buff_name = "Potion of Perfection"
+description = "Remove a card from your deck"
+art = ExtResource("1_biwqa")
+potion_effect = Array[ExtResource("2_6a687")]([SubResource("Resource_1bsgl")])
+metadata/_custom_type_script = "uid://b47bvaygn543d"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://byeasmi4wh1r3"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_x2a00"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_8i3h1"]
+[ext_resource type="Resource" uid="uid://dl4cffqtgu7ui" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/claw.tres" id="2_q60pt"]
+[ext_resource type="Resource" uid="uid://d3sfioma0c67p" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/invisibility.tres" id="3_esm1e"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_hmbij"]
+[ext_resource type="Resource" uid="uid://bkdc4itj62trb" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/nightmare_ray.tres" id="4_rg8lc"]
+[ext_resource type="Resource" uid="uid://bsevp77lxyvbx" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/shape-shift.tres" id="5_7i4f3"]
+[ext_resource type="Resource" uid="uid://0o8ay6xcjpy2" path="res://Enemies/enemy_resources/enchanted_forest/Floor_2/Boss/Oni/ravage.tres" id="6_6udlo"]
+
+[resource]
+script = ExtResource("3_hmbij")
+enemy_name = "Oni"
+hp_variation = Array[int]([120])
+moves = Array[ExtResource("1_x2a00")]([ExtResource("2_q60pt"), ExtResource("3_esm1e"), ExtResource("4_rg8lc"), ExtResource("5_7i4f3"), ExtResource("6_6udlo")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

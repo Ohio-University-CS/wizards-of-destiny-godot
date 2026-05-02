@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://bouyov4bchtab"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_6yn2l"]
+[ext_resource type="Resource" uid="uid://d0igy1vg2qgf4" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/sneak_attack.tres" id="2_k8mvi"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_r0ths"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_kpt6p"]
+[ext_resource type="Resource" uid="uid://bet15ff1clmde" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/poisoned_blade.tres" id="3_swydq"]
+[ext_resource type="Resource" uid="uid://dppbmdgjkoprd" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Assassin/smoke_bomb.tres" id="4_t550y"]
+
+[resource]
+script = ExtResource("3_kpt6p")
+enemy_name = "Goblin Assassin"
+hp_variation = Array[int]([35, 38, 40])
+moves = Array[ExtResource("1_6yn2l")]([ExtResource("2_k8mvi"), ExtResource("3_swydq"), ExtResource("4_t550y")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

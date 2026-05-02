@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cjiqxdd8rxubd"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_gd6s6"]
+[ext_resource type="Texture2D" uid="uid://52awtrjgueuh" path="res://cards/sprites/grand_finale.png" id="1_ui2fi"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="2_bdcov"]
+[ext_resource type="Script" uid="uid://dw5wpdhkkxklf" path="res://cards/effects/add_strike_damage.gd" id="2_lol7w"]
+[ext_resource type="Texture2D" uid="uid://c7h4x5sq5odmx" path="res://cards/sprites/Card_Frame_Rare.png" id="3_r0j6s"]
+[ext_resource type="Script" uid="uid://cc5v4i2yufdlp" path="res://cards/effects/special_effect.gd" id="3_ui2fi"]
+
+[sub_resource type="Resource" id="Resource_ui2fi"]
+script = ExtResource("2_lol7w")
+amount = 15
+target_type = 0
+metadata/_custom_type_script = "uid://dw5wpdhkkxklf"
+
+[sub_resource type="Resource" id="Resource_3odye"]
+script = ExtResource("3_ui2fi")
+card_name = 4
+metadata/_custom_type_script = "uid://cc5v4i2yufdlp"
+
+[resource]
+script = ExtResource("2_bdcov")
+card_name = "Grand Finale"
+description = "Add 15 Damage to Strike. For each Shock and Burn on the Enemy, add 3 more Damage"
+energy_cost = 3
+rarity = 2
+card_type = 1
+card_flag = 1
+artwork = ExtResource("1_ui2fi")
+frame_art = ExtResource("3_r0j6s")
+effects = Array[ExtResource("1_gd6s6")]([SubResource("Resource_ui2fi"), SubResource("Resource_3odye")])
+metadata/_custom_type_script = "uid://c3657u1f1ygos"

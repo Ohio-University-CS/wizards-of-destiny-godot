@@ -1,0 +1,268 @@
+[gd_scene format=3 uid="uid://gmmilof6akbw"]
+
+[ext_resource type="Script" uid="uid://cvobj3noqvvab" path="res://Enemies/enemy.gd" id="1_mty8r"]
+[ext_resource type="Resource" uid="uid://6s1dv3aga1ws" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/Goblin_Archer.tres" id="2_3m3gd"]
+[ext_resource type="Texture2D" uid="uid://c78l1thr2dhla" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer.png" id="2_mty8r"]
+[ext_resource type="Script" uid="uid://or4t3k24b1io" path="res://scripts/health_indicator.gd" id="3_trw6q"]
+[ext_resource type="Script" uid="uid://d27ltskw5tk78" path="res://scripts/health_bar.gd" id="4_y6iaf"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="6_ctsy7"]
+[ext_resource type="Texture2D" uid="uid://dijsiq63xlckq" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer_attack.png" id="7_5ppfn"]
+[ext_resource type="Texture2D" uid="uid://bh0eas6co0ok5" path="res://Enemies/enemy_resources/enchanted_forest/Floor_1/Common/Goblin_Archer/goblin_archer_idle_animation.png" id="8_qrug4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkeut"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5v5y"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1s7x"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xj0x"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n0jo"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl7rt"]
+atlas = ExtResource("7_5ppfn")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqn7i"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x807c"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwmjg"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe6io"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ikco"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hllh3"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0df46"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohnqp"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odaww"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h80x8"]
+atlas = ExtResource("8_qrug4")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfled"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkeut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5v5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1s7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xj0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n0jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl7rt")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqn7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x807c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwmjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe6io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ikco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hllh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0df46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohnqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odaww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h80x8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Goblin_Archer" type="Node2D" unique_id=1513663545]
+script = ExtResource("1_mty8r")
+enemy_data = ExtResource("2_3m3gd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1362981289]
+visible = false
+scale = Vector2(6, 6)
+texture = ExtResource("2_mty8r")
+
+[node name="HealthIndicator" type="Label" parent="." unique_id=651170639]
+offset_left = 66.0
+offset_top = -124.0
+offset_right = 147.99994
+offset_bottom = -77.0
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.35, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+script = ExtResource("3_trw6q")
+
+[node name="EnemyHealth" type="ProgressBar" parent="." unique_id=2069011832]
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -150.0
+offset_right = 64.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+script = ExtResource("4_y6iaf")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyName" type="Label" parent="EnemyHealth" unique_id=354399504]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5189405
+anchor_top = -0.018518519
+anchor_right = -0.5189405
+anchor_bottom = -0.018518519
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 239.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_ctsy7")
+theme_override_font_sizes/font_size = 28
+text = "Goblin Archer"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="Label" parent="EnemyHealth" unique_id=442355712]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 2.0
+offset_right = 81.0
+offset_bottom = 25.0
+horizontal_alignment = 1
+
+[node name="IntentTooltip" type="Panel" parent="." unique_id=2042806299]
+visible = false
+offset_left = -204.0
+offset_top = -244.0
+offset_right = -4.0
+offset_bottom = -194.0
+
+[node name="Label" type="Label" parent="IntentTooltip" unique_id=1396772599]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_ctsy7")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyIntent1" type="TextureRect" parent="." unique_id=1209591267]
+offset_left = -105.0
+offset_top = -95.0
+offset_right = -55.0
+offset_bottom = -45.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent1" unique_id=2109248908]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="EnemyIntent2" type="TextureRect" parent="." unique_id=946741633]
+offset_left = -105.0
+offset_top = -55.0
+offset_right = -55.0
+offset_bottom = -5.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent2" unique_id=870527026]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="EnemyIntent3" type="TextureRect" parent="." unique_id=1516720210]
+offset_left = -106.013
+offset_top = -5.0
+offset_right = -56.013
+offset_bottom = 45.0
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" type="Label" parent="EnemyIntent3" unique_id=1223358403]
+layout_mode = 0
+offset_left = -28.000002
+offset_top = -10.666667
+offset_right = 11.999998
+offset_bottom = 12.333333
+theme_override_fonts/font = ExtResource("6_ctsy7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=181313413]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_mfled")
+animation = &"Attack"

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://cje3yxkjswp03"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_prjgd"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_7uvtj"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_50cwo"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_etvjo"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="4_vpd7d"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="5_v3r7g"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="6_mc554"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="7_xsnb5"]
+
+[sub_resource type="Resource" id="Resource_xbfnh"]
+script = ExtResource("2_50cwo")
+amount = 10
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_55cd7"]
+script = ExtResource("3_etvjo")
+amount = 10
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_co4ld"]
+script = ExtResource("4_vpd7d")
+status_type = 11
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[resource]
+script = ExtResource("2_7uvtj")
+name = "No Passage"
+effects = Array[ExtResource("1_prjgd")]([SubResource("Resource_xbfnh"), SubResource("Resource_55cd7"), SubResource("Resource_co4ld")])
+weight = 30
+intent_icons = Array[Texture2D]([ExtResource("5_v3r7g"), ExtResource("6_mc554"), ExtResource("7_xsnb5")])
+intent_damage_amount = Array[int]([10])
+intent_types = Array[int]([0, 1, 2])
+metadata/_custom_type_script = "uid://t788w26yn03s"

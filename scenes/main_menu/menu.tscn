@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://y6kmsfru2fv"]
+
+[ext_resource type="Script" uid="uid://elftbjqmvv35" path="res://scenes/main_menu/main_menu.gd" id="1_6ufdq"]
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_pt1kw"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_0qkqs"]
+[ext_resource type="Texture2D" uid="uid://wb1qfa686vt6" path="res://scenes/main_menu/game.png" id="3_seilu"]
+[ext_resource type="Texture2D" uid="uid://cnh1k7dqbeh6p" path="res://scenes/main_menu/Alphabet-1.png.png" id="4_8wk7e"]
+[ext_resource type="Texture2D" uid="uid://c1lg2dd8ekef3" path="res://scenes/main_menu/menu.png" id="4_tf1jg"]
+[ext_resource type="Texture2D" uid="uid://ddxn0vfs5xked" path="res://scenes/main_menu/Alphabet-3.png.png" id="5_e4vlm"]
+[ext_resource type="Texture2D" uid="uid://c6kg5pg7fsqkr" path="res://scenes/main_menu/Settings_Icon.png" id="5_q0knb"]
+[ext_resource type="Texture2D" uid="uid://cinsacv227qyx" path="res://scenes/main_menu/Alphabet-4.png.png" id="6_seilu"]
+[ext_resource type="Texture2D" uid="uid://b1xr3qw02ree6" path="res://scenes/main_menu/Menu_info_button.png" id="7_mg445"]
+[ext_resource type="Texture2D" uid="uid://bnh78kd1e0um6" path="res://scenes/main_menu/Alphabet-2.png.png" id="8_8wk7e"]
+
+[node name="Menu" type="Control" unique_id=1065600331]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ufdq")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=78211613]
+texture = ExtResource("1_pt1kw")
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=154917102]
+position = Vector2(697, 217)
+texture = ExtResource("3_seilu")
+
+[node name="Sprite2" type="Sprite2D" parent="." unique_id=884339489]
+position = Vector2(1258, 200)
+texture = ExtResource("4_tf1jg")
+
+[node name="Buttons" type="Control" parent="." unique_id=255705122]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelect" type="Button" parent="Buttons" unique_id=409226595]
+layout_mode = 0
+offset_left = -430.0
+offset_top = -140.0
+offset_right = -186.0
+offset_bottom = -31.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
+
+[node name="Level" type="Sprite2D" parent="Buttons/LevelSelect" unique_id=796527507]
+position = Vector2(90.35157, 110.75)
+scale = Vector2(0.15829682, 0.30177742)
+texture = ExtResource("4_8wk7e")
+
+[node name="Select" type="Sprite2D" parent="Buttons/LevelSelect" unique_id=1024644485]
+position = Vector2(184, 75.75001)
+scale = Vector2(0.17087501, 0.30999282)
+texture = ExtResource("5_e4vlm")
+
+[node name="Collection" type="Button" parent="Buttons" unique_id=763851864]
+layout_mode = 0
+offset_left = 190.0
+offset_top = -140.0
+offset_right = 442.5
+offset_bottom = -31.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Collection" unique_id=370210836]
+position = Vector2(122.499985, 59.25)
+scale = Vector2(0.18249997, 0.33228868)
+texture = ExtResource("6_seilu")
+
+[node name="Settings" type="Button" parent="Buttons" unique_id=1615403388]
+layout_mode = 0
+offset_left = -430.0
+offset_top = 120.0
+offset_right = -186.0
+offset_bottom = 229.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Settings" unique_id=650061656]
+position = Vector2(122.500015, 53.749985)
+scale = Vector2(0.23550914, 0.29545966)
+texture = ExtResource("5_q0knb")
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=1171470084]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 120.0
+offset_right = 434.0
+offset_bottom = 229.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_0qkqs")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1246314232]
+position = Vector2(136.00002, 68.25)
+scale = Vector2(0.28093746, 0.34030262)
+texture = ExtResource("8_8wk7e")
+
+[node name="Info" type="Button" parent="Buttons" unique_id=411843384]
+layout_mode = 0
+offset_left = -81.0
+offset_top = 336.0
+offset_right = -4.0
+offset_bottom = 406.5
+scale = Vector2(2, 2)
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Info" unique_id=990430280]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("7_mg445")
+centered = false

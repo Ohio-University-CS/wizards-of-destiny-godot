@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://cya57lg1lfsb6"]
+
+[ext_resource type="Texture2D" uid="uid://clfvlxiest5qe" path="res://scenes/title_screen/Title_Screen_Backdrop.png" id="1_nwlqx"]
+[ext_resource type="Script" uid="uid://b3ta3xje7i5xt" path="res://scenes/info_page/info_page.gd" id="1_pnuhd"]
+[ext_resource type="Texture2D" uid="uid://brm2o0wmqmu4l" path="res://scenes/title_screen/Title_Screen_Button.png" id="2_pnuhd"]
+[ext_resource type="FontFile" uid="uid://qly2csu1jsxg" path="res://fonts/Cinzel-Bold.ttf" id="3_msiiv"]
+[ext_resource type="Texture2D" uid="uid://bnh78kd1e0um6" path="res://scenes/main_menu/Alphabet-2.png.png" id="4_wr0h2"]
+[ext_resource type="Texture2D" uid="uid://d2i14pdbrg0qk" path="res://art_drop/status effects/block.png" id="5_xn2yo"]
+[ext_resource type="Texture2D" uid="uid://dh76t6tghipy6" path="res://art_drop/status effects/broken.png" id="6_253gq"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="6_hcy2l"]
+[ext_resource type="Texture2D" uid="uid://c0gwjrlylbi8g" path="res://art_drop/status effects/burn.png" id="7_sddm3"]
+[ext_resource type="Texture2D" uid="uid://crrgocd38p5hi" path="res://art_drop/status effects/corroded.png" id="8_wr0h2"]
+[ext_resource type="Texture2D" uid="uid://4pl63padnqly" path="res://art_drop/status effects/empower.png" id="9_ctx8d"]
+[ext_resource type="Texture2D" uid="uid://d1cd1viahxh0o" path="res://art_drop/status effects/drained.png" id="9_wek51"]
+[ext_resource type="Texture2D" uid="uid://dsptqa1wloejp" path="res://art_drop/status effects/shock.png" id="10_a7s83"]
+[ext_resource type="Texture2D" uid="uid://ycijsulkvm1c" path="res://art_drop/status effects/evasive.png" id="11_sjfpx"]
+[ext_resource type="Texture2D" uid="uid://c05iq7ncy4kku" path="res://art_drop/status effects/freeze.png" id="12_1k7fy"]
+[ext_resource type="Texture2D" uid="uid://cokvy5nk7twdf" path="res://art_drop/status effects/stun.png" id="12_dvuqo"]
+[ext_resource type="Texture2D" uid="uid://c3ll6qrme5irj" path="res://art_drop/status effects/rage.png" id="13_3gpmm"]
+[ext_resource type="Texture2D" uid="uid://dwmrmtrnwlhoa" path="res://art_drop/status effects/sealed.png" id="15_8hqe8"]
+[ext_resource type="FontFile" uid="uid://criq0aiciy1id" path="res://fonts/Cinzel-Regular.ttf" id="19_lgxmx"]
+
+[node name="InfoPage" type="Control" unique_id=967636714]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnuhd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1493111867]
+texture = ExtResource("1_nwlqx")
+centered = false
+
+[node name="Buttons" type="Control" parent="." unique_id=1689227831]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Buttons" unique_id=668896231]
+layout_mode = 0
+offset_left = 810.0
+offset_top = 929.0
+offset_right = 1054.0
+offset_bottom = 1038.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(122, 54.5)
+icon = ExtResource("2_pnuhd")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Buttons/Exit" unique_id=1970765630]
+position = Vector2(136.00002, 68.25)
+scale = Vector2(0.28093746, 0.34030262)
+texture = ExtResource("4_wr0h2")
+
+[node name="EffectList" type="GridContainer" parent="." unique_id=2035352100]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 174.0
+offset_right = 439.0
+offset_bottom = 302.0
+scale = Vector2(5, 5)
+theme_override_constants/h_separation = 10
+columns = 4
+
+[node name="Block" type="TextureRect" parent="EffectList" unique_id=1242217485]
+layout_mode = 2
+texture = ExtResource("5_xn2yo")
+stretch_mode = 3
+
+[node name="Broken" type="TextureRect" parent="EffectList" unique_id=63936409]
+layout_mode = 2
+texture = ExtResource("6_253gq")
+stretch_mode = 3
+
+[node name="Burn" type="TextureRect" parent="EffectList" unique_id=163561912]
+layout_mode = 2
+texture = ExtResource("7_sddm3")
+stretch_mode = 3
+
+[node name="Corroded" type="TextureRect" parent="EffectList" unique_id=289980667]
+layout_mode = 2
+texture = ExtResource("8_wr0h2")
+stretch_mode = 3
+
+[node name="Drained" type="TextureRect" parent="EffectList" unique_id=939058291]
+layout_mode = 2
+texture = ExtResource("9_wek51")
+stretch_mode = 3
+
+[node name="Empowered" type="TextureRect" parent="EffectList" unique_id=1115582261]
+layout_mode = 2
+texture = ExtResource("9_ctx8d")
+stretch_mode = 3
+
+[node name="Evasive" type="TextureRect" parent="EffectList" unique_id=1814493773]
+layout_mode = 2
+texture = ExtResource("11_sjfpx")
+stretch_mode = 3
+
+[node name="Freeze" type="TextureRect" parent="EffectList" unique_id=286795228]
+layout_mode = 2
+texture = ExtResource("12_1k7fy")
+stretch_mode = 3
+
+[node name="Rage" type="TextureRect" parent="EffectList" unique_id=192297209]
+layout_mode = 2
+texture = ExtResource("13_3gpmm")
+stretch_mode = 3
+
+[node name="Regeneration" type="TextureRect" parent="EffectList" unique_id=170500599]
+layout_mode = 2
+texture = ExtResource("6_hcy2l")
+stretch_mode = 3
+
+[node name="Sealed" type="TextureRect" parent="EffectList" unique_id=1910359859]
+layout_mode = 2
+texture = ExtResource("15_8hqe8")
+stretch_mode = 3
+
+[node name="Shock" type="TextureRect" parent="EffectList" unique_id=1539209103]
+layout_mode = 2
+texture = ExtResource("10_a7s83")
+stretch_mode = 3
+
+[node name="Stun" type="TextureRect" parent="EffectList" unique_id=1008634937]
+layout_mode = 2
+texture = ExtResource("12_dvuqo")
+stretch_mode = 3
+
+[node name="Info" type="Control" parent="." unique_id=2041080319]
+visible = false
+anchors_preset = 0
+offset_left = 1330.0
+offset_top = 352.0
+offset_right = 1370.0
+offset_bottom = 392.0
+
+[node name="TextureRect" type="TextureRect" parent="Info" unique_id=864205330]
+layout_mode = 0
+offset_left = -78.99999
+offset_top = -163.00002
+offset_right = -38.999992
+offset_bottom = -123.000015
+scale = Vector2(7, 7)
+stretch_mode = 3
+
+[node name="Panel" type="Panel" parent="Info" unique_id=990472481]
+layout_mode = 0
+offset_left = -278.0
+offset_top = 83.0
+offset_right = 404.0
+offset_bottom = 332.0
+
+[node name="Name" type="Label" parent="Info/Panel" unique_id=1758723409]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 14.0
+offset_right = 641.0
+offset_bottom = 69.0
+theme_override_fonts/font = ExtResource("3_msiiv")
+theme_override_font_sizes/font_size = 40
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Info/Panel" unique_id=1490207667]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 94.0
+offset_right = 638.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("19_lgxmx")
+theme_override_font_sizes/font_size = 30
+text = "Description"
+autowrap_mode = 2

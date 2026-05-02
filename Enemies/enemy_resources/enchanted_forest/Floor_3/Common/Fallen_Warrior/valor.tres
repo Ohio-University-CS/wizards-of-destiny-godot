@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bqmwgkels24d8"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_ldq5k"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="2_ldq5k"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="3_dug6j"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="4_ipibe"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_nnqq3"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="6_pwio4"]
+
+[sub_resource type="Resource" id="Resource_dug6j"]
+script = ExtResource("2_ldq5k")
+status_type = 11
+amount = 2
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_el2k0"]
+script = ExtResource("3_dug6j")
+amount = 5
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[resource]
+script = ExtResource("6_pwio4")
+name = "Valor"
+effects = Array[ExtResource("1_ldq5k")]([SubResource("Resource_dug6j"), SubResource("Resource_el2k0")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_ipibe"), ExtResource("5_nnqq3")])
+intent_types = Array[int]([2, 1])
+metadata/_custom_type_script = "uid://t788w26yn03s"

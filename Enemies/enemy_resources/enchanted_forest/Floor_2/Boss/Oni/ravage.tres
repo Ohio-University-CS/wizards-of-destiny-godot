@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://0o8ay6xcjpy2"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_yellk"]
+[ext_resource type="Script" uid="uid://3vccf0xgybrp" path="res://cards/effects/damage_effect.gd" id="2_exq3b"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_x23di"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="3_jdsmm"]
+[ext_resource type="Texture2D" uid="uid://c4euu3wjfr732" path="res://Enemies/intent_sprites/Attack_Intent.png" id="4_j7it3"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="5_ukp1r"]
+
+[sub_resource type="Resource" id="Resource_308me"]
+script = ExtResource("2_exq3b")
+amount = 9
+metadata/_custom_type_script = "uid://3vccf0xgybrp"
+
+[sub_resource type="Resource" id="Resource_3nhur"]
+script = ExtResource("3_jdsmm")
+amount = 3
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[resource]
+script = ExtResource("2_x23di")
+name = "Ravage"
+effects = Array[ExtResource("1_yellk")]([SubResource("Resource_308me"), SubResource("Resource_3nhur")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("4_j7it3"), ExtResource("5_ukp1r")])
+intent_damage_amount = Array[int]([9])
+intent_types = Array[int]([0, 4])
+metadata/_custom_type_script = "uid://t788w26yn03s"

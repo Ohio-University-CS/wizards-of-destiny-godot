@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dcs0sfnej0gb8"]
+
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="1_1b3ke"]
+[ext_resource type="Script" uid="uid://oxw2dwib6mke" path="res://cards/effects/effect_data.gd" id="2_dqqus"]
+[ext_resource type="Resource" uid="uid://b51bgjg8dapsb" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Shield/bash.tres" id="2_gsu0a"]
+[ext_resource type="Resource" uid="uid://cje3yxkjswp03" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Shield/no_passage.tres" id="3_j43gx"]
+[ext_resource type="Script" uid="uid://bsdvyx5wltl0b" path="res://Enemies/EnemyResource.gd" id="3_jx46f"]
+[ext_resource type="Resource" uid="uid://dleky85f66hs2" path="res://Enemies/enemy_resources/enchanted_forest/Floor_3/MiniBoss2/Judgements_Shield/crush.tres" id="4_wrbgu"]
+
+[resource]
+script = ExtResource("3_jx46f")
+enemy_name = "Judgement's Shield"
+hp_variation = Array[int]([200])
+moves = Array[ExtResource("1_1b3ke")]([ExtResource("2_gsu0a"), ExtResource("3_j43gx"), ExtResource("4_wrbgu")])
+metadata/_custom_type_script = "uid://bsdvyx5wltl0b"

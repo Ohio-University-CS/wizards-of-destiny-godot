@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="MoveResource" format=3 uid="uid://bsevp77lxyvbx"]
+
+[ext_resource type="Script" uid="uid://b7pvaoecki3ad" path="res://cards/effects/effect.gd" id="1_6h64d"]
+[ext_resource type="Script" uid="uid://t788w26yn03s" path="res://Enemies/MoveResource.gd" id="2_0h4qb"]
+[ext_resource type="Script" uid="uid://c3r6g7xmfdyea" path="res://cards/effects/block_effect.gd" id="2_qamu3"]
+[ext_resource type="Script" uid="uid://b4gp05fbtexh5" path="res://cards/effects/apply_status_effect.gd" id="3_jqqoa"]
+[ext_resource type="Script" uid="uid://dy5nif0o2ujso" path="res://cards/effects/heal_effect.gd" id="4_a7umu"]
+[ext_resource type="Texture2D" uid="uid://uy2hf7vc236p" path="res://Enemies/intent_sprites/Block_Intent.png" id="5_ve1vp"]
+[ext_resource type="Texture2D" uid="uid://eerqbg28tal4" path="res://Enemies/intent_sprites/Buff_Intent.png" id="6_8dveo"]
+[ext_resource type="Texture2D" uid="uid://cjsunko60cxnt" path="res://art_drop/status effects/regeneration.png" id="7_ie4d4"]
+
+[sub_resource type="Resource" id="Resource_eblrb"]
+script = ExtResource("2_qamu3")
+amount = 10
+target_type = 0
+metadata/_custom_type_script = "uid://c3r6g7xmfdyea"
+
+[sub_resource type="Resource" id="Resource_ai6f0"]
+script = ExtResource("3_jqqoa")
+status_type = 11
+amount = 1
+target_type = 0
+metadata/_custom_type_script = "uid://b4gp05fbtexh5"
+
+[sub_resource type="Resource" id="Resource_4hsnq"]
+script = ExtResource("4_a7umu")
+amount = 10
+target_type = 0
+metadata/_custom_type_script = "uid://dy5nif0o2ujso"
+
+[resource]
+script = ExtResource("2_0h4qb")
+name = "Shape-Shift"
+effects = Array[ExtResource("1_6h64d")]([SubResource("Resource_eblrb"), SubResource("Resource_ai6f0"), SubResource("Resource_4hsnq")])
+weight = 20
+intent_icons = Array[Texture2D]([ExtResource("5_ve1vp"), ExtResource("6_8dveo"), ExtResource("7_ie4d4")])
+intent_types = Array[int]([1, 2, 4])
+metadata/_custom_type_script = "uid://t788w26yn03s"

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://6ociot6d2wny"]
+
+[ext_resource type="Script" uid="uid://wayn6fef8u23" path="res://scripts/Manager.gd" id="1_444vf"]
+[ext_resource type="PackedScene" uid="uid://b0e6oou3duyhv" path="res://ui.tscn" id="2_27ga2"]
+[ext_resource type="Script" uid="uid://cniggcjjpnmqi" path="res://cards/class_data.gd" id="3_h0wof"]
+[ext_resource type="Script" uid="uid://c3657u1f1ygos" path="res://cards/card_data.gd" id="4_fu4bq"]
+
+[sub_resource type="Resource" id="Resource_sbb53"]
+script = ExtResource("3_h0wof")
+metadata/_custom_type_script = "uid://cniggcjjpnmqi"
+
+[node name="Arena" type="Node2D" unique_id=1267453808]
+script = ExtResource("1_444vf")
+card_scene = ExtResource("2_27ga2")
+class_data = SubResource("Resource_sbb53")
+
+[node name="Ui" parent="." unique_id=1024916624 instance=ExtResource("2_27ga2")]
+offset_left = 6.0
