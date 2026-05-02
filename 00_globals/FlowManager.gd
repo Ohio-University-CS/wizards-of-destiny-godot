@@ -50,6 +50,9 @@ func on_combat_finished(result : Dictionary):
 	if result.get("perfect", false):
 		total += 5
 	
+	var interest : int = result.get("interest", 0)
+	total += interest
+	
 	var turns = result.get("turns", 999)
 	var miniboss = result.get("miniboss", false)
 	

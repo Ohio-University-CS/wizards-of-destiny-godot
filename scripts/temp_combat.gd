@@ -1144,9 +1144,14 @@ func _on_opponent_died() -> void:
 		coin_reward += 10
 		miniboss = true
 	
+	# Interest
+	@warning_ignore("integer_division")
+	var interest : int = RunManager.coins/10
+	
 	var result = {
 		"coins": coin_reward,
 		"turns": turn_count,
+		"interest": interest,
 		"miniboss": miniboss,
 		"perfect": player.current_health == player.get_max_health()
 	}
