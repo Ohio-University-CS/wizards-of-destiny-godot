@@ -68,6 +68,21 @@ func _generate_shop():
 		var ui = shop_card_scene.instantiate()
 		var price = _get_card_price(data)
 		
+		# Increasing Prices
+		var flr : int = RunManager.level_floor
+		var stg : int = RunManager.stage
+		
+		if flr == 1 and stg > 6:
+			price += 2
+		elif flr == 2 and stg < 7:
+			price += 4
+		elif flr == 2 and stg > 6:
+			price += 6
+		elif flr == 3 and stg < 7:
+			price += 8
+		elif flr == 3 and stg > 6:
+			price += 10
+		
 		# Comedy Mask
 		if RunManager.has_item("Comedy Mask"):
 			price *= 0.75
@@ -86,6 +101,21 @@ func _generate_shop():
 	for data in item_pool:
 		var ui = shop_item_scene.instantiate()
 		var price = _get_item_price(data)
+		
+		# Increasing Prices
+		var flr : int = RunManager.level_floor
+		var stg : int = RunManager.stage
+		
+		if flr == 1 and stg > 6:
+			price += 3
+		elif flr == 2 and stg < 7:
+			price += 6
+		elif flr == 2 and stg > 6:
+			price += 9
+		elif flr == 3 and stg < 7:
+			price += 12
+		elif flr == 3 and stg > 6:
+			price += 15
 		
 		# Comedy Mask
 		if RunManager.has_item("Comedy Mask"):
@@ -118,6 +148,21 @@ func _generate_shop():
 		var ui = shop_buff_scene.instantiate()
 		var price = _get_buff_price(data)
 		
+		# Increasing Prices
+		var flr : int = RunManager.level_floor
+		var stg : int = RunManager.stage
+		
+		if flr == 1 and stg > 6:
+			price += 1
+		elif flr == 2 and stg < 7:
+			price += 2
+		elif flr == 2 and stg > 6:
+			price += 3
+		elif flr == 3 and stg < 7:
+			price += 4
+		elif flr == 3 and stg > 6:
+			price += 5
+		
 		# Comedy Mask
 		if RunManager.has_item("Comedy Mask"):
 			price *= 0.75
@@ -147,6 +192,21 @@ func _generate_shop():
 		
 		var ui = shop_buff_scene.instantiate()
 		var price = _get_buff_price(data)
+		
+		# Increasing Prices
+		var flr : int = RunManager.level_floor
+		var stg : int = RunManager.stage
+		
+		if flr == 1 and stg > 6:
+			price += 1
+		elif flr == 2 and stg < 7:
+			price += 2
+		elif flr == 2 and stg > 6:
+			price += 3
+		elif flr == 3 and stg < 7:
+			price += 4
+		elif flr == 3 and stg > 6:
+			price += 5
 		
 		# Comedy Mask
 		if RunManager.has_item("Comedy Mask"):
