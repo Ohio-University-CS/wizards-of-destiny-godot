@@ -19,4 +19,4 @@ func _on_run_progress_changed(_level_name: String, _floor: int, _stage_number: i
 
 func _update_level_label() -> void:
 	var level_name := RunManager.get_level_name()
-	text = "%s - Floor %d" % [level_name, RunManager.level_floor]
+	text = "%s - Floor %d, Stage %d" % [level_name, RunManager.level_floor, RunManager.stage]
